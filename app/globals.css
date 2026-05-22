@@ -1,0 +1,186 @@
+@import "tailwindcss";
+@import "@daypicker/react/style.css";
+
+:root {
+  --color-primary: #1e3a5f;
+  --color-accent: #2e75b6;
+  --color-warning: #f0a500;
+  --color-danger: #dc2626;
+  --color-success: #16a34a;
+  --color-background: #f8fafc;
+  --color-foreground: #0f172a;
+  --color-panel: rgba(255, 255, 255, 0.9);
+  --color-panel-strong: #ffffff;
+  --color-border: rgba(148, 163, 184, 0.22);
+  --shadow-panel: 0 18px 60px rgba(15, 23, 42, 0.08);
+  --shadow-panel-strong: 0 24px 80px rgba(15, 23, 42, 0.12);
+}
+
+@theme inline {
+  --color-background: var(--color-background);
+  --color-foreground: var(--color-foreground);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--color-background);
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.4)),
+    radial-gradient(circle at top left, rgba(30, 58, 95, 0.18), transparent 26%),
+    radial-gradient(circle at top right, rgba(46, 117, 182, 0.18), transparent 24%),
+    linear-gradient(180deg, #f8fafc 0%, #eef4fb 45%, #f8fafc 100%);
+  background-attachment: fixed;
+  color: var(--color-foreground);
+  -webkit-font-smoothing: antialiased;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  inset: 0;
+  position: fixed;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(15, 23, 42, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15, 23, 42, 0.03) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.26), transparent 68%);
+}
+
+::selection {
+  background: rgba(46, 117, 182, 0.18);
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.date-popover .rdp-root {
+  --rdp-accent-color: var(--color-primary);
+  --rdp-accent-background-color: rgba(30, 58, 95, 0.08);
+  --rdp-day-width: 40px;
+  --rdp-day-height: 40px;
+  --rdp-day_button-width: 36px;
+  --rdp-day_button-height: 36px;
+  --rdp-day_button-border: 1px solid transparent;
+  --rdp-day_button-border-radius: 999px;
+  --rdp-nav_button-width: 36px;
+  --rdp-nav_button-height: 36px;
+  --rdp-nav-height: 40px;
+  --rdp-months-gap: 0;
+  --rdp-weekday-padding: 0.25rem 0;
+
+  width: 100%;
+}
+
+.date-popover .rdp-months,
+.date-popover .rdp-month {
+  width: 100%;
+}
+
+.date-popover .rdp-month_caption {
+  align-items: center;
+  justify-content: center;
+  margin: 0 2.75rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.date-popover .rdp-nav {
+  inset-inline: 0;
+  justify-content: space-between;
+  padding: 0 0.25rem;
+}
+
+.date-popover .rdp-button_previous,
+.date-popover .rdp-button_next {
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 999px;
+  background: #f8fafc;
+  color: #475569;
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    color 150ms ease;
+}
+
+.date-popover .rdp-button_previous:hover,
+.date-popover .rdp-button_next:hover {
+  border-color: rgba(148, 163, 184, 0.35);
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+.date-popover .rdp-chevron {
+  fill: currentColor;
+}
+
+.date-popover .rdp-weekdays {
+  margin-bottom: 0.25rem;
+}
+
+.date-popover .rdp-weekday {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: #94a3b8;
+  text-transform: uppercase;
+}
+
+.date-popover .rdp-day {
+  text-align: center;
+}
+
+.date-popover .rdp-day_button {
+  font-size: 0.88rem;
+  color: #334155;
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    color 150ms ease,
+    box-shadow 150ms ease;
+}
+
+.date-popover .rdp-day_button:hover:not(:disabled) {
+  background: #f1f5f9;
+}
+
+.date-popover .rdp-today:not(.rdp-selected) .rdp-day_button:not(:disabled) {
+  border-color: rgba(30, 58, 95, 0.16);
+  background: #f8fafc;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.date-popover .rdp-selected .rdp-day_button {
+  border-color: rgba(30, 58, 95, 0.92);
+  background: linear-gradient(135deg, #1e3a5f, #2e75b6);
+  box-shadow: 0 10px 20px rgba(30, 58, 95, 0.18);
+  color: white;
+}
+
+.date-popover .rdp-outside .rdp-day_button {
+  color: #cbd5e1;
+}
+
+.date-popover .rdp-disabled .rdp-day_button {
+  color: #cbd5e1;
+  opacity: 0.5;
+}

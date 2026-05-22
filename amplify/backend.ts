@@ -1,45 +1,83 @@
 import { defineBackend } from "@aws-amplify/backend";
-import { Stack } from "aws-cdk-lib";
-import {
-  CorsHttpMethod,
-  HttpApi,
-  HttpMethod,
-} from "aws-cdk-lib/aws-apigatewayv2";
-import { HttpLambdaIntegration } from "aws-cdk-lib/aws-apigatewayv2-integrations";
-import { data } from "./data/resource.js";
-import { helloRest } from "./functions/hello-rest/resource.js";
+import { PolicyStatement } from "aws-cdk-lib/aws-iam";
+import { StreamViewType } from "aws-cdk-lib/aws-dynamodb";
+import { StartingPosition } from "aws-cdk-lib/aws-lambda";
+import { DynamoEventSource } from "aws-cdk-lib/aws-lambda-event-sources";
+import { auth } from "./auth/resource";
+import { data } from "./data/resource";
+import { storage } from "./storage/resource";
+import { alertFunction } from "./functions/alertFunction/resource";
 
 const backend = defineBackend({
+  auth,
   data,
-  helloRest,
+  storage,
+  alertFunction,
 });
 
-const apiStack = backend.createStack("hello-rest-api");
+const getModelTable = (modelName: string) => {
+  const tableEntry = Object.entries(backend.data.resources.tables).find(([key]) =>
+    key.includes(modelName),
+  );
 
-const httpApi = new HttpApi(apiStack, "HelloRestApi", {
-  apiName: "hello-rest-api",
-  corsPreflight: {
-    allowOrigins: ["*"],
-    allowMethods: [CorsHttpMethod.GET, CorsHttpMethod.OPTIONS],
-    allowHeaders: ["content-type"],
-  },
-});
+  if (!tableEntry) {
+    throw new Error(`Unable to find data table for model ${modelName}`);
+  }
 
-const helloIntegration = new HttpLambdaIntegration(
-  "HelloRestIntegration",
-  backend.helloRest.resources.lambda,
+  return tableEntry[1];
+};
+
+const getModelTableName = (modelName: string) => {
+  return getModelTable(modelName).tableName;
+};
+
+backend.data.resources.cfnResources.amplifyDynamoDbTables.Expense.streamSpecification =
+  {
+    streamViewType: StreamViewType.NEW_IMAGE,
+  };
+
+const expenseTable = getModelTable("Expense");
+
+backend.alertFunction.resources.lambda.addEventSource(
+  new DynamoEventSource(expenseTable, {
+    startingPosition: StartingPosition.LATEST,
+    batchSize: 10,
+    retryAttempts: 2,
+  }),
 );
 
-httpApi.addRoutes({
-  path: "/hello",
-  methods: [HttpMethod.GET],
-  integration: helloIntegration,
-});
+expenseTable.grantStreamRead(backend.alertFunction.resources.lambda);
+getModelTable("Event").grantReadData(backend.alertFunction.resources.lambda);
+getModelTable("Budget").grantReadData(backend.alertFunction.resources.lambda);
+getModelTable("Expense").grantReadData(backend.alertFunction.resources.lambda);
+getModelTable("Notification").grantWriteData(
+  backend.alertFunction.resources.lambda,
+);
 
-backend.addOutput({
-  custom: {
-    restApiEndpoint: httpApi.url,
-    restApiId: httpApi.httpApiId,
-    restApiRegion: Stack.of(httpApi).region,
-  },
-});
+backend.storage.resources.bucket.grantReadWrite(
+  backend.alertFunction.resources.lambda,
+);
+
+backend.alertFunction.addEnvironment(
+  "EVENT_TABLE_NAME",
+  getModelTableName("Event"),
+);
+backend.alertFunction.addEnvironment(
+  "BUDGET_TABLE_NAME",
+  getModelTableName("Budget"),
+);
+backend.alertFunction.addEnvironment(
+  "EXPENSE_TABLE_NAME",
+  getModelTableName("Expense"),
+);
+backend.alertFunction.addEnvironment(
+  "NOTIFICATION_TABLE_NAME",
+  getModelTableName("Notification"),
+);
+
+backend.alertFunction.resources.lambda.addToRolePolicy(
+  new PolicyStatement({
+    actions: ["ses:SendEmail", "ses:SendRawEmail"],
+    resources: ["*"],
+  }),
+);

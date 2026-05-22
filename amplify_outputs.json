@@ -1,17 +1,45 @@
 {
+  "auth": {
+    "user_pool_id": "ap-southeast-2_oq4GJJvls",
+    "aws_region": "ap-southeast-2",
+    "user_pool_client_id": "6ms89ebpjtncsi0hrqpdlhb0nu",
+    "identity_pool_id": "ap-southeast-2:c14f9ee1-0a44-4941-9f1c-9fcabfbb28f9",
+    "mfa_methods": [
+      "TOTP"
+    ],
+    "standard_required_attributes": [
+      "email",
+      "name"
+    ],
+    "username_attributes": [
+      "email"
+    ],
+    "user_verification_types": [
+      "email"
+    ],
+    "groups": [],
+    "mfa_configuration": "OPTIONAL",
+    "password_policy": {
+      "min_length": 8,
+      "require_lowercase": true,
+      "require_numbers": true,
+      "require_symbols": true,
+      "require_uppercase": true
+    },
+    "unauthenticated_identities_enabled": true
+  },
   "data": {
     "url": "https://tzgtuhib45ekljx3r7rldncjay.appsync-api.ap-southeast-2.amazonaws.com/graphql",
     "aws_region": "ap-southeast-2",
-    "api_key": "da2-2svvwepacje3rgqymball4auj4",
-    "default_authorization_type": "API_KEY",
+    "default_authorization_type": "AMAZON_COGNITO_USER_POOLS",
     "authorization_types": [
       "AWS_IAM"
     ],
     "model_introspection": {
       "version": 1,
       "models": {
-        "Todo": {
-          "name": "Todo",
+        "Event": {
+          "name": "Event",
           "fields": {
             "id": {
               "name": "id",
@@ -20,19 +48,146 @@
               "isRequired": true,
               "attributes": []
             },
-            "content": {
-              "name": "content",
+            "name": {
+              "name": "name",
               "isArray": false,
               "type": "String",
               "isRequired": true,
               "attributes": []
             },
-            "isDone": {
-              "name": "isDone",
+            "description": {
+              "name": "description",
               "isArray": false,
-              "type": "Boolean",
+              "type": "String",
               "isRequired": false,
               "attributes": []
+            },
+            "date": {
+              "name": "date",
+              "isArray": false,
+              "type": "AWSDate",
+              "isRequired": true,
+              "attributes": []
+            },
+            "venue": {
+              "name": "venue",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "eventType": {
+              "name": "eventType",
+              "isArray": false,
+              "type": {
+                "enum": "EventType"
+              },
+              "isRequired": true,
+              "attributes": []
+            },
+            "status": {
+              "name": "status",
+              "isArray": false,
+              "type": {
+                "enum": "EventStatus"
+              },
+              "isRequired": true,
+              "attributes": []
+            },
+            "owner": {
+              "name": "owner",
+              "isArray": false,
+              "type": "AWSEmail",
+              "isRequired": true,
+              "attributes": []
+            },
+            "admins": {
+              "name": "admins",
+              "isArray": true,
+              "type": "AWSEmail",
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true
+            },
+            "editors": {
+              "name": "editors",
+              "isArray": true,
+              "type": "AWSEmail",
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true
+            },
+            "viewers": {
+              "name": "viewers",
+              "isArray": true,
+              "type": "AWSEmail",
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true
+            },
+            "members": {
+              "name": "members",
+              "isArray": true,
+              "type": {
+                "model": "EventMember"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true,
+              "association": {
+                "connectionType": "HAS_MANY",
+                "associatedWith": [
+                  "eventId"
+                ]
+              }
+            },
+            "budget": {
+              "name": "budget",
+              "isArray": false,
+              "type": {
+                "model": "Budget"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "association": {
+                "connectionType": "HAS_ONE",
+                "associatedWith": [
+                  "eventId"
+                ],
+                "targetNames": []
+              }
+            },
+            "expenses": {
+              "name": "expenses",
+              "isArray": true,
+              "type": {
+                "model": "Expense"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true,
+              "association": {
+                "connectionType": "HAS_MANY",
+                "associatedWith": [
+                  "eventId"
+                ]
+              }
+            },
+            "notifications": {
+              "name": "notifications",
+              "isArray": true,
+              "type": {
+                "model": "Notification"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true,
+              "association": {
+                "connectionType": "HAS_MANY",
+                "associatedWith": [
+                  "eventId"
+                ]
+              }
             },
             "createdAt": {
               "name": "createdAt",
@@ -52,24 +207,1117 @@
             }
           },
           "syncable": true,
-          "pluralName": "Todos",
+          "pluralName": "Events",
           "attributes": [
             {
               "type": "model",
               "properties": {}
             },
             {
+              "type": "key",
+              "properties": {
+                "name": "eventsByStatusAndDate",
+                "queryField": "listEventByStatusAndDate",
+                "fields": [
+                  "status",
+                  "date"
+                ]
+              }
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "eventsByOwnerAndDate",
+                "queryField": "listEventByOwnerAndDate",
+                "fields": [
+                  "owner",
+                  "date"
+                ]
+              }
+            },
+            {
               "type": "auth",
               "properties": {
                 "rules": [
                   {
-                    "allow": "public",
-                    "provider": "apiKey",
+                    "allow": "private",
                     "operations": [
                       "create",
+                      "read",
                       "update",
-                      "delete",
-                      "read"
+                      "delete"
+                    ]
+                  }
+                ]
+              }
+            }
+          ],
+          "primaryKeyInfo": {
+            "isCustomPrimaryKey": false,
+            "primaryKeyFieldName": "id",
+            "sortKeyFieldNames": []
+          }
+        },
+        "EventMember": {
+          "name": "EventMember",
+          "fields": {
+            "eventId": {
+              "name": "eventId",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true,
+              "attributes": []
+            },
+            "userId": {
+              "name": "userId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "email": {
+              "name": "email",
+              "isArray": false,
+              "type": "AWSEmail",
+              "isRequired": true,
+              "attributes": []
+            },
+            "role": {
+              "name": "role",
+              "isArray": false,
+              "type": {
+                "enum": "MemberRole"
+              },
+              "isRequired": true,
+              "attributes": []
+            },
+            "owner": {
+              "name": "owner",
+              "isArray": false,
+              "type": "AWSEmail",
+              "isRequired": true,
+              "attributes": []
+            },
+            "admins": {
+              "name": "admins",
+              "isArray": true,
+              "type": "AWSEmail",
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true
+            },
+            "editors": {
+              "name": "editors",
+              "isArray": true,
+              "type": "AWSEmail",
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true
+            },
+            "viewers": {
+              "name": "viewers",
+              "isArray": true,
+              "type": "AWSEmail",
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true
+            },
+            "event": {
+              "name": "event",
+              "isArray": false,
+              "type": {
+                "model": "Event"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "association": {
+                "connectionType": "BELONGS_TO",
+                "targetNames": [
+                  "eventId"
+                ]
+              }
+            },
+            "createdAt": {
+              "name": "createdAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            },
+            "updatedAt": {
+              "name": "updatedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            }
+          },
+          "syncable": true,
+          "pluralName": "EventMembers",
+          "attributes": [
+            {
+              "type": "model",
+              "properties": {}
+            },
+            {
+              "type": "key",
+              "properties": {
+                "fields": [
+                  "eventId",
+                  "email"
+                ]
+              }
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "eventMembersByEmail",
+                "queryField": "listEventMemberByEmail",
+                "fields": [
+                  "email"
+                ]
+              }
+            },
+            {
+              "type": "auth",
+              "properties": {
+                "rules": [
+                  {
+                    "allow": "private",
+                    "operations": [
+                      "create",
+                      "read",
+                      "update",
+                      "delete"
+                    ]
+                  }
+                ]
+              }
+            }
+          ],
+          "primaryKeyInfo": {
+            "isCustomPrimaryKey": true,
+            "primaryKeyFieldName": "eventId",
+            "sortKeyFieldNames": [
+              "email"
+            ]
+          }
+        },
+        "Budget": {
+          "name": "Budget",
+          "fields": {
+            "id": {
+              "name": "id",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true,
+              "attributes": []
+            },
+            "eventId": {
+              "name": "eventId",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true,
+              "attributes": []
+            },
+            "totalAmount": {
+              "name": "totalAmount",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": true,
+              "attributes": []
+            },
+            "currency": {
+              "name": "currency",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "totalPlanned": {
+              "name": "totalPlanned",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": true,
+              "attributes": []
+            },
+            "totalActual": {
+              "name": "totalActual",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": true,
+              "attributes": []
+            },
+            "variance": {
+              "name": "variance",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": true,
+              "attributes": []
+            },
+            "owner": {
+              "name": "owner",
+              "isArray": false,
+              "type": "AWSEmail",
+              "isRequired": true,
+              "attributes": []
+            },
+            "admins": {
+              "name": "admins",
+              "isArray": true,
+              "type": "AWSEmail",
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true
+            },
+            "editors": {
+              "name": "editors",
+              "isArray": true,
+              "type": "AWSEmail",
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true
+            },
+            "viewers": {
+              "name": "viewers",
+              "isArray": true,
+              "type": "AWSEmail",
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true
+            },
+            "event": {
+              "name": "event",
+              "isArray": false,
+              "type": {
+                "model": "Event"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "association": {
+                "connectionType": "BELONGS_TO",
+                "targetNames": [
+                  "eventId"
+                ]
+              }
+            },
+            "categories": {
+              "name": "categories",
+              "isArray": true,
+              "type": {
+                "model": "BudgetCategory"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true,
+              "association": {
+                "connectionType": "HAS_MANY",
+                "associatedWith": [
+                  "budgetId"
+                ]
+              }
+            },
+            "createdAt": {
+              "name": "createdAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            },
+            "updatedAt": {
+              "name": "updatedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            }
+          },
+          "syncable": true,
+          "pluralName": "Budgets",
+          "attributes": [
+            {
+              "type": "model",
+              "properties": {}
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "budgetsByEventId",
+                "queryField": "listBudgetByEventId",
+                "fields": [
+                  "eventId"
+                ]
+              }
+            },
+            {
+              "type": "auth",
+              "properties": {
+                "rules": [
+                  {
+                    "allow": "private",
+                    "operations": [
+                      "create",
+                      "read",
+                      "update",
+                      "delete"
+                    ]
+                  }
+                ]
+              }
+            }
+          ],
+          "primaryKeyInfo": {
+            "isCustomPrimaryKey": false,
+            "primaryKeyFieldName": "id",
+            "sortKeyFieldNames": []
+          }
+        },
+        "BudgetCategory": {
+          "name": "BudgetCategory",
+          "fields": {
+            "id": {
+              "name": "id",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true,
+              "attributes": []
+            },
+            "budgetId": {
+              "name": "budgetId",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true,
+              "attributes": []
+            },
+            "name": {
+              "name": "name",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "plannedAmount": {
+              "name": "plannedAmount",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": true,
+              "attributes": []
+            },
+            "actualAmount": {
+              "name": "actualAmount",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": true,
+              "attributes": []
+            },
+            "order": {
+              "name": "order",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": true,
+              "attributes": []
+            },
+            "color": {
+              "name": "color",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "owner": {
+              "name": "owner",
+              "isArray": false,
+              "type": "AWSEmail",
+              "isRequired": true,
+              "attributes": []
+            },
+            "admins": {
+              "name": "admins",
+              "isArray": true,
+              "type": "AWSEmail",
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true
+            },
+            "editors": {
+              "name": "editors",
+              "isArray": true,
+              "type": "AWSEmail",
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true
+            },
+            "viewers": {
+              "name": "viewers",
+              "isArray": true,
+              "type": "AWSEmail",
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true
+            },
+            "budget": {
+              "name": "budget",
+              "isArray": false,
+              "type": {
+                "model": "Budget"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "association": {
+                "connectionType": "BELONGS_TO",
+                "targetNames": [
+                  "budgetId"
+                ]
+              }
+            },
+            "lineItems": {
+              "name": "lineItems",
+              "isArray": true,
+              "type": {
+                "model": "LineItem"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true,
+              "association": {
+                "connectionType": "HAS_MANY",
+                "associatedWith": [
+                  "categoryId"
+                ]
+              }
+            },
+            "expenses": {
+              "name": "expenses",
+              "isArray": true,
+              "type": {
+                "model": "Expense"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true,
+              "association": {
+                "connectionType": "HAS_MANY",
+                "associatedWith": [
+                  "categoryId"
+                ]
+              }
+            },
+            "createdAt": {
+              "name": "createdAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            },
+            "updatedAt": {
+              "name": "updatedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            }
+          },
+          "syncable": true,
+          "pluralName": "BudgetCategories",
+          "attributes": [
+            {
+              "type": "model",
+              "properties": {}
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "budgetCategoriesByBudgetIdAndOrder",
+                "queryField": "listBudgetCategoryByBudgetIdAndOrder",
+                "fields": [
+                  "budgetId",
+                  "order"
+                ]
+              }
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "budgetCategoriesByName",
+                "queryField": "listBudgetCategoryByName",
+                "fields": [
+                  "name"
+                ]
+              }
+            },
+            {
+              "type": "auth",
+              "properties": {
+                "rules": [
+                  {
+                    "allow": "private",
+                    "operations": [
+                      "create",
+                      "read",
+                      "update",
+                      "delete"
+                    ]
+                  }
+                ]
+              }
+            }
+          ],
+          "primaryKeyInfo": {
+            "isCustomPrimaryKey": false,
+            "primaryKeyFieldName": "id",
+            "sortKeyFieldNames": []
+          }
+        },
+        "LineItem": {
+          "name": "LineItem",
+          "fields": {
+            "id": {
+              "name": "id",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true,
+              "attributes": []
+            },
+            "categoryId": {
+              "name": "categoryId",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true,
+              "attributes": []
+            },
+            "description": {
+              "name": "description",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "plannedAmount": {
+              "name": "plannedAmount",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": true,
+              "attributes": []
+            },
+            "notes": {
+              "name": "notes",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "attachmentKey": {
+              "name": "attachmentKey",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "owner": {
+              "name": "owner",
+              "isArray": false,
+              "type": "AWSEmail",
+              "isRequired": true,
+              "attributes": []
+            },
+            "admins": {
+              "name": "admins",
+              "isArray": true,
+              "type": "AWSEmail",
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true
+            },
+            "editors": {
+              "name": "editors",
+              "isArray": true,
+              "type": "AWSEmail",
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true
+            },
+            "viewers": {
+              "name": "viewers",
+              "isArray": true,
+              "type": "AWSEmail",
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true
+            },
+            "category": {
+              "name": "category",
+              "isArray": false,
+              "type": {
+                "model": "BudgetCategory"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "association": {
+                "connectionType": "BELONGS_TO",
+                "targetNames": [
+                  "categoryId"
+                ]
+              }
+            },
+            "expenses": {
+              "name": "expenses",
+              "isArray": true,
+              "type": {
+                "model": "Expense"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true,
+              "association": {
+                "connectionType": "HAS_MANY",
+                "associatedWith": [
+                  "lineItemId"
+                ]
+              }
+            },
+            "createdAt": {
+              "name": "createdAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            },
+            "updatedAt": {
+              "name": "updatedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            }
+          },
+          "syncable": true,
+          "pluralName": "LineItems",
+          "attributes": [
+            {
+              "type": "model",
+              "properties": {}
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "lineItemsByCategoryId",
+                "queryField": "listLineItemByCategoryId",
+                "fields": [
+                  "categoryId"
+                ]
+              }
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "lineItemsByDescription",
+                "queryField": "listLineItemByDescription",
+                "fields": [
+                  "description"
+                ]
+              }
+            },
+            {
+              "type": "auth",
+              "properties": {
+                "rules": [
+                  {
+                    "allow": "private",
+                    "operations": [
+                      "create",
+                      "read",
+                      "update",
+                      "delete"
+                    ]
+                  }
+                ]
+              }
+            }
+          ],
+          "primaryKeyInfo": {
+            "isCustomPrimaryKey": false,
+            "primaryKeyFieldName": "id",
+            "sortKeyFieldNames": []
+          }
+        },
+        "Expense": {
+          "name": "Expense",
+          "fields": {
+            "id": {
+              "name": "id",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true,
+              "attributes": []
+            },
+            "lineItemId": {
+              "name": "lineItemId",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true,
+              "attributes": []
+            },
+            "categoryId": {
+              "name": "categoryId",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true,
+              "attributes": []
+            },
+            "eventId": {
+              "name": "eventId",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true,
+              "attributes": []
+            },
+            "amount": {
+              "name": "amount",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": true,
+              "attributes": []
+            },
+            "vendor": {
+              "name": "vendor",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "expenseDate": {
+              "name": "expenseDate",
+              "isArray": false,
+              "type": "AWSDate",
+              "isRequired": true,
+              "attributes": []
+            },
+            "paymentMethod": {
+              "name": "paymentMethod",
+              "isArray": false,
+              "type": {
+                "enum": "PaymentMethod"
+              },
+              "isRequired": true,
+              "attributes": []
+            },
+            "receiptKey": {
+              "name": "receiptKey",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "notes": {
+              "name": "notes",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "loggedBy": {
+              "name": "loggedBy",
+              "isArray": false,
+              "type": "AWSEmail",
+              "isRequired": true,
+              "attributes": []
+            },
+            "owner": {
+              "name": "owner",
+              "isArray": false,
+              "type": "AWSEmail",
+              "isRequired": true,
+              "attributes": []
+            },
+            "admins": {
+              "name": "admins",
+              "isArray": true,
+              "type": "AWSEmail",
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true
+            },
+            "editors": {
+              "name": "editors",
+              "isArray": true,
+              "type": "AWSEmail",
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true
+            },
+            "viewers": {
+              "name": "viewers",
+              "isArray": true,
+              "type": "AWSEmail",
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true
+            },
+            "lineItem": {
+              "name": "lineItem",
+              "isArray": false,
+              "type": {
+                "model": "LineItem"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "association": {
+                "connectionType": "BELONGS_TO",
+                "targetNames": [
+                  "lineItemId"
+                ]
+              }
+            },
+            "category": {
+              "name": "category",
+              "isArray": false,
+              "type": {
+                "model": "BudgetCategory"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "association": {
+                "connectionType": "BELONGS_TO",
+                "targetNames": [
+                  "categoryId"
+                ]
+              }
+            },
+            "event": {
+              "name": "event",
+              "isArray": false,
+              "type": {
+                "model": "Event"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "association": {
+                "connectionType": "BELONGS_TO",
+                "targetNames": [
+                  "eventId"
+                ]
+              }
+            },
+            "createdAt": {
+              "name": "createdAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            },
+            "updatedAt": {
+              "name": "updatedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            }
+          },
+          "syncable": true,
+          "pluralName": "Expenses",
+          "attributes": [
+            {
+              "type": "model",
+              "properties": {}
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "expensesByLineItemIdAndExpenseDate",
+                "queryField": "listExpenseByLineItemIdAndExpenseDate",
+                "fields": [
+                  "lineItemId",
+                  "expenseDate"
+                ]
+              }
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "expensesByCategoryIdAndExpenseDate",
+                "queryField": "listExpenseByCategoryIdAndExpenseDate",
+                "fields": [
+                  "categoryId",
+                  "expenseDate"
+                ]
+              }
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "expensesByEventIdAndExpenseDate",
+                "queryField": "listExpenseByEventIdAndExpenseDate",
+                "fields": [
+                  "eventId",
+                  "expenseDate"
+                ]
+              }
+            },
+            {
+              "type": "auth",
+              "properties": {
+                "rules": [
+                  {
+                    "allow": "private",
+                    "operations": [
+                      "create",
+                      "read",
+                      "update",
+                      "delete"
+                    ]
+                  }
+                ]
+              }
+            }
+          ],
+          "primaryKeyInfo": {
+            "isCustomPrimaryKey": false,
+            "primaryKeyFieldName": "id",
+            "sortKeyFieldNames": []
+          }
+        },
+        "Notification": {
+          "name": "Notification",
+          "fields": {
+            "id": {
+              "name": "id",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true,
+              "attributes": []
+            },
+            "userId": {
+              "name": "userId",
+              "isArray": false,
+              "type": "AWSEmail",
+              "isRequired": true,
+              "attributes": []
+            },
+            "eventId": {
+              "name": "eventId",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true,
+              "attributes": []
+            },
+            "type": {
+              "name": "type",
+              "isArray": false,
+              "type": {
+                "enum": "NotificationType"
+              },
+              "isRequired": true,
+              "attributes": []
+            },
+            "message": {
+              "name": "message",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "isRead": {
+              "name": "isRead",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": true,
+              "attributes": []
+            },
+            "owner": {
+              "name": "owner",
+              "isArray": false,
+              "type": "AWSEmail",
+              "isRequired": true,
+              "attributes": []
+            },
+            "admins": {
+              "name": "admins",
+              "isArray": true,
+              "type": "AWSEmail",
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true
+            },
+            "event": {
+              "name": "event",
+              "isArray": false,
+              "type": {
+                "model": "Event"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "association": {
+                "connectionType": "BELONGS_TO",
+                "targetNames": [
+                  "eventId"
+                ]
+              }
+            },
+            "createdAt": {
+              "name": "createdAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            },
+            "updatedAt": {
+              "name": "updatedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            }
+          },
+          "syncable": true,
+          "pluralName": "Notifications",
+          "attributes": [
+            {
+              "type": "model",
+              "properties": {}
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "notificationsByUserId",
+                "queryField": "listNotificationByUserId",
+                "fields": [
+                  "userId"
+                ]
+              }
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "notificationsByEventId",
+                "queryField": "listNotificationByEventId",
+                "fields": [
+                  "eventId"
+                ]
+              }
+            },
+            {
+              "type": "auth",
+              "properties": {
+                "rules": [
+                  {
+                    "allow": "private",
+                    "operations": [
+                      "create",
+                      "read",
+                      "update",
+                      "delete"
                     ]
                   }
                 ]
@@ -83,14 +1331,76 @@
           }
         }
       },
-      "enums": {},
+      "enums": {
+        "EventType": {
+          "name": "EventType",
+          "values": [
+            "WEDDING",
+            "CORPORATE",
+            "BIRTHDAY",
+            "CONFERENCE",
+            "OTHER"
+          ]
+        },
+        "EventStatus": {
+          "name": "EventStatus",
+          "values": [
+            "DRAFT",
+            "ACTIVE",
+            "COMPLETED",
+            "ARCHIVED"
+          ]
+        },
+        "MemberRole": {
+          "name": "MemberRole",
+          "values": [
+            "ADMIN",
+            "EDITOR",
+            "VIEWER"
+          ]
+        },
+        "PaymentMethod": {
+          "name": "PaymentMethod",
+          "values": [
+            "CASH",
+            "CARD",
+            "TRANSFER",
+            "CHECK",
+            "OTHER"
+          ]
+        },
+        "NotificationType": {
+          "name": "NotificationType",
+          "values": [
+            "BUDGET_WARNING",
+            "OVER_BUDGET",
+            "MEMBER_ADDED"
+          ]
+        }
+      },
       "nonModels": {}
     }
   },
-  "version": "1.4",
-  "custom": {
-    "restApiEndpoint": "https://w5tvavx4m5.execute-api.ap-southeast-2.amazonaws.com/",
-    "restApiId": "w5tvavx4m5",
-    "restApiRegion": "ap-southeast-2"
-  }
+  "storage": {
+    "aws_region": "ap-southeast-2",
+    "bucket_name": "amplify-amplifycodexv1-no-embsreceiptsbucketde2a85-m6ohgshljpao",
+    "buckets": [
+      {
+        "name": "embs-receipts",
+        "bucket_name": "amplify-amplifycodexv1-no-embsreceiptsbucketde2a85-m6ohgshljpao",
+        "aws_region": "ap-southeast-2",
+        "paths": {
+          "receipts/${cognito-identity.amazonaws.com:sub}/*": {
+            "entityidentity": [
+              "get",
+              "list",
+              "write",
+              "delete"
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "version": "1.4"
 }

@@ -39,3 +39,17 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local Amplify/CDK generated artifacts
+/.amplify/artifacts/
+/.amplify/generated/
+
+# local npm caches and stale dependency folders
+/.npm/
+/node_modules.stale.*/
+
+# IDE files
+/.idea/
+
+# local Amplify client output
+/amplify_outputs.json

@@ -10,12 +10,30 @@
     "amplify:sandbox": "npx ampx sandbox"
   },
   "dependencies": {
+    "@aws-amplify/adapter-nextjs": "^1.7.3",
     "@aws-amplify/backend": "^1.22.0",
     "@aws-amplify/backend-cli": "^1.8.2",
+    "@aws-amplify/data-schema-types": "^1.2.1",
+    "@aws-sdk/client-dynamodb": "^3.1045.0",
+    "@aws-sdk/client-sesv2": "^3.1045.0",
+    "@aws-sdk/lib-dynamodb": "^3.1045.0",
+    "@aws-sdk/util-dynamodb": "^3.996.2",
+    "@daypicker/react": "^10.0.1",
+    "@hookform/resolvers": "^5.2.2",
     "aws-amplify": "^6.16.3",
+    "clsx": "^2.1.1",
+    "date-fns": "^4.1.0",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^4.2.1",
+    "lucide-react": "^1.14.0",
     "next": "16.2.2",
     "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react-dom": "19.2.4",
+    "react-hook-form": "^7.75.0",
+    "react-hot-toast": "^2.6.0",
+    "recharts": "^3.8.1",
+    "tailwind-merge": "^3.6.0",
+    "zod": "^3.25.17"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
@@ -26,6 +44,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.2.2",
     "tailwindcss": "^4",
+    "tsx": "^4.21.0",
     "typescript": "^5"
   }
 }
