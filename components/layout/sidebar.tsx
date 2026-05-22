@@ -32,20 +32,20 @@ export function Sidebar({
       />
       <aside
         className={cn(
-          "fixed inset-y-0 left-0 z-50 flex w-[18.5rem] flex-col bg-[linear-gradient(180deg,rgba(246,249,253,0.98),rgba(240,245,250,0.98))] px-4 py-4 shadow-[18px_0_40px_rgba(15,23,42,0.06)] transition-all duration-300 ease-out md:sticky md:inset-y-auto md:top-0 md:h-screen md:self-start md:translate-x-0 md:overflow-y-auto md:shadow-none",
+          "fixed inset-y-0 left-0 z-50 flex w-[18.5rem] flex-col bg-[linear-gradient(180deg,rgba(242,247,252,0.99),rgba(236,242,248,0.99))] px-4 py-4 shadow-[18px_0_40px_rgba(15,23,42,0.06)] transition-all duration-300 ease-out md:sticky md:inset-y-auto md:top-0 md:h-screen md:self-start md:translate-x-0 md:overflow-y-auto md:shadow-none",
           collapsed ? "md:w-24 md:px-2.5" : "md:w-[18.5rem]",
           open ? "translate-x-0" : "-translate-x-full",
         )}
       >
         <div
           className={cn(
-            "relative flex h-full flex-col overflow-hidden rounded-[2.15rem] border border-slate-200/55 bg-[linear-gradient(180deg,rgba(255,255,255,0.995),rgba(249,251,253,0.985))] p-4 shadow-[12px_12px_26px_rgba(226,232,240,0.56),-10px_-10px_24px_rgba(255,255,255,0.92),0_16px_30px_rgba(15,23,42,0.04)] before:pointer-events-none before:absolute before:inset-0 before:rounded-[inherit] before:ring-1 before:ring-white/60",
+            "relative flex h-full flex-col overflow-hidden rounded-[2.15rem] border border-slate-200/72 bg-[linear-gradient(180deg,rgba(255,255,255,0.998),rgba(249,251,253,0.99))] p-4 shadow-[14px_14px_30px_rgba(226,232,240,0.62),-12px_-12px_28px_rgba(255,255,255,0.94),0_18px_34px_rgba(15,23,42,0.05)] before:pointer-events-none before:absolute before:inset-0 before:rounded-[inherit] before:ring-1 before:ring-white/72",
             collapsed && "md:px-2.5",
           )}
         >
-          <span className="pointer-events-none absolute -left-10 -top-10 h-32 w-32 rounded-full bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.94),rgba(255,255,255,0.42)_56%,transparent_76%)]" />
+          <span className="pointer-events-none absolute -left-10 -top-10 h-32 w-32 rounded-full bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.96),rgba(255,255,255,0.48)_56%,transparent_76%)]" />
           <span className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-[radial-gradient(circle_at_center,rgba(46,117,182,0.14),rgba(46,117,182,0.06)_58%,transparent_100%)]" />
-          <span className="pointer-events-none absolute left-1/2 top-0 h-16 w-32 -translate-x-1/2 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.7),transparent_72%)]" />
+          <span className="pointer-events-none absolute left-1/2 top-0 h-16 w-32 -translate-x-1/2 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.76),transparent_72%)]" />
           <span className="pointer-events-none absolute -left-8 bottom-14 h-20 w-20 rounded-full bg-[radial-gradient(circle_at_center,rgba(30,58,95,0.04),transparent_72%)]" />
           <span className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-[linear-gradient(180deg,transparent_0%,rgba(248,250,252,0.35)_62%,rgba(248,250,252,0.62)_100%)]" />
           <span className="pointer-events-none absolute left-1/2 bottom-0 h-24 w-44 -translate-x-1/2 rounded-full bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.72),transparent_72%)]" />
