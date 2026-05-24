@@ -1,12 +1,16 @@
 import { defineAuth } from "@aws-amplify/backend";
+import {
+  getVerificationEmailBody,
+  getVerificationEmailSubject,
+} from "../../config/branding.mjs";
 
 export const auth = defineAuth({
   loginWith: {
     email: {
       verificationEmailStyle: "CODE",
-      verificationEmailSubject: "Verify your EMBS account",
+      verificationEmailSubject: getVerificationEmailSubject(),
       verificationEmailBody: (createCode) =>
-        `Use this verification code to finish creating your Event Management Budgeting System account: ${createCode()}`,
+        getVerificationEmailBody(createCode()),
     },
   },
   userAttributes: {

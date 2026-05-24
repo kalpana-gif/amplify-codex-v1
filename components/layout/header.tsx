@@ -18,6 +18,7 @@ import { useRouter } from "next/navigation";
 import { signOut } from "aws-amplify/auth";
 import { Button } from "@/components/ui/button";
 import { Modal } from "@/components/ui/modal";
+import { BRANDING } from "@/config/branding.mjs";
 import { getCurrentUserProfile } from "@/lib/graphql/events";
 
 export function Header({
@@ -105,7 +106,7 @@ export function Header({
           </button>
           <div>
             <p className="text-xs uppercase tracking-[0.24em] text-slate-500">
-              Event Management Budgeting System
+              {BRANDING.fullName}
             </p>
             <h2 className="text-xl font-semibold text-slate-950">{userName}</h2>
           </div>

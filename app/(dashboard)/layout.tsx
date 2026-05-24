@@ -20,8 +20,8 @@ export default function DashboardLayout({
         className={cn(
           "min-h-screen md:grid",
           sidebarCollapsed
-            ? "md:grid-cols-[96px_1fr]"
-            : "md:grid-cols-[308px_1fr]",
+            ? "md:grid-cols-[96px_minmax(0,1fr)]"
+            : "md:grid-cols-[308px_minmax(0,1fr)]",
         )}
       >
         <Sidebar

@@ -1,3 +1,5 @@
+import { BRANDING } from "@/config/branding.mjs";
+
 export default function AuthLayout({
   children,
 }: {
@@ -10,7 +12,7 @@ export default function AuthLayout({
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.14),transparent_24%),radial-gradient(circle_at_bottom_left,rgba(46,117,182,0.28),transparent_34%)]" />
           <div className="relative">
             <p className="text-xs uppercase tracking-[0.28em] text-blue-200">
-            Event Management Budgeting System
+              {BRANDING.fullName}
             </p>
             <h1 className="mt-6 max-w-xl text-5xl font-semibold tracking-tight">
               Budget authority, execution control, and reporting in one place.

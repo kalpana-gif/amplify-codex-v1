@@ -8,6 +8,7 @@ import { Card } from "@/components/ui/card";
 import { EmptyState } from "@/components/ui/empty-state";
 import { Input } from "@/components/ui/input";
 import { Select } from "@/components/ui/select";
+import { BRANDING } from "@/config/branding.mjs";
 import { listEventsForCurrentUser } from "@/lib/graphql/events";
 import { getReportData } from "@/lib/graphql/reports";
 import { formatCurrency, formatDate } from "@/lib/utils";
@@ -130,7 +131,7 @@ export default function ReportsPage() {
         ) : (
           <EmptyState
             title="Select an event to preview reporting data"
-            description="Once an event is selected, EMBS will summarize the budget and show export-ready expense history."
+            description={BRANDING.reportsEmptyStateDescription}
           />
         )}
 
