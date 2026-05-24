@@ -3,7 +3,6 @@
 import { useMemo } from "react";
 import { Plus } from "lucide-react";
 import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { CategoryRow } from "@/components/budget/category-row";
 import { formatCurrency } from "@/lib/utils";
 import type { BudgetOverview } from "@/types";

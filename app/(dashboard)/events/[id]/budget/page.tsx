@@ -62,6 +62,10 @@ const getResultErrorMessage = (
   return firstMessage ?? fallback;
 };
 
+const getCollaboratorEmails = (
+  emails: readonly (string | null)[] | null | undefined,
+) => emails?.filter((email): email is string => Boolean(email)) ?? [];
+
 const recalculateBudget = (budget: BudgetOverview): BudgetOverview => {
   const categories = budget.categories.map((category) => ({
     ...category,
@@ -111,9 +115,9 @@ export default function BudgetPage() {
       setProfileEmail(snapshot.profile.email);
       setPermissions(getEventPermissions(snapshot.profile.email, snapshot.event));
       setCollaborators({
-        admins: snapshot.event.admins ?? [],
-        editors: snapshot.event.editors ?? [],
-        viewers: snapshot.event.viewers ?? [],
+        admins: getCollaboratorEmails(snapshot.event.admins),
+        editors: getCollaboratorEmails(snapshot.event.editors),
+        viewers: getCollaboratorEmails(snapshot.event.viewers),
       });
     }
   }, [params.id]);
@@ -140,9 +144,9 @@ export default function BudgetPage() {
           setProfileEmail(snapshot.profile.email);
           setPermissions(getEventPermissions(snapshot.profile.email, snapshot.event));
           setCollaborators({
-            admins: snapshot.event.admins ?? [],
-            editors: snapshot.event.editors ?? [],
-            viewers: snapshot.event.viewers ?? [],
+            admins: getCollaboratorEmails(snapshot.event.admins),
+            editors: getCollaboratorEmails(snapshot.event.editors),
+            viewers: getCollaboratorEmails(snapshot.event.viewers),
           });
         }
       })

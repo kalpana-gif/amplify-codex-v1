@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowUpRight, CalendarDays, MapPin, WalletCards } from "lucide-react";
+import { CalendarDays, MapPin, WalletCards } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { EventStatus } from "@/components/events/event-status";
 import { formatCurrency, formatDate } from "@/lib/utils";

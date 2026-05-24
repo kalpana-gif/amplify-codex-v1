@@ -39,6 +39,12 @@ body {
     linear-gradient(180deg, #f8fafc 0%, #eef4fb 45%, #f8fafc 100%);
   background-attachment: fixed;
   color: var(--color-foreground);
+  font-family:
+    "Segoe UI",
+    "Helvetica Neue",
+    Arial,
+    "Noto Sans",
+    sans-serif;
   -webkit-font-smoothing: antialiased;
   position: relative;
 }

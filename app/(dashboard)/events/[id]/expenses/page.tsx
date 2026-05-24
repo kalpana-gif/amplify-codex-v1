@@ -54,6 +54,10 @@ const fetchExpensesPageData = async (eventId: string) => {
   };
 };
 
+const getCollaboratorEmails = (
+  emails: readonly (string | null)[] | null | undefined,
+) => emails?.filter((email): email is string => Boolean(email)) ?? [];
+
 export default function ExpensesPage() {
   const params = useParams<{ id: string }>();
   const router = useRouter();
@@ -85,9 +89,9 @@ export default function ExpensesPage() {
           setUser(snapshot.profile);
           setPermissions(getEventPermissions(snapshot.profile.email, snapshot.event));
           setCollaborators({
-            admins: snapshot.event.admins ?? [],
-            editors: snapshot.event.editors ?? [],
-            viewers: snapshot.event.viewers ?? [],
+            admins: getCollaboratorEmails(snapshot.event.admins),
+            editors: getCollaboratorEmails(snapshot.event.editors),
+            viewers: getCollaboratorEmails(snapshot.event.viewers),
           });
         }
       })

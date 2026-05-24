@@ -47,6 +47,10 @@ type EventDetails = {
   viewers?: string[] | null;
 };
 
+const getCollaboratorEmails = (
+  emails: readonly (string | null)[] | null | undefined,
+) => emails?.filter((email): email is string => Boolean(email)) ?? [];
+
 export default function EventOverviewPage() {
   const params = useParams<{ id: string }>();
   const router = useRouter();
@@ -110,10 +114,17 @@ export default function EventOverviewPage() {
           return;
         }
 
-        setEvent(result.data);
+        const normalizedEvent: EventDetails = {
+          ...result.data,
+          admins: getCollaboratorEmails(result.data.admins),
+          editors: getCollaboratorEmails(result.data.editors),
+          viewers: getCollaboratorEmails(result.data.viewers),
+        };
+
+        setEvent(normalizedEvent);
 
         if (profile) {
-          setPermissions(getEventPermissions(profile.email, result.data));
+          setPermissions(getEventPermissions(profile.email, normalizedEvent));
         }
 
         setBudget(

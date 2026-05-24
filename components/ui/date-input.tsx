@@ -5,7 +5,7 @@ import {
   parseISO,
   startOfMonth,
 } from "date-fns";
-import { DayPicker } from "@daypicker/react";
+import { DayPicker, type Matcher } from "@daypicker/react";
 import { CalendarDays } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -89,6 +89,22 @@ export function DateInput({
 
   const minDate = React.useMemo(() => parseDateValue(min), [min]);
   const maxDate = React.useMemo(() => parseDateValue(max), [max]);
+  const disabledMatchers = React.useMemo<Matcher[]>(
+    () => {
+      const matchers: Matcher[] = [];
+
+      if (minDate) {
+        matchers.push({ before: minDate });
+      }
+
+      if (maxDate) {
+        matchers.push({ after: maxDate });
+      }
+
+      return matchers;
+    },
+    [maxDate, minDate],
+  );
 
   const commitValue = (nextDate: Date) => {
     onChange?.(format(nextDate, "yyyy-MM-dd"));
@@ -147,10 +163,7 @@ export function DateInput({
       {isOpen ? (
         <div className="date-popover absolute left-0 top-[calc(100%+0.6rem)] z-[100] min-w-[19rem] rounded-[1.25rem] border border-slate-200 bg-white p-3 shadow-[0_20px_50px_rgba(15,23,42,0.16)]">
           <DayPicker
-            disabled={[
-              minDate ? { before: minDate } : undefined,
-              maxDate ? { after: maxDate } : undefined,
-            ].filter(Boolean)}
+            disabled={disabledMatchers}
             fixedWeeks
             mode="single"
             month={visibleMonth}
