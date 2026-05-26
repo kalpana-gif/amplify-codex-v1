@@ -4,6 +4,8 @@ import { cn } from "@/lib/utils";
 const buttonVariants = {
   primary:
     "bg-[linear-gradient(135deg,var(--color-primary),#16314f)] text-white shadow-[0_14px_28px_rgba(30,58,95,0.24)] hover:-translate-y-0.5 hover:shadow-[0_18px_32px_rgba(30,58,95,0.28)] disabled:bg-slate-300",
+  auth:
+    "group relative isolate overflow-hidden border border-[rgba(30,58,95,0.14)] bg-[linear-gradient(135deg,var(--color-primary),var(--color-accent))] text-white [text-shadow:1px_1px_1px_rgba(0,0,0,0.18)] shadow-[0_18px_38px_rgba(30,58,95,0.2)] hover:brightness-105 hover:shadow-[0_22px_42px_rgba(30,58,95,0.24)] disabled:border-slate-200 disabled:bg-slate-300 disabled:shadow-none disabled:[text-shadow:none]",
   secondary:
     "border border-slate-200 bg-white/90 text-[var(--color-primary)] hover:border-slate-300 hover:bg-white",
   ghost: "bg-transparent text-slate-700 hover:bg-slate-950/5",

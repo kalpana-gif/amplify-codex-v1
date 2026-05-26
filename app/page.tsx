@@ -2,7 +2,8 @@
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { BRANDING, getBrandMonogram } from "@/config/branding.mjs";
+import { BrandMark } from "@/components/branding/brand-mark";
+import { BRANDING } from "@/config/branding.mjs";
 import { getCurrentUserProfile } from "@/lib/graphql/events";
 
 export default function HomePage() {
@@ -18,7 +19,7 @@ export default function HomePage() {
     <div className="flex min-h-screen items-center justify-center px-6">
       <div className="w-full max-w-lg rounded-[32px] border border-slate-200/80 bg-white/90 px-8 py-10 text-center shadow-[var(--shadow-panel-strong)] backdrop-blur-md">
         <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-[1.75rem] bg-[linear-gradient(135deg,var(--color-primary),var(--color-accent))] text-lg font-semibold text-white">
-          {getBrandMonogram()}
+          <BrandMark className="h-7 w-7" />
         </div>
         <p className="mt-6 text-xs uppercase tracking-[0.28em] text-slate-500">
           {BRANDING.fullName}
