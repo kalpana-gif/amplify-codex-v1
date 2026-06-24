@@ -3,7 +3,10 @@
 import { useEffect, useState, startTransition } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { TeamPageContentLoader } from "@/components/ui/page-loader";
-import { getCurrentUserProfile } from "@/lib/graphql/events";
+import {
+  getCurrentUserProfile,
+  syncCurrentUserDirectoryProfile,
+} from "@/lib/graphql/events";
 
 export function AuthGuard({
   children,
@@ -22,6 +25,7 @@ export function AuthGuard({
           return;
         }
 
+        void syncCurrentUserDirectoryProfile(profile);
         setStatus("ready");
       });
     });

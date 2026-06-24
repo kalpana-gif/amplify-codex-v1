@@ -17,6 +17,16 @@ export const schema = a
       "OVER_BUDGET",
       "MEMBER_ADDED",
     ]),
+    UserDirectoryProfile: a
+      .model({
+        email: a.email().required(),
+        name: a.string().required(),
+        userId: a.string(),
+        searchName: a.string(),
+        lastSeenAt: a.string().required(),
+      })
+      .identifier(["email"])
+      .authorization((allow) => [allow.authenticated().to(["create", "read", "update"])]),
     Event: a
       .model({
         name: a.string().required(),

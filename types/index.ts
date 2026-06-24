@@ -161,6 +161,12 @@ export type CurrentUser = {
   name: string;
 };
 
+export type UserDirectoryProfile = {
+  email: string;
+  name: string;
+  lastSeenAt?: string | null;
+};
+
 export type EventTeamMember = {
   email: string;
   role: MemberRole;

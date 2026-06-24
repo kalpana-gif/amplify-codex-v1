@@ -12,6 +12,7 @@ import type {
   EventTeamSnapshot,
   MemberRole,
   TeamMemberInput,
+  UserDirectoryProfile,
 } from "@/types";
 
 const defaultCategoryPalette = [
@@ -40,6 +41,8 @@ const roleSortOrder: Record<MemberRole, number> = {
   EDITOR: 1,
   VIEWER: 2,
 };
+
+const directorySelectionSet = ["email", "name", "searchName", "lastSeenAt"] as const;
 
 const eventCreateSelectionSet = ["id"] as const;
 const eventUpdateSelectionSet = ["id", "status"] as const;
@@ -117,6 +120,29 @@ const buildBudgetSummary = (
   };
 };
 
+const sanitizeUserDisplayName = (name: string | null | undefined, email: string) => {
+  const trimmedName = name?.trim();
+
+  if (!trimmedName) {
+    return email;
+  }
+
+  return trimmedName;
+};
+
+const buildDirectoryProfileInput = (profile: CurrentUser) => {
+  const normalizedEmail = profile.email.toLowerCase();
+  const name = sanitizeUserDisplayName(profile.name, normalizedEmail);
+
+  return {
+    email: normalizedEmail,
+    name,
+    userId: profile.id,
+    searchName: name.toLowerCase(),
+    lastSeenAt: new Date().toISOString(),
+  };
+};
+
 export const getCurrentUserProfile = async (): Promise<CurrentUser | null> => {
   try {
     const user = await getCurrentUser();
@@ -132,6 +158,80 @@ export const getCurrentUserProfile = async (): Promise<CurrentUser | null> => {
     };
   } catch {
     return null;
+  }
+};
+
+export const syncCurrentUserDirectoryProfile = async (
+  profileOverride?: CurrentUser | null,
+) => {
+  const profile = profileOverride ?? (await getCurrentUserProfile());
+
+  if (!profile) {
+    return null;
+  }
+
+  const nextProfile = buildDirectoryProfileInput(profile);
+
+  try {
+    const existingResult = await client.models.UserDirectoryProfile.get(
+      { email: nextProfile.email },
+      {
+        authMode: "userPool",
+        selectionSet: directorySelectionSet,
+      },
+    );
+
+    const existingProfile = existingResult.data;
+
+    if (!existingProfile) {
+      await client.models.UserDirectoryProfile.create(nextProfile, {
+        authMode: "userPool",
+      });
+      return {
+        email: nextProfile.email,
+        name: nextProfile.name,
+        lastSeenAt: nextProfile.lastSeenAt,
+      } satisfies UserDirectoryProfile;
+    }
+
+    await client.models.UserDirectoryProfile.update(nextProfile, {
+      authMode: "userPool",
+    });
+
+    return {
+      email: nextProfile.email,
+      name: nextProfile.name,
+      lastSeenAt: nextProfile.lastSeenAt,
+    } satisfies UserDirectoryProfile;
+  } catch (error) {
+    console.error("Failed to sync directory profile.", error);
+    return null;
+  }
+};
+
+export const listUserDirectoryProfiles = async (): Promise<UserDirectoryProfile[]> => {
+  try {
+    const result = await client.models.UserDirectoryProfile.list({
+      authMode: "userPool",
+      selectionSet: directorySelectionSet,
+      limit: 200,
+    });
+
+    return result.data
+      .map((profile) => ({
+        email: profile.email.toLowerCase(),
+        name: sanitizeUserDisplayName(profile.name, profile.email.toLowerCase()),
+        lastSeenAt: profile.lastSeenAt,
+      }))
+      .sort((first, second) =>
+        (second.lastSeenAt ?? "").localeCompare(first.lastSeenAt ?? ""),
+      );
+  } catch (error) {
+    throw new Error(
+      error instanceof Error
+        ? error.message
+        : "Failed to load registered users.",
+    );
   }
 };
 
