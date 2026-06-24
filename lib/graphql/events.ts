@@ -1,5 +1,5 @@
 import { fetchUserAttributes, getCurrentUser } from "aws-amplify/auth";
-import { client, cognitoUserPoolId } from "@/lib/amplify-client";
+import { client } from "@/lib/amplify-client";
 import { getBudgetOverview } from "@/lib/graphql/budget";
 import { calcPercentage, calcVariance } from "@/lib/utils";
 import type {
@@ -12,7 +12,6 @@ import type {
   EventTeamSnapshot,
   MemberRole,
   TeamMemberInput,
-  UserPoolUser,
 } from "@/types";
 
 const defaultCategoryPalette = [
@@ -777,53 +776,6 @@ export const getEventTeamSnapshot = async (
   } catch (error) {
     throw new Error(
       error instanceof Error ? error.message : "Failed to load event users.",
-    );
-  }
-};
-
-export const listUserPoolUsers = async (): Promise<UserPoolUser[]> => {
-  try {
-    if (!cognitoUserPoolId) {
-      throw new Error("Cognito user pool is not configured for team lookup.");
-    }
-
-    const result = await client.queries.listUserPoolUsers({
-      userPoolId: cognitoUserPoolId,
-    }, {
-      authMode: "userPool",
-    });
-
-    if (result.errors?.length) {
-      throw new Error(
-        getResultErrorMessage(result.errors, "Failed to load user pool users."),
-      );
-    }
-
-    return (result.data ?? [])
-      .filter(
-        (
-          user,
-        ): user is {
-          email: string;
-          name: string;
-          status: string;
-          enabled: boolean;
-        } => Boolean(user?.email),
-      )
-      .map((user) => ({
-        email: user.email.toLowerCase(),
-        name: user.name.trim(),
-        status: user.status,
-        enabled: user.enabled,
-      }))
-      .sort(
-        (first, second) =>
-          first.name.localeCompare(second.name) ||
-          first.email.localeCompare(second.email),
-      );
-  } catch (error) {
-    throw new Error(
-      error instanceof Error ? error.message : "Failed to load user pool users.",
     );
   }
 };

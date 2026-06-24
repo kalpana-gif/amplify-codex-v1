@@ -33,9 +33,6 @@ export const isGoogleAuthConfigured =
     (provider) => provider.toUpperCase() === "GOOGLE",
   );
 
-export const cognitoUserPoolId =
-  typeof rawAuth?.user_pool_id === "string" ? rawAuth.user_pool_id : null;
-
 export const configureAmplifyClient = () => {
   if (isConfigured) {
     return;

@@ -733,13 +733,6 @@
    ]
   }
  },
- "Outputs": {
-  "amplifyamplifycodexv1novigisandboxf427c53406functionembsalertfunctionlambda9F55996FRef": {
-   "Value": {
-    "Ref": "embsalertfunctionlambdaF35455EF"
-   }
-  }
- },
  "Parameters": {
   "referencetoamplifyamplifycodexv1novigisandboxf427c53406dataNestedStackdataNestedStackResourceCE093568Outputsamplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataExpenseNestedStackExpenseNestedStackResourceAD11659DOutputsamplifyamplify12C403AE": {
    "Type": "String"
@@ -758,6 +751,13 @@
   },
   "referencetoamplifyamplifycodexv1novigisandboxf427c53406storageNestedStackstorageNestedStackResourceADA4624COutputsamplifyamplifycodexv1novigisandboxf427c53406storageembsreceiptsBucket44A545AFArn": {
    "Type": "String"
+  }
+ },
+ "Outputs": {
+  "amplifyamplifycodexv1novigisandboxf427c53406functionembsalertfunctionlambda9F55996FRef": {
+   "Value": {
+    "Ref": "embsalertfunctionlambdaF35455EF"
+   }
   }
  }
 }
