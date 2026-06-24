@@ -190,3 +190,98 @@ a {
   color: #cbd5e1;
   opacity: 0.5;
 }
+
+.auth-button-loader {
+  position: relative;
+  display: block;
+  width: 1.15rem;
+  height: 1.15rem;
+  transform: rotate(165deg);
+}
+
+.auth-button-loader::before,
+.auth-button-loader::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  width: 0.28rem;
+  height: 0.28rem;
+  border-radius: 999px;
+  transform: translate(-50%, -50%);
+}
+
+.auth-button-loader::before {
+  animation: auth-loader-before 1.9s infinite ease-in-out;
+}
+
+.auth-button-loader::after {
+  animation: auth-loader-after 1.9s infinite ease-in-out;
+}
+
+@keyframes auth-loader-before {
+  0% {
+    width: 0.28rem;
+    box-shadow:
+      0.6rem -0.3rem var(--auth-loader-primary, color-mix(in srgb, var(--color-primary) 84%, white)),
+      -0.6rem 0.3rem var(--auth-loader-accent, color-mix(in srgb, var(--color-accent) 84%, white));
+  }
+
+  35% {
+    width: 1.15rem;
+    box-shadow:
+      0 -0.3rem var(--auth-loader-primary, color-mix(in srgb, var(--color-primary) 84%, white)),
+      0 0.3rem var(--auth-loader-accent, color-mix(in srgb, var(--color-accent) 84%, white));
+  }
+
+  70% {
+    width: 0.28rem;
+    box-shadow:
+      -0.6rem -0.3rem var(--auth-loader-primary, color-mix(in srgb, var(--color-primary) 84%, white)),
+      0.6rem 0.3rem var(--auth-loader-accent, color-mix(in srgb, var(--color-accent) 84%, white));
+  }
+
+  100% {
+    box-shadow:
+      0.6rem -0.3rem var(--auth-loader-primary, color-mix(in srgb, var(--color-primary) 84%, white)),
+      -0.6rem 0.3rem var(--auth-loader-accent, color-mix(in srgb, var(--color-accent) 84%, white));
+  }
+}
+
+@keyframes auth-loader-after {
+  0% {
+    height: 0.28rem;
+    box-shadow:
+      0.3rem 0.6rem var(--auth-loader-secondary, color-mix(in srgb, var(--color-accent) 66%, white)),
+      -0.3rem -0.6rem var(--auth-loader-tertiary, color-mix(in srgb, var(--color-primary) 68%, white));
+  }
+
+  35% {
+    height: 1.15rem;
+    box-shadow:
+      0.3rem 0 var(--auth-loader-secondary, color-mix(in srgb, var(--color-accent) 66%, white)),
+      -0.3rem 0 var(--auth-loader-tertiary, color-mix(in srgb, var(--color-primary) 68%, white));
+  }
+
+  70% {
+    height: 0.28rem;
+    box-shadow:
+      0.3rem -0.6rem var(--auth-loader-secondary, color-mix(in srgb, var(--color-accent) 66%, white)),
+      -0.3rem 0.6rem var(--auth-loader-tertiary, color-mix(in srgb, var(--color-primary) 68%, white));
+  }
+
+  100% {
+    box-shadow:
+      0.3rem 0.6rem var(--auth-loader-secondary, color-mix(in srgb, var(--color-accent) 66%, white)),
+      -0.3rem -0.6rem var(--auth-loader-tertiary, color-mix(in srgb, var(--color-primary) 68%, white));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .auth-button-loader::before,
+  .auth-button-loader::after {
+    animation-duration: 0.01ms;
+    animation-iteration-count: 1;
+  }
+}

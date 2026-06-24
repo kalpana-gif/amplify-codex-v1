@@ -5,6 +5,7 @@ import {
   useRef,
   useState,
   startTransition,
+  type CSSProperties,
   type MouseEvent as ReactMouseEvent,
 } from "react";
 import {
@@ -16,6 +17,7 @@ import {
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { signOut } from "aws-amplify/auth";
+import { AuthButtonLoader } from "@/components/auth/auth-button-loader";
 import { Button } from "@/components/ui/button";
 import { Modal } from "@/components/ui/modal";
 import { BRANDING } from "@/config/branding.mjs";
@@ -222,13 +224,33 @@ export function Header({
             <Button
               className="w-full sm:w-auto"
               variant="danger"
+              disabled={isSigningOut}
               onClick={() => {
                 setIsSigningOut(true);
                 void signOut().finally(() => router.replace("/login"));
               }}
             >
-              <LogOut className="mr-2 h-4 w-4" />
-              {isSigningOut ? "Signing out..." : "Sign Out"}
+              {isSigningOut ? (
+                <>
+                  <AuthButtonLoader
+                    className="mr-3 scale-[0.78]"
+                    style={
+                      {
+                        "--auth-loader-primary": "rgba(255,255,255,0.96)",
+                        "--auth-loader-accent": "rgba(255,255,255,0.82)",
+                        "--auth-loader-secondary": "rgba(255,255,255,0.72)",
+                        "--auth-loader-tertiary": "rgba(255,255,255,0.6)",
+                      } as CSSProperties
+                    }
+                  />
+                  Signing out
+                </>
+              ) : (
+                <>
+                  <LogOut className="mr-2 h-4 w-4" />
+                  Sign Out
+                </>
+              )}
             </Button>
           </div>
         </div>
