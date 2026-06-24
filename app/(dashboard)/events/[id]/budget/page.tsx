@@ -15,6 +15,7 @@ import { BudgetTable } from "@/components/budget/budget-table";
 import { Card } from "@/components/ui/card";
 import { ErrorBoundary } from "@/components/ui/error-boundary";
 import { PageWrapper } from "@/components/layout/page-wrapper";
+import { EventWorkspaceLoader } from "@/components/ui/page-loader";
 import { client } from "@/lib/amplify-client";
 import {
   createBudgetCategory,
@@ -168,7 +169,7 @@ export default function BudgetPage() {
   }, [params.id, router]);
 
   if (!budget) {
-    return null;
+    return <EventWorkspaceLoader variant="budget" />;
   }
 
   const lineItemCount = budget.categories.reduce(

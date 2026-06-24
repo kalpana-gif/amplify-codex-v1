@@ -20,6 +20,7 @@ import { signOut } from "aws-amplify/auth";
 import { AuthButtonLoader } from "@/components/auth/auth-button-loader";
 import { Button } from "@/components/ui/button";
 import { Modal } from "@/components/ui/modal";
+import { Skeleton } from "@/components/ui/skeleton";
 import { BRANDING } from "@/config/branding.mjs";
 import { getCurrentUserProfile } from "@/lib/graphql/events";
 
@@ -33,7 +34,7 @@ export function Header({
   onToggleSidebarCollapse: () => void;
 }) {
   const router = useRouter();
-  const [userName, setUserName] = useState("Loading...");
+  const [userName, setUserName] = useState<string | null>(null);
   const [profileMenuOpen, setProfileMenuOpen] = useState(false);
   const [signOutOpen, setSignOutOpen] = useState(false);
   const [isSigningOut, setIsSigningOut] = useState(false);
@@ -73,7 +74,7 @@ export function Header({
     };
   }, [profileMenuOpen]);
 
-  const initials = userName
+  const initials = (userName ?? "Guest")
     .split(" ")
     .filter(Boolean)
     .slice(0, 2)
@@ -110,7 +111,11 @@ export function Header({
             <p className="text-xs uppercase tracking-[0.24em] text-slate-500">
               {BRANDING.fullName}
             </p>
-            <h2 className="text-xl font-semibold text-slate-950">{userName}</h2>
+            {userName ? (
+              <h2 className="text-xl font-semibold text-slate-950">{userName}</h2>
+            ) : (
+              <Skeleton className="mt-2 h-6 w-32 rounded-full border-white/0" />
+            )}
           </div>
         </div>
 
