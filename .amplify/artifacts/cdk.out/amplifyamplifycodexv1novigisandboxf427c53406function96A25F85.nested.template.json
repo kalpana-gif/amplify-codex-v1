@@ -282,7 +282,7 @@
      "S3Bucket": {
       "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
      },
-     "S3Key": "6c70a76c640830094064a429e196a0e47674671d73070a8ac1c1773b564fbcd9.zip"
+     "S3Key": "b5632615d5a7e8d13fdc6ba7b50c384a746a377fa099d2fb7408b5a8b0297139.zip"
     },
     "Environment": {
      "Variables": {
@@ -418,7 +418,7 @@
    "DeletionPolicy": "Delete",
    "Metadata": {
     "aws:cdk:path": "amplify-amplifycodexv1-novigi-sandbox-f427c53406/function/embs-alert-function-lambda/Resource",
-    "aws:asset:path": "asset.6c70a76c640830094064a429e196a0e47674671d73070a8ac1c1773b564fbcd9",
+    "aws:asset:path": "asset.b5632615d5a7e8d13fdc6ba7b50c384a746a377fa099d2fb7408b5a8b0297139",
     "aws:asset:is-bundled": true,
     "aws:asset:property": "Code"
    }
@@ -459,7 +459,7 @@
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/2WOwQ6CMBBEv4V7WRFJPAvRm8TIB5ClLKRQWsIWjSH8uykkXjy9mTm8TAxxcoYowDeHsu5DrSpYcmJHdeFQ9gLfXC4ah6rG0tiaOoZ8w2020ilrhMIBlqfVJLLGbHxYreTH1z2tgk8lMpNjuHgIPkE6y55cikxi18OSNeZnvb7IuMLOk6Q7jqMyrff9r+sqNmXhsPVV+JPQ8eEVx3BMIAo6ViqcZuPUQPDc+QVV0PeC9wAAAA=="
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/2WOzQ6CMBCEn4V7WbFqPIvRm8TAA5ClLKb8tIYtEEN4d1NIvHj6ZubwZSTI0xmiACcOVdmErS5gTogdlZlD1QicOJ9b7IoSc2NLqhmSFffBKKetERo7mFPbkrhWZuXTtlp9fN3SIviQIzM5houH4APEg2rIxcgkNj3M18r8rLeRjMvs0Ct64Putzcv7/tdlEasyc/jyVfiTUPNulBL2R4iCmrUO+8E43RGkG79plCel9wAAAA=="
    },
    "Metadata": {
     "aws:cdk:path": "amplify-amplifycodexv1-novigi-sandbox-f427c53406/function/CDKMetadata/Default"
@@ -733,6 +733,13 @@
    ]
   }
  },
+ "Outputs": {
+  "amplifyamplifycodexv1novigisandboxf427c53406functionembsalertfunctionlambda9F55996FRef": {
+   "Value": {
+    "Ref": "embsalertfunctionlambdaF35455EF"
+   }
+  }
+ },
  "Parameters": {
   "referencetoamplifyamplifycodexv1novigisandboxf427c53406dataNestedStackdataNestedStackResourceCE093568Outputsamplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataExpenseNestedStackExpenseNestedStackResourceAD11659DOutputsamplifyamplify12C403AE": {
    "Type": "String"
@@ -751,13 +758,6 @@
   },
   "referencetoamplifyamplifycodexv1novigisandboxf427c53406storageNestedStackstorageNestedStackResourceADA4624COutputsamplifyamplifycodexv1novigisandboxf427c53406storageembsreceiptsBucket44A545AFArn": {
    "Type": "String"
-  }
- },
- "Outputs": {
-  "amplifyamplifycodexv1novigisandboxf427c53406functionembsalertfunctionlambda9F55996FRef": {
-   "Value": {
-    "Ref": "embsalertfunctionlambdaF35455EF"
-   }
   }
  }
 }
