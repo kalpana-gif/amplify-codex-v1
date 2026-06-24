@@ -19,12 +19,12 @@ import { cn, formatCurrency } from "@/lib/utils";
 import type { BudgetOverview, CurrentUser, ExpenseView, PaymentMethod } from "@/types";
 
 const schema = z.object({
-  amount: z.number().min(0.01),
-  vendor: z.string().min(2),
-  expenseDate: z.string().min(1),
+  amount: z.number().min(0.01, "Enter an amount greater than zero."),
+  vendor: z.string().min(2, "Enter the vendor name."),
+  expenseDate: z.string().min(1, "Select the expense date."),
   paymentMethod: z.enum(["CASH", "CARD", "TRANSFER", "CHECK", "OTHER"]),
-  categoryId: z.string().min(1),
-  lineItemId: z.string().min(1),
+  categoryId: z.string().min(1, "Select a category."),
+  lineItemId: z.string().min(1, "Select a line item."),
   notes: z.string().optional(),
 });
 
@@ -36,15 +36,26 @@ export type ExpenseFormCollaborators = {
 
 type FormValues = z.infer<typeof schema>;
 
-const buildDefaultValues = (budget: BudgetOverview): FormValues => ({
-  amount: 0,
-  vendor: "",
-  expenseDate: new Date().toISOString().slice(0, 10),
-  paymentMethod: "CARD",
-  categoryId: budget.categories[0]?.id ?? "",
-  lineItemId: budget.categories[0]?.lineItems[0]?.id ?? "",
-  notes: "",
-});
+const getFirstCategoryWithLineItems = (budget: BudgetOverview) =>
+  budget.categories.find((category) => category.lineItems.length > 0) ??
+  budget.categories[0];
+
+const buildDefaultValues = (budget: BudgetOverview): FormValues => {
+  const defaultCategory = getFirstCategoryWithLineItems(budget);
+
+  return {
+    amount: 0,
+    vendor: "",
+    expenseDate: new Date().toISOString().slice(0, 10),
+    paymentMethod: "CARD",
+    categoryId: defaultCategory?.id ?? "",
+    lineItemId: defaultCategory?.lineItems[0]?.id ?? "",
+    notes: "",
+  };
+};
+
+const fieldError = (message?: string) =>
+  message ? <p className="text-sm text-red-600">{message}</p> : null;
 
 const buildExpenseView = (
   budget: BudgetOverview,
@@ -127,9 +138,18 @@ export function ExpenseEntryForm({
   );
 
   useEffect(() => {
-    const nextLineItemId = selectedCategory?.lineItems[0]?.id ?? "";
+    const currentLineItemId = form.getValues("lineItemId");
+    const nextLineItems = selectedCategory?.lineItems ?? [];
+    const hasCurrentLineItem = nextLineItems.some(
+      (lineItem) => lineItem.id === currentLineItemId,
+    );
+    const nextLineItemId = hasCurrentLineItem
+      ? currentLineItemId
+      : (nextLineItems[0]?.id ?? "");
 
-    form.setValue("lineItemId", nextLineItemId);
+    form.setValue("lineItemId", nextLineItemId, {
+      shouldValidate: true,
+    });
   }, [form, selectedCategory?.lineItems, selectedCategoryId]);
 
   return (
@@ -189,47 +209,52 @@ export function ExpenseEntryForm({
 
       <form
         className={cn("grid gap-3 md:grid-cols-2", isModal ? "mt-5" : "mt-4")}
-        onSubmit={form.handleSubmit((values) => {
-          setSubmitting(true);
+        onSubmit={form.handleSubmit(
+          (values) => {
+            setSubmitting(true);
 
-          startTransition(() => {
-            void createExpense({
-              id: pendingExpenseId,
-              lineItemId: values.lineItemId,
-              categoryId: values.categoryId,
-              eventId,
-              amount: Math.round(values.amount * 100),
-              vendor: values.vendor,
-              expenseDate: values.expenseDate,
-              paymentMethod: values.paymentMethod as PaymentMethod,
-              receiptKey,
-              notes: values.notes,
-              loggedBy: user.email,
-              owner: user.email,
-              admins: collaborators.admins,
-              editors: collaborators.editors,
-              viewers: collaborators.viewers,
-            })
-              .then((result) => {
-                if (!result.data) {
-                  throw new Error("Failed to create expense.");
-                }
-
-                onCreated(buildExpenseView(budget, result.data));
-                toast.success("Expense added.");
-                form.reset(buildDefaultValues(budget));
-                setPendingExpenseId(crypto.randomUUID());
-                setReceiptKey(undefined);
-                onSubmitted?.();
+            startTransition(() => {
+              void createExpense({
+                id: pendingExpenseId,
+                lineItemId: values.lineItemId,
+                categoryId: values.categoryId,
+                eventId,
+                amount: Math.round(values.amount * 100),
+                vendor: values.vendor,
+                expenseDate: values.expenseDate,
+                paymentMethod: values.paymentMethod as PaymentMethod,
+                receiptKey,
+                notes: values.notes,
+                loggedBy: user.email,
+                owner: user.email,
+                admins: collaborators.admins,
+                editors: collaborators.editors,
+                viewers: collaborators.viewers,
               })
-              .catch((error) =>
-                toast.error(
-                  error instanceof Error ? error.message : "Failed to add expense.",
-                ),
-              )
-              .finally(() => setSubmitting(false));
-          });
-        })}
+                .then((result) => {
+                  if (!result.data) {
+                    throw new Error("Failed to create expense.");
+                  }
+
+                  onCreated(buildExpenseView(budget, result.data));
+                  toast.success("Expense added.");
+                  form.reset(buildDefaultValues(budget));
+                  setPendingExpenseId(crypto.randomUUID());
+                  setReceiptKey(undefined);
+                  onSubmitted?.();
+                })
+                .catch((error) =>
+                  toast.error(
+                    error instanceof Error ? error.message : "Failed to add expense.",
+                  ),
+                )
+                .finally(() => setSubmitting(false));
+            });
+          },
+          () => {
+            toast.error("Fix the highlighted expense fields and try again.");
+          },
+        )}
       >
         <label className="space-y-2">
           <span className="text-sm font-medium text-slate-700">Amount ({currency})</span>
@@ -239,10 +264,12 @@ export function ExpenseEntryForm({
             type="number"
             {...form.register("amount", { valueAsNumber: true })}
           />
+          {fieldError(form.formState.errors.amount?.message)}
         </label>
         <label className="space-y-2">
           <span className="text-sm font-medium text-slate-700">Vendor</span>
           <Input {...form.register("vendor")} />
+          {fieldError(form.formState.errors.vendor?.message)}
         </label>
         <label className="space-y-2">
           <span className="text-sm font-medium text-slate-700">Date</span>
@@ -258,6 +285,7 @@ export function ExpenseEntryForm({
               />
             )}
           />
+          {fieldError(form.formState.errors.expenseDate?.message)}
         </label>
         <label className="space-y-2">
           <span className="text-sm font-medium text-slate-700">Payment Method</span>
@@ -278,6 +306,7 @@ export function ExpenseEntryForm({
               </option>
             ))}
           </Select>
+          {fieldError(form.formState.errors.categoryId?.message)}
         </label>
         <label className="space-y-2">
           <span className="text-sm font-medium text-slate-700">Line Item</span>
@@ -291,6 +320,12 @@ export function ExpenseEntryForm({
               </option>
             ))}
           </Select>
+          {!selectedCategory?.lineItems.length ? (
+            <p className="text-sm text-amber-700">
+              This category has no line items yet. Add one in Budget before logging an expense.
+            </p>
+          ) : null}
+          {fieldError(form.formState.errors.lineItemId?.message)}
         </label>
         <label className="space-y-2 md:col-span-2">
           <span className="text-sm font-medium text-slate-700">Notes</span>

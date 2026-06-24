@@ -1378,60 +1378,7 @@
           ]
         }
       },
-      "nonModels": {
-        "UserPoolUser": {
-          "name": "UserPoolUser",
-          "fields": {
-            "email": {
-              "name": "email",
-              "isArray": false,
-              "type": "AWSEmail",
-              "isRequired": true,
-              "attributes": []
-            },
-            "name": {
-              "name": "name",
-              "isArray": false,
-              "type": "String",
-              "isRequired": true,
-              "attributes": []
-            },
-            "status": {
-              "name": "status",
-              "isArray": false,
-              "type": "String",
-              "isRequired": true,
-              "attributes": []
-            },
-            "enabled": {
-              "name": "enabled",
-              "isArray": false,
-              "type": "Boolean",
-              "isRequired": true,
-              "attributes": []
-            }
-          }
-        }
-      },
-      "queries": {
-        "listUserPoolUsers": {
-          "name": "listUserPoolUsers",
-          "isArray": true,
-          "type": {
-            "nonModel": "UserPoolUser"
-          },
-          "isRequired": false,
-          "isArrayNullable": true,
-          "arguments": {
-            "userPoolId": {
-              "name": "userPoolId",
-              "isArray": false,
-              "type": "String",
-              "isRequired": true
-            }
-          }
-        }
-      }
+      "nonModels": {}
     }
   },
   "storage": {

@@ -34,12 +34,6 @@
     "groups"
    ]
   },
-  "AWS::Amplify::Function": {
-   "version": "1",
-   "stackOutputs": [
-    "definedFunctions"
-   ]
-  },
   "AWS::Amplify::GraphQL": {
    "version": "1",
    "stackOutputs": [
@@ -49,6 +43,12 @@
     "awsAppsyncRegion",
     "amplifyApiModelSchemaS3Uri",
     "awsAppsyncAdditionalAuthenticationTypes"
+   ]
+  },
+  "AWS::Amplify::Function": {
+   "version": "1",
+   "stackOutputs": [
+    "definedFunctions"
    ]
   },
   "AWS::Amplify::Storage": {
@@ -154,30 +154,6 @@
   "groups": {
    "Value": "[]"
   },
-  "definedFunctions": {
-   "Value": {
-    "Fn::Join": [
-     "",
-     [
-      "[\"",
-      {
-       "Fn::GetAtt": [
-        "auth179371D7",
-        "Outputs.amplifyamplifycodexv1novigisandboxf427c53406authembsteamdirectoryfunctionlambdaB6B1ABABRef"
-       ]
-      },
-      "\",\"",
-      {
-       "Fn::GetAtt": [
-        "function1351588B",
-        "Outputs.amplifyamplifycodexv1novigisandboxf427c53406functionembsalertfunctionlambda9F55996FRef"
-       ]
-      },
-      "\"]"
-     ]
-    ]
-   }
-  },
   "awsAppsyncApiId": {
    "Value": {
     "Fn::GetAtt": [
@@ -241,6 +217,23 @@
   },
   "awsAppsyncAdditionalAuthenticationTypes": {
    "Value": "AWS_IAM"
+  },
+  "definedFunctions": {
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "[\"",
+      {
+       "Fn::GetAtt": [
+        "function1351588B",
+        "Outputs.amplifyamplifycodexv1novigisandboxf427c53406functionembsalertfunctionlambda9F55996FRef"
+       ]
+      },
+      "\"]"
+     ]
+    ]
+   }
   },
   "storageRegion": {
    "Value": {
@@ -307,7 +300,7 @@
        {
         "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
        },
-       "/684d9eadaed9cdd4def2fc03753183ac75cf93490c3d990615e5cdc98e549484.json"
+       "/435f7e0ae27842c10a94726a18924a79f08a47cc2d4a34473e8ee885a4842bb3.json"
       ]
      ]
     }
@@ -347,12 +340,6 @@
        "auth179371D7",
        "Outputs.amplifyamplifycodexv1novigisandboxf427c53406authamplifyAuthIdentityPool455D94E7Ref"
       ]
-     },
-     "referencetoamplifyamplifycodexv1novigisandboxf427c53406authNestedStackauthNestedStackResourceB90F43D4Outputsamplifyamplifycodexv1novigisandboxf427c53406authembsteamdirectoryfunctionlambdaB6B1ABABArn": {
-      "Fn::GetAtt": [
-       "auth179371D7",
-       "Outputs.amplifyamplifycodexv1novigisandboxf427c53406authembsteamdirectoryfunctionlambdaB6B1ABABArn"
-      ]
      }
     },
     "Tags": [
@@ -381,7 +368,7 @@
        {
         "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
        },
-       "/1b76bfc045dd8c0109b90b0eea1583402c94bfd01b7276406f84a37c93c5567a.json"
+       "/dab4fca9532b2779626e9533b86d2a3d5369cdf7ce93a0c3968bf799bcffb26c.json"
       ]
      ]
     }
@@ -511,7 +498,7 @@
        {
         "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
        },
-       "/9cb72bd7d9c6f82a60eeb5d355b300067aa3faa28de4c7d52432b04015ac879b.json"
+       "/aede6709d3d5dddee67154465832cd4c93a11d86869268d1a884bd640a7d2618.json"
       ]
      ]
     }

@@ -1,5 +1,4 @@
 import { a, defineData } from "@aws-amplify/backend";
-import { teamDirectoryFunction } from "../functions/teamDirectoryFunction/resource.mjs";
 
 export const schema = a
   .schema({
@@ -18,21 +17,6 @@ export const schema = a
       "OVER_BUDGET",
       "MEMBER_ADDED",
     ]),
-    UserPoolUser: a.customType({
-      email: a.email().required(),
-      name: a.string().required(),
-      status: a.string().required(),
-      enabled: a.boolean().required(),
-    }),
-    listUserPoolUsers: a
-      .query()
-      .arguments({
-        userPoolId: a.string().required(),
-      })
-      .returns(a.ref("UserPoolUser").array())
-      .authorization((allow) => [allow.authenticated()])
-      .handler(a.handler.function(teamDirectoryFunction)),
-
     Event: a
       .model({
         name: a.string().required(),

@@ -161,13 +161,6 @@ export type CurrentUser = {
   name: string;
 };
 
-export type UserPoolUser = {
-  email: string;
-  name: string;
-  status: string;
-  enabled: boolean;
-};
-
 export type EventTeamMember = {
   email: string;
   role: MemberRole;
