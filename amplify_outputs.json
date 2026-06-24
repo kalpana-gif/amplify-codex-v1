@@ -1,9 +1,9 @@
 {
   "auth": {
-    "user_pool_id": "ap-southeast-2_bpAQ1C2r5",
+    "user_pool_id": "ap-southeast-2_G3bDW60TU",
     "aws_region": "ap-southeast-2",
-    "user_pool_client_id": "nknhmtmflmp2j96vmhtqcptk3",
-    "identity_pool_id": "ap-southeast-2:28b1f371-97c0-404a-a9cf-22ccb5507eac",
+    "user_pool_client_id": "41otda02g9ro9dm6t3adjgv14v",
+    "identity_pool_id": "ap-southeast-2:a8e70413-64e3-4510-bd84-44b014149c54",
     "mfa_methods": [
       "TOTP"
     ],
@@ -29,7 +29,7 @@
     "unauthenticated_identities_enabled": true
   },
   "data": {
-    "url": "https://bb6w7t2ldffb3e2d5gwhdeb3i4.appsync-api.ap-southeast-2.amazonaws.com/graphql",
+    "url": "https://qcexg2ykirexvdj3ujxjsecpc4.appsync-api.ap-southeast-2.amazonaws.com/graphql",
     "aws_region": "ap-southeast-2",
     "default_authorization_type": "AMAZON_COGNITO_USER_POOLS",
     "authorization_types": [
@@ -1378,16 +1378,69 @@
           ]
         }
       },
-      "nonModels": {}
+      "nonModels": {
+        "UserPoolUser": {
+          "name": "UserPoolUser",
+          "fields": {
+            "email": {
+              "name": "email",
+              "isArray": false,
+              "type": "AWSEmail",
+              "isRequired": true,
+              "attributes": []
+            },
+            "name": {
+              "name": "name",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "status": {
+              "name": "status",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "enabled": {
+              "name": "enabled",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": true,
+              "attributes": []
+            }
+          }
+        }
+      },
+      "queries": {
+        "listUserPoolUsers": {
+          "name": "listUserPoolUsers",
+          "isArray": true,
+          "type": {
+            "nonModel": "UserPoolUser"
+          },
+          "isRequired": false,
+          "isArrayNullable": true,
+          "arguments": {
+            "userPoolId": {
+              "name": "userPoolId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            }
+          }
+        }
+      }
     }
   },
   "storage": {
     "aws_region": "ap-southeast-2",
-    "bucket_name": "amplify-d3aug6c5sbdvui-ma-embsreceiptsbucketde2a85-ssfzahjnsy4a",
+    "bucket_name": "amplify-amplifycodexv1-no-embsreceiptsbucketde2a85-4dm1qappam7d",
     "buckets": [
       {
         "name": "embs-receipts",
-        "bucket_name": "amplify-d3aug6c5sbdvui-ma-embsreceiptsbucketde2a85-ssfzahjnsy4a",
+        "bucket_name": "amplify-amplifycodexv1-no-embsreceiptsbucketde2a85-4dm1qappam7d",
         "aws_region": "ap-southeast-2",
         "paths": {
           "receipts/${cognito-identity.amazonaws.com:sub}/*": {
@@ -1402,5 +1455,5 @@
       }
     ]
   },
-  "version": "1.3"
+  "version": "1.4"
 }

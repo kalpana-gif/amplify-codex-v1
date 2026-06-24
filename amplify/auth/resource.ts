@@ -3,8 +3,10 @@ import {
   getVerificationEmailBody,
   getVerificationEmailSubject,
 } from "../../config/branding.mjs";
+import { teamDirectoryFunction } from "../functions/teamDirectoryFunction/resource";
 
 export const auth = defineAuth({
+  access: (allow) => [allow.resource(teamDirectoryFunction).to(["listUsers"])],
   loginWith: {
     email: {
       verificationEmailStyle: "CODE",

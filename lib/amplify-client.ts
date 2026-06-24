@@ -33,12 +33,17 @@ export const isGoogleAuthConfigured =
     (provider) => provider.toUpperCase() === "GOOGLE",
   );
 
+export const cognitoUserPoolId =
+  typeof rawAuth?.user_pool_id === "string" ? rawAuth.user_pool_id : null;
+
 export const configureAmplifyClient = () => {
   if (isConfigured) {
     return;
   }
 
-  Amplify.configure(amplifyConfig, { ssr: true });
+  // This app uses Amplify from client components, so avoid cookie-based SSR auth
+  // storage that can overflow localhost request headers during development.
+  Amplify.configure(amplifyConfig);
   isConfigured = true;
 };
 

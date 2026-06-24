@@ -10,10 +10,10 @@
     "amplify:sandbox": "npx ampx sandbox"
   },
   "dependencies": {
-    "@aws-amplify/adapter-nextjs": "^1.7.3",
     "@aws-amplify/backend": "^1.22.0",
     "@aws-amplify/backend-cli": "^1.8.2",
     "@aws-amplify/data-schema-types": "^1.2.1",
+    "@aws-sdk/client-cognito-identity-provider": "^3.1075.0",
     "@aws-sdk/client-dynamodb": "^3.1045.0",
     "@aws-sdk/client-sesv2": "^3.1045.0",
     "@aws-sdk/lib-dynamodb": "^3.1045.0",

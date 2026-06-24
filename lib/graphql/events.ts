@@ -1,5 +1,5 @@
 import { fetchUserAttributes, getCurrentUser } from "aws-amplify/auth";
-import { client } from "@/lib/amplify-client";
+import { client, cognitoUserPoolId } from "@/lib/amplify-client";
 import { getBudgetOverview } from "@/lib/graphql/budget";
 import { calcPercentage, calcVariance } from "@/lib/utils";
 import type {
@@ -12,6 +12,7 @@ import type {
   EventTeamSnapshot,
   MemberRole,
   TeamMemberInput,
+  UserPoolUser,
 } from "@/types";
 
 const defaultCategoryPalette = [
@@ -145,26 +146,29 @@ export const getEventPermissions = (
   },
 ): EventPermissions => {
   const normalizedEmail = currentEmail.toLowerCase();
-  const hasAuthenticatedUser = normalizedEmail.length > 0;
-  const admins = (event.admins ?? []).filter(Boolean) as string[];
-  const editors = (event.editors ?? []).filter(Boolean) as string[];
-  const viewers = (event.viewers ?? []).filter(Boolean) as string[];
-  const isOwner = event.owner?.toLowerCase() === normalizedEmail;
-  const isAdmin = hasAuthenticatedUser || isOwner || admins.some((email) => email === normalizedEmail);
-  const isEditor = hasAuthenticatedUser || isAdmin || editors.some((email) => email === normalizedEmail);
-  const isViewer =
-    hasAuthenticatedUser || isEditor || viewers.some((email) => email === normalizedEmail);
+  if (!normalizedEmail) {
+    return defaultPermissions;
+  }
+
+  const ownerEmail = event.owner?.toLowerCase() ?? "";
+  const admins = normalizeEmailList(event.admins);
+  const editors = normalizeEmailList(event.editors);
+  const viewers = normalizeEmailList(event.viewers);
+  const isOwner = ownerEmail === normalizedEmail;
+  const isAdmin = isOwner || admins.includes(normalizedEmail);
+  const isEditor = isAdmin || editors.includes(normalizedEmail);
+  const isViewer = isEditor || viewers.includes(normalizedEmail);
 
   return {
     isOwner,
     isAdmin,
     isEditor,
     isViewer,
-    canEditBudget: hasAuthenticatedUser,
-    canEditExpenses: hasAuthenticatedUser,
-    canManageRoles: hasAuthenticatedUser,
-    canManageEventLifecycle: hasAuthenticatedUser,
-    canDeleteEvent: hasAuthenticatedUser,
+    canEditBudget: isAdmin,
+    canEditExpenses: isEditor,
+    canManageRoles: isAdmin,
+    canManageEventLifecycle: isAdmin,
+    canDeleteEvent: isAdmin,
   };
 };
 
@@ -775,6 +779,122 @@ export const getEventTeamSnapshot = async (
       error instanceof Error ? error.message : "Failed to load event users.",
     );
   }
+};
+
+export const listUserPoolUsers = async (): Promise<UserPoolUser[]> => {
+  try {
+    if (!cognitoUserPoolId) {
+      throw new Error("Cognito user pool is not configured for team lookup.");
+    }
+
+    const result = await client.queries.listUserPoolUsers({
+      userPoolId: cognitoUserPoolId,
+    }, {
+      authMode: "userPool",
+    });
+
+    if (result.errors?.length) {
+      throw new Error(
+        getResultErrorMessage(result.errors, "Failed to load user pool users."),
+      );
+    }
+
+    return (result.data ?? [])
+      .filter(
+        (
+          user,
+        ): user is {
+          email: string;
+          name: string;
+          status: string;
+          enabled: boolean;
+        } => Boolean(user?.email),
+      )
+      .map((user) => ({
+        email: user.email.toLowerCase(),
+        name: user.name.trim(),
+        status: user.status,
+        enabled: user.enabled,
+      }))
+      .sort(
+        (first, second) =>
+          first.name.localeCompare(second.name) ||
+          first.email.localeCompare(second.email),
+      );
+  } catch (error) {
+    throw new Error(
+      error instanceof Error ? error.message : "Failed to load user pool users.",
+    );
+  }
+};
+
+export const addEventMember = async (
+  eventId: string,
+  email: string,
+  role: MemberRole,
+): Promise<EventTeamSnapshot> => {
+  const context = await loadEventTeamContext(eventId);
+  const profile = context.currentUser;
+  const normalizedEmail = email.toLowerCase();
+
+  if (!profile) {
+    throw new Error("You must be signed in to add users to this event.");
+  }
+
+  if (!context.permissions.canManageRoles) {
+    throw new Error("You do not have permission to manage this event team.");
+  }
+
+  if (normalizedEmail === context.event.owner) {
+    throw new Error("The event owner is already assigned to this event.");
+  }
+
+  const existingMember = context.members.find(
+    (member) => member.email === normalizedEmail,
+  );
+
+  if (existingMember) {
+    if (existingMember.role === role) {
+      return {
+        ...context,
+        members: sortMembersForDisplay(context.members),
+      };
+    }
+
+    return updateEventMemberRole(eventId, normalizedEmail, role);
+  }
+
+  const nextMembers = [
+    ...context.members,
+    {
+      email: normalizedEmail,
+      role,
+    },
+  ];
+  const memberGroups = splitMembersByRole(context.event.owner, nextMembers);
+  const createResult = await client.models.EventMember.create(
+    {
+      eventId,
+      email: normalizedEmail,
+      role,
+      owner: context.event.owner,
+      admins: memberGroups.admins,
+      editors: memberGroups.editors,
+      viewers: memberGroups.viewers,
+    },
+    {
+      authMode: "userPool",
+    },
+  );
+
+  assertMutationSucceeded(createResult, "Failed to assign the user to this event.");
+
+  await syncEventAccessState(eventId, context.event.owner, nextMembers, {
+    email: normalizedEmail,
+    role,
+  });
+
+  return getEventTeamSnapshot(eventId);
 };
 
 export const updateEventMemberRole = async (
