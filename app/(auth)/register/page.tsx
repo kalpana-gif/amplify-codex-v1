@@ -30,6 +30,7 @@ import {
   startGoogleAuthRedirect,
 } from "@/lib/amplify-auth-actions";
 import { isGoogleAuthConfigured } from "@/lib/amplify-client";
+import { syncCurrentUserDirectoryProfile } from "@/lib/graphql/events";
 
 const registerSchema = z.object({
   name: z.string().min(2, "Name is required."),
@@ -272,6 +273,7 @@ export default function RegisterPage() {
                 email,
                 password,
               });
+              await syncCurrentUserDirectoryProfile();
               toast.success("Account verified.");
               router.replace("/events");
             } catch (error) {

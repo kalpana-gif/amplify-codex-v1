@@ -20,6 +20,7 @@ import {
   startGoogleAuthRedirect,
 } from "@/lib/amplify-auth-actions";
 import { isGoogleAuthConfigured } from "@/lib/amplify-client";
+import { syncCurrentUserDirectoryProfile } from "@/lib/graphql/events";
 
 const schema = z.object({
   email: z.string().email("Enter a valid email."),
@@ -119,6 +120,7 @@ export default function LoginPage() {
             });
 
             if (result.isSignedIn) {
+              await syncCurrentUserDirectoryProfile();
               toast.success("Signed in.");
               router.replace(redirect);
               return;

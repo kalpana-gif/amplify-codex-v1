@@ -4,7 +4,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...defineBackend in @aws-amplify/backend...",
-        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782330548150:11: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782330548150:11:1)",
+        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782331827919:11: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782331827919:11:1)",
         "...node internals, @aws-amplify/backend-deployer, @aws-cdk/toolkit-lib..."
       ]
     },
@@ -33,7 +33,7 @@
         "...<anonymous> in @aws-amplify/backend-output-storage...",
         "Array.forEach (:)",
         "...@aws-amplify/backend-output-storage, defineBackend in @aws-amplify/backend...",
-        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782330548150:11: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782330548150:11:1)",
+        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782331827919:11: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782331827919:11:1)",
         "...node internals, @aws-amplify/backend-deployer, @aws-cdk/toolkit-lib..."
       ]
     }
@@ -49,7 +49,7 @@
         "...<anonymous> in @aws-amplify/backend-output-storage...",
         "Array.forEach (:)",
         "...@aws-amplify/backend-output-storage, defineBackend in @aws-amplify/backend...",
-        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782330548150:11: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782330548150:11:1)",
+        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782331827919:11: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782331827919:11:1)",
         "...node internals, @aws-amplify/backend-deployer, @aws-cdk/toolkit-lib..."
       ]
     }
@@ -61,7 +61,7 @@
         "...<anonymous> in @aws-amplify/backend...",
         "Array.forEach (:)",
         "...defineBackend in @aws-amplify/backend...",
-        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782330548150:11: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782330548150:11:1)",
+        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782331827919:11: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782331827919:11:1)",
         "...node internals..."
       ]
     }
@@ -388,7 +388,7 @@
         "...<anonymous> in @aws-amplify/backend...",
         "Array.forEach (:)",
         "...defineBackend in @aws-amplify/backend...",
-        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782330548150:11: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782330548150:11:1)",
+        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782331827919:11: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782331827919:11:1)",
         "...node internals..."
       ]
     }
@@ -490,7 +490,7 @@
         "...<anonymous> in @aws-amplify/backend...",
         "Array.forEach (:)",
         "...defineBackend in @aws-amplify/backend...",
-        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782330548150:11: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782330548150:11:1)",
+        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782331827919:11: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782331827919:11:1)",
         "...node internals..."
       ]
     }
@@ -502,7 +502,7 @@
         "...<anonymous> in @aws-amplify/backend...",
         "Array.forEach (:)",
         "...defineBackend in @aws-amplify/backend...",
-        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782330548150:11: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782330548150:11:1)",
+        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782331827919:11: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782331827919:11:1)",
         "...node internals..."
       ]
     }
@@ -666,7 +666,7 @@
         "...aws-cdk-lib, <anonymous> in @aws-amplify/backend...",
         "Array.forEach (:)",
         "...defineBackend in @aws-amplify/backend...",
-        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782330548150:11: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782330548150:11:1)",
+        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782331827919:11: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782331827919:11:1)",
         "...node internals..."
       ]
     }
@@ -932,7 +932,7 @@
         "...aws-cdk-lib, <anonymous> in @aws-amplify/backend...",
         "Array.forEach (:)",
         "...defineBackend in @aws-amplify/backend...",
-        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782330548150:11: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782330548150:11:1)",
+        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782331827919:11: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782331827919:11:1)",
         "...node internals..."
       ]
     }
@@ -993,7 +993,7 @@
         "...aws-cdk-lib, <anonymous> in @aws-amplify/backend...",
         "Array.forEach (:)",
         "...defineBackend in @aws-amplify/backend...",
-        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782330548150:11: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782330548150:11:1)",
+        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782331827919:11: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782331827919:11:1)",
         "...node internals..."
       ]
     }
@@ -1100,7 +1100,7 @@
         "...aws-cdk-lib, <anonymous> in @aws-amplify/backend...",
         "Array.forEach (:)",
         "...defineBackend in @aws-amplify/backend...",
-        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782330548150:11: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782330548150:11:1)",
+        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782331827919:11: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782331827919:11:1)",
         "...node internals..."
       ]
     }
@@ -1142,7 +1142,7 @@
         "...@aws-amplify/auth-construct, @aws-amplify/backend-auth, <anonymous> in @aws-amplify/backend...",
         "Array.forEach (:)",
         "...defineBackend in @aws-amplify/backend...",
-        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782330548150:11: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782330548150:11:1)"
+        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782331827919:11: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782331827919:11:1)"
       ]
     }
   ],
@@ -1157,7 +1157,7 @@
         "...@aws-amplify/auth-construct, @aws-amplify/backend-auth, <anonymous> in @aws-amplify/backend...",
         "Array.forEach (:)",
         "...defineBackend in @aws-amplify/backend...",
-        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782330548150:11: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782330548150:11:1)"
+        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782331827919:11: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782331827919:11:1)"
       ]
     }
   ],
@@ -1191,6 +1191,18 @@
     {
       "type": "aws:cdk:creationStack",
       "data": [
+        "...<anonymous> in @aws-amplify/graphql-api-construct...",
+        "Map.forEach (:)",
+        "...@aws-amplify/graphql-api-construct..."
+      ]
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/UserDirectoryProfile": [
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...<anonymous> in @aws-amplify/graphql-api-construct...",
+        "Array.forEach (:)",
         "...<anonymous> in @aws-amplify/graphql-api-construct...",
         "Map.forEach (:)",
         "...@aws-amplify/graphql-api-construct..."
@@ -1677,6 +1689,420 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...aws-cdk-lib, <anonymous> in @aws-amplify/graphql-api-construct...",
+        "Map.forEach (:)",
+        "...@aws-amplify/graphql-api-construct..."
+      ]
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/UserDirectoryProfile/DynamoDBModelTableReadIOPS": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DynamoDBModelTableReadIOPS"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...<anonymous> in @aws-amplify/graphql-api-construct...",
+        "Array.forEach (:)",
+        "...<anonymous> in @aws-amplify/graphql-api-construct...",
+        "Map.forEach (:)",
+        "...@aws-amplify/graphql-api-construct..."
+      ]
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/UserDirectoryProfile/DynamoDBModelTableWriteIOPS": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DynamoDBModelTableWriteIOPS"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...<anonymous> in @aws-amplify/graphql-api-construct...",
+        "Array.forEach (:)",
+        "...<anonymous> in @aws-amplify/graphql-api-construct...",
+        "Map.forEach (:)",
+        "...@aws-amplify/graphql-api-construct..."
+      ]
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/UserDirectoryProfile/DynamoDBBillingMode": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DynamoDBBillingMode"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...<anonymous> in @aws-amplify/graphql-api-construct...",
+        "Array.forEach (:)",
+        "...<anonymous> in @aws-amplify/graphql-api-construct...",
+        "Map.forEach (:)",
+        "...@aws-amplify/graphql-api-construct..."
+      ]
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/UserDirectoryProfile/DynamoDBEnablePointInTimeRecovery": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DynamoDBEnablePointInTimeRecovery"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...<anonymous> in @aws-amplify/graphql-api-construct...",
+        "Array.forEach (:)",
+        "...<anonymous> in @aws-amplify/graphql-api-construct...",
+        "Map.forEach (:)",
+        "...@aws-amplify/graphql-api-construct..."
+      ]
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/UserDirectoryProfile/DynamoDBEnableServerSideEncryption": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DynamoDBEnableServerSideEncryption"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...<anonymous> in @aws-amplify/graphql-api-construct...",
+        "Array.forEach (:)",
+        "...<anonymous> in @aws-amplify/graphql-api-construct...",
+        "Map.forEach (:)",
+        "...@aws-amplify/graphql-api-construct..."
+      ]
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/UserDirectoryProfile/HasEnvironmentParameter": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "HasEnvironmentParameter"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...<anonymous> in @aws-amplify/graphql-api-construct...",
+        "Array.forEach (:)",
+        "...<anonymous> in @aws-amplify/graphql-api-construct...",
+        "Map.forEach (:)",
+        "...@aws-amplify/graphql-api-construct..."
+      ]
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/UserDirectoryProfile/ShouldUsePayPerRequestBilling": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ShouldUsePayPerRequestBilling"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...<anonymous> in @aws-amplify/graphql-api-construct...",
+        "Array.forEach (:)",
+        "...<anonymous> in @aws-amplify/graphql-api-construct...",
+        "Map.forEach (:)",
+        "...@aws-amplify/graphql-api-construct..."
+      ]
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/UserDirectoryProfile/ShouldUsePointInTimeRecovery": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ShouldUsePointInTimeRecovery"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...<anonymous> in @aws-amplify/graphql-api-construct...",
+        "Array.forEach (:)",
+        "...<anonymous> in @aws-amplify/graphql-api-construct...",
+        "Map.forEach (:)",
+        "...@aws-amplify/graphql-api-construct..."
+      ]
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/UserDirectoryProfile/UserDirectoryProfileTable": [
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "UserDirectoryProfile"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/UserDirectoryProfile/CustomTableUserDirectoryProfileTable": [
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "UserDirectoryProfile"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/UserDirectoryProfile/GetAttUserDirectoryProfileTableStreamArn": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "GetAttUserDirectoryProfileTableStreamArn"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...<anonymous> in @aws-amplify/graphql-api-construct...",
+        "Array.forEach (:)",
+        "...<anonymous> in @aws-amplify/graphql-api-construct...",
+        "Map.forEach (:)",
+        "...@aws-amplify/graphql-api-construct..."
+      ]
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/UserDirectoryProfile/GetAttUserDirectoryProfileTableName": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "GetAttUserDirectoryProfileTableName"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...<anonymous> in @aws-amplify/graphql-api-construct...",
+        "Array.forEach (:)",
+        "...<anonymous> in @aws-amplify/graphql-api-construct...",
+        "Map.forEach (:)",
+        "...@aws-amplify/graphql-api-construct..."
+      ]
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/UserDirectoryProfile/UserDirectoryProfileIAMRole": [
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "UserDirectoryProfileIAMRole"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/UserDirectoryProfile/UserDirectoryProfileDataSource": [
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "UserDirectoryProfileTable"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/UserDirectoryProfile/queryGetUserDirectoryProfileResolver": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "GetUserDirectoryProfileResolver"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "Query.getUserDirectoryProfile"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/UserDirectoryProfile/queryListUserDirectoryProfilesResolver": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ListUserDirectoryProfileResolver"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "Query.listUserDirectoryProfiles"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/UserDirectoryProfile/mutationCreateUserDirectoryProfileResolver": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CreateUserDirectoryProfileResolver"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "Mutation.createUserDirectoryProfile"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/UserDirectoryProfile/mutationUpdateUserDirectoryProfileResolver": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UpdateUserDirectoryProfileResolver"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "Mutation.updateUserDirectoryProfile"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/UserDirectoryProfile/mutationDeleteUserDirectoryProfileResolver": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DeleteUserDirectoryProfileResolver"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "Mutation.deleteUserDirectoryProfile"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/UserDirectoryProfile/subscriptionOnCreateUserDirectoryProfileResolver": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SubscriptiononCreateUserDirectoryProfileResolver"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "Subscription.onCreateUserDirectoryProfile"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/UserDirectoryProfile/subscriptionOnUpdateUserDirectoryProfileResolver": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SubscriptiononUpdateUserDirectoryProfileResolver"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "Subscription.onUpdateUserDirectoryProfile"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/UserDirectoryProfile/subscriptionOnDeleteUserDirectoryProfileResolver": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SubscriptiononDeleteUserDirectoryProfileResolver"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "Subscription.onDeleteUserDirectoryProfile"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/UserDirectoryProfile/reference-to-amplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataAmplifyTableManagerNestedStackAmplifyTableManagerNestedStackResourceC3BDA801Outputs.amplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataAmplifyTableManagerTableManagerCustomProviderframeworkonEvent4B15A7E9Arn": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "referencetoamplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataAmplifyTableManagerNestedStackAmplifyTableManagerNestedStackResourceC3BDA801Outputsamplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataAmplifyTableManagerTableMana79D5B887"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, @aws-amplify/backend, node internals...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/UserDirectoryProfile/reference-to-amplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataGraphQLAPI5E40F3A8ApiId": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "referencetoamplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataGraphQLAPI5E40F3A8ApiId"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, @aws-amplify/backend, node internals, @aws-amplify/backend-deployer...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/UserDirectoryProfile/reference-to-amplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataGraphQLAPINONEDS878C609DName": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "referencetoamplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataGraphQLAPINONEDS878C609DName"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, @aws-amplify/backend, node internals, @aws-amplify/backend-deployer...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/UserDirectoryProfile/reference-to-amplifyamplifycodexv1novigisandboxf427c53406authNestedStackauthNestedStackResourceB90F43D4Outputs.amplifyamplifycodexv1novigisandboxf427c53406authamplifyAuthauthenticatedUserRole35CA15EBRef": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "referencetoamplifyamplifycodexv1novigisandboxf427c53406authNestedStackauthNestedStackResourceB90F43D4Outputsamplifyamplifycodexv1novigisandboxf427c53406authamplifyAuthauthenticatedUserRole35CA15EBRef"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, @aws-amplify/backend, node internals...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/UserDirectoryProfile/reference-to-amplifyamplifycodexv1novigisandboxf427c53406authNestedStackauthNestedStackResourceB90F43D4Outputs.amplifyamplifycodexv1novigisandboxf427c53406authamplifyAuthunauthenticatedUserRole66A823D4Ref": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "referencetoamplifyamplifycodexv1novigisandboxf427c53406authNestedStackauthNestedStackResourceB90F43D4Outputsamplifyamplifycodexv1novigisandboxf427c53406authamplifyAuthunauthenticatedUserRole66A823D4Ref"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, @aws-amplify/backend, node internals...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/UserDirectoryProfile/reference-to-amplifyamplifycodexv1novigisandboxf427c53406authNestedStackauthNestedStackResourceB90F43D4Outputs.amplifyamplifycodexv1novigisandboxf427c53406authamplifyAuthIdentityPool455D94E7Ref": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "referencetoamplifyamplifycodexv1novigisandboxf427c53406authNestedStackauthNestedStackResourceB90F43D4Outputsamplifyamplifycodexv1novigisandboxf427c53406authamplifyAuthIdentityPool455D94E7Ref"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, @aws-amplify/backend, node internals...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/UserDirectoryProfile.NestedStack/UserDirectoryProfile.NestedStackResource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "amplifyDataUserDirectoryProfileNestedStackUserDirectoryProfileNestedStackResourceC2344479"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, <anonymous> in @aws-amplify/graphql-api-construct...",
+        "Array.forEach (:)",
+        "...<anonymous> in @aws-amplify/graphql-api-construct...",
         "Map.forEach (:)",
         "...@aws-amplify/graphql-api-construct..."
       ]
@@ -5641,7 +6067,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...NodejsFunction.addEventSource in aws-cdk-lib...",
-        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782330548150:41: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782330548150:41:4)",
+        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782331827919:41: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782331827919:41:4)",
         "...node internals, @aws-amplify/backend-deployer, @aws-cdk/toolkit-lib..."
       ]
     }
@@ -5719,6 +6145,596 @@
     }
   ],
   "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/AmplifyTableManager/CDKMetadata/Condition": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CDKMetadataAvailable"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/UserDirectoryProfile/UserDirectoryProfileIAMRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UserDirectoryProfileIAMRoleFC14B600"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, <anonymous> in @aws-amplify/graphql-api-construct...",
+        "Array.forEach (:)",
+        "...<anonymous> in @aws-amplify/graphql-api-construct...",
+        "Map.forEach (:)",
+        "...@aws-amplify/graphql-api-construct..."
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "UserDirectoryProfileIAMRole"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/UserDirectoryProfile/UserDirectoryProfileDataSource/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UserDirectoryProfileDataSource"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, <anonymous> in @aws-amplify/graphql-api-construct...",
+        "Array.forEach (:)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "UserDirectoryProfileTable"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/UserDirectoryProfile/QuerygetUserDirectoryProfilepreAuth0Function/QuerygetUserDirectoryProfilepreAuth0Function.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "QuerygetUserDirectoryProfilepreAuth0FunctionQuerygetUserDirectoryProfilepreAuth0FunctionAppSyncFunction21FD0EBF"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "QuerygetUserDirectoryProfilepreAuth0Function"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/UserDirectoryProfile/QuerygetUserDirectoryProfileauth0Function/QuerygetUserDirectoryProfileauth0Function.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "QuerygetUserDirectoryProfileauth0FunctionQuerygetUserDirectoryProfileauth0FunctionAppSyncFunctionE09DA905"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "QuerygetUserDirectoryProfileauth0Function"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/UserDirectoryProfile/QuerygetUserDirectoryProfilepostAuth0Function/QuerygetUserDirectoryProfilepostAuth0Function.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "QuerygetUserDirectoryProfilepostAuth0FunctionQuerygetUserDirectoryProfilepostAuth0FunctionAppSyncFunction8BF72456"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "QuerygetUserDirectoryProfilepostAuth0Function"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/UserDirectoryProfile/QueryGetUserDirectoryProfileDataResolverFn/QueryGetUserDirectoryProfileDataResolverFn.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "QueryGetUserDirectoryProfileDataResolverFnQueryGetUserDirectoryProfileDataResolverFnAppSyncFunctionB1B9C779"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "QueryGetUserDirectoryProfileDataResolverFn"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/UserDirectoryProfile/QuerylistUserDirectoryProfilespreAuth0Function/QuerylistUserDirectoryProfilespreAuth0Function.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "QuerylistUserDirectoryProfilespreAuth0FunctionQuerylistUserDirectoryProfilespreAuth0FunctionAppSyncFunction0C764774"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "QuerylistUserDirectoryProfilespreAuth0Function"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/UserDirectoryProfile/QuerylistUserDirectoryProfilesauth0Function/QuerylistUserDirectoryProfilesauth0Function.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "QuerylistUserDirectoryProfilesauth0FunctionQuerylistUserDirectoryProfilesauth0FunctionAppSyncFunction8E44B3CB"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "QuerylistUserDirectoryProfilesauth0Function"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/UserDirectoryProfile/QuerylistUserDirectoryProfilespostAuth0Function/QuerylistUserDirectoryProfilespostAuth0Function.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "QuerylistUserDirectoryProfilespostAuth0FunctionQuerylistUserDirectoryProfilespostAuth0FunctionAppSyncFunctionC87D6F01"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "QuerylistUserDirectoryProfilespostAuth0Function"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/UserDirectoryProfile/QueryListUserDirectoryProfilesDataResolverFn/QueryListUserDirectoryProfilesDataResolverFn.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "QueryListUserDirectoryProfilesDataResolverFnQueryListUserDirectoryProfilesDataResolverFnAppSyncFunctionCF5C6F2E"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "QueryListUserDirectoryProfilesDataResolverFn"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/UserDirectoryProfile/MutationcreateUserDirectoryProfileinit0Function/MutationcreateUserDirectoryProfileinit0Function.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "MutationcreateUserDirectoryProfileinit0FunctionMutationcreateUserDirectoryProfileinit0FunctionAppSyncFunction1304E58C"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "MutationcreateUserDirectoryProfileinit0Function"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/UserDirectoryProfile/MutationcreateUserDirectoryProfilepreAuth0Function/MutationcreateUserDirectoryProfilepreAuth0Function.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "MutationcreateUserDirectoryProfilepreAuth0FunctionMutationcreateUserDirectoryProfilepreAuth0FunctionAppSyncFunctionC917EF03"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "MutationcreateUserDirectoryProfilepreAuth0Function"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/UserDirectoryProfile/MutationcreateUserDirectoryProfileauth0Function/MutationcreateUserDirectoryProfileauth0Function.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "MutationcreateUserDirectoryProfileauth0FunctionMutationcreateUserDirectoryProfileauth0FunctionAppSyncFunctionC0166550"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "MutationcreateUserDirectoryProfileauth0Function"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/UserDirectoryProfile/MutationcreateUserDirectoryProfilepostAuth0Function/MutationcreateUserDirectoryProfilepostAuth0Function.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "MutationcreateUserDirectoryProfilepostAuth0FunctionMutationcreateUserDirectoryProfilepostAuth0FunctionAppSyncFunction907F8F27"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "MutationcreateUserDirectoryProfilepostAuth0Function"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/UserDirectoryProfile/MutationCreateUserDirectoryProfileDataResolverFn/MutationCreateUserDirectoryProfileDataResolverFn.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "MutationCreateUserDirectoryProfileDataResolverFnMutationCreateUserDirectoryProfileDataResolverFnAppSyncFunctionF971A12B"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "MutationCreateUserDirectoryProfileDataResolverFn"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/UserDirectoryProfile/MutationupdateUserDirectoryProfileinit0Function/MutationupdateUserDirectoryProfileinit0Function.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "MutationupdateUserDirectoryProfileinit0FunctionMutationupdateUserDirectoryProfileinit0FunctionAppSyncFunctionD5A7A0F3"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "MutationupdateUserDirectoryProfileinit0Function"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/UserDirectoryProfile/MutationupdateUserDirectoryProfilepreAuth0Function/MutationupdateUserDirectoryProfilepreAuth0Function.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "MutationupdateUserDirectoryProfilepreAuth0FunctionMutationupdateUserDirectoryProfilepreAuth0FunctionAppSyncFunction2042D31B"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "MutationupdateUserDirectoryProfilepreAuth0Function"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/UserDirectoryProfile/MutationupdateUserDirectoryProfileauth0Function/MutationupdateUserDirectoryProfileauth0Function.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "MutationupdateUserDirectoryProfileauth0FunctionMutationupdateUserDirectoryProfileauth0FunctionAppSyncFunction6B878E86"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "MutationupdateUserDirectoryProfileauth0Function"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/UserDirectoryProfile/MutationupdateUserDirectoryProfilepostAuth0Function/MutationupdateUserDirectoryProfilepostAuth0Function.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "MutationupdateUserDirectoryProfilepostAuth0FunctionMutationupdateUserDirectoryProfilepostAuth0FunctionAppSyncFunction8299A514"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "MutationupdateUserDirectoryProfilepostAuth0Function"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/UserDirectoryProfile/MutationUpdateUserDirectoryProfileDataResolverFn/MutationUpdateUserDirectoryProfileDataResolverFn.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "MutationUpdateUserDirectoryProfileDataResolverFnMutationUpdateUserDirectoryProfileDataResolverFnAppSyncFunction8C7B0249"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "MutationUpdateUserDirectoryProfileDataResolverFn"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/UserDirectoryProfile/MutationdeleteUserDirectoryProfilepreAuth0Function/MutationdeleteUserDirectoryProfilepreAuth0Function.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "MutationdeleteUserDirectoryProfilepreAuth0FunctionMutationdeleteUserDirectoryProfilepreAuth0FunctionAppSyncFunction00F86BC8"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "MutationdeleteUserDirectoryProfilepreAuth0Function"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/UserDirectoryProfile/MutationdeleteUserDirectoryProfileauth0Function/MutationdeleteUserDirectoryProfileauth0Function.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "MutationdeleteUserDirectoryProfileauth0FunctionMutationdeleteUserDirectoryProfileauth0FunctionAppSyncFunctionFFD1AFAB"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "MutationdeleteUserDirectoryProfileauth0Function"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/UserDirectoryProfile/MutationdeleteUserDirectoryProfilepostAuth0Function/MutationdeleteUserDirectoryProfilepostAuth0Function.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "MutationdeleteUserDirectoryProfilepostAuth0FunctionMutationdeleteUserDirectoryProfilepostAuth0FunctionAppSyncFunctionABC05975"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "MutationdeleteUserDirectoryProfilepostAuth0Function"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/UserDirectoryProfile/MutationDeleteUserDirectoryProfileDataResolverFn/MutationDeleteUserDirectoryProfileDataResolverFn.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "MutationDeleteUserDirectoryProfileDataResolverFnMutationDeleteUserDirectoryProfileDataResolverFnAppSyncFunction270B76F8"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "MutationDeleteUserDirectoryProfileDataResolverFn"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/UserDirectoryProfile/SubscriptiononCreateUserDirectoryProfileauth0Function/SubscriptiononCreateUserDirectoryProfileauth0Function.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SubscriptiononCreateUserDirectoryProfileauth0FunctionSubscriptiononCreateUserDirectoryProfileauth0FunctionAppSyncFunction75EFDB01"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "SubscriptiononCreateUserDirectoryProfileauth0Function"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/UserDirectoryProfile/SubscriptiononCreateUserDirectoryProfilepostAuth0Function/SubscriptiononCreateUserDirectoryProfilepostAuth0Function.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SubscriptiononCreateUserDirectoryProfilepostAuth0FunctionSubscriptiononCreateUserDirectoryProfilepostAuth0FunctionAppSyncFunction13CCD9B4"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "SubscriptiononCreateUserDirectoryProfilepostAuth0Function"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/UserDirectoryProfile/SubscriptionOnCreateUserDirectoryProfileDataResolverFn/SubscriptionOnCreateUserDirectoryProfileDataResolverFn.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SubscriptionOnCreateUserDirectoryProfileDataResolverFnSubscriptionOnCreateUserDirectoryProfileDataResolverFnAppSyncFunctionB5E87D58"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "SubscriptionOnCreateUserDirectoryProfileDataResolverFn"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/UserDirectoryProfile/SubscriptiononUpdateUserDirectoryProfileauth0Function/SubscriptiononUpdateUserDirectoryProfileauth0Function.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SubscriptiononUpdateUserDirectoryProfileauth0FunctionSubscriptiononUpdateUserDirectoryProfileauth0FunctionAppSyncFunction54B544D5"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "SubscriptiononUpdateUserDirectoryProfileauth0Function"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/UserDirectoryProfile/SubscriptiononUpdateUserDirectoryProfilepostAuth0Function/SubscriptiononUpdateUserDirectoryProfilepostAuth0Function.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SubscriptiononUpdateUserDirectoryProfilepostAuth0FunctionSubscriptiononUpdateUserDirectoryProfilepostAuth0FunctionAppSyncFunctionF6DEB2BD"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "SubscriptiononUpdateUserDirectoryProfilepostAuth0Function"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/UserDirectoryProfile/SubscriptionOnUpdateUserDirectoryProfileDataResolverFn/SubscriptionOnUpdateUserDirectoryProfileDataResolverFn.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SubscriptionOnUpdateUserDirectoryProfileDataResolverFnSubscriptionOnUpdateUserDirectoryProfileDataResolverFnAppSyncFunction7195D62B"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "SubscriptionOnUpdateUserDirectoryProfileDataResolverFn"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/UserDirectoryProfile/SubscriptiononDeleteUserDirectoryProfileauth0Function/SubscriptiononDeleteUserDirectoryProfileauth0Function.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SubscriptiononDeleteUserDirectoryProfileauth0FunctionSubscriptiononDeleteUserDirectoryProfileauth0FunctionAppSyncFunction5FEB7CE6"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "SubscriptiononDeleteUserDirectoryProfileauth0Function"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/UserDirectoryProfile/SubscriptiononDeleteUserDirectoryProfilepostAuth0Function/SubscriptiononDeleteUserDirectoryProfilepostAuth0Function.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SubscriptiononDeleteUserDirectoryProfilepostAuth0FunctionSubscriptiononDeleteUserDirectoryProfilepostAuth0FunctionAppSyncFunctionEC1E78C8"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "SubscriptiononDeleteUserDirectoryProfilepostAuth0Function"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/UserDirectoryProfile/SubscriptionOnDeleteUserDirectoryProfileDataResolverFn/SubscriptionOnDeleteUserDirectoryProfileDataResolverFn.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SubscriptionOnDeleteUserDirectoryProfileDataResolverFnSubscriptionOnDeleteUserDirectoryProfileDataResolverFnAppSyncFunction85ACA56E"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "SubscriptionOnDeleteUserDirectoryProfileDataResolverFn"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/UserDirectoryProfile/CDKMetadata/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CDKMetadata"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/UserDirectoryProfile/CDKMetadata/Condition": [
     {
       "type": "aws:cdk:logicalId",
       "data": "CDKMetadataAvailable"
@@ -10714,6 +11730,25 @@
         "Map.forEach (:)",
         "...@aws-amplify/graphql-api-construct..."
       ]
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/UserDirectoryProfile/UserDirectoryProfileTable/Default/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UserDirectoryProfileTable"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, <anonymous> in @aws-amplify/graphql-api-construct...",
+        "Array.forEach (:)",
+        "...<anonymous> in @aws-amplify/graphql-api-construct...",
+        "Map.forEach (:)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "UserDirectoryProfile"
     }
   ],
   "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/Event/EventTable/Default/Default": [

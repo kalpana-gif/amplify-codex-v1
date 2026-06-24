@@ -4,7 +4,11 @@ import {
   getVerificationEmailSubject,
 } from "../../config/branding.mjs";
 
+const branchAuthName =
+  process.env.AWS_BRANCH === "main" ? "mainBranchAuth" : undefined;
+
 export const auth = defineAuth({
+  ...(branchAuthName ? { name: branchAuthName } : {}),
   loginWith: {
     email: {
       verificationEmailStyle: "CODE",
