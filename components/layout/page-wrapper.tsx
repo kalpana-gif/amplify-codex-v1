@@ -4,6 +4,7 @@ export function PageWrapper({
   title,
   description,
   actions,
+  headerContent,
   children,
   className,
   compact = false,
@@ -12,6 +13,7 @@ export function PageWrapper({
   title: string;
   description?: string;
   actions?: React.ReactNode;
+  headerContent?: React.ReactNode;
   children: React.ReactNode;
   className?: string;
   compact?: boolean;
@@ -36,24 +38,30 @@ export function PageWrapper({
           )}
         >
           <div>
-            <h1
-              className={cn(
-                "font-semibold tracking-tight text-slate-950",
-                compact ? "text-3xl" : "text-4xl",
-              )}
-            >
-              {title}
-            </h1>
-            {description ? (
-              <p
-                className={cn(
-                  "max-w-3xl text-sm text-slate-600",
-                  compact ? "mt-2 leading-6" : "mt-3 leading-7",
-                )}
-              >
-                {description}
-              </p>
-            ) : null}
+            {headerContent ? (
+              headerContent
+            ) : (
+              <>
+                <h1
+                  className={cn(
+                    "font-semibold tracking-tight text-slate-950",
+                    compact ? "text-3xl" : "text-4xl",
+                  )}
+                >
+                  {title}
+                </h1>
+                {description ? (
+                  <p
+                    className={cn(
+                      "max-w-3xl text-sm text-slate-600",
+                      compact ? "mt-2 leading-6" : "mt-3 leading-7",
+                    )}
+                  >
+                    {description}
+                  </p>
+                ) : null}
+              </>
+            )}
           </div>
           {actions ? <div className="flex items-center gap-3">{actions}</div> : null}
         </div>

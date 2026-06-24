@@ -17,6 +17,7 @@ import { ResizableSplitView } from "@/components/layout/resizable-split-view";
 import { Card } from "@/components/ui/card";
 import { ErrorBoundary } from "@/components/ui/error-boundary";
 import { PageWrapper } from "@/components/layout/page-wrapper";
+import { EventWorkspaceLoader } from "@/components/ui/page-loader";
 import { client } from "@/lib/amplify-client";
 import { getBudgetOverview } from "@/lib/graphql/budget";
 import { deleteExpense, listExpensesForEvent } from "@/lib/graphql/expenses";
@@ -113,7 +114,7 @@ export default function ExpensesPage() {
   }, [params.id, router]);
 
   if (!budget || !user) {
-    return null;
+    return <EventWorkspaceLoader variant="expenses" />;
   }
 
   const runningTotal = expenses.reduce((sum, expense) => sum + expense.amount, 0);

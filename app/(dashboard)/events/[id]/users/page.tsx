@@ -9,8 +9,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { EmptyState } from "@/components/ui/empty-state";
+import { EventWorkspaceLoader } from "@/components/ui/page-loader";
 import { Select } from "@/components/ui/select";
-import { Skeleton } from "@/components/ui/skeleton";
 import {
   getEventTeamSnapshot,
   updateEventMemberRole,
@@ -120,6 +120,10 @@ export default function EventUsersPage() {
   const editorCount = snapshot?.event.editors.length ?? 0;
   const viewerCount = snapshot?.event.viewers.length ?? 0;
 
+  if (isLoading) {
+    return <EventWorkspaceLoader variant="team" />;
+  }
+
   return (
     <PageWrapper
       title={title}
@@ -141,19 +145,7 @@ export default function EventUsersPage() {
         </Card>
       ) : null}
 
-      {isLoading ? (
-        <div className="space-y-4">
-          <div className="grid gap-4 md:grid-cols-4">
-            {Array.from({ length: 4 }).map((_, index) => (
-              <Skeleton key={index} className="h-28 rounded-[1.75rem]" />
-            ))}
-          </div>
-          <Skeleton className="h-40 rounded-[2rem]" />
-          <Skeleton className="h-72 rounded-[2rem]" />
-        </div>
-      ) : null}
-
-      {!isLoading && snapshot ? (
+      {snapshot ? (
         <>
           <div className="grid gap-4 md:grid-cols-4">
             {[

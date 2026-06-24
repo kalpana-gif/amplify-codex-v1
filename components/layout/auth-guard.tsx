@@ -2,8 +2,8 @@
 
 import { useEffect, useState, startTransition } from "react";
 import { usePathname, useRouter } from "next/navigation";
+import { TeamPageContentLoader } from "@/components/ui/page-loader";
 import { getCurrentUserProfile } from "@/lib/graphql/events";
-import { Skeleton } from "@/components/ui/skeleton";
 
 export function AuthGuard({
   children,
@@ -28,17 +28,7 @@ export function AuthGuard({
   }, [pathname, router]);
 
   if (status === "checking") {
-    return (
-      <div className="space-y-6">
-        <Skeleton className="h-20 w-full rounded-3xl" />
-        <div className="grid gap-4 md:grid-cols-3">
-          <Skeleton className="h-40" />
-          <Skeleton className="h-40" />
-          <Skeleton className="h-40" />
-        </div>
-        <Skeleton className="h-80 w-full rounded-3xl" />
-      </div>
-    );
+    return <TeamPageContentLoader />;
   }
 
   return children;
