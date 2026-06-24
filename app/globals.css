@@ -193,113 +193,106 @@ a {
 
 .auth-button-loader {
   position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  display: inline-block;
   width: 1.15rem;
   height: 1.15rem;
-  filter: drop-shadow(0 0 0.4rem rgba(46, 117, 182, 0.2));
+  transform: rotate(165deg);
+  filter: drop-shadow(
+    0 0 0.55rem
+      color-mix(in srgb, var(--auth-loader-accent, var(--color-accent)) 18%, transparent)
+  );
+  --auth-loader-primary: color-mix(in srgb, var(--color-primary) 88%, white);
+  --auth-loader-accent: color-mix(in srgb, var(--color-accent) 84%, white);
+  --auth-loader-secondary: color-mix(in srgb, var(--color-success) 78%, white);
+  --auth-loader-tertiary: color-mix(in srgb, var(--color-warning) 80%, white);
 }
 
-.auth-button-loader__ring,
-.auth-button-loader__orbit,
-.auth-button-loader__core,
-.auth-button-loader__dot {
+.auth-button-loader::before,
+.auth-button-loader::after {
+  content: "";
   position: absolute;
-  border-radius: 999px;
-}
-
-.auth-button-loader__ring {
-  inset: 0;
-  border: 1px solid
-    var(--auth-loader-ring, color-mix(in srgb, var(--color-accent) 34%, white));
-  opacity: 0;
-  animation: auth-loader-ring 1.6s infinite ease-out;
-}
-
-.auth-button-loader__ring--delay {
-  animation-delay: 0.45s;
-}
-
-.auth-button-loader__orbit {
-  inset: 0.08rem;
-  animation: auth-loader-orbit 1.05s infinite linear;
-}
-
-.auth-button-loader__dot {
-  top: -0.06rem;
+  top: 50%;
   left: 50%;
-  width: 0.26rem;
-  height: 0.26rem;
-  transform: translateX(-50%);
-  background:
-    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.92), transparent 50%),
-    linear-gradient(
-      135deg,
-      var(--auth-loader-accent, color-mix(in srgb, var(--color-accent) 82%, white)),
-      var(--auth-loader-primary, color-mix(in srgb, var(--color-primary) 84%, white))
-    );
-  box-shadow:
-    0 0 0.45rem color-mix(in srgb, var(--color-accent) 28%, white),
-    0 0 0.85rem color-mix(in srgb, var(--color-primary) 18%, white);
+  display: block;
+  width: 0.24rem;
+  height: 0.24rem;
+  border-radius: 999px;
+  transform: translate(-50%, -50%);
 }
 
-.auth-button-loader__core {
-  inset: 0.29rem;
-  background:
-    radial-gradient(circle at 35% 35%, rgba(255, 255, 255, 0.95), transparent 46%),
-    linear-gradient(
-      135deg,
-      var(--auth-loader-primary, color-mix(in srgb, var(--color-primary) 84%, white)),
-      var(--auth-loader-accent, color-mix(in srgb, var(--color-accent) 84%, white))
-    );
-  box-shadow:
-    0 0 0 0.08rem rgba(255, 255, 255, 0.85),
-    0 0 0.7rem color-mix(in srgb, var(--color-accent) 18%, white);
-  animation: auth-loader-core 1.15s infinite ease-in-out;
+.auth-button-loader::before {
+  animation: auth-loader-before 2s infinite ease-in-out;
 }
 
-@keyframes auth-loader-ring {
+.auth-button-loader::after {
+  animation: auth-loader-after 2s infinite ease-in-out;
+}
+
+@keyframes auth-loader-before {
   0% {
-    opacity: 0;
-    transform: scale(0.72);
+    width: 0.24rem;
+    box-shadow:
+      0.46rem -0.22rem var(--auth-loader-primary),
+      -0.46rem 0.22rem var(--auth-loader-accent);
   }
 
-  28% {
-    opacity: 0.75;
+  35% {
+    width: 1.15rem;
+    box-shadow:
+      0 -0.22rem var(--auth-loader-primary),
+      0 0.22rem var(--auth-loader-accent);
+  }
+
+  70% {
+    width: 0.24rem;
+    box-shadow:
+      -0.46rem -0.22rem var(--auth-loader-primary),
+      0.46rem 0.22rem var(--auth-loader-accent);
   }
 
   100% {
-    opacity: 0;
-    transform: scale(1.5);
+    box-shadow:
+      0.46rem -0.22rem var(--auth-loader-primary),
+      -0.46rem 0.22rem var(--auth-loader-accent);
   }
 }
 
-@keyframes auth-loader-orbit {
+@keyframes auth-loader-after {
   0% {
-    transform: rotate(0deg);
+    height: 0.24rem;
+    box-shadow:
+      0.22rem 0.46rem var(--auth-loader-secondary),
+      -0.22rem -0.46rem var(--auth-loader-tertiary);
+  }
+
+  35% {
+    height: 1.15rem;
+    box-shadow:
+      0.22rem 0 var(--auth-loader-secondary),
+      -0.22rem 0 var(--auth-loader-tertiary);
+  }
+
+  70% {
+    height: 0.24rem;
+    box-shadow:
+      0.22rem -0.46rem var(--auth-loader-secondary),
+      -0.22rem 0.46rem var(--auth-loader-tertiary);
   }
 
   100% {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes auth-loader-core {
-  0%,
-  100% {
-    transform: scale(0.92);
-  }
-
-  50% {
-    transform: scale(1);
+    box-shadow:
+      0.22rem 0.46rem var(--auth-loader-secondary),
+      -0.22rem -0.46rem var(--auth-loader-tertiary);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .auth-button-loader__ring,
-  .auth-button-loader__orbit,
-  .auth-button-loader__core {
+  .auth-button-loader {
+    transform: none;
+  }
+
+  .auth-button-loader::before,
+  .auth-button-loader::after {
     animation-duration: 0.01ms;
     animation-iteration-count: 1;
   }
