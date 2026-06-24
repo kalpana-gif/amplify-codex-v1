@@ -12,9 +12,12 @@ import {
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { EmptyState } from "@/components/ui/empty-state";
-import { Skeleton } from "@/components/ui/skeleton";
 import { EventCard } from "@/components/events/event-card";
 import { PageWrapper } from "@/components/layout/page-wrapper";
+import {
+  EventsPageContentLoader,
+  PageHeaderSkeleton,
+} from "@/components/ui/page-loader";
 import { listEventsForCurrentUser } from "@/lib/graphql/events";
 import type { EventStatus, EventSummary } from "@/types";
 
@@ -114,6 +117,7 @@ export default function EventsPage() {
     <PageWrapper
       title="Events"
       description="Track budgets, spend, and status across all events."
+      headerContent={isLoading ? <PageHeaderSkeleton /> : undefined}
       actions={
         <Link href="/events/new" className="inline-flex overflow-visible md:-translate-y-4">
           <Button className="relative h-[3.35rem] min-w-[15.9rem] justify-center overflow-visible rounded-full border border-[rgba(30,58,95,0.14)] bg-[linear-gradient(135deg,var(--color-primary),var(--color-accent))] px-6 shadow-[0_18px_38px_rgba(30,58,95,0.2)]">
@@ -146,28 +150,7 @@ export default function EventsPage() {
       ) : null}
 
       {isLoading ? (
-        <div className="space-y-4">
-          <div className="grid gap-4 xl:grid-cols-[1.2fr_0.8fr]">
-            <Card className="p-6">
-              <div className="grid gap-3 md:grid-cols-4">
-                {Array.from({ length: 4 }).map((_, index) => (
-                  <Skeleton key={index} className="h-24 rounded-[1.5rem]" />
-                ))}
-              </div>
-            </Card>
-            <Card className="p-6">
-              <div className="grid gap-3 sm:grid-cols-2">
-                <Skeleton className="h-28 rounded-[1.5rem]" />
-                <Skeleton className="h-28 rounded-[1.5rem]" />
-              </div>
-            </Card>
-          </div>
-          <div className="grid gap-5 lg:grid-cols-2 xl:grid-cols-3">
-            {Array.from({ length: 3 }).map((_, index) => (
-              <Skeleton key={index} className="h-[360px] rounded-[2rem]" />
-            ))}
-          </div>
-        </div>
+        <EventsPageContentLoader />
       ) : null}
 
       {!isLoading ? (

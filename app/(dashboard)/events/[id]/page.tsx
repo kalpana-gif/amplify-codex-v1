@@ -22,6 +22,7 @@ import { Button } from "@/components/ui/button";
 import { PageWrapper } from "@/components/layout/page-wrapper";
 import { EventStatus } from "@/components/events/event-status";
 import { Modal } from "@/components/ui/modal";
+import { EventWorkspaceLoader } from "@/components/ui/page-loader";
 import { client } from "@/lib/amplify-client";
 import { getBudgetOverview } from "@/lib/graphql/budget";
 import {
@@ -151,7 +152,7 @@ export default function EventOverviewPage() {
   }, [params.id, router]);
 
   if (!event) {
-    return null;
+    return <EventWorkspaceLoader variant="overview" />;
   }
 
   const handleStatusChange = async (

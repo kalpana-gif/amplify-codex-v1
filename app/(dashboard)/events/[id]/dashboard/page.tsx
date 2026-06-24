@@ -10,6 +10,7 @@ import { UtilizationDonut } from "@/components/dashboard/utilization-donut";
 import { Card } from "@/components/ui/card";
 import { ErrorBoundary } from "@/components/ui/error-boundary";
 import { PageWrapper } from "@/components/layout/page-wrapper";
+import { EventWorkspaceLoader } from "@/components/ui/page-loader";
 import { client } from "@/lib/amplify-client";
 import { getBudgetOverview } from "@/lib/graphql/budget";
 import { listExpensesForEvent } from "@/lib/graphql/expenses";
@@ -76,7 +77,7 @@ export default function EventDashboardPage() {
   }, [budget, expenses]);
 
   if (!budget) {
-    return null;
+    return <EventWorkspaceLoader variant="dashboard" />;
   }
 
   return (
