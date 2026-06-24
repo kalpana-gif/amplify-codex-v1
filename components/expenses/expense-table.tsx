@@ -1,11 +1,12 @@
 "use client";
 
+import type { ReactNode } from "react";
 import { useMemo, useState } from "react";
 import toast from "react-hot-toast";
 import { Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
+import { DateInput } from "@/components/ui/date-input";
 import { Modal } from "@/components/ui/modal";
 import { Select } from "@/components/ui/select";
 import { formatCurrency, formatDate } from "@/lib/utils";
@@ -15,15 +16,18 @@ export function ExpenseTable({
   expenses,
   currency,
   canEdit,
+  headerAction,
   onDelete,
 }: {
   expenses: ExpenseView[];
   currency: string;
   canEdit: boolean;
+  headerAction?: ReactNode;
   onDelete: (expenseId: string) => Promise<void>;
 }) {
   const [sortColumn, setSortColumn] = useState<keyof ExpenseView>("expenseDate");
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [isDeleting, setIsDeleting] = useState(false);
   const [categoryFilter, setCategoryFilter] = useState("ALL");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
@@ -70,10 +74,13 @@ export function ExpenseTable({
     (sum, expense) => sum + expense.amount,
     0,
   );
+  const selectedExpense = selectedId
+    ? expenses.find((expense) => expense.id === selectedId) ?? null
+    : null;
 
   return (
     <Card className="overflow-hidden">
-      <div className="flex items-center justify-between border-b border-slate-200 px-5 py-4">
+      <div className="flex flex-col gap-3 border-b border-slate-200 px-5 py-4 md:flex-row md:items-center md:justify-between">
         <div>
           <h2 className="text-lg font-semibold text-slate-950">Expenses</h2>
           <p className="mt-1 text-sm text-slate-600">
@@ -83,6 +90,9 @@ export function ExpenseTable({
               : ""}
           </p>
         </div>
+        {headerAction ? (
+          <div className="flex items-center gap-3 md:shrink-0">{headerAction}</div>
+        ) : null}
       </div>
       <div className="grid gap-3 border-b border-slate-200 px-5 py-4 md:grid-cols-3">
         <label className="space-y-2">
@@ -105,20 +115,22 @@ export function ExpenseTable({
           <span className="text-xs font-medium uppercase tracking-[0.18em] text-slate-500">
             Start Date
           </span>
-          <Input
-            type="date"
+          <DateInput
+            max={endDate || undefined}
+            placeholder="Select start date"
             value={startDate}
-            onChange={(event) => setStartDate(event.target.value)}
+            onChange={setStartDate}
           />
         </label>
         <label className="space-y-2">
           <span className="text-xs font-medium uppercase tracking-[0.18em] text-slate-500">
             End Date
           </span>
-          <Input
-            type="date"
+          <DateInput
+            min={startDate || undefined}
+            placeholder="Select end date"
             value={endDate}
-            onChange={(event) => setEndDate(event.target.value)}
+            onChange={setEndDate}
           />
         </label>
       </div>
@@ -143,7 +155,7 @@ export function ExpenseTable({
                 </th>
               ))}
               <th className="px-4 py-3 text-left">Receipt</th>
-              <th className="px-4 py-3 text-right">Actions</th>
+              <th className="px-4 py-3 text-center">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -167,16 +179,17 @@ export function ExpenseTable({
                       "None"
                     )}
                   </td>
-                  <td className="px-4 py-3 text-right">
+                  <td className="px-4 py-3 text-center">
                     {canEdit ? (
                       <Button
                         variant="ghost"
                         size="sm"
-                        className="text-red-600"
+                        aria-label="Delete expense"
+                        className="h-9 w-9 rounded-full p-0 text-red-600 hover:bg-red-50 hover:text-red-700"
+                        title="Delete expense"
                         onClick={() => setSelectedId(expense.id)}
                       >
-                        <Trash2 className="mr-2 h-4 w-4" />
-                        Delete
+                        <Trash2 className="h-4 w-4" />
                       </Button>
                     ) : null}
                   </td>
@@ -199,36 +212,76 @@ export function ExpenseTable({
       <Modal
         open={Boolean(selectedId)}
         title="Delete expense"
-        description="This removes the expense from the tracker."
-        onClose={() => setSelectedId(null)}
+        description="Please confirm before removing this expense from the tracker."
+        onClose={() => {
+          if (!isDeleting) {
+            setSelectedId(null);
+          }
+        }}
       >
-        <div className="flex justify-end gap-3">
-          <Button variant="secondary" onClick={() => setSelectedId(null)}>
-            Cancel
-          </Button>
-          <Button
-            variant="danger"
-            onClick={() => {
-              const id = selectedId;
+        <div className="space-y-5">
+          {selectedExpense ? (
+            <div className="rounded-[1.35rem] border border-red-100 bg-[linear-gradient(180deg,rgba(254,242,242,0.96),rgba(255,255,255,0.98))] p-4">
+              <div className="flex items-start justify-between gap-3">
+                <div>
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-red-500">
+                    Expense to delete
+                  </p>
+                  <p className="mt-1 text-base font-semibold text-slate-950">
+                    {selectedExpense.vendor}
+                  </p>
+                  <p className="mt-1 text-sm text-slate-600">
+                    {selectedExpense.categoryName} • {selectedExpense.lineItemDescription}
+                  </p>
+                </div>
+                <div className="rounded-[1rem] border border-red-200 bg-white px-3 py-2 text-right">
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500">
+                    Amount
+                  </p>
+                  <p className="mt-1 text-sm font-semibold text-slate-950">
+                    {formatCurrency(selectedExpense.amount, currency)}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ) : null}
 
-              if (!id) {
-                return;
-              }
+          <div className="flex justify-end gap-3">
+            <Button
+              disabled={isDeleting}
+              variant="secondary"
+              onClick={() => setSelectedId(null)}
+            >
+              Cancel
+            </Button>
+            <Button
+              disabled={isDeleting}
+              variant="danger"
+              onClick={() => {
+                const id = selectedId;
 
-              void onDelete(id)
-                .then(() => {
-                  toast.success("Expense deleted.");
-                  setSelectedId(null);
-                })
-                .catch((error) =>
-                  toast.error(
-                    error instanceof Error ? error.message : "Delete failed.",
-                  ),
-                );
-            }}
-          >
-            Delete
-          </Button>
+                if (!id) {
+                  return;
+                }
+
+                setIsDeleting(true);
+
+                void onDelete(id)
+                  .then(() => {
+                    toast.success("Expense deleted.");
+                    setSelectedId(null);
+                  })
+                  .catch((error) =>
+                    toast.error(
+                      error instanceof Error ? error.message : "Delete failed.",
+                    ),
+                  )
+                  .finally(() => setIsDeleting(false));
+              }}
+            >
+              {isDeleting ? "Deleting..." : "Delete"}
+            </Button>
+          </div>
         </div>
       </Modal>
     </Card>
