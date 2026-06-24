@@ -10,7 +10,10 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { ExpenseForm } from "@/components/expenses/expense-form";
+import { ExpensePDFExport } from "@/components/expenses/expense-pdf-export";
+import { ExpenseQuickAdd } from "@/components/expenses/expense-quick-add";
 import { ExpenseTable } from "@/components/expenses/expense-table";
+import { ResizableSplitView } from "@/components/layout/resizable-split-view";
 import { Card } from "@/components/ui/card";
 import { ErrorBoundary } from "@/components/ui/error-boundary";
 import { PageWrapper } from "@/components/layout/page-wrapper";
@@ -30,6 +33,7 @@ const fetchExpensesPageData = async (eventId: string) => {
         authMode: "userPool",
         selectionSet: [
           "id",
+          "name",
           "owner",
           "admins",
           "editors",
@@ -63,6 +67,7 @@ export default function ExpensesPage() {
   const router = useRouter();
   const [budget, setBudget] = useState<BudgetOverview | null>(null);
   const [expenses, setExpenses] = useState<ExpenseView[]>([]);
+  const [eventName, setEventName] = useState("Event");
   const [user, setUser] = useState<CurrentUser | null>(null);
   const [permissions, setPermissions] = useState({
     canEditExpenses: false,
@@ -84,6 +89,7 @@ export default function ExpensesPage() {
 
         setBudget(snapshot.budgetOverview);
         setExpenses(snapshot.expenseItems);
+        setEventName(snapshot.event.name ?? "Event");
 
         if (snapshot.profile && snapshot.event) {
           setUser(snapshot.profile);
@@ -151,75 +157,109 @@ export default function ExpensesPage() {
 
   return (
     <PageWrapper
+      actions={
+        <ExpensePDFExport
+          budget={budget}
+          eventName={eventName}
+          expenses={expenses}
+        />
+      }
+      actionsPosition="center"
       title="Expense Tracker"
       description="Capture actual spend, attach proof, and keep the event inside its approved ceiling."
     >
       <ErrorBoundary title="Expense section unavailable">
         <Card className="p-4 md:p-5">
-          <p className="text-[11px] uppercase tracking-[0.24em] text-slate-500">
-            Spend Position
-          </p>
-          <h2 className="mt-2 max-w-3xl text-[clamp(2rem,2.4vw,3rem)] font-semibold leading-[1.05] tracking-tight text-slate-950">
-            Live spend against budget
-          </h2>
-          <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600">
-            Approved, spent, and remaining in one view.
-          </p>
+          <div className="flex flex-col gap-3">
+            <div className="min-w-0">
+              <p className="text-[11px] uppercase tracking-[0.24em] text-slate-500">
+                Spend Position
+              </p>
+              <h2 className="mt-2 max-w-3xl text-[clamp(1.55rem,1.9vw,2.15rem)] font-semibold leading-[1.08] tracking-tight text-slate-950">
+                Live spend against budget
+              </h2>
+              <p className="mt-1.5 max-w-2xl text-sm leading-6 text-slate-600">
+                Approved, spent, remaining, and expense rows in one compact view.
+              </p>
+            </div>
 
-          <div className="mt-3 grid gap-3 sm:grid-cols-2 2xl:grid-cols-4">
-            {spendMetrics.map(({ label, value, icon: Icon, accentClass, iconClass }) => (
-              <div
-                key={label}
-                className={`flex min-h-[96px] min-w-0 flex-col justify-between rounded-[1rem] border border-slate-200/70 px-4 py-3 ${accentClass}`}
-              >
-                <div className="flex items-start justify-between gap-3">
-                  <p className="max-w-[10ch] text-[10px] uppercase tracking-[0.2em] text-slate-500">
-                    {label}
+            <div className="mt-1 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+              {spendMetrics.map(({ label, value, icon: Icon, accentClass, iconClass }) => (
+                <div
+                  key={label}
+                  className={`flex min-h-[78px] min-w-0 flex-col justify-between rounded-[1rem] border border-slate-200/70 px-4 py-3 ${accentClass}`}
+                >
+                  <div className="flex items-start justify-between gap-3">
+                    <p className="max-w-[10ch] text-[10px] uppercase tracking-[0.2em] text-slate-500">
+                      {label}
+                    </p>
+                    <span
+                      className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full ${iconClass}`}
+                    >
+                      <Icon className="h-4 w-4" />
+                    </span>
+                  </div>
+                  <p className="mt-1.5 min-w-0 text-[clamp(1rem,1vw,1.28rem)] font-semibold leading-tight tracking-tight text-slate-950 tabular-nums">
+                    {value}
                   </p>
-                  <span
-                    className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full ${iconClass}`}
-                  >
-                    <Icon className="h-4 w-4" />
-                  </span>
                 </div>
-                <p className="mt-2 min-w-0 text-[clamp(1rem,1vw,1.35rem)] font-semibold leading-tight tracking-tight text-slate-950 tabular-nums">
-                  {value}
-                </p>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </Card>
 
-        <div className="grid gap-6 xl:grid-cols-[420px_1fr]">
-          <ExpenseForm
-            budget={budget}
-            currency={budget.currency}
-            eventId={params.id}
-            user={user}
-            collaborators={collaborators}
-            onCreated={(expense) =>
-              setExpenses((current) => [expense, ...current])
-            }
-          />
-          <ExpenseTable
-            expenses={expenses}
-            currency={budget.currency}
-            canEdit={permissions.canEditExpenses}
-            onDelete={async (expenseId) => {
-              const previous = expenses;
-              setExpenses((current) =>
-                current.filter((expense) => expense.id !== expenseId),
-              );
-
-              try {
-                await deleteExpense(expenseId);
-              } catch (error) {
-                setExpenses(previous);
-                throw error;
+        <ResizableSplitView
+          initialLeftWidth={420}
+          minLeftWidth={360}
+          minRightWidth={640}
+          storageKey="expenses-page-layout"
+          left={
+            <ExpenseForm
+              budget={budget}
+              currency={budget.currency}
+              eventId={params.id}
+              remainingAmount={remaining}
+              user={user}
+              collaborators={collaborators}
+              onCreated={(expense) =>
+                setExpenses((current) => [expense, ...current])
               }
-            }}
-          />
-        </div>
+            />
+          }
+          right={
+            <ExpenseTable
+              expenses={expenses}
+              currency={budget.currency}
+              canEdit={permissions.canEditExpenses}
+              headerAction={
+                <ExpenseQuickAdd
+                  budget={budget}
+                  collaborators={collaborators}
+                  currency={budget.currency}
+                  eventId={params.id}
+                  remainingAmount={remaining}
+                  user={user}
+                  onCreated={(expense) =>
+                    setExpenses((current) => [expense, ...current])
+                  }
+                />
+              }
+              onDelete={async (expenseId) => {
+                const previous = expenses;
+                setExpenses((current) =>
+                  current.filter((expense) => expense.id !== expenseId),
+                );
+
+                try {
+                  await deleteExpense(expenseId);
+                } catch (error) {
+                  setExpenses(previous);
+                  throw error;
+                }
+              }}
+            />
+          }
+        />
       </ErrorBoundary>
     </PageWrapper>
   );
