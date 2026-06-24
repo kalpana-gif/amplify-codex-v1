@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { motion } from "framer-motion";
 import toast from "react-hot-toast";
 import { Pencil, Save, Trash2, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -10,12 +11,16 @@ import { formatCurrency, varianceTone } from "@/lib/utils";
 import type { LineItemView } from "@/types";
 
 export function LineItemRow({
+  highlight = false,
+  index = 0,
   item,
   currency,
   canEdit,
   onSave,
   onDelete,
 }: {
+  highlight?: boolean;
+  index?: number;
   item: LineItemView;
   currency: string;
   canEdit: boolean;
@@ -32,7 +37,17 @@ export function LineItemRow({
 
   return (
     <>
-      <tr className="border-t border-slate-100 bg-white">
+      <motion.tr
+        animate={{ opacity: 1, y: 0 }}
+        className={`border-t border-slate-100 ${
+          highlight
+            ? "bg-[linear-gradient(90deg,rgba(239,246,255,0.98),rgba(255,255,255,0.96))]"
+            : "bg-white/92"
+        }`}
+        exit={{ opacity: 0, y: -8 }}
+        initial={{ opacity: 0, y: -10 }}
+        transition={{ duration: 0.2, delay: index * 0.03, ease: "easeOut" }}
+      >
         <td className="px-4 py-3 text-sm text-slate-600">
           {editing ? (
             <Input
@@ -44,7 +59,7 @@ export function LineItemRow({
               <div className="flex items-center gap-2">
                 <span className="h-2 w-2 rounded-full bg-slate-300" />
                 <span className="font-medium text-slate-700">{description}</span>
-                <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[11px] font-medium uppercase tracking-[0.12em] text-slate-500">
+                <span className="rounded-full border border-slate-200/80 bg-slate-50 px-2 py-0.5 text-[11px] font-medium uppercase tracking-[0.12em] text-slate-500">
                   Line item
                 </span>
               </div>
@@ -162,7 +177,7 @@ export function LineItemRow({
             </div>
           ) : null}
         </td>
-      </tr>
+      </motion.tr>
 
       <Modal
         className="max-w-md"

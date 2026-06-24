@@ -3,12 +3,14 @@
 import { useCallback, useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import {
+  Scale,
   CircleGauge,
   ClipboardList,
   PiggyBank,
   Wallet,
   type LucideIcon,
 } from "lucide-react";
+import { BudgetPDFExport } from "@/components/budget/budget-pdf-export";
 import { BudgetTable } from "@/components/budget/budget-table";
 import { Card } from "@/components/ui/card";
 import { ErrorBoundary } from "@/components/ui/error-boundary";
@@ -36,6 +38,7 @@ const fetchBudgetPageData = async (eventId: string) => {
         authMode: "userPool",
         selectionSet: [
           "id",
+          "name",
           "owner",
           "admins",
           "editors",
@@ -100,6 +103,7 @@ export default function BudgetPage() {
   const [permissions, setPermissions] = useState({
     canEditBudget: false,
   });
+  const [eventName, setEventName] = useState("Budget Planner");
   const [profileEmail, setProfileEmail] = useState("");
   const [collaborators, setCollaborators] = useState({
     admins: [] as string[],
@@ -110,6 +114,7 @@ export default function BudgetPage() {
   const reload = useCallback(async () => {
     const snapshot = await fetchBudgetPageData(params.id);
     setBudget(snapshot.overview);
+    setEventName(snapshot.event.name);
 
     if (snapshot.profile && snapshot.event) {
       setProfileEmail(snapshot.profile.email);
@@ -139,6 +144,7 @@ export default function BudgetPage() {
         }
 
         setBudget(snapshot.overview);
+        setEventName(snapshot.event.name);
 
         if (snapshot.profile && snapshot.event) {
           setProfileEmail(snapshot.profile.email);
@@ -169,12 +175,20 @@ export default function BudgetPage() {
     (sum, category) => sum + category.lineItems.length,
     0,
   );
+  const approvedGap = budget.totalAmount - budget.totalPlanned;
+  const approvedGapToneClass =
+    approvedGap < 0
+      ? "text-red-600"
+      : approvedGap === 0
+        ? "text-slate-700"
+        : "text-[var(--color-primary)]";
   const budgetMetrics: Array<{
     label: string;
     value: string;
     icon: LucideIcon;
     accentClass: string;
     iconClass: string;
+    valueClass?: string;
   }> = [
     {
       label: "Approved",
@@ -198,38 +212,87 @@ export default function BudgetPage() {
       iconClass: "bg-[rgba(15,23,42,0.08)] text-slate-700",
     },
     {
-      label: "Remaining",
+      label: "Plan Remaining",
       value: formatCurrency(budget.variance, budget.currency),
       icon: PiggyBank,
       accentClass: "bg-[rgba(30,58,95,0.08)]",
       iconClass: "bg-[rgba(30,58,95,0.14)] text-[var(--color-primary)]",
     },
+    {
+      label: "Gap",
+      value: formatCurrency(Math.abs(approvedGap), budget.currency),
+      icon: Scale,
+      accentClass: "bg-[rgba(46,117,182,0.06)]",
+      iconClass: "bg-[rgba(46,117,182,0.14)] text-[var(--color-primary)]",
+      valueClass: approvedGapToneClass,
+    },
   ];
 
   return (
     <PageWrapper
+      actions={<BudgetPDFExport budget={budget} eventName={eventName} />}
+      actionsPosition="center"
       title="Budget Planner"
       description="Track category budgets, line-item allocations, and remaining spend."
     >
       <ErrorBoundary title="Budget planner unavailable">
-        <div className="grid gap-4 xl:grid-cols-[minmax(0,1.15fr)_380px]">
-          <Card className="p-4 md:p-5">
-            <p className="text-[11px] uppercase tracking-[0.24em] text-slate-500">
-              Budget Position
-            </p>
-            <h2 className="mt-2 max-w-3xl text-[clamp(1.8rem,2.2vw,2.7rem)] font-semibold leading-[1.05] tracking-tight text-slate-950">
-              Planned budget against live actuals
-            </h2>
-            <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600">
-              Approved, planned, actual, and remaining in one view.
-            </p>
+        <Card className="p-4">
+          <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-3 xl:flex-row xl:items-start xl:justify-between">
+              <div className="min-w-0">
+                <p className="text-[11px] uppercase tracking-[0.24em] text-slate-500">
+                  Budget Position
+                </p>
+                <h2 className="mt-2 max-w-3xl text-[clamp(1.55rem,1.9vw,2.15rem)] font-semibold leading-[1.08] tracking-tight text-slate-950">
+                  Planned budget against live actuals
+                </h2>
+                <p className="mt-1.5 max-w-2xl text-sm leading-6 text-slate-600">
+                  Approved, planned, actual, plan remaining, and gap in one compact view.
+                </p>
+              </div>
 
-            <div className="mt-3 grid gap-3 sm:grid-cols-2 2xl:grid-cols-4">
+              <div className="grid gap-2 sm:grid-cols-3 xl:w-fit xl:self-start">
+                <div className="rounded-[0.95rem] border border-slate-200/70 bg-slate-50/80 px-3.5 py-2.5">
+                  <p className="text-[10px] uppercase tracking-[0.18em] text-slate-500">
+                    Access
+                  </p>
+                  <p
+                    className={`mt-1 text-sm font-semibold ${
+                      permissions.canEditBudget
+                        ? "text-[var(--color-primary)]"
+                        : "text-slate-700"
+                    }`}
+                  >
+                    {permissions.canEditBudget ? "Edit" : "View"}
+                  </p>
+                </div>
+
+                <div className="rounded-[0.95rem] border border-slate-200/70 bg-slate-50/80 px-3.5 py-2.5">
+                  <p className="text-[10px] uppercase tracking-[0.18em] text-slate-500">
+                    Categories
+                  </p>
+                  <p className="mt-1 text-sm font-semibold text-slate-950">
+                    {budget.categories.length}
+                  </p>
+                </div>
+
+                <div className="rounded-[0.95rem] border border-slate-200/70 bg-slate-50/80 px-3.5 py-2.5">
+                  <p className="text-[10px] uppercase tracking-[0.18em] text-slate-500">
+                    Line Items
+                  </p>
+                  <p className="mt-1 text-sm font-semibold text-slate-950">
+                    {lineItemCount}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-1 grid gap-3 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5">
               {budgetMetrics.map(
-                ({ label, value, icon: Icon, accentClass, iconClass }) => (
+                ({ label, value, icon: Icon, accentClass, iconClass, valueClass }) => (
                   <div
                     key={label}
-                    className={`flex min-h-[96px] min-w-0 flex-col justify-between rounded-[1rem] border border-slate-200/70 px-4 py-3 ${accentClass}`}
+                    className={`flex min-h-[78px] min-w-0 flex-col justify-between rounded-[1rem] border border-slate-200/70 px-4 py-3 ${accentClass}`}
                   >
                     <div className="flex items-start justify-between gap-3">
                       <p className="max-w-[10ch] text-[10px] uppercase tracking-[0.2em] text-slate-500">
@@ -241,49 +304,19 @@ export default function BudgetPage() {
                         <Icon className="h-4 w-4" />
                       </span>
                     </div>
-                    <p className="mt-2 min-w-0 text-[clamp(1rem,1vw,1.35rem)] font-semibold leading-tight tracking-tight text-slate-950 tabular-nums">
+                    <p
+                      className={`mt-1.5 min-w-0 text-[clamp(1rem,1vw,1.28rem)] font-semibold leading-tight tracking-tight tabular-nums ${
+                        valueClass ?? "text-slate-950"
+                      }`}
+                    >
                       {value}
                     </p>
                   </div>
                 ),
               )}
             </div>
-          </Card>
-
-          <Card className="p-5">
-            <div className="space-y-4">
-              <div className="space-y-2">
-                <p className="text-[11px] uppercase tracking-[0.24em] text-slate-500">
-                  Planning Notes
-                </p>
-                <p className="text-sm leading-6 text-slate-600">
-                  Remaining is calculated as{" "}
-                  <span className="font-semibold text-slate-950">
-                    budget minus actual spend
-                  </span>
-                  . Line items show how each category budget is allocated.
-                </p>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                <span
-                  className={`inline-flex items-center rounded-full px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.2em] ${
-                    permissions.canEditBudget
-                      ? "border border-[rgba(46,117,182,0.18)] bg-[rgba(46,117,182,0.08)] text-[var(--color-primary)]"
-                      : "border border-slate-200 bg-white text-slate-700"
-                  }`}
-                >
-                  {permissions.canEditBudget ? "Edit Access" : "View Access"}
-                </span>
-                <span className="inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-700">
-                  {budget.categories.length} Categories
-                </span>
-                <span className="inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-700">
-                  {lineItemCount} Line Items
-                </span>
-              </div>
-            </div>
-          </Card>
-        </div>
+          </div>
+        </Card>
 
         <BudgetTable
           budget={budget}
@@ -348,7 +381,7 @@ export default function BudgetPage() {
               throw error;
             }
           }}
-          onAddCategory={async () => {
+          onAddCategory={async ({ name, plannedAmount }) => {
             const previousBudget = budget;
             const tempId = `temp-category-${crypto.randomUUID()}`;
             const order = budget.categories.length;
@@ -360,8 +393,8 @@ export default function BudgetPage() {
                 {
                   id: tempId,
                   budgetId: current.id,
-                  name: "New Category",
-                  plannedAmount: 0,
+                  name,
+                  plannedAmount,
                   actualAmount: 0,
                   variance: 0,
                   order,
@@ -373,8 +406,8 @@ export default function BudgetPage() {
 
             try {
               const result = await createBudgetCategory(budget.id, {
-                name: "New Category",
-                plannedAmount: 0,
+                name,
+                plannedAmount,
                 order,
                 color: "#2E75B6",
                 owner: profileEmail,
@@ -405,12 +438,17 @@ export default function BudgetPage() {
               }));
 
               void reload();
+              return createdCategory.id;
             } catch (error) {
               setBudget(previousBudget);
               throw error;
             }
           }}
-          onAddLineItem={async (categoryId) => {
+          onAddLineItem={async ({
+            categoryId,
+            description,
+            plannedAmount,
+          }) => {
             const previousBudget = budget;
             const tempId = `temp-line-${crypto.randomUUID()}`;
 
@@ -425,8 +463,8 @@ export default function BudgetPage() {
                         {
                           id: tempId,
                           categoryId,
-                          description: "New line item",
-                          plannedAmount: 0,
+                          description,
+                          plannedAmount,
                           actualAmount: 0,
                           variance: 0,
                           notes: null,
@@ -440,8 +478,8 @@ export default function BudgetPage() {
 
             try {
               const result = await createLineItem(categoryId, {
-                description: "New line item",
-                plannedAmount: 0,
+                description,
+                plannedAmount,
                 owner: profileEmail,
                 admins: collaborators.admins,
                 editors: collaborators.editors,
@@ -472,6 +510,7 @@ export default function BudgetPage() {
               }));
 
               void reload();
+              return createdLineItem.id;
             } catch (error) {
               setBudget(previousBudget);
               throw error;

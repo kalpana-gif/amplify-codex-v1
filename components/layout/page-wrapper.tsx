@@ -7,6 +7,7 @@ export function PageWrapper({
   children,
   className,
   compact = false,
+  actionsPosition = "end",
 }: {
   title: string;
   description?: string;
@@ -14,6 +15,7 @@ export function PageWrapper({
   children: React.ReactNode;
   className?: string;
   compact?: boolean;
+  actionsPosition?: "end" | "center";
 }) {
   return (
     <section className={cn(compact ? "space-y-4" : "space-y-6", className)}>
@@ -26,7 +28,11 @@ export function PageWrapper({
         <div
           className={cn(
             "flex flex-col md:flex-row md:justify-between",
-            compact ? "gap-4 md:items-center" : "gap-5 md:items-end",
+            compact
+              ? "gap-4 md:items-center"
+              : actionsPosition === "center"
+                ? "gap-5 md:items-center"
+                : "gap-5 md:items-end",
           )}
         >
           <div>
