@@ -5,7 +5,7 @@ import { usePathname, useParams, useRouter } from "next/navigation";
 import { useEffect, useState, startTransition } from "react";
 import { LayoutGroup, motion } from "framer-motion";
 import { ArrowLeft, ChevronRight } from "lucide-react";
-import { client } from "@/lib/amplify-client";
+import { getEventAccessContext } from "@/lib/graphql/events";
 import { cn } from "@/lib/utils";
 
 const buildTabs = (eventId: string) => [
@@ -26,23 +26,16 @@ export function EventNavigation() {
     let isActive = true;
 
     startTransition(() => {
-      void client.models.Event.get(
-        { id: params.id },
-        {
-          authMode: "userPool",
-          selectionSet: ["name", "status"],
-        },
-      ).then((result) => {
+      void getEventAccessContext(params.id).then((context) => {
         if (!isActive) {
           return;
         }
 
-        if (!result.data || result.data.status === "ARCHIVED") {
+        setEventName(context.event.name || "Event Workspace");
+      }).catch(() => {
+        if (isActive) {
           router.replace("/events");
-          return;
         }
-
-        setEventName(result.data?.name ?? "Event Workspace");
       });
     });
 

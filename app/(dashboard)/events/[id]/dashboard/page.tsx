@@ -11,9 +11,9 @@ import { Card } from "@/components/ui/card";
 import { ErrorBoundary } from "@/components/ui/error-boundary";
 import { PageWrapper } from "@/components/layout/page-wrapper";
 import { EventWorkspaceLoader } from "@/components/ui/page-loader";
-import { client } from "@/lib/amplify-client";
 import { getBudgetOverview } from "@/lib/graphql/budget";
 import { listExpensesForEvent } from "@/lib/graphql/expenses";
+import { getEventAccessContext } from "@/lib/graphql/events";
 import { calcPercentage, formatCurrency, formatDate } from "@/lib/utils";
 import type { BudgetOverview, DashboardSummary, ExpenseView } from "@/types";
 
@@ -29,21 +29,10 @@ export default function EventDashboardPage() {
     void Promise.all([
       getBudgetOverview(params.id),
       listExpensesForEvent(params.id),
-      client.models.Event.get(
-        { id: params.id },
-        {
-          authMode: "userPool",
-          selectionSet: ["id", "status"],
-        },
-      ),
+      getEventAccessContext(params.id),
     ])
-      .then(([budgetOverview, expenseItems, eventResult]) => {
+      .then(([budgetOverview, expenseItems]) => {
         if (!active) {
-          return;
-        }
-
-        if (!eventResult.data || eventResult.data.status === "ARCHIVED") {
-          router.replace("/events");
           return;
         }
 

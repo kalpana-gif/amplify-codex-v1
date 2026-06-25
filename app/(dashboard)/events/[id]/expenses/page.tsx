@@ -18,43 +18,22 @@ import { Card } from "@/components/ui/card";
 import { ErrorBoundary } from "@/components/ui/error-boundary";
 import { PageWrapper } from "@/components/layout/page-wrapper";
 import { EventWorkspaceLoader } from "@/components/ui/page-loader";
-import { client } from "@/lib/amplify-client";
 import { getBudgetOverview } from "@/lib/graphql/budget";
 import { deleteExpense, listExpensesForEvent } from "@/lib/graphql/expenses";
-import { getCurrentUserProfile, getEventPermissions } from "@/lib/graphql/events";
+import { getEventAccessContext } from "@/lib/graphql/events";
 import { formatCurrency } from "@/lib/utils";
 import type { BudgetOverview, CurrentUser, ExpenseView } from "@/types";
 
 const fetchExpensesPageData = async (eventId: string) => {
-  const [budgetOverview, eventResult, profile, expenseItems] = await Promise.all([
+  const [budgetOverview, access, expenseItems] = await Promise.all([
     getBudgetOverview(eventId),
-    client.models.Event.get(
-      { id: eventId },
-      {
-        authMode: "userPool",
-        selectionSet: [
-          "id",
-          "name",
-          "owner",
-          "admins",
-          "editors",
-          "viewers",
-          "status",
-        ],
-      },
-    ),
-    getCurrentUserProfile(),
+    getEventAccessContext(eventId),
     listExpensesForEvent(eventId),
   ]);
 
-  if (!eventResult.data || eventResult.data.status === "ARCHIVED") {
-    throw new Error("Event not found.");
-  }
-
   return {
     budgetOverview,
-    event: eventResult.data,
-    profile,
+    access,
     expenseItems,
   };
 };
@@ -90,17 +69,14 @@ export default function ExpensesPage() {
 
         setBudget(snapshot.budgetOverview);
         setExpenses(snapshot.expenseItems);
-        setEventName(snapshot.event.name ?? "Event");
-
-        if (snapshot.profile && snapshot.event) {
-          setUser(snapshot.profile);
-          setPermissions(getEventPermissions(snapshot.profile.email, snapshot.event));
-          setCollaborators({
-            admins: getCollaboratorEmails(snapshot.event.admins),
-            editors: getCollaboratorEmails(snapshot.event.editors),
-            viewers: getCollaboratorEmails(snapshot.event.viewers),
-          });
-        }
+        setEventName(snapshot.access.event.name ?? "Event");
+        setUser(snapshot.access.currentUser);
+        setPermissions(snapshot.access.permissions);
+        setCollaborators({
+          admins: getCollaboratorEmails(snapshot.access.event.admins),
+          editors: getCollaboratorEmails(snapshot.access.event.editors),
+          viewers: getCollaboratorEmails(snapshot.access.event.viewers),
+        });
       })
       .catch(() => {
         if (active) {

@@ -1,27 +1,29 @@
 import { client } from "@/lib/amplify-client";
+import { getBudgetOverview } from "@/lib/graphql/budget";
 import type { ExpenseView } from "@/types";
 
 export const listExpensesForEvent = async (
   eventId: string,
 ): Promise<ExpenseView[]> => {
-  const [expensesResult, categoriesResult, lineItemsResult] = await Promise.all([
+  const [expensesResult, budgetOverview] = await Promise.all([
     client.models.Expense.list({
       authMode: "userPool",
       filter: { eventId: { eq: eventId } },
     }),
-    client.models.BudgetCategory.list({
-      authMode: "userPool",
-    }),
-    client.models.LineItem.list({
-      authMode: "userPool",
-    }),
+    getBudgetOverview(eventId),
   ]);
 
+  const categoryPairs =
+    budgetOverview?.categories.map((category) => [category.id, category.name] as const) ?? [];
+  const lineItemPairs =
+    budgetOverview?.categories.flatMap((category) =>
+      category.lineItems.map((lineItem) => [lineItem.id, lineItem.description] as const),
+    ) ?? [];
   const categories = new Map(
-    categoriesResult.data.map((category) => [category.id, category.name]),
+    categoryPairs,
   );
   const lineItems = new Map(
-    lineItemsResult.data.map((lineItem) => [lineItem.id, lineItem.description]),
+    lineItemPairs,
   );
 
   return expensesResult.data

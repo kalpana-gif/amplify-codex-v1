@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "amplify:sandbox": "npx ampx sandbox"
+    "amplify:sandbox": "npx ampx sandbox",
+    "repair:event-access": "node scripts/repair-event-access.mjs"
   },
   "dependencies": {
     "@aws-amplify/backend": "^1.22.0",

@@ -48,7 +48,12 @@ export const schema = a
         index("owner").sortKeys(["date"]),
         index("status").sortKeys(["date"]),
       ])
-      .authorization((allow) => [allow.authenticated().to(["create", "read", "update", "delete"])]),
+      .authorization((allow) => [
+        allow.ownerDefinedIn("owner").identityClaim("email").to(["create", "read", "update", "delete"]),
+        allow.ownersDefinedIn("admins").identityClaim("email").to(["read", "update", "delete"]),
+        allow.ownersDefinedIn("editors").identityClaim("email").to(["read"]),
+        allow.ownersDefinedIn("viewers").identityClaim("email").to(["read"]),
+      ]),
 
     EventMember: a
       .model({
@@ -64,7 +69,12 @@ export const schema = a
       })
       .identifier(["eventId", "email"])
       .secondaryIndexes((index) => [index("email")])
-      .authorization((allow) => [allow.authenticated().to(["create", "read", "update", "delete"])]),
+      .authorization((allow) => [
+        allow.ownerDefinedIn("owner").identityClaim("email").to(["create", "read", "update", "delete"]),
+        allow.ownersDefinedIn("admins").identityClaim("email").to(["create", "read", "update", "delete"]),
+        allow.ownersDefinedIn("editors").identityClaim("email").to(["read"]),
+        allow.ownersDefinedIn("viewers").identityClaim("email").to(["read"]),
+      ]),
 
     Budget: a
       .model({
@@ -82,7 +92,12 @@ export const schema = a
         categories: a.hasMany("BudgetCategory", "budgetId"),
       })
       .secondaryIndexes((index) => [index("eventId")])
-      .authorization((allow) => [allow.authenticated().to(["create", "read", "update", "delete"])]),
+      .authorization((allow) => [
+        allow.ownerDefinedIn("owner").identityClaim("email").to(["create", "read", "update", "delete"]),
+        allow.ownersDefinedIn("admins").identityClaim("email").to(["read", "update", "delete"]),
+        allow.ownersDefinedIn("editors").identityClaim("email").to(["read"]),
+        allow.ownersDefinedIn("viewers").identityClaim("email").to(["read"]),
+      ]),
 
     BudgetCategory: a
       .model({
@@ -104,7 +119,12 @@ export const schema = a
         index("budgetId").sortKeys(["order"]),
         index("name"),
       ])
-      .authorization((allow) => [allow.authenticated().to(["create", "read", "update", "delete"])]),
+      .authorization((allow) => [
+        allow.ownerDefinedIn("owner").identityClaim("email").to(["create", "read", "update", "delete"]),
+        allow.ownersDefinedIn("admins").identityClaim("email").to(["create", "read", "update", "delete"]),
+        allow.ownersDefinedIn("editors").identityClaim("email").to(["read"]),
+        allow.ownersDefinedIn("viewers").identityClaim("email").to(["read"]),
+      ]),
 
     LineItem: a
       .model({
@@ -124,7 +144,12 @@ export const schema = a
         index("categoryId"),
         index("description"),
       ])
-      .authorization((allow) => [allow.authenticated().to(["create", "read", "update", "delete"])]),
+      .authorization((allow) => [
+        allow.ownerDefinedIn("owner").identityClaim("email").to(["create", "read", "update", "delete"]),
+        allow.ownersDefinedIn("admins").identityClaim("email").to(["create", "read", "update", "delete"]),
+        allow.ownersDefinedIn("editors").identityClaim("email").to(["read"]),
+        allow.ownersDefinedIn("viewers").identityClaim("email").to(["read"]),
+      ]),
 
     Expense: a
       .model({
@@ -151,7 +176,12 @@ export const schema = a
         index("categoryId").sortKeys(["expenseDate"]),
         index("lineItemId").sortKeys(["expenseDate"]),
       ])
-      .authorization((allow) => [allow.authenticated().to(["create", "read", "update", "delete"])]),
+      .authorization((allow) => [
+        allow.ownerDefinedIn("owner").identityClaim("email").to(["create", "read", "update", "delete"]),
+        allow.ownersDefinedIn("admins").identityClaim("email").to(["create", "read", "update", "delete"]),
+        allow.ownersDefinedIn("editors").identityClaim("email").to(["create", "read", "update", "delete"]),
+        allow.ownersDefinedIn("viewers").identityClaim("email").to(["read"]),
+      ]),
 
     Notification: a
       .model({
@@ -165,7 +195,11 @@ export const schema = a
         event: a.belongsTo("Event", "eventId"),
       })
       .secondaryIndexes((index) => [index("userId"), index("eventId")])
-      .authorization((allow) => [allow.authenticated().to(["create", "read", "update", "delete"])]),
+      .authorization((allow) => [
+        allow.ownerDefinedIn("owner").identityClaim("email").to(["create", "read", "update", "delete"]),
+        allow.ownersDefinedIn("admins").identityClaim("email").to(["create", "read", "update", "delete"]),
+        allow.ownerDefinedIn("userId").identityClaim("email").to(["read", "update"]),
+      ]),
   });
 
 export const data = defineData({

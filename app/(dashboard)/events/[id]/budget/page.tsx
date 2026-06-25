@@ -16,7 +16,6 @@ import { Card } from "@/components/ui/card";
 import { ErrorBoundary } from "@/components/ui/error-boundary";
 import { PageWrapper } from "@/components/layout/page-wrapper";
 import { EventWorkspaceLoader } from "@/components/ui/page-loader";
-import { client } from "@/lib/amplify-client";
 import {
   createBudgetCategory,
   createLineItem,
@@ -26,36 +25,17 @@ import {
   updateBudgetCategory,
   updateLineItem,
 } from "@/lib/graphql/budget";
-import { getCurrentUserProfile, getEventPermissions } from "@/lib/graphql/events";
+import { getEventAccessContext } from "@/lib/graphql/events";
 import { calcVariance, formatCurrency } from "@/lib/utils";
 import type { BudgetOverview } from "@/types";
 
 const fetchBudgetPageData = async (eventId: string) => {
-  const [overview, eventResult, profile] = await Promise.all([
+  const [overview, access] = await Promise.all([
     getBudgetOverview(eventId),
-    client.models.Event.get(
-      { id: eventId },
-      {
-        authMode: "userPool",
-        selectionSet: [
-          "id",
-          "name",
-          "owner",
-          "admins",
-          "editors",
-          "viewers",
-          "status",
-        ],
-      },
-    ),
-    getCurrentUserProfile(),
+    getEventAccessContext(eventId),
   ]);
 
-  if (!eventResult.data || eventResult.data.status === "ARCHIVED") {
-    throw new Error("Event not found.");
-  }
-
-  return { overview, event: eventResult.data, profile };
+  return { overview, access };
 };
 
 const getResultErrorMessage = (
@@ -115,17 +95,14 @@ export default function BudgetPage() {
   const reload = useCallback(async () => {
     const snapshot = await fetchBudgetPageData(params.id);
     setBudget(snapshot.overview);
-    setEventName(snapshot.event.name);
-
-    if (snapshot.profile && snapshot.event) {
-      setProfileEmail(snapshot.profile.email);
-      setPermissions(getEventPermissions(snapshot.profile.email, snapshot.event));
-      setCollaborators({
-        admins: getCollaboratorEmails(snapshot.event.admins),
-        editors: getCollaboratorEmails(snapshot.event.editors),
-        viewers: getCollaboratorEmails(snapshot.event.viewers),
-      });
-    }
+    setEventName(snapshot.access.event.name);
+    setProfileEmail(snapshot.access.currentUser.email);
+    setPermissions(snapshot.access.permissions);
+    setCollaborators({
+      admins: getCollaboratorEmails(snapshot.access.event.admins),
+      editors: getCollaboratorEmails(snapshot.access.event.editors),
+      viewers: getCollaboratorEmails(snapshot.access.event.viewers),
+    });
   }, [params.id]);
 
   const patchBudget = useCallback(
@@ -145,17 +122,14 @@ export default function BudgetPage() {
         }
 
         setBudget(snapshot.overview);
-        setEventName(snapshot.event.name);
-
-        if (snapshot.profile && snapshot.event) {
-          setProfileEmail(snapshot.profile.email);
-          setPermissions(getEventPermissions(snapshot.profile.email, snapshot.event));
-          setCollaborators({
-            admins: getCollaboratorEmails(snapshot.event.admins),
-            editors: getCollaboratorEmails(snapshot.event.editors),
-            viewers: getCollaboratorEmails(snapshot.event.viewers),
-          });
-        }
+        setEventName(snapshot.access.event.name);
+        setProfileEmail(snapshot.access.currentUser.email);
+        setPermissions(snapshot.access.permissions);
+        setCollaborators({
+          admins: getCollaboratorEmails(snapshot.access.event.admins),
+          editors: getCollaboratorEmails(snapshot.access.event.editors),
+          viewers: getCollaboratorEmails(snapshot.access.event.viewers),
+        });
       })
       .catch(() => {
         if (active) {

@@ -23,11 +23,9 @@ import { PageWrapper } from "@/components/layout/page-wrapper";
 import { EventStatus } from "@/components/events/event-status";
 import { Modal } from "@/components/ui/modal";
 import { EventWorkspaceLoader } from "@/components/ui/page-loader";
-import { client } from "@/lib/amplify-client";
 import { getBudgetOverview } from "@/lib/graphql/budget";
 import {
-  getCurrentUserProfile,
-  getEventPermissions,
+  getEventAccessContext,
   softDeleteEvent,
   updateEventWorkflowStatus,
 } from "@/lib/graphql/events";
@@ -83,50 +81,23 @@ export default function EventOverviewPage() {
     let active = true;
 
     void Promise.all([
-      client.models.Event.get(
-        { id: params.id },
-        {
-          authMode: "userPool",
-          selectionSet: [
-            "id",
-            "name",
-            "description",
-            "date",
-            "venue",
-            "eventType",
-            "status",
-            "owner",
-            "admins",
-            "editors",
-            "viewers",
-          ],
-        },
-      ),
-      getCurrentUserProfile(),
+      getEventAccessContext(params.id),
       getBudgetOverview(params.id),
     ])
-      .then(([result, profile, overview]) => {
+      .then(([access, overview]) => {
         if (!active) {
           return;
         }
 
-        if (!result.data || result.data.status === "ARCHIVED") {
-          router.replace("/events");
-          return;
-        }
-
         const normalizedEvent: EventDetails = {
-          ...result.data,
-          admins: getCollaboratorEmails(result.data.admins),
-          editors: getCollaboratorEmails(result.data.editors),
-          viewers: getCollaboratorEmails(result.data.viewers),
+          ...access.event,
+          admins: getCollaboratorEmails(access.event.admins),
+          editors: getCollaboratorEmails(access.event.editors),
+          viewers: getCollaboratorEmails(access.event.viewers),
         };
 
         setEvent(normalizedEvent);
-
-        if (profile) {
-          setPermissions(getEventPermissions(profile.email, normalizedEvent));
-        }
+        setPermissions(access.permissions);
 
         setBudget(
           overview

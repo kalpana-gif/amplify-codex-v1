@@ -46,6 +46,50 @@ const directorySelectionSet = ["email", "name", "searchName", "lastSeenAt"] as c
 
 const eventCreateSelectionSet = ["id"] as const;
 const eventUpdateSelectionSet = ["id", "status"] as const;
+const eventAccessSelectionSet = [
+  "id",
+  "name",
+  "description",
+  "date",
+  "venue",
+  "eventType",
+  "status",
+  "owner",
+  "admins",
+  "editors",
+  "viewers",
+] as const;
+const eventListSelectionSet = [
+  "id",
+  "name",
+  "description",
+  "date",
+  "createdAt",
+  "venue",
+  "eventType",
+  "status",
+  "owner",
+  "admins",
+  "editors",
+  "viewers",
+] as const;
+const eventMembershipSelectionSet = ["eventId"] as const;
+const eventListPageSize = 200;
+
+type EventAccessRecord = {
+  id: string;
+  name: string;
+  description?: string | null;
+  date: string;
+  venue?: string | null;
+  eventType: EventSummary["eventType"];
+  status: EventStatus;
+  owner: string;
+  admins?: (string | null)[] | null;
+  editors?: (string | null)[] | null;
+  viewers?: (string | null)[] | null;
+  createdAt?: string | null;
+};
 
 const getResultErrorMessage = (
   errors: readonly { message?: string | null }[] | undefined,
@@ -274,25 +318,103 @@ export const getEventPermissions = (
 const isEventSoftDeleted = (event: { status?: string | null }) =>
   event.status === "ARCHIVED";
 
+const listOwnedEvents = async (ownerEmail: string) => {
+  const events: EventAccessRecord[] = [];
+  let nextToken: string | null | undefined;
+
+  do {
+    const result = await client.models.Event.listEventByOwnerAndDate(
+      { owner: ownerEmail },
+      {
+        authMode: "userPool",
+        limit: eventListPageSize,
+        nextToken,
+        selectionSet: eventListSelectionSet,
+      },
+    );
+
+    events.push(
+      ...result.data.map((event) => normalizeEventAccessRecord(event)),
+    );
+    nextToken = result.nextToken;
+  } while (nextToken);
+
+  return events;
+};
+
+const listMemberEventIds = async (email: string) => {
+  const eventIds = new Set<string>();
+  let nextToken: string | null | undefined;
+
+  do {
+    const result = await client.models.EventMember.listEventMemberByEmail(
+      { email },
+      {
+        authMode: "userPool",
+        limit: eventListPageSize,
+        nextToken,
+        selectionSet: eventMembershipSelectionSet,
+      },
+    );
+
+    for (const member of result.data) {
+      eventIds.add(member.eventId);
+    }
+
+    nextToken = result.nextToken;
+  } while (nextToken);
+
+  return Array.from(eventIds);
+};
+
+const getEventSummaryRecord = async (eventId: string) => {
+  try {
+    const result = await client.models.Event.get(
+      { id: eventId },
+      {
+        authMode: "userPool",
+        selectionSet: eventListSelectionSet,
+      },
+    );
+
+    return result.data ? normalizeEventAccessRecord(result.data) : null;
+  } catch {
+    return null;
+  }
+};
+
 export const listEventsForCurrentUser = async (): Promise<EventSummary[]> => {
   try {
-    const { data } = await client.models.Event.list({
-      authMode: "userPool",
-      selectionSet: [
-        "id",
-        "name",
-        "description",
-        "date",
-        "createdAt",
-        "venue",
-        "eventType",
-        "status",
-      ],
-    });
+    const profile = await getCurrentUserProfile();
+
+    if (!profile) {
+      return [];
+    }
+
+    const [ownedEvents, memberEventIds] = await Promise.all([
+      listOwnedEvents(profile.email),
+      listMemberEventIds(profile.email),
+    ]);
+
+    const eventsById = new Map<string, EventAccessRecord>(
+      ownedEvents.map((event) => [event.id, event]),
+    );
+    const linkedEvents = await Promise.all(
+      memberEventIds
+        .filter((eventId) => !eventsById.has(eventId))
+        .map((eventId) => getEventSummaryRecord(eventId)),
+    );
+
+    for (const event of linkedEvents) {
+      if (event) {
+        eventsById.set(event.id, event);
+      }
+    }
 
     const summaries = await Promise.all(
-      data
+      Array.from(eventsById.values())
         .filter((event) => !isEventSoftDeleted(event))
+        .filter((event) => getEventPermissions(profile.email, event).isViewer)
         .map(async (event) => {
         let budgetSummary = buildBudgetSummary(null);
 
@@ -542,6 +664,59 @@ const normalizeEmailList = (emails?: (string | null)[] | null) =>
     .filter((email): email is string => Boolean(email))
     .map((email) => email.toLowerCase());
 
+const normalizeEventAccessRecord = (event: EventAccessRecord) => ({
+  ...event,
+  owner: event.owner.toLowerCase(),
+  admins: normalizeEmailList(event.admins),
+  editors: normalizeEmailList(event.editors),
+  viewers: normalizeEmailList(event.viewers),
+});
+
+const assertCanReadEvent = (
+  profile: CurrentUser,
+  event: EventAccessRecord,
+) => {
+  const permissions = getEventPermissions(profile.email, event);
+
+  if (!permissions.isViewer) {
+    throw new Error("You do not have permission to view this event.");
+  }
+
+  return permissions;
+};
+
+export const getEventAccessContext = async (eventId: string) => {
+  const [eventResult, profile] = await Promise.all([
+    client.models.Event.get(
+      { id: eventId },
+      {
+        authMode: "userPool",
+        selectionSet: eventAccessSelectionSet,
+      },
+    ),
+    getCurrentUserProfile(),
+  ]);
+
+  const event = eventResult.data;
+
+  if (!event || isEventSoftDeleted(event)) {
+    throw new Error("Event not found.");
+  }
+
+  if (!profile) {
+    throw new Error("You must be signed in to view this event.");
+  }
+
+  const normalizedEvent = normalizeEventAccessRecord(event);
+  const permissions = assertCanReadEvent(profile, normalizedEvent);
+
+  return {
+    event: normalizedEvent,
+    currentUser: profile,
+    permissions,
+  };
+};
+
 const sortMembersForDisplay = (members: TeamMemberInput[]) =>
   [...members].sort((first, second) => {
     if (first.role !== second.role) {
@@ -552,22 +727,8 @@ const sortMembersForDisplay = (members: TeamMemberInput[]) =>
   });
 
 const loadEventTeamContext = async (eventId: string) => {
-  const [eventResult, membersResult, profile] = await Promise.all([
-    client.models.Event.get(
-      { id: eventId },
-      {
-        authMode: "userPool",
-        selectionSet: [
-          "id",
-          "name",
-          "owner",
-          "admins",
-          "editors",
-          "viewers",
-          "status",
-        ],
-      },
-    ),
+  const [baseContext, membersResult] = await Promise.all([
+    getEventAccessContext(eventId),
     client.models.EventMember.list({
       authMode: "userPool",
       filter: {
@@ -575,21 +736,10 @@ const loadEventTeamContext = async (eventId: string) => {
       },
       selectionSet: ["eventId", "email", "role"],
     }),
-    getCurrentUserProfile(),
   ]);
 
-  const event = eventResult.data;
-
-  if (!event) {
-    throw new Error("Event not found.");
-  }
-
-  if (isEventSoftDeleted(event)) {
-    throw new Error("Event not found.");
-  }
-
   const members = normalizeMembers(
-    event.owner.toLowerCase(),
+    baseContext.event.owner,
     membersResult.data.map((member) => ({
       email: member.email.toLowerCase(),
       role: member.role as MemberRole,
@@ -597,53 +747,13 @@ const loadEventTeamContext = async (eventId: string) => {
   );
 
   return {
-    event: {
-      id: event.id,
-      name: event.name,
-      owner: event.owner.toLowerCase(),
-      admins: normalizeEmailList(event.admins),
-      editors: normalizeEmailList(event.editors),
-      viewers: normalizeEmailList(event.viewers),
-    },
+    ...baseContext,
     members,
-    currentUser: profile,
-    permissions: profile
-      ? getEventPermissions(profile.email, event)
-      : defaultPermissions,
   };
 };
 
 const loadEventLifecycleContext = async (eventId: string) => {
-  const [eventResult, profile] = await Promise.all([
-    client.models.Event.get(
-      { id: eventId },
-      {
-        authMode: "userPool",
-        selectionSet: [
-          "id",
-          "name",
-          "owner",
-          "admins",
-          "editors",
-          "viewers",
-          "status",
-        ],
-      },
-    ),
-    getCurrentUserProfile(),
-  ]);
-
-  const event = eventResult.data;
-
-  if (!profile) {
-    throw new Error("You must be signed in to manage this event.");
-  }
-
-  if (!event || isEventSoftDeleted(event)) {
-    throw new Error("Event not found.");
-  }
-
-  const permissions = getEventPermissions(profile.email, event);
+  const { event, currentUser: profile, permissions } = await getEventAccessContext(eventId);
 
   if (!permissions.canManageEventLifecycle) {
     throw new Error("Only event admins can manage this event.");
