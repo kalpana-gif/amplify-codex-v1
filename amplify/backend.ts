@@ -52,9 +52,24 @@ backend.data.resources.cfnResources.amplifyDynamoDbTables.Expense.streamSpecific
   };
 
 const expenseTable = getModelTable("Expense");
+const expenseTableRefreshResource =
+  backend.data.resources.cfnResources.amplifyDynamoDbTables.Expense as {
+    resource: {
+      addPropertyOverride: (propertyPath: string, value: unknown) => void;
+    };
+  };
 const legacyExpenseStreamMappingId = `DynamoDBEventSource:${Names.nodeUniqueId(
   expenseTable.node,
 )}`;
+
+// Force the custom table resource to refresh its outputs so the stream ARN
+// stays in sync when an existing branch stack has a stale TableStreamArn.
+expenseTableRefreshResource.resource.addPropertyOverride("tags", [
+  {
+    key: "stream-refresh-token",
+    value: "expense-stream-v2",
+  },
+]);
 
 const expenseStreamMapping =
   backend.alertFunction.resources.lambda.addEventSourceMapping(
