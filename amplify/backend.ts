@@ -1,5 +1,5 @@
 import { defineBackend } from "@aws-amplify/backend";
-import { Tags } from "aws-cdk-lib";
+import { Names, Tags } from "aws-cdk-lib";
 import { PolicyStatement } from "aws-cdk-lib/aws-iam";
 import { StreamViewType } from "aws-cdk-lib/aws-dynamodb";
 import { StartingPosition } from "aws-cdk-lib/aws-lambda";
@@ -52,10 +52,13 @@ backend.data.resources.cfnResources.amplifyDynamoDbTables.Expense.streamSpecific
   };
 
 const expenseTable = getModelTable("Expense");
+const legacyExpenseStreamMappingId = `DynamoDBEventSource:${Names.nodeUniqueId(
+  expenseTable.node,
+)}`;
 
 const expenseStreamMapping =
   backend.alertFunction.resources.lambda.addEventSourceMapping(
-    "ExpenseStreamMapping",
+    legacyExpenseStreamMappingId,
     {
       eventSourceArn: expenseTable.tableStreamArn,
       startingPosition: StartingPosition.LATEST,
@@ -65,7 +68,7 @@ const expenseStreamMapping =
   );
 
 expenseStreamMapping.node.addDependency(
-  expenseTable,
+  backend.data.resources.nestedStacks.Expense,
 );
 
 expenseTable.grantStreamRead(backend.alertFunction.resources.lambda);
