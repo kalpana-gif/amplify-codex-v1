@@ -40,8 +40,24 @@
       "Value": "embs-alert-function"
      },
      {
+      "Key": "Branch",
+      "Value": "sandbox"
+     },
+     {
       "Key": "created-by",
       "Value": "amplify"
+     },
+     {
+      "Key": "DeploymentType",
+      "Value": "sandbox"
+     },
+     {
+      "Key": "Environment",
+      "Value": "sandbox"
+     },
+     {
+      "Key": "Project",
+      "Value": "EBMS"
      }
     ]
    },
@@ -404,8 +420,24 @@
       "Value": "embs-alert-function"
      },
      {
+      "Key": "Branch",
+      "Value": "sandbox"
+     },
+     {
       "Key": "created-by",
       "Value": "amplify"
+     },
+     {
+      "Key": "DeploymentType",
+      "Value": "sandbox"
+     },
+     {
+      "Key": "Environment",
+      "Value": "sandbox"
+     },
+     {
+      "Key": "Project",
+      "Value": "EBMS"
      }
     ],
     "Timeout": 30
@@ -445,8 +477,24 @@
       "Value": "embs-alert-function"
      },
      {
+      "Key": "Branch",
+      "Value": "sandbox"
+     },
+     {
       "Key": "created-by",
       "Value": "amplify"
+     },
+     {
+      "Key": "DeploymentType",
+      "Value": "sandbox"
+     },
+     {
+      "Key": "Environment",
+      "Value": "sandbox"
+     },
+     {
+      "Key": "Project",
+      "Value": "EBMS"
      }
     ]
    },
@@ -459,7 +507,7 @@
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/2WOzQ6CMBCEn4V7WbFqPIvRm8TAA5ClLKb8tIYtEEN4d1NIvHj6ZubwZSTI0xmiACcOVdmErS5gTogdlZlD1QicOJ9b7IoSc2NLqhmSFffBKKetERo7mFPbkrhWZuXTtlp9fN3SIviQIzM5houH4APEg2rIxcgkNj3M18r8rLeRjMvs0Ct64Putzcv7/tdlEasyc/jyVfiTUPNulBL2R4iCmrUO+8E43RGkG79plCel9wAAAA=="
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/2WOzQ6CMBCEn4V7WRE0nsXoTWLgAchSFlN+WsIWiCG8uykkXjx9M3P4MiGE5wsEHs7sy7LxW1XAkhBbKjOLshE4c7602BUl5tqUVDMkGx6jllYZLRR2sKSmJXGr9MaXaZX8uLqnVXCUIzNZhquD4AjiUTZkY2QSux6WW6V/1vtE2mZmHCQ9se+Vfjvf/7quYlNmFt+uCncSaj5MYQDHEwRezUr5w6it6gjSnV/roj949wAAAA=="
    },
    "Metadata": {
     "aws:cdk:path": "amplify-amplifycodexv1-novigi-sandbox-f427c53406/function/CDKMetadata/Default"

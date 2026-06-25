@@ -21,8 +21,24 @@
       "Value": "amplifyData"
      },
      {
+      "Key": "Branch",
+      "Value": "sandbox"
+     },
+     {
       "Key": "created-by",
       "Value": "amplify"
+     },
+     {
+      "Key": "DeploymentType",
+      "Value": "sandbox"
+     },
+     {
+      "Key": "Environment",
+      "Value": "sandbox"
+     },
+     {
+      "Key": "Project",
+      "Value": "EBMS"
      }
     ],
     "UserPoolConfig": {
@@ -100,8 +116,24 @@
       "Value": "amplifyData"
      },
      {
+      "Key": "Branch",
+      "Value": "sandbox"
+     },
+     {
       "Key": "created-by",
       "Value": "amplify"
+     },
+     {
+      "Key": "DeploymentType",
+      "Value": "sandbox"
+     },
+     {
+      "Key": "Environment",
+      "Value": "sandbox"
+     },
+     {
+      "Key": "Project",
+      "Value": "EBMS"
      }
     ],
     "TemplateURL": {
@@ -120,7 +152,7 @@
        {
         "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
        },
-       "/e9f6ad063bb29263e500c043edc7b47780b23710caaa856b1421640b85a9e888.json"
+       "/0c1653642fd14622f16d8d182ca00ad89e642279c50efea39862a14b0ba442f4.json"
       ]
      ]
     }
@@ -190,8 +222,24 @@
       "Value": "amplifyData"
      },
      {
+      "Key": "Branch",
+      "Value": "sandbox"
+     },
+     {
       "Key": "created-by",
       "Value": "amplify"
+     },
+     {
+      "Key": "DeploymentType",
+      "Value": "sandbox"
+     },
+     {
+      "Key": "Environment",
+      "Value": "sandbox"
+     },
+     {
+      "Key": "Project",
+      "Value": "EBMS"
      }
     ],
     "TemplateURL": {
@@ -210,7 +258,7 @@
        {
         "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
        },
-       "/de70b3468296fc8814e3696310b9b0ff0bdd9e6f0a1d09cda87a23d61ef0f345.json"
+       "/5446face0afbb913e9b36381a544e915c4343257dc5524f4b93ef093996df40c.json"
       ]
      ]
     }
@@ -283,8 +331,24 @@
       "Value": "amplifyData"
      },
      {
+      "Key": "Branch",
+      "Value": "sandbox"
+     },
+     {
       "Key": "created-by",
       "Value": "amplify"
+     },
+     {
+      "Key": "DeploymentType",
+      "Value": "sandbox"
+     },
+     {
+      "Key": "Environment",
+      "Value": "sandbox"
+     },
+     {
+      "Key": "Project",
+      "Value": "EBMS"
      }
     ],
     "TemplateURL": {
@@ -303,7 +367,7 @@
        {
         "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
        },
-       "/e4c00a9f834d06e020c5c4d266c4c25314a0144f101c5b7ed6916d26044bf4cd.json"
+       "/e2d1689a766cd84e571be763aadf7f3dbc96616361c2b043e71b68f7f40cd958.json"
       ]
      ]
     }
@@ -376,8 +440,24 @@
       "Value": "amplifyData"
      },
      {
+      "Key": "Branch",
+      "Value": "sandbox"
+     },
+     {
       "Key": "created-by",
       "Value": "amplify"
+     },
+     {
+      "Key": "DeploymentType",
+      "Value": "sandbox"
+     },
+     {
+      "Key": "Environment",
+      "Value": "sandbox"
+     },
+     {
+      "Key": "Project",
+      "Value": "EBMS"
      }
     ],
     "TemplateURL": {
@@ -396,7 +476,7 @@
        {
         "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
        },
-       "/7810fa1c2a72e52daf74e23210ce617d8f0d146c80f98f3fcd648583fcf1cc17.json"
+       "/bc8177ca664a3151980caae92573d7b856aa518fedf3c123a6261c685fd09347.json"
       ]
      ]
     }
@@ -469,8 +549,24 @@
       "Value": "amplifyData"
      },
      {
+      "Key": "Branch",
+      "Value": "sandbox"
+     },
+     {
       "Key": "created-by",
       "Value": "amplify"
+     },
+     {
+      "Key": "DeploymentType",
+      "Value": "sandbox"
+     },
+     {
+      "Key": "Environment",
+      "Value": "sandbox"
+     },
+     {
+      "Key": "Project",
+      "Value": "EBMS"
      }
     ],
     "TemplateURL": {
@@ -489,7 +585,7 @@
        {
         "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
        },
-       "/330e9a9e63b6278df96c18f1f87403ebb5db57b02aed3c4f4e902b4cb275ba2e.json"
+       "/1b57b5a62a9551c513260f5579accf577fc4764f78dac89092b332995ca2dd59.json"
       ]
      ]
     }
@@ -562,8 +658,24 @@
       "Value": "amplifyData"
      },
      {
+      "Key": "Branch",
+      "Value": "sandbox"
+     },
+     {
       "Key": "created-by",
       "Value": "amplify"
+     },
+     {
+      "Key": "DeploymentType",
+      "Value": "sandbox"
+     },
+     {
+      "Key": "Environment",
+      "Value": "sandbox"
+     },
+     {
+      "Key": "Project",
+      "Value": "EBMS"
      }
     ],
     "TemplateURL": {
@@ -582,7 +694,7 @@
        {
         "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
        },
-       "/403ca52dd681cea867d6244d3f62a5a06cd017eecdcb9cecc22b95e951229403.json"
+       "/931b0444df4047ae1b4cf1a0dc39440e931beb24333567afa27a8450655d80bd.json"
       ]
      ]
     }
@@ -655,8 +767,24 @@
       "Value": "amplifyData"
      },
      {
+      "Key": "Branch",
+      "Value": "sandbox"
+     },
+     {
       "Key": "created-by",
       "Value": "amplify"
+     },
+     {
+      "Key": "DeploymentType",
+      "Value": "sandbox"
+     },
+     {
+      "Key": "Environment",
+      "Value": "sandbox"
+     },
+     {
+      "Key": "Project",
+      "Value": "EBMS"
      }
     ],
     "TemplateURL": {
@@ -675,7 +803,7 @@
        {
         "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
        },
-       "/ef0ce58284c7911a928d3d324a338e145c3b4448f53234fc1a2f8289985f16c7.json"
+       "/1db19c826cfc43595be4787e58b71f162c9e75dbd18014f93abb4bda0c9abd1b.json"
       ]
      ]
     }
@@ -748,8 +876,24 @@
       "Value": "amplifyData"
      },
      {
+      "Key": "Branch",
+      "Value": "sandbox"
+     },
+     {
       "Key": "created-by",
       "Value": "amplify"
+     },
+     {
+      "Key": "DeploymentType",
+      "Value": "sandbox"
+     },
+     {
+      "Key": "Environment",
+      "Value": "sandbox"
+     },
+     {
+      "Key": "Project",
+      "Value": "EBMS"
      }
     ],
     "TemplateURL": {
@@ -768,7 +912,7 @@
        {
         "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
        },
-       "/e7a6f8f3a53ed9b6dd0060a5b6cdc8cd9179bd429ca88e8ed0dd8cd904574839.json"
+       "/b02b46b52e1d9dbacdb03f6cfa60a08d4496a4b01d9ef796c1e1ea13a8a1f62c.json"
       ]
      ]
     }
@@ -841,8 +985,24 @@
       "Value": "amplifyData"
      },
      {
+      "Key": "Branch",
+      "Value": "sandbox"
+     },
+     {
       "Key": "created-by",
       "Value": "amplify"
+     },
+     {
+      "Key": "DeploymentType",
+      "Value": "sandbox"
+     },
+     {
+      "Key": "Environment",
+      "Value": "sandbox"
+     },
+     {
+      "Key": "Project",
+      "Value": "EBMS"
      }
     ],
     "TemplateURL": {
@@ -861,7 +1021,7 @@
        {
         "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
        },
-       "/87b6fe38e591fcaf243329625def457a247aa08b79d3ff9d2e8b2fad40d18ce0.json"
+       "/23f118744d4d92d812832817a64187d921cf8cac2dc541a17da6d3df01deeea4.json"
       ]
      ]
     }
@@ -997,8 +1157,24 @@
       "Value": "amplifyData"
      },
      {
+      "Key": "Branch",
+      "Value": "sandbox"
+     },
+     {
       "Key": "created-by",
       "Value": "amplify"
+     },
+     {
+      "Key": "DeploymentType",
+      "Value": "sandbox"
+     },
+     {
+      "Key": "Environment",
+      "Value": "sandbox"
+     },
+     {
+      "Key": "Project",
+      "Value": "EBMS"
      }
     ],
     "TemplateURL": {
@@ -1017,7 +1193,7 @@
        {
         "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
        },
-       "/c51e198b301837ef9ce38bbb733cdb632d06703bc9a0a4be3b7738f5e32ac1ad.json"
+       "/b2cec7894ed7ed3726932a82e9a834b543bdeafb628367602eb67fd95b29acfe.json"
       ]
      ]
     }
@@ -1088,8 +1264,24 @@
       "Value": "true"
      },
      {
+      "Key": "Branch",
+      "Value": "sandbox"
+     },
+     {
       "Key": "created-by",
       "Value": "amplify"
+     },
+     {
+      "Key": "DeploymentType",
+      "Value": "sandbox"
+     },
+     {
+      "Key": "Environment",
+      "Value": "sandbox"
+     },
+     {
+      "Key": "Project",
+      "Value": "EBMS"
      }
     ]
    },
@@ -1342,8 +1534,24 @@
       "Value": "sandbox"
      },
      {
+      "Key": "Branch",
+      "Value": "sandbox"
+     },
+     {
       "Key": "created-by",
       "Value": "amplify"
+     },
+     {
+      "Key": "DeploymentType",
+      "Value": "sandbox"
+     },
+     {
+      "Key": "Environment",
+      "Value": "sandbox"
+     },
+     {
+      "Key": "Project",
+      "Value": "EBMS"
      }
     ]
    },
@@ -1523,8 +1731,24 @@
       "Value": "sandbox"
      },
      {
+      "Key": "Branch",
+      "Value": "sandbox"
+     },
+     {
       "Key": "created-by",
       "Value": "amplify"
+     },
+     {
+      "Key": "DeploymentType",
+      "Value": "sandbox"
+     },
+     {
+      "Key": "Environment",
+      "Value": "sandbox"
+     },
+     {
+      "Key": "Project",
+      "Value": "EBMS"
      }
     ],
     "Timeout": 900
@@ -1559,8 +1783,24 @@
       "Value": "true"
      },
      {
+      "Key": "Branch",
+      "Value": "sandbox"
+     },
+     {
       "Key": "created-by",
       "Value": "amplify"
+     },
+     {
+      "Key": "DeploymentType",
+      "Value": "sandbox"
+     },
+     {
+      "Key": "Environment",
+      "Value": "sandbox"
+     },
+     {
+      "Key": "Project",
+      "Value": "EBMS"
      }
     ]
    },
@@ -1742,7 +1982,11 @@
     "Name": "/amplify/resource_reference/amplifycodexv1/novigi-sandbox-f427c53406/AMPLIFY_DATA_GRAPHQL_ENDPOINT",
     "Tags": {
      "amplify:deployment-type": "sandbox",
-     "created-by": "amplify"
+     "Branch": "sandbox",
+     "created-by": "amplify",
+     "DeploymentType": "sandbox",
+     "Environment": "sandbox",
+     "Project": "EBMS"
     },
     "Type": "String",
     "Value": {
@@ -1764,7 +2008,11 @@
     "Name": "/amplify/resource_reference/amplifycodexv1/novigi-sandbox-f427c53406/AMPLIFY_DATA_MODEL_INTROSPECTION_SCHEMA_BUCKET_NAME",
     "Tags": {
      "amplify:deployment-type": "sandbox",
-     "created-by": "amplify"
+     "Branch": "sandbox",
+     "created-by": "amplify",
+     "DeploymentType": "sandbox",
+     "Environment": "sandbox",
+     "Project": "EBMS"
     },
     "Type": "String",
     "Value": {
@@ -1783,7 +2031,11 @@
     "Name": "/amplify/resource_reference/amplifycodexv1/novigi-sandbox-f427c53406/AMPLIFY_DATA_MODEL_INTROSPECTION_SCHEMA_KEY",
     "Tags": {
      "amplify:deployment-type": "sandbox",
-     "created-by": "amplify"
+     "Branch": "sandbox",
+     "created-by": "amplify",
+     "DeploymentType": "sandbox",
+     "Environment": "sandbox",
+     "Project": "EBMS"
     },
     "Type": "String",
     "Value": "modelIntrospectionSchema.json"
@@ -1800,7 +2052,11 @@
     "Name": "/amplify/resource_reference/amplifycodexv1/novigi-sandbox-f427c53406/AMPLIFY_DATA_DEFAULT_NAME",
     "Tags": {
      "amplify:deployment-type": "sandbox",
-     "created-by": "amplify"
+     "Branch": "sandbox",
+     "created-by": "amplify",
+     "DeploymentType": "sandbox",
+     "Environment": "sandbox",
+     "Project": "EBMS"
     },
     "Type": "String",
     "Value": "amplifyData"
@@ -1814,7 +2070,7 @@
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/6WSTW/bMAyGf0tzVrQu3TBgN9fBeinaLAZ2GYaAkZmUiT48kW4WCP7vg6wl6bpTsRP58hWJR5Rmevbxk76+ggNPTbufWlrr9IAs2DYCZq+WyKGPBhUceJWg6/jojU53Ebqnn7bq6BYYVb3xY+XrfdXRC9WYJ3SgHoLHOQg0ZVS98Rc1KL7R6bY3e5TslOx7mjj6RX7yefISLUPwjR4t1uVo1UuYo0XBx/UOjfBkUP/V/UMVaxEsmeOFqeg3kJWGRkDQoX8j2L/NJ6688by1VWqxs+GY7T9N83NBATMK6yqHQVlw6xZ0qjf+Ho4Yv2FkCl415LcWJfgvvTeSK+ek3pyLgyJwOi2DHR9vjJftlGxQzE6nRiL57QIiOBSMo38Sw5Bl+Vd1zxLc+Xflqae8sK5s5lzBgY0lXR24tjSiq/FKjcCW/Pav+a+GLmJ4phZj2ZcPLeodv3uezfT7D/r6asdE09h7IYd6WeJvqqIg8w8DAAA="
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/6WSTY8TMQyGf8v2nIbSBSFxm50KLquldCQuCFVuxu26zccQe7ZU0fx3lAltl+W04mS/fmPriZO5nr//oGc3cOSpaQ9TSxudHpAF20bAHNQKOfTRoIIjrxN0HZ+80elzhO7xp606ugNGVW/9WPl6X3X0TDXmER2oh+BxAQJNGVVv/VUNim91uuvNASU7JfueJo5+kZ98nDxHyxB8q0eLdTla9RIWaFHwy2aPRngyqP/q/qGKtQyWzOnKVPQryEpDIyDo0L8S7N/mM1feeN7aOrXY2XDK9p+mxaWggBmFdZXDoCy4TQs61Vt/DyeM3zAyBa8a8juLEvyn3hvJlUtSby/FQRE4nVbBjo83xut2SjYoZqdTI5H8bgkRHArG0T+LYciy/Ku6Zwnu8rvy1HNeWNc2c67hyMaSro5cWxrR1XilRmBHfvfX/BdDlzE8UYux7MuHFvWe3zzNZ/rtOz272TPRNPZeyKFelfgbKJQ4Lg8DAAA="
    },
    "Metadata": {
     "aws:cdk:path": "amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/CDKMetadata/Default"

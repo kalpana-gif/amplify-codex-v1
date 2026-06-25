@@ -1,4 +1,5 @@
 import { defineBackend } from "@aws-amplify/backend";
+import { Tags } from "aws-cdk-lib";
 import { PolicyStatement } from "aws-cdk-lib/aws-iam";
 import { StreamViewType } from "aws-cdk-lib/aws-dynamodb";
 import { StartingPosition } from "aws-cdk-lib/aws-lambda";
@@ -13,6 +14,19 @@ const backend = defineBackend({
   data,
   storage,
   alertFunction,
+});
+
+const branchName = process.env.AWS_BRANCH?.trim();
+const environmentName = branchName || "sandbox";
+const deploymentType = branchName ? "branch" : "sandbox";
+
+[
+  ["Project", "EBMS"],
+  ["Environment", environmentName],
+  ["Branch", environmentName],
+  ["DeploymentType", deploymentType],
+].forEach(([key, value]) => {
+  Tags.of(backend.stack).add(key, value);
 });
 
 const getModelTable = (modelName) => {
