@@ -3094,6 +3094,9 @@
      }
     ]
    },
+   "DependsOn": [
+    "amplifyDataExpenseNestedStackExpenseNestedStackResource456F16BB"
+   ],
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete",
    "Metadata": {
