@@ -1,4 +1,5 @@
 import { Amplify } from "aws-amplify";
+import { fetchAuthSession } from "aws-amplify/auth";
 import { generateClient } from "aws-amplify/data";
 import type { ResourcesConfig } from "aws-amplify";
 import outputs from "@/amplify_outputs.json";
@@ -47,3 +48,30 @@ export const configureAmplifyClient = () => {
 configureAmplifyClient();
 
 export const client = generateClient<Schema>();
+
+export const getUserPoolAuthOptions = async <
+  T extends Record<string, unknown> | undefined = undefined,
+>(
+  options?: T,
+) => {
+  const baseOptions = {
+    ...(options ?? {}),
+    authMode: "userPool" as const,
+  };
+
+  try {
+    const session = await fetchAuthSession();
+    const authToken = session.tokens?.idToken?.toString();
+
+    if (!authToken) {
+      return baseOptions;
+    }
+
+    return {
+      ...baseOptions,
+      authToken,
+    };
+  } catch {
+    return baseOptions;
+  }
+};

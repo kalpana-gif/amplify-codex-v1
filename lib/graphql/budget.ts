@@ -1,4 +1,4 @@
-import { client } from "@/lib/amplify-client";
+import { client, getUserPoolAuthOptions } from "@/lib/amplify-client";
 import { calcVariance } from "@/lib/utils";
 import type { BudgetCategoryView, BudgetOverview, CurrencyCode } from "@/types";
 
@@ -48,9 +48,10 @@ const buildBudgetMetrics = (
 export const getBudgetOverview = async (
   eventId: string,
 ): Promise<BudgetOverview | null> => {
+  const userPoolAuth = await getUserPoolAuthOptions();
   const [budgetResult, expensesResult] = await Promise.all([
     client.models.Budget.list({
-      authMode: "userPool",
+      ...userPoolAuth,
       filter: {
         eventId: { eq: eventId },
       },
@@ -74,7 +75,7 @@ export const getBudgetOverview = async (
       ],
     }),
     client.models.Expense.list({
-      authMode: "userPool",
+      ...userPoolAuth,
       filter: {
         eventId: { eq: eventId },
       },
@@ -149,7 +150,7 @@ export const updateBudgetCategory = async (
 ) =>
   client.models.BudgetCategory.update(
     { id: categoryId, ...input },
-    { authMode: "userPool" },
+    await getUserPoolAuthOptions(),
   );
 
 export const updateLineItem = async (
@@ -163,7 +164,7 @@ export const updateLineItem = async (
 ) =>
   client.models.LineItem.update(
     { id: lineItemId, ...input },
-    { authMode: "userPool" },
+    await getUserPoolAuthOptions(),
   );
 
 export const createBudgetCategory = async (
@@ -185,7 +186,7 @@ export const createBudgetCategory = async (
       actualAmount: 0,
       ...input,
     },
-    { authMode: "userPool" },
+    await getUserPoolAuthOptions(),
   );
 
 export const createLineItem = async (
@@ -213,17 +214,17 @@ export const createLineItem = async (
       editors: input.editors,
       viewers: input.viewers,
     },
-    { authMode: "userPool" },
+    await getUserPoolAuthOptions(),
   );
 
 export const deleteBudgetCategory = async (categoryId: string) =>
   client.models.BudgetCategory.delete(
     { id: categoryId },
-    { authMode: "userPool" },
+    await getUserPoolAuthOptions(),
   );
 
 export const deleteLineItem = async (lineItemId: string) =>
   client.models.LineItem.delete(
     { id: lineItemId },
-    { authMode: "userPool" },
+    await getUserPoolAuthOptions(),
   );

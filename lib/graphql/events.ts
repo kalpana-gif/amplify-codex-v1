@@ -1,5 +1,5 @@
 import { fetchUserAttributes, getCurrentUser } from "aws-amplify/auth";
-import { client } from "@/lib/amplify-client";
+import { client, getUserPoolAuthOptions } from "@/lib/amplify-client";
 import { getBudgetOverview } from "@/lib/graphql/budget";
 import { calcPercentage, calcVariance } from "@/lib/utils";
 import type {
@@ -220,10 +220,11 @@ export const syncCurrentUserDirectoryProfile = async (
   const nextProfile = buildDirectoryProfileInput(profile);
 
   try {
+    const userPoolAuth = await getUserPoolAuthOptions();
     const existingResult = await client.models.UserDirectoryProfile.get(
       { email: nextProfile.email },
       {
-        authMode: "userPool",
+        ...userPoolAuth,
         selectionSet: directorySelectionSet,
       },
     );
@@ -231,9 +232,7 @@ export const syncCurrentUserDirectoryProfile = async (
     const existingProfile = existingResult.data;
 
     if (!existingProfile) {
-      await client.models.UserDirectoryProfile.create(nextProfile, {
-        authMode: "userPool",
-      });
+      await client.models.UserDirectoryProfile.create(nextProfile, userPoolAuth);
       return {
         email: nextProfile.email,
         name: nextProfile.name,
@@ -241,9 +240,7 @@ export const syncCurrentUserDirectoryProfile = async (
       } satisfies UserDirectoryProfile;
     }
 
-    await client.models.UserDirectoryProfile.update(nextProfile, {
-      authMode: "userPool",
-    });
+    await client.models.UserDirectoryProfile.update(nextProfile, userPoolAuth);
 
     return {
       email: nextProfile.email,
@@ -258,8 +255,9 @@ export const syncCurrentUserDirectoryProfile = async (
 
 export const listUserDirectoryProfiles = async (): Promise<UserDirectoryProfile[]> => {
   try {
+    const userPoolAuth = await getUserPoolAuthOptions();
     const result = await client.models.UserDirectoryProfile.list({
-      authMode: "userPool",
+      ...userPoolAuth,
       selectionSet: directorySelectionSet,
       limit: 200,
     });
@@ -323,13 +321,14 @@ const isEventSoftDeleted = (event: { status?: string | null }) =>
 
 const listOwnedEvents = async (ownerEmail: string) => {
   const events: EventAccessRecord[] = [];
+  const userPoolAuth = await getUserPoolAuthOptions();
   let nextToken: string | null | undefined;
 
   do {
     const result = await client.models.Event.listEventByOwnerAndDate(
       { owner: ownerEmail },
       {
-        authMode: "userPool",
+        ...userPoolAuth,
         limit: eventListPageSize,
         nextToken,
         selectionSet: eventListSelectionSet,
@@ -347,13 +346,14 @@ const listOwnedEvents = async (ownerEmail: string) => {
 
 const listMemberEventIds = async (email: string) => {
   const eventIds = new Set<string>();
+  const userPoolAuth = await getUserPoolAuthOptions();
   let nextToken: string | null | undefined;
 
   do {
     const result = await client.models.EventMember.listEventMemberByEmail(
       { email },
       {
-        authMode: "userPool",
+        ...userPoolAuth,
         limit: eventListPageSize,
         nextToken,
         selectionSet: eventMembershipSelectionSet,
@@ -372,10 +372,11 @@ const listMemberEventIds = async (email: string) => {
 
 const getEventSummaryRecord = async (eventId: string) => {
   try {
+    const userPoolAuth = await getUserPoolAuthOptions();
     const result = await client.models.Event.get(
       { id: eventId },
       {
-        authMode: "userPool",
+        ...userPoolAuth,
         selectionSet: eventListSelectionSet,
       },
     );
@@ -479,6 +480,7 @@ const createBudgetCategories = async (
   setup: BudgetSetupInput,
 ) => {
   const memberGroups = splitMembersByRole(ownerEmail, members);
+  const userPoolAuth = await getUserPoolAuthOptions();
   const results = [];
 
   for (const [index, category] of setup.categories.entries()) {
@@ -496,7 +498,7 @@ const createBudgetCategories = async (
         editors: memberGroups.editors,
         viewers: memberGroups.viewers,
       },
-      { authMode: "userPool" },
+      userPoolAuth,
     );
 
     if (!categoryResult.data) {
@@ -534,7 +536,7 @@ const createBudgetCategories = async (
             editors: memberGroups.editors,
             viewers: memberGroups.viewers,
           },
-          { authMode: "userPool" },
+          userPoolAuth,
         ),
       ),
     );
@@ -565,6 +567,7 @@ export const createEventGraph = async (input: EventCreationInput) => {
 
   const memberGroups = splitMembersByRole(profile.email, input.members);
   const status = input.status ?? "DRAFT";
+  const userPoolAuth = await getUserPoolAuthOptions();
 
   const eventResult = await client.models.Event.create(
     {
@@ -580,7 +583,7 @@ export const createEventGraph = async (input: EventCreationInput) => {
       viewers: memberGroups.viewers,
     },
     {
-      authMode: "userPool",
+      ...userPoolAuth,
       selectionSet: eventCreateSelectionSet,
     },
   );
@@ -611,7 +614,7 @@ export const createEventGraph = async (input: EventCreationInput) => {
       editors: memberGroups.editors,
       viewers: memberGroups.viewers,
     },
-    { authMode: "userPool" },
+    userPoolAuth,
   );
 
   if (!budgetResult.data) {
@@ -636,7 +639,7 @@ export const createEventGraph = async (input: EventCreationInput) => {
           editors: memberGroups.editors,
           viewers: memberGroups.viewers,
         },
-        { authMode: "userPool" },
+        userPoolAuth,
       ),
     ),
   );
@@ -689,11 +692,12 @@ const assertCanReadEvent = (
 };
 
 export const getEventAccessContext = async (eventId: string) => {
+  const userPoolAuth = await getUserPoolAuthOptions();
   const [eventResult, profile] = await Promise.all([
     client.models.Event.get(
       { id: eventId },
       {
-        authMode: "userPool",
+        ...userPoolAuth,
         selectionSet: eventAccessSelectionSet,
       },
     ),
@@ -730,10 +734,11 @@ const sortMembersForDisplay = (members: TeamMemberInput[]) =>
   });
 
 const loadEventTeamContext = async (eventId: string) => {
+  const userPoolAuth = await getUserPoolAuthOptions();
   const [baseContext, membersResult] = await Promise.all([
     getEventAccessContext(eventId),
     client.models.EventMember.list({
-      authMode: "userPool",
+      ...userPoolAuth,
       filter: {
         eventId: { eq: eventId },
       },
@@ -806,31 +811,32 @@ const syncEventAccessState = async (
   targetRoleChange: { email: string; role: MemberRole },
 ) => {
   const memberGroups = splitMembersByRole(ownerEmail, members);
+  const userPoolAuth = await getUserPoolAuthOptions();
   const [budgetResult, expenseResult, memberResult, notificationResult] =
     await Promise.all([
       client.models.Budget.list({
-        authMode: "userPool",
+        ...userPoolAuth,
         filter: {
           eventId: { eq: eventId },
         },
         selectionSet: ["id", "categories.id", "categories.lineItems.id"],
       }),
       client.models.Expense.list({
-        authMode: "userPool",
+        ...userPoolAuth,
         filter: {
           eventId: { eq: eventId },
         },
         selectionSet: ["id"],
       }),
       client.models.EventMember.list({
-        authMode: "userPool",
+        ...userPoolAuth,
         filter: {
           eventId: { eq: eventId },
         },
         selectionSet: ["eventId", "email", "role"],
       }),
       client.models.Notification.list({
-        authMode: "userPool",
+        ...userPoolAuth,
         filter: {
           eventId: { eq: eventId },
         },
@@ -851,7 +857,7 @@ const syncEventAccessState = async (
         editors: memberGroups.editors,
         viewers: memberGroups.viewers,
       },
-      { authMode: "userPool" },
+      userPoolAuth,
     ),
   );
 
@@ -864,7 +870,7 @@ const syncEventAccessState = async (
           editors: memberGroups.editors,
           viewers: memberGroups.viewers,
         },
-        { authMode: "userPool" },
+        userPoolAuth,
       ),
     ),
   );
@@ -879,7 +885,7 @@ const syncEventAccessState = async (
             editors: memberGroups.editors,
             viewers: memberGroups.viewers,
           },
-          { authMode: "userPool" },
+          userPoolAuth,
         ),
       ),
     ),
@@ -893,7 +899,7 @@ const syncEventAccessState = async (
         editors: memberGroups.editors,
         viewers: memberGroups.viewers,
       },
-      { authMode: "userPool" },
+      userPoolAuth,
     ),
   );
 
@@ -910,7 +916,7 @@ const syncEventAccessState = async (
         editors: memberGroups.editors,
         viewers: memberGroups.viewers,
       },
-      { authMode: "userPool" },
+      userPoolAuth,
     ),
   );
 
@@ -920,7 +926,7 @@ const syncEventAccessState = async (
         id: notification.id,
         admins: memberGroups.admins,
       },
-      { authMode: "userPool" },
+      userPoolAuth,
     ),
   );
 
@@ -973,7 +979,7 @@ const syncEventAccessState = async (
       viewers: memberGroups.viewers,
     },
     {
-      authMode: "userPool",
+      ...userPoolAuth,
       selectionSet: eventCreateSelectionSet,
     },
   );
@@ -1042,6 +1048,7 @@ export const addEventMember = async (
     },
   ];
   const memberGroups = splitMembersByRole(context.event.owner, nextMembers);
+  const userPoolAuth = await getUserPoolAuthOptions();
   const createResult = await client.models.EventMember.create(
     {
       eventId,
@@ -1053,7 +1060,7 @@ export const addEventMember = async (
       viewers: memberGroups.viewers,
     },
     {
-      authMode: "userPool",
+      ...userPoolAuth,
     },
   );
 
@@ -1135,7 +1142,7 @@ export const updateEventWorkflowStatus = async (
       status,
     },
     {
-      authMode: "userPool",
+      ...(await getUserPoolAuthOptions()),
       selectionSet: eventUpdateSelectionSet,
     },
   );
@@ -1154,7 +1161,7 @@ export const softDeleteEvent = async (eventId: string) => {
       status: "ARCHIVED",
     },
     {
-      authMode: "userPool",
+      ...(await getUserPoolAuthOptions()),
       selectionSet: eventUpdateSelectionSet,
     },
   );

@@ -1,4 +1,4 @@
-import { client } from "@/lib/amplify-client";
+import { client, getUserPoolAuthOptions } from "@/lib/amplify-client";
 import { getBudgetOverview } from "@/lib/graphql/budget";
 import type { ExpenseView } from "@/types";
 
@@ -8,9 +8,10 @@ const asArray = <T>(data?: readonly T[] | T[] | null) =>
 export const listExpensesForEvent = async (
   eventId: string,
 ): Promise<ExpenseView[]> => {
+  const userPoolAuth = await getUserPoolAuthOptions();
   const [expensesResult, budgetOverview] = await Promise.all([
     client.models.Expense.list({
-      authMode: "userPool",
+      ...userPoolAuth,
       filter: { eventId: { eq: eventId } },
     }),
     getBudgetOverview(eventId),
@@ -67,7 +68,10 @@ export const createExpense = async (
     editors: string[];
     viewers: string[];
   },
-) => client.models.Expense.create(input);
+) => client.models.Expense.create(input, await getUserPoolAuthOptions());
 
 export const deleteExpense = async (expenseId: string) =>
-  client.models.Expense.delete({ id: expenseId });
+  client.models.Expense.delete(
+    { id: expenseId },
+    await getUserPoolAuthOptions(),
+  );
