@@ -2,6 +2,9 @@ import { client } from "@/lib/amplify-client";
 import { getBudgetOverview } from "@/lib/graphql/budget";
 import type { ExpenseView } from "@/types";
 
+const asArray = <T>(data?: readonly T[] | T[] | null) =>
+  Array.isArray(data) ? [...data] : [];
+
 export const listExpensesForEvent = async (
   eventId: string,
 ): Promise<ExpenseView[]> => {
@@ -26,7 +29,7 @@ export const listExpensesForEvent = async (
     lineItemPairs,
   );
 
-  return expensesResult.data
+  return asArray(expensesResult.data)
     .map((expense) => ({
       id: expense.id,
       lineItemId: expense.lineItemId,

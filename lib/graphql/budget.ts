@@ -2,6 +2,9 @@ import { client } from "@/lib/amplify-client";
 import { calcVariance } from "@/lib/utils";
 import type { BudgetCategoryView, BudgetOverview, CurrencyCode } from "@/types";
 
+const asArray = <T>(data?: readonly T[] | T[] | null) =>
+  Array.isArray(data) ? [...data] : [];
+
 const buildBudgetMetrics = (
   categories: Array<{
     id: string;
@@ -79,7 +82,9 @@ export const getBudgetOverview = async (
     }),
   ]);
 
-  const budget = budgetResult.data[0];
+  const budgets = asArray(budgetResult.data);
+  const expenses = asArray(expensesResult.data);
+  const budget = budgets[0];
 
   if (!budget) {
     return null;
@@ -90,7 +95,7 @@ export const getBudgetOverview = async (
       id: category.id,
       plannedAmount: category.plannedAmount,
     })),
-    expensesResult.data,
+    expenses,
   );
 
   const categories = (budget.categories ?? [])

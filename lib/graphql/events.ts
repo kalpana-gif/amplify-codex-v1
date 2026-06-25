@@ -99,6 +99,9 @@ const getResultErrorMessage = (
   return firstMessage ?? fallback;
 };
 
+const asArray = <T>(data?: readonly T[] | T[] | null) =>
+  Array.isArray(data) ? [...data] : [];
+
 const normalizeMembers = (ownerEmail: string, members: TeamMemberInput[]) => {
   const deduped = new Map<string, TeamMemberInput>();
 
@@ -261,7 +264,7 @@ export const listUserDirectoryProfiles = async (): Promise<UserDirectoryProfile[
       limit: 200,
     });
 
-    return result.data
+    return asArray(result.data)
       .map((profile) => ({
         email: profile.email.toLowerCase(),
         name: sanitizeUserDisplayName(profile.name, profile.email.toLowerCase()),
@@ -334,7 +337,7 @@ const listOwnedEvents = async (ownerEmail: string) => {
     );
 
     events.push(
-      ...result.data.map((event) => normalizeEventAccessRecord(event)),
+      ...asArray(result.data).map((event) => normalizeEventAccessRecord(event)),
     );
     nextToken = result.nextToken;
   } while (nextToken);
@@ -357,7 +360,7 @@ const listMemberEventIds = async (email: string) => {
       },
     );
 
-    for (const member of result.data) {
+    for (const member of asArray(result.data)) {
       eventIds.add(member.eventId);
     }
 
@@ -740,7 +743,7 @@ const loadEventTeamContext = async (eventId: string) => {
 
   const members = normalizeMembers(
     baseContext.event.owner,
-    membersResult.data.map((member) => ({
+    asArray(membersResult.data).map((member) => ({
       email: member.email.toLowerCase(),
       role: member.role as MemberRole,
     })),
@@ -835,7 +838,12 @@ const syncEventAccessState = async (
       }),
     ]);
 
-  const budgetUpdates = budgetResult.data.map((budget) =>
+  const budgets = asArray(budgetResult.data);
+  const expenses = asArray(expenseResult.data);
+  const memberRecords = asArray(memberResult.data);
+  const notifications = asArray(notificationResult.data);
+
+  const budgetUpdates = budgets.map((budget) =>
     client.models.Budget.update(
       {
         id: budget.id,
@@ -847,7 +855,7 @@ const syncEventAccessState = async (
     ),
   );
 
-  const categoryUpdates = budgetResult.data.flatMap((budget) =>
+  const categoryUpdates = budgets.flatMap((budget) =>
     (budget.categories ?? []).map((category) =>
       client.models.BudgetCategory.update(
         {
@@ -861,7 +869,7 @@ const syncEventAccessState = async (
     ),
   );
 
-  const lineItemUpdates = budgetResult.data.flatMap((budget) =>
+  const lineItemUpdates = budgets.flatMap((budget) =>
     (budget.categories ?? []).flatMap((category) =>
       (category.lineItems ?? []).map((lineItem) =>
         client.models.LineItem.update(
@@ -877,7 +885,7 @@ const syncEventAccessState = async (
     ),
   );
 
-  const expenseUpdates = expenseResult.data.map((expense) =>
+  const expenseUpdates = expenses.map((expense) =>
     client.models.Expense.update(
       {
         id: expense.id,
@@ -889,7 +897,7 @@ const syncEventAccessState = async (
     ),
   );
 
-  const memberUpdates = memberResult.data.map((member) =>
+  const memberUpdates = memberRecords.map((member) =>
     client.models.EventMember.update(
       {
         eventId: member.eventId,
@@ -906,7 +914,7 @@ const syncEventAccessState = async (
     ),
   );
 
-  const notificationUpdates = notificationResult.data.map((notification) =>
+  const notificationUpdates = notifications.map((notification) =>
     client.models.Notification.update(
       {
         id: notification.id,
