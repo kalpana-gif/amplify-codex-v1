@@ -13,6 +13,7 @@ const buildTabs = (eventId: string) => [
   { href: `/events/${eventId}/dashboard`, label: "Dashboard" },
   { href: `/events/${eventId}/budget`, label: "Budget" },
   { href: `/events/${eventId}/expenses`, label: "Expenses" },
+  { href: `/events/${eventId}/tasks`, label: "To-do List" },
   { href: `/events/${eventId}/users`, label: "Team" },
 ];
 

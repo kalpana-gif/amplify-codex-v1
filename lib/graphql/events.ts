@@ -819,7 +819,8 @@ const syncEventAccessState = async (
   const normalizedMembers = normalizeMembers(ownerEmail, members);
   const memberGroups = splitMembersByRole(ownerEmail, normalizedMembers);
   const userPoolAuth = await getUserPoolAuthOptions();
-  const [budgetResult, expenseResult, notificationResult] = await Promise.all([
+  const eventTaskModel = client.models.EventTask;
+  const [budgetResult, expenseResult, taskResult, notificationResult] = await Promise.all([
       client.models.Budget.list({
         ...userPoolAuth,
         filter: {
@@ -834,6 +835,15 @@ const syncEventAccessState = async (
         },
         selectionSet: ["id"],
       }),
+      eventTaskModel
+        ? eventTaskModel.list({
+            ...userPoolAuth,
+            filter: {
+              eventId: { eq: eventId },
+            },
+            selectionSet: ["id", "assigneeEmail"],
+          })
+        : Promise.resolve({ data: [] }),
       client.models.Notification.list({
         ...userPoolAuth,
         filter: {
@@ -845,7 +855,12 @@ const syncEventAccessState = async (
 
   const budgets = asArray(budgetResult.data);
   const expenses = asArray(expenseResult.data);
+  const tasks = asArray(taskResult.data);
   const notifications = asArray(notificationResult.data);
+  const assignableEmails = new Set([
+    ownerEmail.toLowerCase(),
+    ...normalizedMembers.map((member) => member.email.toLowerCase()),
+  ]);
 
   const budgetUpdates = budgets.map((budget) =>
     client.models.Budget.update(
@@ -901,6 +916,28 @@ const syncEventAccessState = async (
     ),
   );
 
+  const taskUpdates = tasks.map((task) => {
+    const normalizedAssignee = task.assigneeEmail?.toLowerCase() ?? null;
+
+    if (!eventTaskModel) {
+      return Promise.resolve({ data: { id: task.id } });
+    }
+
+    return eventTaskModel.update(
+      {
+        id: task.id,
+        assigneeEmail:
+          normalizedAssignee && assignableEmails.has(normalizedAssignee)
+            ? normalizedAssignee
+            : null,
+        admins: memberGroups.admins,
+        editors: memberGroups.editors,
+        viewers: memberGroups.viewers,
+      },
+      userPoolAuth,
+    );
+  });
+
   const memberUpdates = normalizedMembers.map((member) =>
     client.models.EventMember.update(
       {
@@ -930,6 +967,7 @@ const syncEventAccessState = async (
     categoryMutations,
     lineItemMutations,
     expenseMutations,
+    taskMutations,
     memberMutations,
     notificationMutations,
   ] = await Promise.all([
@@ -937,6 +975,7 @@ const syncEventAccessState = async (
     Promise.all(categoryUpdates),
     Promise.all(lineItemUpdates),
     Promise.all(expenseUpdates),
+    Promise.all(taskUpdates),
     Promise.all(memberUpdates),
     Promise.all(notificationUpdates),
   ]);
@@ -956,6 +995,10 @@ const syncEventAccessState = async (
   assertMutationBatchSucceeded(
     expenseMutations,
     "Failed to update expense permissions.",
+  );
+  assertMutationBatchSucceeded(
+    taskMutations,
+    "Failed to update task permissions.",
   );
   assertMutationBatchSucceeded(
     memberMutations,

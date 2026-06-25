@@ -126,7 +126,7 @@ export function DashboardPageLoader() {
 export function EventWorkspaceLoader({
   variant,
 }: {
-  variant: "overview" | "dashboard" | "budget" | "expenses" | "team";
+  variant: "overview" | "dashboard" | "budget" | "expenses" | "team" | "tasks";
 }) {
   if (variant === "overview") {
     return (
@@ -168,6 +168,19 @@ export function EventWorkspaceLoader({
           <MetricSkeletonGrid />
           <Skeleton className="h-40 rounded-[2rem]" />
           <Skeleton className="h-72 rounded-[2rem]" />
+        </div>
+      </LoaderCanvas>
+    );
+  }
+
+  if (variant === "tasks") {
+    return (
+      <LoaderCanvas>
+        <div className="space-y-4">
+          <Skeleton className="h-24 rounded-[2rem]" />
+          <MetricSkeletonGrid itemClassName="h-[5.4rem] rounded-[1.75rem]" />
+          <Skeleton className="h-[5.5rem] rounded-[1.75rem]" />
+          <Skeleton className="h-[34rem] rounded-[2rem]" />
         </div>
       </LoaderCanvas>
     );

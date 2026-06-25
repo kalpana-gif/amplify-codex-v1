@@ -265,6 +265,22 @@
                 ]
               }
             },
+            "tasks": {
+              "name": "tasks",
+              "isArray": true,
+              "type": {
+                "model": "EventTask"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true,
+              "association": {
+                "connectionType": "HAS_MANY",
+                "associatedWith": [
+                  "eventId"
+                ]
+              }
+            },
             "notifications": {
               "name": "notifications",
               "isArray": true,
@@ -1477,6 +1493,230 @@
             "sortKeyFieldNames": []
           }
         },
+        "EventTask": {
+          "name": "EventTask",
+          "fields": {
+            "id": {
+              "name": "id",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true,
+              "attributes": []
+            },
+            "eventId": {
+              "name": "eventId",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true,
+              "attributes": []
+            },
+            "title": {
+              "name": "title",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "memo": {
+              "name": "memo",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "notes": {
+              "name": "notes",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "assigneeEmail": {
+              "name": "assigneeEmail",
+              "isArray": false,
+              "type": "AWSEmail",
+              "isRequired": false,
+              "attributes": []
+            },
+            "status": {
+              "name": "status",
+              "isArray": false,
+              "type": {
+                "enum": "TaskStatus"
+              },
+              "isRequired": true,
+              "attributes": []
+            },
+            "completedAt": {
+              "name": "completedAt",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "createdBy": {
+              "name": "createdBy",
+              "isArray": false,
+              "type": "AWSEmail",
+              "isRequired": true,
+              "attributes": []
+            },
+            "completedBy": {
+              "name": "completedBy",
+              "isArray": false,
+              "type": "AWSEmail",
+              "isRequired": false,
+              "attributes": []
+            },
+            "owner": {
+              "name": "owner",
+              "isArray": false,
+              "type": "AWSEmail",
+              "isRequired": true,
+              "attributes": []
+            },
+            "admins": {
+              "name": "admins",
+              "isArray": true,
+              "type": "AWSEmail",
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true
+            },
+            "editors": {
+              "name": "editors",
+              "isArray": true,
+              "type": "AWSEmail",
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true
+            },
+            "viewers": {
+              "name": "viewers",
+              "isArray": true,
+              "type": "AWSEmail",
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true
+            },
+            "event": {
+              "name": "event",
+              "isArray": false,
+              "type": {
+                "model": "Event"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "association": {
+                "connectionType": "BELONGS_TO",
+                "targetNames": [
+                  "eventId"
+                ]
+              }
+            },
+            "createdAt": {
+              "name": "createdAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            },
+            "updatedAt": {
+              "name": "updatedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            }
+          },
+          "syncable": true,
+          "pluralName": "EventTasks",
+          "attributes": [
+            {
+              "type": "model",
+              "properties": {}
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "eventTasksByEventId",
+                "queryField": "listEventTaskByEventId",
+                "fields": [
+                  "eventId"
+                ]
+              }
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "eventTasksByAssigneeEmail",
+                "queryField": "listEventTaskByAssigneeEmail",
+                "fields": [
+                  "assigneeEmail"
+                ]
+              }
+            },
+            {
+              "type": "auth",
+              "properties": {
+                "rules": [
+                  {
+                    "provider": "userPools",
+                    "ownerField": "owner",
+                    "allow": "owner",
+                    "operations": [
+                      "create",
+                      "read",
+                      "update",
+                      "delete"
+                    ],
+                    "identityClaim": "email"
+                  },
+                  {
+                    "provider": "userPools",
+                    "ownerField": "admins",
+                    "allow": "owner",
+                    "operations": [
+                      "create",
+                      "read",
+                      "update",
+                      "delete"
+                    ],
+                    "identityClaim": "email"
+                  },
+                  {
+                    "provider": "userPools",
+                    "ownerField": "editors",
+                    "allow": "owner",
+                    "operations": [
+                      "create",
+                      "read",
+                      "update",
+                      "delete"
+                    ],
+                    "identityClaim": "email"
+                  },
+                  {
+                    "provider": "userPools",
+                    "ownerField": "viewers",
+                    "allow": "owner",
+                    "operations": [
+                      "read"
+                    ],
+                    "identityClaim": "email"
+                  }
+                ]
+              }
+            }
+          ],
+          "primaryKeyInfo": {
+            "isCustomPrimaryKey": false,
+            "primaryKeyFieldName": "id",
+            "sortKeyFieldNames": []
+          }
+        },
         "Notification": {
           "name": "Notification",
           "fields": {
@@ -1675,6 +1915,13 @@
             "VIEWER"
           ]
         },
+        "TaskStatus": {
+          "name": "TaskStatus",
+          "values": [
+            "OPEN",
+            "COMPLETED"
+          ]
+        },
         "PaymentMethod": {
           "name": "PaymentMethod",
           "values": [
@@ -1694,7 +1941,59 @@
           ]
         }
       },
-      "nonModels": {}
+      "nonModels": {
+        "InviteMemberEmailResult": {
+          "name": "InviteMemberEmailResult",
+          "fields": {
+            "delivered": {
+              "name": "delivered",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": true,
+              "attributes": []
+            },
+            "message": {
+              "name": "message",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            }
+          }
+        }
+      },
+      "mutations": {
+        "sendEventMemberInviteEmail": {
+          "name": "sendEventMemberInviteEmail",
+          "isArray": false,
+          "type": {
+            "nonModel": "InviteMemberEmailResult"
+          },
+          "isRequired": false,
+          "arguments": {
+            "eventId": {
+              "name": "eventId",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true
+            },
+            "email": {
+              "name": "email",
+              "isArray": false,
+              "type": "AWSEmail",
+              "isRequired": true
+            },
+            "role": {
+              "name": "role",
+              "isArray": false,
+              "type": {
+                "enum": "MemberRole"
+              },
+              "isRequired": true
+            }
+          }
+        }
+      }
     }
   },
   "storage": {

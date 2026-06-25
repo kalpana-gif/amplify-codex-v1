@@ -12,6 +12,7 @@ export const schema = a
     ]),
     EventStatus: a.enum(["DRAFT", "ACTIVE", "COMPLETED", "ARCHIVED"]),
     MemberRole: a.enum(["ADMIN", "EDITOR", "VIEWER"]),
+    TaskStatus: a.enum(["OPEN", "COMPLETED"]),
     PaymentMethod: a.enum(["CASH", "CARD", "TRANSFER", "CHECK", "OTHER"]),
     NotificationType: a.enum([
       "BUDGET_WARNING",
@@ -57,6 +58,7 @@ export const schema = a
         members: a.hasMany("EventMember", "eventId"),
         budget: a.hasOne("Budget", "eventId"),
         expenses: a.hasMany("Expense", "eventId"),
+        tasks: a.hasMany("EventTask", "eventId"),
         notifications: a.hasMany("Notification", "eventId"),
       })
       .secondaryIndexes((index) => [
@@ -191,6 +193,31 @@ export const schema = a
         index("categoryId").sortKeys(["expenseDate"]),
         index("lineItemId").sortKeys(["expenseDate"]),
       ])
+      .authorization((allow) => [
+        allow.ownerDefinedIn("owner").identityClaim("email").to(["create", "read", "update", "delete"]),
+        allow.ownersDefinedIn("admins").identityClaim("email").to(["create", "read", "update", "delete"]),
+        allow.ownersDefinedIn("editors").identityClaim("email").to(["create", "read", "update", "delete"]),
+        allow.ownersDefinedIn("viewers").identityClaim("email").to(["read"]),
+      ]),
+
+    EventTask: a
+      .model({
+        eventId: a.id().required(),
+        title: a.string().required(),
+        memo: a.string(),
+        notes: a.string(),
+        assigneeEmail: a.email(),
+        status: a.ref("TaskStatus").required(),
+        completedAt: a.string(),
+        createdBy: a.email().required(),
+        completedBy: a.email(),
+        owner: a.email().required(),
+        admins: a.email().array(),
+        editors: a.email().array(),
+        viewers: a.email().array(),
+        event: a.belongsTo("Event", "eventId"),
+      })
+      .secondaryIndexes((index) => [index("eventId"), index("assigneeEmail")])
       .authorization((allow) => [
         allow.ownerDefinedIn("owner").identityClaim("email").to(["create", "read", "update", "delete"]),
         allow.ownersDefinedIn("admins").identityClaim("email").to(["create", "read", "update", "delete"]),

@@ -9,6 +9,8 @@ export type EventStatus = "DRAFT" | "ACTIVE" | "COMPLETED" | "ARCHIVED";
 
 export type MemberRole = "ADMIN" | "EDITOR" | "VIEWER";
 
+export type TaskStatus = "OPEN" | "COMPLETED";
+
 export type PaymentMethod =
   | "CASH"
   | "CARD"
@@ -184,4 +186,19 @@ export type EventTeamSnapshot = {
   members: EventTeamMember[];
   currentUser: CurrentUser | null;
   permissions: EventPermissions;
+};
+
+export type EventTaskView = {
+  id: string;
+  eventId: string;
+  title: string;
+  memo?: string | null;
+  notes?: string | null;
+  assigneeEmail?: string | null;
+  status: TaskStatus;
+  completedAt?: string | null;
+  createdBy: string;
+  completedBy?: string | null;
+  createdAt?: string | null;
+  updatedAt?: string | null;
 };

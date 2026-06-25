@@ -4,7 +4,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...defineBackend in @aws-amplify/backend...",
-        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782384140956:12: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782384140956:12:1)",
+        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782412674544:13: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782412674544:13:1)",
         "...node internals, @aws-amplify/backend-deployer, @aws-cdk/toolkit-lib..."
       ]
     },
@@ -49,7 +49,7 @@
         "...<anonymous> in @aws-amplify/backend-output-storage...",
         "Array.forEach (:)",
         "...@aws-amplify/backend-output-storage, defineBackend in @aws-amplify/backend...",
-        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782384140956:12: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782384140956:12:1)",
+        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782412674544:13: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782412674544:13:1)",
         "...node internals, @aws-amplify/backend-deployer, @aws-cdk/toolkit-lib..."
       ]
     }
@@ -65,7 +65,7 @@
         "...<anonymous> in @aws-amplify/backend-output-storage...",
         "Array.forEach (:)",
         "...@aws-amplify/backend-output-storage, defineBackend in @aws-amplify/backend...",
-        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782384140956:12: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782384140956:12:1)",
+        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782412674544:13: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782412674544:13:1)",
         "...node internals, @aws-amplify/backend-deployer, @aws-cdk/toolkit-lib..."
       ]
     }
@@ -77,7 +77,7 @@
         "...<anonymous> in @aws-amplify/backend...",
         "Array.forEach (:)",
         "...defineBackend in @aws-amplify/backend...",
-        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782384140956:12: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782384140956:12:1)",
+        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782412674544:13: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782412674544:13:1)",
         "...node internals..."
       ]
     }
@@ -404,8 +404,23 @@
         "...<anonymous> in @aws-amplify/backend...",
         "Array.forEach (:)",
         "...defineBackend in @aws-amplify/backend...",
-        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782384140956:12: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782384140956:12:1)",
+        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782412674544:13: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782412674544:13:1)",
         "...node internals..."
+      ]
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/definedFunctions": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "definedFunctions"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...<anonymous> in @aws-amplify/backend-output-storage...",
+        "Array.forEach (:)",
+        "...@aws-amplify/backend-output-storage, @aws-amplify/backend-function, <anonymous> in @aws-amplify/backend...",
+        "Array.map (:)"
       ]
     }
   ],
@@ -506,35 +521,8 @@
         "...<anonymous> in @aws-amplify/backend...",
         "Array.forEach (:)",
         "...defineBackend in @aws-amplify/backend...",
-        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782384140956:12: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782384140956:12:1)",
+        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782412674544:13: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782412674544:13:1)",
         "...node internals..."
-      ]
-    }
-  ],
-  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/function": [
-    {
-      "type": "aws:cdk:creationStack",
-      "data": [
-        "...<anonymous> in @aws-amplify/backend...",
-        "Array.forEach (:)",
-        "...defineBackend in @aws-amplify/backend...",
-        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782384140956:12: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782384140956:12:1)",
-        "...node internals..."
-      ]
-    }
-  ],
-  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/definedFunctions": [
-    {
-      "type": "aws:cdk:logicalId",
-      "data": "definedFunctions"
-    },
-    {
-      "type": "aws:cdk:creationStack",
-      "data": [
-        "...<anonymous> in @aws-amplify/backend-output-storage...",
-        "Array.forEach (:)",
-        "...@aws-amplify/backend-output-storage, @aws-amplify/backend-function, <anonymous> in @aws-amplify/backend...",
-        "Array.forEach (:)"
       ]
     }
   ],
@@ -682,7 +670,7 @@
         "...aws-cdk-lib, <anonymous> in @aws-amplify/backend...",
         "Array.forEach (:)",
         "...defineBackend in @aws-amplify/backend...",
-        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782384140956:12: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782384140956:12:1)",
+        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782412674544:13: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782412674544:13:1)",
         "...node internals..."
       ]
     }
@@ -833,6 +821,45 @@
       ]
     }
   ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/reference-to-amplifyamplifycodexv1novigisandboxf427c53406storageNestedStackstorageNestedStackResourceADA4624COutputs.amplifyamplifycodexv1novigisandboxf427c53406storageembsreceiptsBucket44A545AFArn": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "referencetoamplifyamplifycodexv1novigisandboxf427c53406storageNestedStackstorageNestedStackResourceADA4624COutputsamplifyamplifycodexv1novigisandboxf427c53406storageembsreceiptsBucket44A545AFArn"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, @aws-amplify/backend, node internals...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyamplifycodexv1novigisandboxf427c53406dataebmsmemberinvitefunctionlambda73DDAB81Ref": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "amplifyamplifycodexv1novigisandboxf427c53406dataebmsmemberinvitefunctionlambda73DDAB81Ref"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, @aws-amplify/backend, node internals, @aws-amplify/backend-deployer...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyamplifycodexv1novigisandboxf427c53406dataembsalertfunctionlambda14E4C99CRef": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "amplifyamplifycodexv1novigisandboxf427c53406dataembsalertfunctionlambda14E4C99CRef"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, @aws-amplify/backend, node internals, @aws-amplify/backend-deployer...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
   "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataGraphQLAPI5E40F3A8ApiId": [
     {
       "type": "aws:cdk:logicalId",
@@ -872,71 +899,6 @@
       ]
     }
   ],
-  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataExpenseNestedStackExpenseNestedStackResourceAD11659DOutputs.amplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataExpenseExpenseTable042A9B15TableStreamArn": [
-    {
-      "type": "aws:cdk:logicalId",
-      "data": "amplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataExpenseNestedStackExpenseNestedStackResourceAD11659DOutputsamplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataExpenseExpenseTable042A9B15TableStreamArn"
-    },
-    {
-      "type": "aws:cdk:creationStack",
-      "data": [
-        "...aws-cdk-lib, @aws-amplify/backend, node internals...",
-        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
-      ]
-    }
-  ],
-  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataEventNestedStackEventNestedStackResource818B32BBOutputs.amplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataEventEventTableBB415F37TableArn": [
-    {
-      "type": "aws:cdk:logicalId",
-      "data": "amplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataEventNestedStackEventNestedStackResource818B32BBOutputsamplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataEventEventTableBB415F37TableArn"
-    },
-    {
-      "type": "aws:cdk:creationStack",
-      "data": [
-        "...aws-cdk-lib, @aws-amplify/backend, node internals...",
-        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
-      ]
-    }
-  ],
-  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataBudgetNestedStackBudgetNestedStackResource9125FF76Outputs.amplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataBudgetBudgetTableC412B569TableArn": [
-    {
-      "type": "aws:cdk:logicalId",
-      "data": "amplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataBudgetNestedStackBudgetNestedStackResource9125FF76Outputsamplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataBudgetBudgetTableC412B569TableArn"
-    },
-    {
-      "type": "aws:cdk:creationStack",
-      "data": [
-        "...aws-cdk-lib, @aws-amplify/backend, node internals...",
-        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
-      ]
-    }
-  ],
-  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataExpenseNestedStackExpenseNestedStackResourceAD11659DOutputs.amplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataExpenseExpenseTable042A9B15TableArn": [
-    {
-      "type": "aws:cdk:logicalId",
-      "data": "amplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataExpenseNestedStackExpenseNestedStackResourceAD11659DOutputsamplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataExpenseExpenseTable042A9B15TableArn"
-    },
-    {
-      "type": "aws:cdk:creationStack",
-      "data": [
-        "...aws-cdk-lib, @aws-amplify/backend, node internals...",
-        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
-      ]
-    }
-  ],
-  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataNotificationNestedStackNotificationNestedStackResourceEE15945FOutputs.amplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataNotificationNotificationTableB0022585TableArn": [
-    {
-      "type": "aws:cdk:logicalId",
-      "data": "amplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataNotificationNestedStackNotificationNestedStackResourceEE15945FOutputsamplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataNotificationNotificationTableB0022585TableArn"
-    },
-    {
-      "type": "aws:cdk:creationStack",
-      "data": [
-        "...aws-cdk-lib, @aws-amplify/backend, node internals...",
-        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
-      ]
-    }
-  ],
   "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data.NestedStack/data.NestedStackResource": [
     {
       "type": "aws:cdk:logicalId",
@@ -948,7 +910,7 @@
         "...aws-cdk-lib, <anonymous> in @aws-amplify/backend...",
         "Array.forEach (:)",
         "...defineBackend in @aws-amplify/backend...",
-        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782384140956:12: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782384140956:12:1)",
+        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782412674544:13: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782412674544:13:1)",
         "...node internals..."
       ]
     }
@@ -957,19 +919,6 @@
     {
       "type": "aws:cdk:is-custom-resource-handler-customResourceProvider",
       "data": true
-    }
-  ],
-  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/storage/reference-to-amplifyamplifycodexv1novigisandboxf427c53406authNestedStackauthNestedStackResourceB90F43D4Outputs.amplifyamplifycodexv1novigisandboxf427c53406authamplifyAuthauthenticatedUserRole35CA15EBRef": [
-    {
-      "type": "aws:cdk:logicalId",
-      "data": "referencetoamplifyamplifycodexv1novigisandboxf427c53406authNestedStackauthNestedStackResourceB90F43D4Outputsamplifyamplifycodexv1novigisandboxf427c53406authamplifyAuthauthenticatedUserRole35CA15EBRef"
-    },
-    {
-      "type": "aws:cdk:creationStack",
-      "data": [
-        "...aws-cdk-lib, @aws-amplify/backend, node internals...",
-        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
-      ]
     }
   ],
   "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/storage/amplifyamplifycodexv1novigisandboxf427c53406storageembsreceiptsBucket44A545AFArn": [
@@ -981,6 +930,19 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...aws-cdk-lib, @aws-amplify/backend, node internals, @aws-amplify/backend-deployer...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/storage/reference-to-amplifyamplifycodexv1novigisandboxf427c53406authNestedStackauthNestedStackResourceB90F43D4Outputs.amplifyamplifycodexv1novigisandboxf427c53406authamplifyAuthauthenticatedUserRole35CA15EBRef": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "referencetoamplifyamplifycodexv1novigisandboxf427c53406authNestedStackauthNestedStackResourceB90F43D4Outputsamplifyamplifycodexv1novigisandboxf427c53406authamplifyAuthauthenticatedUserRole35CA15EBRef"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, @aws-amplify/backend, node internals...",
         "(no user code in 10 frames, use --stack-trace-limit to capture more)"
       ]
     }
@@ -1009,114 +971,7 @@
         "...aws-cdk-lib, <anonymous> in @aws-amplify/backend...",
         "Array.forEach (:)",
         "...defineBackend in @aws-amplify/backend...",
-        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782384140956:12: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782384140956:12:1)",
-        "...node internals..."
-      ]
-    }
-  ],
-  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/function/reference-to-amplifyamplifycodexv1novigisandboxf427c53406dataNestedStackdataNestedStackResourceCE093568Outputs.amplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataExpenseNestedStackExpenseNestedStackResourceAD11659DOutputsamplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataExpenseExpenseTable042A9B15TableStreamArn": [
-    {
-      "type": "aws:cdk:logicalId",
-      "data": "referencetoamplifyamplifycodexv1novigisandboxf427c53406dataNestedStackdataNestedStackResourceCE093568Outputsamplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataExpenseNestedStackExpenseNestedStackResourceAD11659DOutputsamplifyamplify12C403AE"
-    },
-    {
-      "type": "aws:cdk:creationStack",
-      "data": [
-        "...aws-cdk-lib, @aws-amplify/backend, node internals...",
-        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
-      ]
-    }
-  ],
-  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/function/reference-to-amplifyamplifycodexv1novigisandboxf427c53406dataNestedStackdataNestedStackResourceCE093568Outputs.amplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataEventNestedStackEventNestedStackResource818B32BBOutputsamplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataEventEventTableBB415F37TableArn": [
-    {
-      "type": "aws:cdk:logicalId",
-      "data": "referencetoamplifyamplifycodexv1novigisandboxf427c53406dataNestedStackdataNestedStackResourceCE093568Outputsamplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataEventNestedStackEventNestedStackResource818B32BBOutputsamplifyamplifycodeEC51F051"
-    },
-    {
-      "type": "aws:cdk:creationStack",
-      "data": [
-        "...aws-cdk-lib, @aws-amplify/backend, node internals...",
-        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
-      ]
-    }
-  ],
-  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/function/reference-to-amplifyamplifycodexv1novigisandboxf427c53406dataNestedStackdataNestedStackResourceCE093568Outputs.amplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataBudgetNestedStackBudgetNestedStackResource9125FF76Outputsamplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataBudgetBudgetTableC412B569TableArn": [
-    {
-      "type": "aws:cdk:logicalId",
-      "data": "referencetoamplifyamplifycodexv1novigisandboxf427c53406dataNestedStackdataNestedStackResourceCE093568Outputsamplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataBudgetNestedStackBudgetNestedStackResource9125FF76Outputsamplifyamplifyco155EBB32"
-    },
-    {
-      "type": "aws:cdk:creationStack",
-      "data": [
-        "...aws-cdk-lib, @aws-amplify/backend, node internals...",
-        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
-      ]
-    }
-  ],
-  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/function/reference-to-amplifyamplifycodexv1novigisandboxf427c53406dataNestedStackdataNestedStackResourceCE093568Outputs.amplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataExpenseNestedStackExpenseNestedStackResourceAD11659DOutputsamplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataExpenseExpenseTable042A9B15TableArn": [
-    {
-      "type": "aws:cdk:logicalId",
-      "data": "referencetoamplifyamplifycodexv1novigisandboxf427c53406dataNestedStackdataNestedStackResourceCE093568Outputsamplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataExpenseNestedStackExpenseNestedStackResourceAD11659DOutputsamplifyamplifyEC7034FB"
-    },
-    {
-      "type": "aws:cdk:creationStack",
-      "data": [
-        "...aws-cdk-lib, @aws-amplify/backend, node internals...",
-        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
-      ]
-    }
-  ],
-  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/function/reference-to-amplifyamplifycodexv1novigisandboxf427c53406dataNestedStackdataNestedStackResourceCE093568Outputs.amplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataNotificationNestedStackNotificationNestedStackResourceEE15945FOutputsamplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataNotificationNotificationTableB0022585TableArn": [
-    {
-      "type": "aws:cdk:logicalId",
-      "data": "referencetoamplifyamplifycodexv1novigisandboxf427c53406dataNestedStackdataNestedStackResourceCE093568Outputsamplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataNotificationNestedStackNotificationNestedStackResourceEE15945FOutputsampl52E0C51C"
-    },
-    {
-      "type": "aws:cdk:creationStack",
-      "data": [
-        "...aws-cdk-lib, @aws-amplify/backend, node internals...",
-        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
-      ]
-    }
-  ],
-  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/function/reference-to-amplifyamplifycodexv1novigisandboxf427c53406storageNestedStackstorageNestedStackResourceADA4624COutputs.amplifyamplifycodexv1novigisandboxf427c53406storageembsreceiptsBucket44A545AFArn": [
-    {
-      "type": "aws:cdk:logicalId",
-      "data": "referencetoamplifyamplifycodexv1novigisandboxf427c53406storageNestedStackstorageNestedStackResourceADA4624COutputsamplifyamplifycodexv1novigisandboxf427c53406storageembsreceiptsBucket44A545AFArn"
-    },
-    {
-      "type": "aws:cdk:creationStack",
-      "data": [
-        "...aws-cdk-lib, @aws-amplify/backend, node internals...",
-        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
-      ]
-    }
-  ],
-  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/function/amplifyamplifycodexv1novigisandboxf427c53406functionembsalertfunctionlambda9F55996FRef": [
-    {
-      "type": "aws:cdk:logicalId",
-      "data": "amplifyamplifycodexv1novigisandboxf427c53406functionembsalertfunctionlambda9F55996FRef"
-    },
-    {
-      "type": "aws:cdk:creationStack",
-      "data": [
-        "...aws-cdk-lib, @aws-amplify/backend, node internals, @aws-amplify/backend-deployer...",
-        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
-      ]
-    }
-  ],
-  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/function.NestedStack/function.NestedStackResource": [
-    {
-      "type": "aws:cdk:logicalId",
-      "data": "function1351588B"
-    },
-    {
-      "type": "aws:cdk:creationStack",
-      "data": [
-        "...aws-cdk-lib, <anonymous> in @aws-amplify/backend...",
-        "Array.forEach (:)",
-        "...defineBackend in @aws-amplify/backend...",
-        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782384140956:12: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782384140956:12:1)",
+        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782412674544:13: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782412674544:13:1)",
         "...node internals..."
       ]
     }
@@ -1158,7 +1013,7 @@
         "...@aws-amplify/auth-construct, @aws-amplify/backend-auth, <anonymous> in @aws-amplify/backend...",
         "Array.forEach (:)",
         "...defineBackend in @aws-amplify/backend...",
-        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782384140956:12: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782384140956:12:1)"
+        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782412674544:13: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782412674544:13:1)"
       ]
     }
   ],
@@ -1173,7 +1028,7 @@
         "...@aws-amplify/auth-construct, @aws-amplify/backend-auth, <anonymous> in @aws-amplify/backend...",
         "Array.forEach (:)",
         "...defineBackend in @aws-amplify/backend...",
-        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782384140956:12: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782384140956:12:1)"
+        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782412674544:13: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782412674544:13:1)"
       ]
     }
   ],
@@ -1200,6 +1055,20 @@
       "data": [
         "...aws-cdk-lib, @aws-amplify/backend, node internals...",
         "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/ebms-member-invite-function-lambda/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ebmsmemberinvitefunctionlambda1FBC2DB1"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, @aws-amplify/backend-function, <anonymous> in @aws-amplify/backend...",
+        "Array.map (:)",
+        "...@aws-amplify/backend-data..."
       ]
     }
   ],
@@ -1297,6 +1166,18 @@
       ]
     }
   ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask": [
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...<anonymous> in @aws-amplify/graphql-api-construct...",
+        "Array.forEach (:)",
+        "...<anonymous> in @aws-amplify/graphql-api-construct...",
+        "Map.forEach (:)",
+        "...@aws-amplify/graphql-api-construct..."
+      ]
+    }
+  ],
   "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/Notification": [
     {
       "type": "aws:cdk:creationStack",
@@ -1306,6 +1187,15 @@
         "...<anonymous> in @aws-amplify/graphql-api-construct...",
         "Map.forEach (:)",
         "...@aws-amplify/graphql-api-construct..."
+      ]
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/FunctionDirectiveStack": [
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
       ]
     }
   ],
@@ -1437,6 +1327,20 @@
       ]
     }
   ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/embs-alert-function-lambda/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "embsalertfunctionlambdaF35455EF"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, @aws-amplify/backend-function, <anonymous> in @aws-amplify/backend...",
+        "Array.forEach (:)",
+        "...@aws-amplify/backend..."
+      ]
+    }
+  ],
   "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/CDKMetadata/Default": [
     {
       "type": "aws:cdk:logicalId",
@@ -1544,46 +1448,6 @@
       ]
     }
   ],
-  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/function/embs-alert-function-lambda/Resource": [
-    {
-      "type": "aws:cdk:logicalId",
-      "data": "embsalertfunctionlambdaF35455EF"
-    },
-    {
-      "type": "aws:cdk:creationStack",
-      "data": [
-        "...aws-cdk-lib, @aws-amplify/backend-function, <anonymous> in @aws-amplify/backend...",
-        "Array.forEach (:)",
-        "...@aws-amplify/backend..."
-      ]
-    }
-  ],
-  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/function/CDKMetadata/Default": [
-    {
-      "type": "aws:cdk:logicalId",
-      "data": "CDKMetadata"
-    },
-    {
-      "type": "aws:cdk:creationStack",
-      "data": [
-        "...aws-cdk-lib, @aws-amplify/backend, node internals...",
-        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
-      ]
-    }
-  ],
-  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/function/CDKMetadata/Condition": [
-    {
-      "type": "aws:cdk:logicalId",
-      "data": "CDKMetadataAvailable"
-    },
-    {
-      "type": "aws:cdk:creationStack",
-      "data": [
-        "...aws-cdk-lib, @aws-amplify/backend, node internals...",
-        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
-      ]
-    }
-  ],
   "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/auth/amplifyAuth/UserPool/Resource": [
     {
       "type": "aws:cdk:logicalId",
@@ -1635,6 +1499,19 @@
       "data": [
         "...aws-cdk-lib, @aws-amplify/auth-construct, @aws-amplify/backend-auth, <anonymous> in @aws-amplify/backend...",
         "Array.forEach (:)"
+      ]
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/ebms-member-invite-function-lambda/ServiceRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ebmsmemberinvitefunctionlambdaServiceRole035E7150"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, @aws-amplify/backend-function, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
       ]
     }
   ],
@@ -2478,6 +2355,19 @@
       "data": "Query.listEventByOwnerAndDate"
     }
   ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/Event/amplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataEventEventTableBB415F37TableArn": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "amplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataEventEventTableBB415F37TableArn"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, @aws-amplify/backend, node internals, @aws-amplify/backend-deployer...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
   "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/Event/reference-to-amplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataAmplifyTableManagerNestedStackAmplifyTableManagerNestedStackResourceC3BDA801Outputs.amplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataAmplifyTableManagerTableManagerCustomProviderframeworkonEvent4B15A7E9Arn": [
     {
       "type": "aws:cdk:logicalId",
@@ -2560,19 +2450,6 @@
     {
       "type": "aws:cdk:logicalId",
       "data": "amplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataEventEventDataSource1589FA85Name"
-    },
-    {
-      "type": "aws:cdk:creationStack",
-      "data": [
-        "...aws-cdk-lib, @aws-amplify/backend, node internals, @aws-amplify/backend-deployer...",
-        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
-      ]
-    }
-  ],
-  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/Event/amplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataEventEventTableBB415F37TableArn": [
-    {
-      "type": "aws:cdk:logicalId",
-      "data": "amplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataEventEventTableBB415F37TableArn"
     },
     {
       "type": "aws:cdk:creationStack",
@@ -4964,6 +4841,480 @@
       ]
     }
   ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/DynamoDBModelTableReadIOPS": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DynamoDBModelTableReadIOPS"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...<anonymous> in @aws-amplify/graphql-api-construct...",
+        "Array.forEach (:)",
+        "...<anonymous> in @aws-amplify/graphql-api-construct...",
+        "Map.forEach (:)",
+        "...@aws-amplify/graphql-api-construct..."
+      ]
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/DynamoDBModelTableWriteIOPS": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DynamoDBModelTableWriteIOPS"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...<anonymous> in @aws-amplify/graphql-api-construct...",
+        "Array.forEach (:)",
+        "...<anonymous> in @aws-amplify/graphql-api-construct...",
+        "Map.forEach (:)",
+        "...@aws-amplify/graphql-api-construct..."
+      ]
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/DynamoDBBillingMode": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DynamoDBBillingMode"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...<anonymous> in @aws-amplify/graphql-api-construct...",
+        "Array.forEach (:)",
+        "...<anonymous> in @aws-amplify/graphql-api-construct...",
+        "Map.forEach (:)",
+        "...@aws-amplify/graphql-api-construct..."
+      ]
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/DynamoDBEnablePointInTimeRecovery": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DynamoDBEnablePointInTimeRecovery"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...<anonymous> in @aws-amplify/graphql-api-construct...",
+        "Array.forEach (:)",
+        "...<anonymous> in @aws-amplify/graphql-api-construct...",
+        "Map.forEach (:)",
+        "...@aws-amplify/graphql-api-construct..."
+      ]
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/DynamoDBEnableServerSideEncryption": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DynamoDBEnableServerSideEncryption"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...<anonymous> in @aws-amplify/graphql-api-construct...",
+        "Array.forEach (:)",
+        "...<anonymous> in @aws-amplify/graphql-api-construct...",
+        "Map.forEach (:)",
+        "...@aws-amplify/graphql-api-construct..."
+      ]
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/HasEnvironmentParameter": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "HasEnvironmentParameter"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...<anonymous> in @aws-amplify/graphql-api-construct...",
+        "Array.forEach (:)",
+        "...<anonymous> in @aws-amplify/graphql-api-construct...",
+        "Map.forEach (:)",
+        "...@aws-amplify/graphql-api-construct..."
+      ]
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/ShouldUsePayPerRequestBilling": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ShouldUsePayPerRequestBilling"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...<anonymous> in @aws-amplify/graphql-api-construct...",
+        "Array.forEach (:)",
+        "...<anonymous> in @aws-amplify/graphql-api-construct...",
+        "Map.forEach (:)",
+        "...@aws-amplify/graphql-api-construct..."
+      ]
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/ShouldUsePointInTimeRecovery": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ShouldUsePointInTimeRecovery"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...<anonymous> in @aws-amplify/graphql-api-construct...",
+        "Array.forEach (:)",
+        "...<anonymous> in @aws-amplify/graphql-api-construct...",
+        "Map.forEach (:)",
+        "...@aws-amplify/graphql-api-construct..."
+      ]
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/EventTaskTable": [
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "EventTask"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/CustomTableEventTaskTable": [
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "EventTask"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/GetAttEventTaskTableStreamArn": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "GetAttEventTaskTableStreamArn"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...<anonymous> in @aws-amplify/graphql-api-construct...",
+        "Array.forEach (:)",
+        "...<anonymous> in @aws-amplify/graphql-api-construct...",
+        "Map.forEach (:)",
+        "...@aws-amplify/graphql-api-construct..."
+      ]
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/GetAttEventTaskTableName": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "GetAttEventTaskTableName"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...<anonymous> in @aws-amplify/graphql-api-construct...",
+        "Array.forEach (:)",
+        "...<anonymous> in @aws-amplify/graphql-api-construct...",
+        "Map.forEach (:)",
+        "...@aws-amplify/graphql-api-construct..."
+      ]
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/EventTaskIAMRole": [
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "EventTaskIAMRole"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/EventTaskDataSource": [
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "EventTaskTable"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/queryGetEventTaskResolver": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "GetEventTaskResolver"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "Query.getEventTask"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/queryListEventTasksResolver": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ListEventTaskResolver"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "Query.listEventTasks"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/mutationCreateEventTaskResolver": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CreateEventTaskResolver"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "Mutation.createEventTask"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/mutationUpdateEventTaskResolver": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UpdateEventTaskResolver"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "Mutation.updateEventTask"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/mutationDeleteEventTaskResolver": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DeleteEventTaskResolver"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "Mutation.deleteEventTask"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/subscriptionOnCreateEventTaskResolver": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SubscriptiononCreateEventTaskResolver"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "Subscription.onCreateEventTask"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/subscriptionOnUpdateEventTaskResolver": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SubscriptiononUpdateEventTaskResolver"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "Subscription.onUpdateEventTask"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/subscriptionOnDeleteEventTaskResolver": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SubscriptiononDeleteEventTaskResolver"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "Subscription.onDeleteEventTask"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/queryListEventTaskByEventIdResolver": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "QuerylistEventTaskByEventIdResolver"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "Query.listEventTaskByEventId"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/queryListEventTaskByAssigneeEmailResolver": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "QuerylistEventTaskByAssigneeEmailResolver"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "Query.listEventTaskByAssigneeEmail"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/reference-to-amplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataAmplifyTableManagerNestedStackAmplifyTableManagerNestedStackResourceC3BDA801Outputs.amplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataAmplifyTableManagerTableManagerCustomProviderframeworkonEvent4B15A7E9Arn": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "referencetoamplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataAmplifyTableManagerNestedStackAmplifyTableManagerNestedStackResourceC3BDA801Outputsamplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataAmplifyTableManagerTableMana79D5B887"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, @aws-amplify/backend, node internals...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/reference-to-amplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataGraphQLAPI5E40F3A8ApiId": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "referencetoamplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataGraphQLAPI5E40F3A8ApiId"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, @aws-amplify/backend, node internals, @aws-amplify/backend-deployer...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/reference-to-amplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataGraphQLAPINONEDS878C609DName": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "referencetoamplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataGraphQLAPINONEDS878C609DName"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, @aws-amplify/backend, node internals, @aws-amplify/backend-deployer...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/reference-to-amplifyamplifycodexv1novigisandboxf427c53406authNestedStackauthNestedStackResourceB90F43D4Outputs.amplifyamplifycodexv1novigisandboxf427c53406authamplifyAuthauthenticatedUserRole35CA15EBRef": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "referencetoamplifyamplifycodexv1novigisandboxf427c53406authNestedStackauthNestedStackResourceB90F43D4Outputsamplifyamplifycodexv1novigisandboxf427c53406authamplifyAuthauthenticatedUserRole35CA15EBRef"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, @aws-amplify/backend, node internals...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/reference-to-amplifyamplifycodexv1novigisandboxf427c53406authNestedStackauthNestedStackResourceB90F43D4Outputs.amplifyamplifycodexv1novigisandboxf427c53406authamplifyAuthunauthenticatedUserRole66A823D4Ref": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "referencetoamplifyamplifycodexv1novigisandboxf427c53406authNestedStackauthNestedStackResourceB90F43D4Outputsamplifyamplifycodexv1novigisandboxf427c53406authamplifyAuthunauthenticatedUserRole66A823D4Ref"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, @aws-amplify/backend, node internals...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/reference-to-amplifyamplifycodexv1novigisandboxf427c53406authNestedStackauthNestedStackResourceB90F43D4Outputs.amplifyamplifycodexv1novigisandboxf427c53406authamplifyAuthIdentityPool455D94E7Ref": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "referencetoamplifyamplifycodexv1novigisandboxf427c53406authNestedStackauthNestedStackResourceB90F43D4Outputsamplifyamplifycodexv1novigisandboxf427c53406authamplifyAuthIdentityPool455D94E7Ref"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, @aws-amplify/backend, node internals...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/amplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataEventTaskEventTaskDataSourceAC3C0C6CName": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "amplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataEventTaskEventTaskDataSourceAC3C0C6CName"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, @aws-amplify/backend, node internals, @aws-amplify/backend-deployer...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/amplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataEventTaskEventTaskTable0A236DC8TableArn": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "amplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataEventTaskEventTaskTable0A236DC8TableArn"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, @aws-amplify/backend, node internals, @aws-amplify/backend-deployer...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask.NestedStack/EventTask.NestedStackResource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "amplifyDataEventTaskNestedStackEventTaskNestedStackResourceC780B709"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, <anonymous> in @aws-amplify/graphql-api-construct...",
+        "Array.forEach (:)",
+        "...<anonymous> in @aws-amplify/graphql-api-construct...",
+        "Map.forEach (:)",
+        "...@aws-amplify/graphql-api-construct..."
+      ]
+    }
+  ],
   "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/Notification/DynamoDBModelTableReadIOPS": [
     {
       "type": "aws:cdk:logicalId",
@@ -5438,6 +5789,137 @@
       ]
     }
   ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/FunctionDirectiveStack/HasEnvironmentParameter": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "HasEnvironmentParameter"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, <anonymous> in @aws-amplify/backend...",
+        "Array.forEach (:)",
+        "...@aws-amplify/backend..."
+      ]
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/FunctionDirectiveStack/FnSendEventMemberInviteEmailLambdaDataSource": [
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "FnSendEventMemberInviteEmailLambdaDataSource"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/FunctionDirectiveStack/mutationSendEventMemberInviteEmailResolver": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "MutationsendEventMemberInviteEmailResolver"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...<anonymous> in @aws-amplify/graphql-api-construct...",
+        "Array.forEach (:)",
+        "...<anonymous> in @aws-amplify/graphql-api-construct...",
+        "Map.forEach (:)",
+        "...@aws-amplify/graphql-api-construct..."
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "Mutation.sendEventMemberInviteEmail"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/FunctionDirectiveStack/reference-to-amplifyamplifycodexv1novigisandboxf427c53406dataebmsmemberinvitefunctionlambda73DDAB81Arn": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "referencetoamplifyamplifycodexv1novigisandboxf427c53406dataebmsmemberinvitefunctionlambda73DDAB81Arn"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, @aws-amplify/backend, node internals, @aws-amplify/backend-deployer...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/FunctionDirectiveStack/reference-to-amplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataGraphQLAPI5E40F3A8ApiId": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "referencetoamplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataGraphQLAPI5E40F3A8ApiId"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, @aws-amplify/backend, node internals, @aws-amplify/backend-deployer...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/FunctionDirectiveStack/reference-to-amplifyamplifycodexv1novigisandboxf427c53406authNestedStackauthNestedStackResourceB90F43D4Outputs.amplifyamplifycodexv1novigisandboxf427c53406authamplifyAuthauthenticatedUserRole35CA15EBRef": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "referencetoamplifyamplifycodexv1novigisandboxf427c53406authNestedStackauthNestedStackResourceB90F43D4Outputsamplifyamplifycodexv1novigisandboxf427c53406authamplifyAuthauthenticatedUserRole35CA15EBRef"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, @aws-amplify/backend, node internals...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/FunctionDirectiveStack/reference-to-amplifyamplifycodexv1novigisandboxf427c53406authNestedStackauthNestedStackResourceB90F43D4Outputs.amplifyamplifycodexv1novigisandboxf427c53406authamplifyAuthunauthenticatedUserRole66A823D4Ref": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "referencetoamplifyamplifycodexv1novigisandboxf427c53406authNestedStackauthNestedStackResourceB90F43D4Outputsamplifyamplifycodexv1novigisandboxf427c53406authamplifyAuthunauthenticatedUserRole66A823D4Ref"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, @aws-amplify/backend, node internals...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/FunctionDirectiveStack/reference-to-amplifyamplifycodexv1novigisandboxf427c53406authNestedStackauthNestedStackResourceB90F43D4Outputs.amplifyamplifycodexv1novigisandboxf427c53406authamplifyAuthIdentityPool455D94E7Ref": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "referencetoamplifyamplifycodexv1novigisandboxf427c53406authNestedStackauthNestedStackResourceB90F43D4Outputsamplifyamplifycodexv1novigisandboxf427c53406authamplifyAuthIdentityPool455D94E7Ref"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, @aws-amplify/backend, node internals...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/FunctionDirectiveStack/reference-to-amplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataGraphQLAPINONEDS878C609DName": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "referencetoamplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataGraphQLAPINONEDS878C609DName"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, @aws-amplify/backend, node internals, @aws-amplify/backend-deployer...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/FunctionDirectiveStack.NestedStack/FunctionDirectiveStack.NestedStackResource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "amplifyDataFunctionDirectiveStackNestedStackFunctionDirectiveStackNestedStackResource1246A302"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, @aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
   "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/ConnectionStack/eventMembersResolver": [
     {
       "type": "aws:cdk:logicalId",
@@ -5470,6 +5952,23 @@
     {
       "type": "graphqltransformer:resourceName",
       "data": "Event.expenses"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/ConnectionStack/eventTasksResolver": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "EventtasksResolver"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "Event.tasks"
     }
   ],
   "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/ConnectionStack/eventNotificationsResolver": [
@@ -5693,6 +6192,23 @@
       "data": "Expense.event"
     }
   ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/ConnectionStack/eventTaskEventResolver": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "EventTaskeventResolver"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "EventTask.event"
+    }
+  ],
   "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/ConnectionStack/notificationEventResolver": [
     {
       "type": "aws:cdk:logicalId",
@@ -5818,6 +6334,32 @@
     {
       "type": "aws:cdk:logicalId",
       "data": "referencetoamplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataExpenseNestedStackExpenseNestedStackResourceAD11659DOutputsamplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataExpenseExpenseTable042A9B15TableArn"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, @aws-amplify/backend, node internals...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/ConnectionStack/reference-to-amplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataEventTaskNestedStackEventTaskNestedStackResource85A081BAOutputs.amplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataEventTaskEventTaskDataSourceAC3C0C6CName": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "referencetoamplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataEventTaskNestedStackEventTaskNestedStackResource85A081BAOutputsamplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataEventTaskEventTaskDataSourceAC3C0C6CName"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, @aws-amplify/backend, node internals...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/ConnectionStack/reference-to-amplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataEventTaskNestedStackEventTaskNestedStackResource85A081BAOutputs.amplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataEventTaskEventTaskTable0A236DC8TableArn": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "referencetoamplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataEventTaskNestedStackEventTaskNestedStackResource85A081BAOutputsamplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataEventTaskEventTaskTable0A236DC8TableArn"
     },
     {
       "type": "aws:cdk:creationStack",
@@ -6041,6 +6583,33 @@
       ]
     }
   ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/embs-alert-function-lambda/ServiceRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "embsalertfunctionlambdaServiceRoleA5B2BB6B"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, @aws-amplify/backend-function, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/embs-alert-function-lambda/DynamoDBEventSource:amplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataExpenseCustomTableExpenseTable5E878C57/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "embsalertfunctionlambdaDynamoDBEventSourceamplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataExpenseCustomTableExpenseTable5E878C57F48F7AC9"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...NodejsFunction.addEventSource in aws-cdk-lib...",
+        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782412674544:57: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782412674544:57:4)",
+        "...node internals, @aws-amplify/backend-deployer, @aws-cdk/toolkit-lib..."
+      ]
+    }
+  ],
   "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/storage/embs-receipts/Bucket/Resource": [
     {
       "type": "aws:cdk:logicalId",
@@ -6061,30 +6630,16 @@
       }
     }
   ],
-  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/function/embs-alert-function-lambda/ServiceRole/Resource": [
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/ebms-member-invite-function-lambda/ServiceRole/DefaultPolicy/Resource": [
     {
       "type": "aws:cdk:logicalId",
-      "data": "embsalertfunctionlambdaServiceRoleA5B2BB6B"
+      "data": "ebmsmemberinvitefunctionlambdaServiceRoleDefaultPolicy31CADC77"
     },
     {
       "type": "aws:cdk:creationStack",
       "data": [
-        "...aws-cdk-lib, @aws-amplify/backend-function, @aws-amplify/backend...",
+        "...aws-cdk-lib...",
         "(no user code in 10 frames, use --stack-trace-limit to capture more)"
-      ]
-    }
-  ],
-  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/function/embs-alert-function-lambda/DynamoDBEventSource:amplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataExpenseCustomTableExpenseTable5E878C57/Resource": [
-    {
-      "type": "aws:cdk:logicalId",
-      "data": "embsalertfunctionlambdaDynamoDBEventSourceamplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataExpenseCustomTableExpenseTable5E878C57F48F7AC9"
-    },
-    {
-      "type": "aws:cdk:creationStack",
-      "data": [
-        "...NodejsFunction.addEventSource in aws-cdk-lib...",
-        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782384140956:55: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782384140956:55:4)",
-        "...node internals, @aws-amplify/backend-deployer, @aws-cdk/toolkit-lib..."
       ]
     }
   ],
@@ -6096,8 +6651,9 @@
     {
       "type": "aws:cdk:creationStack",
       "data": [
-        "...aws-cdk-lib, @aws-amplify/graphql-api-construct...",
-        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+        "...aws-cdk-lib, <anonymous> in @aws-amplify/graphql-api-construct...",
+        "Map.forEach (:)",
+        "...@aws-amplify/graphql-api-construct..."
       ]
     },
     {
@@ -10439,6 +10995,613 @@
       ]
     }
   ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/EventTaskIAMRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "EventTaskIAMRoleCB25417E"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, <anonymous> in @aws-amplify/graphql-api-construct...",
+        "Array.forEach (:)",
+        "...<anonymous> in @aws-amplify/graphql-api-construct...",
+        "Map.forEach (:)",
+        "...@aws-amplify/graphql-api-construct..."
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "EventTaskIAMRole"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/EventTaskDataSource/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "EventTaskDataSource"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, <anonymous> in @aws-amplify/graphql-api-construct...",
+        "Array.forEach (:)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "EventTaskTable"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/QuerygetEventTaskauth0Function/QuerygetEventTaskauth0Function.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "QuerygetEventTaskauth0FunctionQuerygetEventTaskauth0FunctionAppSyncFunctionDA87F7A2"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "QuerygetEventTaskauth0Function"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/QuerygetEventTaskpostAuth0Function/QuerygetEventTaskpostAuth0Function.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "QuerygetEventTaskpostAuth0FunctionQuerygetEventTaskpostAuth0FunctionAppSyncFunctionD2508C9E"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "QuerygetEventTaskpostAuth0Function"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/QueryGetEventTaskDataResolverFn/QueryGetEventTaskDataResolverFn.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "QueryGetEventTaskDataResolverFnQueryGetEventTaskDataResolverFnAppSyncFunction782F49B0"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "QueryGetEventTaskDataResolverFn"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/QuerylistEventTasksauth0Function/QuerylistEventTasksauth0Function.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "QuerylistEventTasksauth0FunctionQuerylistEventTasksauth0FunctionAppSyncFunctionB8002571"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "QuerylistEventTasksauth0Function"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/QuerylistEventTaskspostAuth0Function/QuerylistEventTaskspostAuth0Function.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "QuerylistEventTaskspostAuth0FunctionQuerylistEventTaskspostAuth0FunctionAppSyncFunctionE17ACDA7"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "QuerylistEventTaskspostAuth0Function"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/QueryListEventTasksDataResolverFn/QueryListEventTasksDataResolverFn.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "QueryListEventTasksDataResolverFnQueryListEventTasksDataResolverFnAppSyncFunctionA87CD0B1"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "QueryListEventTasksDataResolverFn"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/MutationcreateEventTaskinit0Function/MutationcreateEventTaskinit0Function.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "MutationcreateEventTaskinit0FunctionMutationcreateEventTaskinit0FunctionAppSyncFunction063EB7BB"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "MutationcreateEventTaskinit0Function"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/MutationcreateEventTaskauth0Function/MutationcreateEventTaskauth0Function.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "MutationcreateEventTaskauth0FunctionMutationcreateEventTaskauth0FunctionAppSyncFunction3C100288"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "MutationcreateEventTaskauth0Function"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/MutationcreateEventTaskpostAuth0Function/MutationcreateEventTaskpostAuth0Function.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "MutationcreateEventTaskpostAuth0FunctionMutationcreateEventTaskpostAuth0FunctionAppSyncFunctionDF813AE2"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "MutationcreateEventTaskpostAuth0Function"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/MutationCreateEventTaskDataResolverFn/MutationCreateEventTaskDataResolverFn.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "MutationCreateEventTaskDataResolverFnMutationCreateEventTaskDataResolverFnAppSyncFunction4A353281"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "MutationCreateEventTaskDataResolverFn"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/MutationupdateEventTaskinit0Function/MutationupdateEventTaskinit0Function.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "MutationupdateEventTaskinit0FunctionMutationupdateEventTaskinit0FunctionAppSyncFunction33C8DDAB"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "MutationupdateEventTaskinit0Function"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/MutationupdateEventTaskauth0Function/MutationupdateEventTaskauth0Function.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "MutationupdateEventTaskauth0FunctionMutationupdateEventTaskauth0FunctionAppSyncFunctionAE1CF7B0"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "MutationupdateEventTaskauth0Function"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/MutationupdateEventTaskpostAuth0Function/MutationupdateEventTaskpostAuth0Function.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "MutationupdateEventTaskpostAuth0FunctionMutationupdateEventTaskpostAuth0FunctionAppSyncFunction2643AC98"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "MutationupdateEventTaskpostAuth0Function"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/MutationUpdateEventTaskDataResolverFn/MutationUpdateEventTaskDataResolverFn.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "MutationUpdateEventTaskDataResolverFnMutationUpdateEventTaskDataResolverFnAppSyncFunction04A23534"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "MutationUpdateEventTaskDataResolverFn"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/MutationdeleteEventTaskauth0Function/MutationdeleteEventTaskauth0Function.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "MutationdeleteEventTaskauth0FunctionMutationdeleteEventTaskauth0FunctionAppSyncFunctionD4AED6AC"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "MutationdeleteEventTaskauth0Function"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/MutationdeleteEventTaskpostAuth0Function/MutationdeleteEventTaskpostAuth0Function.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "MutationdeleteEventTaskpostAuth0FunctionMutationdeleteEventTaskpostAuth0FunctionAppSyncFunction562931CF"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "MutationdeleteEventTaskpostAuth0Function"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/MutationDeleteEventTaskDataResolverFn/MutationDeleteEventTaskDataResolverFn.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "MutationDeleteEventTaskDataResolverFnMutationDeleteEventTaskDataResolverFnAppSyncFunction04CED2D7"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "MutationDeleteEventTaskDataResolverFn"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/SubscriptiononCreateEventTaskauth0Function/SubscriptiononCreateEventTaskauth0Function.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SubscriptiononCreateEventTaskauth0FunctionSubscriptiononCreateEventTaskauth0FunctionAppSyncFunction6B966537"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "SubscriptiononCreateEventTaskauth0Function"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/SubscriptiononCreateEventTaskpostAuth0Function/SubscriptiononCreateEventTaskpostAuth0Function.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SubscriptiononCreateEventTaskpostAuth0FunctionSubscriptiononCreateEventTaskpostAuth0FunctionAppSyncFunctionF780B02D"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "SubscriptiononCreateEventTaskpostAuth0Function"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/SubscriptionOnCreateEventTaskDataResolverFn/SubscriptionOnCreateEventTaskDataResolverFn.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SubscriptionOnCreateEventTaskDataResolverFnSubscriptionOnCreateEventTaskDataResolverFnAppSyncFunctionC191A9DD"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "SubscriptionOnCreateEventTaskDataResolverFn"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/SubscriptiononUpdateEventTaskauth0Function/SubscriptiononUpdateEventTaskauth0Function.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SubscriptiononUpdateEventTaskauth0FunctionSubscriptiononUpdateEventTaskauth0FunctionAppSyncFunction9AB416AC"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "SubscriptiononUpdateEventTaskauth0Function"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/SubscriptiononUpdateEventTaskpostAuth0Function/SubscriptiononUpdateEventTaskpostAuth0Function.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SubscriptiononUpdateEventTaskpostAuth0FunctionSubscriptiononUpdateEventTaskpostAuth0FunctionAppSyncFunction0FBEE836"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "SubscriptiononUpdateEventTaskpostAuth0Function"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/SubscriptionOnUpdateEventTaskDataResolverFn/SubscriptionOnUpdateEventTaskDataResolverFn.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SubscriptionOnUpdateEventTaskDataResolverFnSubscriptionOnUpdateEventTaskDataResolverFnAppSyncFunctionD76941CF"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "SubscriptionOnUpdateEventTaskDataResolverFn"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/SubscriptiononDeleteEventTaskauth0Function/SubscriptiononDeleteEventTaskauth0Function.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SubscriptiononDeleteEventTaskauth0FunctionSubscriptiononDeleteEventTaskauth0FunctionAppSyncFunctionEA2D9189"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "SubscriptiononDeleteEventTaskauth0Function"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/SubscriptiononDeleteEventTaskpostAuth0Function/SubscriptiononDeleteEventTaskpostAuth0Function.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SubscriptiononDeleteEventTaskpostAuth0FunctionSubscriptiononDeleteEventTaskpostAuth0FunctionAppSyncFunction210F39CF"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "SubscriptiononDeleteEventTaskpostAuth0Function"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/SubscriptionOnDeleteEventTaskDataResolverFn/SubscriptionOnDeleteEventTaskDataResolverFn.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SubscriptionOnDeleteEventTaskDataResolverFnSubscriptionOnDeleteEventTaskDataResolverFnAppSyncFunction95898AAB"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "SubscriptionOnDeleteEventTaskDataResolverFn"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/QuerylistEventTaskByEventIdauth0Function/QuerylistEventTaskByEventIdauth0Function.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "QuerylistEventTaskByEventIdauth0FunctionQuerylistEventTaskByEventIdauth0FunctionAppSyncFunction300F65FA"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "QuerylistEventTaskByEventIdauth0Function"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/QuerylistEventTaskByEventIdpostAuth0Function/QuerylistEventTaskByEventIdpostAuth0Function.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "QuerylistEventTaskByEventIdpostAuth0FunctionQuerylistEventTaskByEventIdpostAuth0FunctionAppSyncFunctionDC9EB110"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "QuerylistEventTaskByEventIdpostAuth0Function"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/QueryListEventTaskByEventIdDataResolverFn/QueryListEventTaskByEventIdDataResolverFn.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "QueryListEventTaskByEventIdDataResolverFnQueryListEventTaskByEventIdDataResolverFnAppSyncFunction68DC5AC0"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "QueryListEventTaskByEventIdDataResolverFn"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/QuerylistEventTaskByAssigneeEmailauth0Function/QuerylistEventTaskByAssigneeEmailauth0Function.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "QuerylistEventTaskByAssigneeEmailauth0FunctionQuerylistEventTaskByAssigneeEmailauth0FunctionAppSyncFunction710E10C5"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "QuerylistEventTaskByAssigneeEmailauth0Function"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/QuerylistEventTaskByAssigneeEmailpostAuth0Function/QuerylistEventTaskByAssigneeEmailpostAuth0Function.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "QuerylistEventTaskByAssigneeEmailpostAuth0FunctionQuerylistEventTaskByAssigneeEmailpostAuth0FunctionAppSyncFunction2D849BE0"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "QuerylistEventTaskByAssigneeEmailpostAuth0Function"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/QueryListEventTaskByAssigneeEmailDataResolverFn/QueryListEventTaskByAssigneeEmailDataResolverFn.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "QueryListEventTaskByAssigneeEmailDataResolverFnQueryListEventTaskByAssigneeEmailDataResolverFnAppSyncFunction599DF233"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "QueryListEventTaskByAssigneeEmailDataResolverFn"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/CDKMetadata/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CDKMetadata"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/CDKMetadata/Condition": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CDKMetadataAvailable"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
   "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/Notification/NotificationIAMRole/Resource": [
     {
       "type": "aws:cdk:logicalId",
@@ -11046,6 +12209,89 @@
       ]
     }
   ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/FunctionDirectiveStack/FnSendEventMemberInviteEmailLambdaDataSource/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FnSendEventMemberInviteEmailLambdaDataSource"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, <anonymous> in @aws-amplify/graphql-api-construct...",
+        "Array.forEach (:)",
+        "...<anonymous> in @aws-amplify/graphql-api-construct...",
+        "Map.forEach (:)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "FnSendEventMemberInviteEmailLambdaDataSource"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/FunctionDirectiveStack/InvokeFnSendEventMemberInviteEmailLambdaDataSource/InvokeFnSendEventMemberInviteEmailLambdaDataSource.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "InvokeFnSendEventMemberInviteEmailLambdaDataSourceInvokeFnSendEventMemberInviteEmailLambdaDataSourceAppSyncFunction4C56F83B"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...<anonymous> in @aws-amplify/graphql-api-construct...",
+        "Array.forEach (:)",
+        "...<anonymous> in @aws-amplify/graphql-api-construct...",
+        "Map.forEach (:)",
+        "...@aws-amplify/graphql-api-construct..."
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "InvokeFnSendEventMemberInviteEmailLambdaDataSource"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/FunctionDirectiveStack/MutationSendEventMemberInviteEmailAuthFN/MutationSendEventMemberInviteEmailAuthFN.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "MutationSendEventMemberInviteEmailAuthFNMutationSendEventMemberInviteEmailAuthFNAppSyncFunction4D35EFF1"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...<anonymous> in @aws-amplify/graphql-api-construct...",
+        "Map.forEach (:)",
+        "...@aws-amplify/graphql-api-construct..."
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "MutationSendEventMemberInviteEmailAuthFN"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/FunctionDirectiveStack/CDKMetadata/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CDKMetadata"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/FunctionDirectiveStack/CDKMetadata/Condition": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CDKMetadataAvailable"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
   "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/ConnectionStack/Eventmembersauth0Function/Eventmembersauth0Function.AppSyncFunction": [
     {
       "type": "aws:cdk:logicalId",
@@ -11112,6 +12358,40 @@
     {
       "type": "graphqltransformer:resourceName",
       "data": "EventExpensesDataResolverFn"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/ConnectionStack/Eventtasksauth0Function/Eventtasksauth0Function.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "Eventtasksauth0FunctionEventtasksauth0FunctionAppSyncFunctionB58DF171"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "Eventtasksauth0Function"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/ConnectionStack/EventTasksDataResolverFn/EventTasksDataResolverFn.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "EventTasksDataResolverFnEventTasksDataResolverFnAppSyncFunction3184DD73"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "EventTasksDataResolverFn"
     }
   ],
   "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/ConnectionStack/Eventnotificationsauth0Function/Eventnotificationsauth0Function.AppSyncFunction": [
@@ -11556,6 +12836,40 @@
       "data": "ExpenseEventDataResolverFn"
     }
   ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/ConnectionStack/EventTaskeventauth0Function/EventTaskeventauth0Function.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "EventTaskeventauth0FunctionEventTaskeventauth0FunctionAppSyncFunctionB9018516"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "EventTaskeventauth0Function"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/ConnectionStack/EventTaskEventDataResolverFn/EventTaskEventDataResolverFn.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "EventTaskEventDataResolverFnEventTaskEventDataResolverFnAppSyncFunction443D6875"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...@aws-amplify/graphql-api-construct, @aws-amplify/backend-data, @aws-amplify/backend...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "EventTaskEventDataResolverFn"
+    }
+  ],
   "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/ConnectionStack/Notificationeventauth0Function/Notificationeventauth0Function.AppSyncFunction": [
     {
       "type": "aws:cdk:logicalId",
@@ -11648,6 +12962,19 @@
       ]
     }
   ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/embs-alert-function-lambda/ServiceRole/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "embsalertfunctionlambdaServiceRoleDefaultPolicy88EB79A0"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
   "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/storage/embs-receipts/Bucket/Policy/Resource": [
     {
       "type": "aws:cdk:logicalId",
@@ -11671,19 +12998,6 @@
     {
       "type": "aws:cdk:logicalId",
       "data": "embsreceiptsBucketAutoDeleteObjectsCustomResource349094AD"
-    },
-    {
-      "type": "aws:cdk:creationStack",
-      "data": [
-        "...aws-cdk-lib...",
-        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
-      ]
-    }
-  ],
-  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/function/embs-alert-function-lambda/ServiceRole/DefaultPolicy/Resource": [
-    {
-      "type": "aws:cdk:logicalId",
-      "data": "embsalertfunctionlambdaServiceRoleDefaultPolicy88EB79A0"
     },
     {
       "type": "aws:cdk:creationStack",
@@ -11881,6 +13195,25 @@
       "data": "Expense"
     }
   ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/EventTask/EventTaskTable/Default/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "EventTaskTable"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, <anonymous> in @aws-amplify/graphql-api-construct...",
+        "Array.forEach (:)",
+        "...<anonymous> in @aws-amplify/graphql-api-construct...",
+        "Map.forEach (:)"
+      ]
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "EventTask"
+    }
+  ],
   "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/Notification/NotificationTable/Default/Default": [
     {
       "type": "aws:cdk:logicalId",
@@ -11898,6 +13231,19 @@
     {
       "type": "graphqltransformer:resourceName",
       "data": "Notification"
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/FunctionDirectiveStack/FnSendEventMemberInviteEmailLambdaDataSource/ServiceRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FnSendEventMemberInviteEmailLambdaDataSourceServiceRole646EF279"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, <anonymous> in @aws-amplify/graphql-api-construct...",
+        "Array.forEach (:)"
+      ]
     }
   ],
   "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/AmplifyCodegenAssets/AmplifyCodegenAssetsBucket/Policy/Resource": [
@@ -11967,6 +13313,19 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...aws-cdk-lib, @aws-amplify/graphql-api-construct...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/amplify-amplifycodexv1-novigi-sandbox-f427c53406/data/amplifyData/FunctionDirectiveStack/FnSendEventMemberInviteEmailLambdaDataSource/ServiceRole/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FnSendEventMemberInviteEmailLambdaDataSourceServiceRoleDefaultPolicy215ACE99"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
         "(no user code in 10 frames, use --stack-trace-limit to capture more)"
       ]
     }
