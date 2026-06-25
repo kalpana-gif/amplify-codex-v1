@@ -3,7 +3,6 @@ import { Tags } from "aws-cdk-lib";
 import { PolicyStatement } from "aws-cdk-lib/aws-iam";
 import { StreamViewType } from "aws-cdk-lib/aws-dynamodb";
 import { StartingPosition } from "aws-cdk-lib/aws-lambda";
-import { DynamoEventSource } from "aws-cdk-lib/aws-lambda-event-sources";
 import { auth } from "./auth/resource";
 import { data } from "./data/resource";
 import { storage } from "./storage/resource";
@@ -54,12 +53,19 @@ backend.data.resources.cfnResources.amplifyDynamoDbTables.Expense.streamSpecific
 
 const expenseTable = getModelTable("Expense");
 
-backend.alertFunction.resources.lambda.addEventSource(
-  new DynamoEventSource(expenseTable, {
-    startingPosition: StartingPosition.LATEST,
-    batchSize: 10,
-    retryAttempts: 2,
-  }),
+const expenseStreamMapping =
+  backend.alertFunction.resources.lambda.addEventSourceMapping(
+    "ExpenseStreamMapping",
+    {
+      eventSourceArn: expenseTable.tableStreamArn,
+      startingPosition: StartingPosition.LATEST,
+      batchSize: 10,
+      retryAttempts: 2,
+    },
+  );
+
+expenseStreamMapping.node.addDependency(
+  expenseTable,
 );
 
 expenseTable.grantStreamRead(backend.alertFunction.resources.lambda);
