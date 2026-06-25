@@ -1,6 +1,273 @@
 {
  "Description": "{\"createdOn\":\"Mac\",\"createdBy\":\"AmplifySandbox\",\"createdWith\":\"1.18.0\",\"stackType\":\"function-Lambda\",\"metadata\":{}}",
  "Resources": {
+  "ebmsmemberinvitefunctionlambdaServiceRole035E7150": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "amplify:deployment-type",
+      "Value": "sandbox"
+     },
+     {
+      "Key": "amplify:friendly-name",
+      "Value": "ebms-member-invite-function"
+     },
+     {
+      "Key": "Branch",
+      "Value": "sandbox"
+     },
+     {
+      "Key": "created-by",
+      "Value": "amplify"
+     },
+     {
+      "Key": "DeploymentType",
+      "Value": "sandbox"
+     },
+     {
+      "Key": "Environment",
+      "Value": "sandbox"
+     },
+     {
+      "Key": "Project",
+      "Value": "EBMS"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-amplifycodexv1-novigi-sandbox-f427c53406/function/ebms-member-invite-function-lambda/ServiceRole/Resource"
+   }
+  },
+  "ebmsmemberinvitefunctionlambdaServiceRoleDefaultPolicy31CADC77": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "dynamodb:BatchGetItem",
+        "dynamodb:Query",
+        "dynamodb:GetItem",
+        "dynamodb:Scan",
+        "dynamodb:ConditionCheckItem",
+        "dynamodb:DescribeTable"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Ref": "referencetoamplifyamplifycodexv1novigisandboxf427c53406dataNestedStackdataNestedStackResourceCE093568Outputsamplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataEventNestedStackEventNestedStackResource818B32BBOutputsamplifyamplifycodeEC51F051"
+        }
+       ]
+      },
+      {
+       "Action": [
+        "dynamodb:GetRecords",
+        "dynamodb:GetShardIterator"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Ref": "referencetoamplifyamplifycodexv1novigisandboxf427c53406dataNestedStackdataNestedStackResourceCE093568Outputsamplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataEventNestedStackEventNestedStackResource818B32BBOutputsamplifyamplifycodeEC51F051"
+        }
+       ]
+      },
+      {
+       "Action": [
+        "ses:SendEmail",
+        "ses:SendRawEmail"
+       ],
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": "ssm:GetParameters",
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":ssm:",
+           {
+            "Ref": "AWS::Region"
+           },
+           ":",
+           {
+            "Ref": "AWS::AccountId"
+           },
+           ":parameter/amplify/amplifycodexv1/novigi-sandbox-f427c53406/SES_FROM_EMAIL"
+          ]
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":ssm:",
+           {
+            "Ref": "AWS::Region"
+           },
+           ":",
+           {
+            "Ref": "AWS::AccountId"
+           },
+           ":parameter/amplify/shared/amplify-codex-v1/SES_FROM_EMAIL"
+          ]
+         ]
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "ebmsmemberinvitefunctionlambdaServiceRoleDefaultPolicy31CADC77",
+    "Roles": [
+     {
+      "Ref": "ebmsmemberinvitefunctionlambdaServiceRole035E7150"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-amplifycodexv1-novigi-sandbox-f427c53406/function/ebms-member-invite-function-lambda/ServiceRole/DefaultPolicy/Resource"
+   }
+  },
+  "ebmsmemberinvitefunctionlambda1FBC2DB1": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Architectures": [
+     "x86_64"
+    ],
+    "Code": {
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+     },
+     "S3Key": "0bad83912aaaf1706d68d7dc5c89a3e9e5d413c1399c9d3ff04f97ea38a4dae8.zip"
+    },
+    "Environment": {
+     "Variables": {
+      "SES_FROM_EMAIL": "<value will be resolved during runtime>",
+      "AMPLIFY_SSM_ENV_CONFIG": "{\"SES_FROM_EMAIL\":{\"path\":\"/amplify/amplifycodexv1/novigi-sandbox-f427c53406/SES_FROM_EMAIL\",\"sharedPath\":\"/amplify/shared/amplify-codex-v1/SES_FROM_EMAIL\"}}",
+      "EVENT_TABLE_NAME": {
+       "Fn::Select": [
+        1,
+        {
+         "Fn::Split": [
+          "/",
+          {
+           "Fn::Select": [
+            5,
+            {
+             "Fn::Split": [
+              ":",
+              {
+               "Ref": "referencetoamplifyamplifycodexv1novigisandboxf427c53406dataNestedStackdataNestedStackResourceCE093568Outputsamplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataEventNestedStackEventNestedStackResource818B32BBOutputsamplifyamplifycodeEC51F051"
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     }
+    },
+    "EphemeralStorage": {
+     "Size": 512
+    },
+    "Handler": "index.handler",
+    "MemorySize": 512,
+    "Role": {
+     "Fn::GetAtt": [
+      "ebmsmemberinvitefunctionlambdaServiceRole035E7150",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs20.x",
+    "Tags": [
+     {
+      "Key": "amplify:deployment-type",
+      "Value": "sandbox"
+     },
+     {
+      "Key": "amplify:friendly-name",
+      "Value": "ebms-member-invite-function"
+     },
+     {
+      "Key": "Branch",
+      "Value": "sandbox"
+     },
+     {
+      "Key": "created-by",
+      "Value": "amplify"
+     },
+     {
+      "Key": "DeploymentType",
+      "Value": "sandbox"
+     },
+     {
+      "Key": "Environment",
+      "Value": "sandbox"
+     },
+     {
+      "Key": "Project",
+      "Value": "EBMS"
+     }
+    ],
+    "Timeout": 30
+   },
+   "DependsOn": [
+    "ebmsmemberinvitefunctionlambdaServiceRoleDefaultPolicy31CADC77",
+    "ebmsmemberinvitefunctionlambdaServiceRole035E7150"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-amplifycodexv1-novigi-sandbox-f427c53406/function/ebms-member-invite-function-lambda/Resource",
+    "aws:asset:path": "asset.0bad83912aaaf1706d68d7dc5c89a3e9e5d413c1399c9d3ff04f97ea38a4dae8",
+    "aws:asset:is-bundled": true,
+    "aws:asset:property": "Code"
+   }
+  },
   "embsalertfunctionlambdaServiceRoleA5B2BB6B": {
    "Type": "AWS::IAM::Role",
    "Properties": {
@@ -781,11 +1048,31 @@
    ]
   }
  },
+ "Outputs": {
+  "amplifyamplifycodexv1novigisandboxf427c53406functionebmsmemberinvitefunctionlambda80E5BEAFArn": {
+   "Value": {
+    "Fn::GetAtt": [
+     "ebmsmemberinvitefunctionlambda1FBC2DB1",
+     "Arn"
+    ]
+   }
+  },
+  "amplifyamplifycodexv1novigisandboxf427c53406functionebmsmemberinvitefunctionlambda80E5BEAFRef": {
+   "Value": {
+    "Ref": "ebmsmemberinvitefunctionlambda1FBC2DB1"
+   }
+  },
+  "amplifyamplifycodexv1novigisandboxf427c53406functionembsalertfunctionlambda9F55996FRef": {
+   "Value": {
+    "Ref": "embsalertfunctionlambdaF35455EF"
+   }
+  }
+ },
  "Parameters": {
-  "referencetoamplifyamplifycodexv1novigisandboxf427c53406dataNestedStackdataNestedStackResourceCE093568Outputsamplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataExpenseNestedStackExpenseNestedStackResourceAD11659DOutputsamplifyamplify12C403AE": {
+  "referencetoamplifyamplifycodexv1novigisandboxf427c53406dataNestedStackdataNestedStackResourceCE093568Outputsamplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataEventNestedStackEventNestedStackResource818B32BBOutputsamplifyamplifycodeEC51F051": {
    "Type": "String"
   },
-  "referencetoamplifyamplifycodexv1novigisandboxf427c53406dataNestedStackdataNestedStackResourceCE093568Outputsamplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataEventNestedStackEventNestedStackResource818B32BBOutputsamplifyamplifycodeEC51F051": {
+  "referencetoamplifyamplifycodexv1novigisandboxf427c53406dataNestedStackdataNestedStackResourceCE093568Outputsamplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataExpenseNestedStackExpenseNestedStackResourceAD11659DOutputsamplifyamplify12C403AE": {
    "Type": "String"
   },
   "referencetoamplifyamplifycodexv1novigisandboxf427c53406dataNestedStackdataNestedStackResourceCE093568Outputsamplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataBudgetNestedStackBudgetNestedStackResource9125FF76Outputsamplifyamplifyco155EBB32": {
@@ -799,13 +1086,6 @@
   },
   "referencetoamplifyamplifycodexv1novigisandboxf427c53406storageNestedStackstorageNestedStackResourceADA4624COutputsamplifyamplifycodexv1novigisandboxf427c53406storageembsreceiptsBucket44A545AFArn": {
    "Type": "String"
-  }
- },
- "Outputs": {
-  "amplifyamplifycodexv1novigisandboxf427c53406functionembsalertfunctionlambda9F55996FRef": {
-   "Value": {
-    "Ref": "embsalertfunctionlambdaF35455EF"
-   }
   }
  }
 }

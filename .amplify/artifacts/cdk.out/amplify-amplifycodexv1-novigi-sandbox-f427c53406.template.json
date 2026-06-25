@@ -34,6 +34,12 @@
     "groups"
    ]
   },
+  "AWS::Amplify::Function": {
+   "version": "1",
+   "stackOutputs": [
+    "definedFunctions"
+   ]
+  },
   "AWS::Amplify::GraphQL": {
    "version": "1",
    "stackOutputs": [
@@ -43,12 +49,6 @@
     "awsAppsyncRegion",
     "amplifyApiModelSchemaS3Uri",
     "awsAppsyncAdditionalAuthenticationTypes"
-   ]
-  },
-  "AWS::Amplify::Function": {
-   "version": "1",
-   "stackOutputs": [
-    "definedFunctions"
    ]
   },
   "AWS::Amplify::Storage": {
@@ -154,6 +154,30 @@
   "groups": {
    "Value": "[]"
   },
+  "definedFunctions": {
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "[\"",
+      {
+       "Fn::GetAtt": [
+        "data7552DF31",
+        "Outputs.amplifyamplifycodexv1novigisandboxf427c53406dataebmsmemberinvitefunctionlambda73DDAB81Ref"
+       ]
+      },
+      "\",\"",
+      {
+       "Fn::GetAtt": [
+        "data7552DF31",
+        "Outputs.amplifyamplifycodexv1novigisandboxf427c53406dataembsalertfunctionlambda14E4C99CRef"
+       ]
+      },
+      "\"]"
+     ]
+    ]
+   }
+  },
   "awsAppsyncApiId": {
    "Value": {
     "Fn::GetAtt": [
@@ -217,23 +241,6 @@
   },
   "awsAppsyncAdditionalAuthenticationTypes": {
    "Value": "AWS_IAM"
-  },
-  "definedFunctions": {
-   "Value": {
-    "Fn::Join": [
-     "",
-     [
-      "[\"",
-      {
-       "Fn::GetAtt": [
-        "function1351588B",
-        "Outputs.amplifyamplifycodexv1novigisandboxf427c53406functionembsalertfunctionlambda9F55996FRef"
-       ]
-      },
-      "\"]"
-     ]
-    ]
-   }
   },
   "storageRegion": {
    "Value": {
@@ -356,6 +363,12 @@
        "auth179371D7",
        "Outputs.amplifyamplifycodexv1novigisandboxf427c53406authamplifyAuthIdentityPool455D94E7Ref"
       ]
+     },
+     "referencetoamplifyamplifycodexv1novigisandboxf427c53406storageNestedStackstorageNestedStackResourceADA4624COutputsamplifyamplifycodexv1novigisandboxf427c53406storageembsreceiptsBucket44A545AFArn": {
+      "Fn::GetAtt": [
+       "storage0EC3F24A",
+       "Outputs.amplifyamplifycodexv1novigisandboxf427c53406storageembsreceiptsBucket44A545AFArn"
+      ]
      }
     },
     "Tags": [
@@ -400,7 +413,7 @@
        {
         "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
        },
-       "/098d88006bf5a13f8e9775c17b5d089fa137b88596757c9ea7839cc6a9d2da17.json"
+       "/f3e1c2036a8bfa269f95d1b1f1b95b5593e103b58e35fd259c07647c5830b91f.json"
       ]
      ]
     }
@@ -466,7 +479,7 @@
        {
         "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
        },
-       "/fce953541d32a09bbda94c7919bac3b754c8782476047d2a28eaf62d2690071a.json"
+       "/54aca5aa7b41f26fa20a1622ab4d90be4930900b4d11ba7b3a325c588ff43b9c.json"
       ]
      ]
     }
@@ -476,102 +489,6 @@
    "Metadata": {
     "aws:cdk:path": "amplify-amplifycodexv1-novigi-sandbox-f427c53406/storage.NestedStack/storage.NestedStackResource",
     "aws:asset:path": "amplifyamplifycodexv1novigisandboxf427c53406storageD8A953CA.nested.template.json",
-    "aws:asset:property": "TemplateURL"
-   }
-  },
-  "function1351588B": {
-   "Type": "AWS::CloudFormation::Stack",
-   "Properties": {
-    "Parameters": {
-     "referencetoamplifyamplifycodexv1novigisandboxf427c53406dataNestedStackdataNestedStackResourceCE093568Outputsamplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataExpenseNestedStackExpenseNestedStackResourceAD11659DOutputsamplifyamplify12C403AE": {
-      "Fn::GetAtt": [
-       "data7552DF31",
-       "Outputs.amplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataExpenseNestedStackExpenseNestedStackResourceAD11659DOutputsamplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataExpenseExpenseTable042A9B15TableStreamArn"
-      ]
-     },
-     "referencetoamplifyamplifycodexv1novigisandboxf427c53406dataNestedStackdataNestedStackResourceCE093568Outputsamplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataEventNestedStackEventNestedStackResource818B32BBOutputsamplifyamplifycodeEC51F051": {
-      "Fn::GetAtt": [
-       "data7552DF31",
-       "Outputs.amplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataEventNestedStackEventNestedStackResource818B32BBOutputsamplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataEventEventTableBB415F37TableArn"
-      ]
-     },
-     "referencetoamplifyamplifycodexv1novigisandboxf427c53406dataNestedStackdataNestedStackResourceCE093568Outputsamplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataBudgetNestedStackBudgetNestedStackResource9125FF76Outputsamplifyamplifyco155EBB32": {
-      "Fn::GetAtt": [
-       "data7552DF31",
-       "Outputs.amplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataBudgetNestedStackBudgetNestedStackResource9125FF76Outputsamplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataBudgetBudgetTableC412B569TableArn"
-      ]
-     },
-     "referencetoamplifyamplifycodexv1novigisandboxf427c53406dataNestedStackdataNestedStackResourceCE093568Outputsamplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataExpenseNestedStackExpenseNestedStackResourceAD11659DOutputsamplifyamplifyEC7034FB": {
-      "Fn::GetAtt": [
-       "data7552DF31",
-       "Outputs.amplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataExpenseNestedStackExpenseNestedStackResourceAD11659DOutputsamplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataExpenseExpenseTable042A9B15TableArn"
-      ]
-     },
-     "referencetoamplifyamplifycodexv1novigisandboxf427c53406dataNestedStackdataNestedStackResourceCE093568Outputsamplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataNotificationNestedStackNotificationNestedStackResourceEE15945FOutputsampl52E0C51C": {
-      "Fn::GetAtt": [
-       "data7552DF31",
-       "Outputs.amplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataNotificationNestedStackNotificationNestedStackResourceEE15945FOutputsamplifyamplifycodexv1novigisandboxf427c53406dataamplifyDataNotificationNotificationTableB0022585TableArn"
-      ]
-     },
-     "referencetoamplifyamplifycodexv1novigisandboxf427c53406storageNestedStackstorageNestedStackResourceADA4624COutputsamplifyamplifycodexv1novigisandboxf427c53406storageembsreceiptsBucket44A545AFArn": {
-      "Fn::GetAtt": [
-       "storage0EC3F24A",
-       "Outputs.amplifyamplifycodexv1novigisandboxf427c53406storageembsreceiptsBucket44A545AFArn"
-      ]
-     }
-    },
-    "Tags": [
-     {
-      "Key": "amplify:deployment-type",
-      "Value": "sandbox"
-     },
-     {
-      "Key": "Branch",
-      "Value": "sandbox"
-     },
-     {
-      "Key": "created-by",
-      "Value": "amplify"
-     },
-     {
-      "Key": "DeploymentType",
-      "Value": "sandbox"
-     },
-     {
-      "Key": "Environment",
-      "Value": "sandbox"
-     },
-     {
-      "Key": "Project",
-      "Value": "EBMS"
-     }
-    ],
-    "TemplateURL": {
-     "Fn::Join": [
-      "",
-      [
-       "https://s3.",
-       {
-        "Ref": "AWS::Region"
-       },
-       ".",
-       {
-        "Ref": "AWS::URLSuffix"
-       },
-       "/",
-       {
-        "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
-       },
-       "/a9117661e20b10ba6ccbb44234cb4be62131d86c7d98399f8f9c3b73d3be1e09.json"
-      ]
-     ]
-    }
-   },
-   "UpdateReplacePolicy": "Delete",
-   "DeletionPolicy": "Delete",
-   "Metadata": {
-    "aws:cdk:path": "amplify-amplifycodexv1-novigi-sandbox-f427c53406/function.NestedStack/function.NestedStackResource",
-    "aws:asset:path": "amplifyamplifycodexv1novigisandboxf427c53406function96A25F85.nested.template.json",
     "aws:asset:property": "TemplateURL"
    }
   },
