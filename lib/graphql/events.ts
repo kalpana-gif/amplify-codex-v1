@@ -91,6 +91,13 @@ type EventAccessRecord = {
   createdAt?: string | null;
 };
 
+export type AddEventMemberResult = {
+  snapshot: EventTeamSnapshot;
+  status: "created" | "updated" | "unchanged";
+  inviteEmailSent: boolean;
+  inviteEmailError: string | null;
+};
+
 const getResultErrorMessage = (
   errors: readonly { message?: string | null }[] | undefined,
   fallback: string,
@@ -996,7 +1003,7 @@ export const addEventMember = async (
   eventId: string,
   email: string,
   role: MemberRole,
-): Promise<EventTeamSnapshot> => {
+): Promise<AddEventMemberResult> => {
   const context = await loadEventTeamContext(eventId);
   const profile = context.currentUser;
   const normalizedEmail = email.toLowerCase();
@@ -1020,12 +1027,22 @@ export const addEventMember = async (
   if (existingMember) {
     if (existingMember.role === role) {
       return {
-        ...context,
-        members: sortMembersForDisplay(context.members),
+        snapshot: {
+          ...context,
+          members: sortMembersForDisplay(context.members),
+        },
+        status: "unchanged",
+        inviteEmailSent: false,
+        inviteEmailError: null,
       };
     }
 
-    return updateEventMemberRole(eventId, normalizedEmail, role);
+    return {
+      snapshot: await updateEventMemberRole(eventId, normalizedEmail, role),
+      status: "updated",
+      inviteEmailSent: false,
+      inviteEmailError: null,
+    };
   }
 
   const nextMembers = [
@@ -1056,7 +1073,49 @@ export const addEventMember = async (
 
   await syncEventAccessState(eventId, context.event.owner, nextMembers);
 
-  return getEventTeamSnapshot(eventId);
+  const snapshot = await getEventTeamSnapshot(eventId);
+
+  try {
+    const inviteResult = await client.mutations.sendEventMemberInviteEmail(
+      {
+        eventId,
+        email: normalizedEmail,
+        role,
+      },
+      await getUserPoolAuthOptions(),
+    );
+
+    if (!inviteResult.data?.delivered) {
+      return {
+        snapshot,
+        status: "created",
+        inviteEmailSent: false,
+        inviteEmailError:
+          inviteResult.data?.message ??
+          getResultErrorMessage(
+            inviteResult.errors,
+            "The member was added, but the invite email could not be sent.",
+          ),
+      };
+    }
+
+    return {
+      snapshot,
+      status: "created",
+      inviteEmailSent: true,
+      inviteEmailError: null,
+    };
+  } catch (error) {
+    return {
+      snapshot,
+      status: "created",
+      inviteEmailSent: false,
+      inviteEmailError:
+        error instanceof Error
+          ? error.message
+          : "The member was added, but the invite email could not be sent.",
+    };
+  }
 };
 
 export const updateEventMemberRole = async (

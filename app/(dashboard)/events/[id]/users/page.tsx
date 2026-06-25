@@ -263,14 +263,31 @@ export default function EventUsersPage() {
     setIsInviting(true);
 
     try {
-      const nextSnapshot = await addEventMember(params.id, normalizedEmail, inviteRole);
-      setSnapshot(nextSnapshot);
+      const result = await addEventMember(params.id, normalizedEmail, inviteRole);
+      setSnapshot(result.snapshot);
       setInviteEmail("");
       setInviteRole("VIEWER");
       setDirectoryQuery("");
       setAddMemberMode("invite");
       setIsAddMemberModalOpen(false);
-      toast.success(`${normalizedEmail} added as ${inviteRole.toLowerCase()}.`);
+
+      if (result.status === "updated") {
+        toast.success(`${normalizedEmail} is now ${inviteRole.toLowerCase()}.`);
+      } else if (result.status === "unchanged") {
+        toast.success(
+          `${normalizedEmail} already has ${inviteRole.toLowerCase()} access.`,
+        );
+      } else if (result.inviteEmailSent) {
+        toast.success(
+          `${normalizedEmail} added as ${inviteRole.toLowerCase()} and invite email sent.`,
+        );
+      } else if (result.inviteEmailError) {
+        toast.success(
+          `${normalizedEmail} added as ${inviteRole.toLowerCase()}, but the invite email could not be sent.`,
+        );
+      } else {
+        toast.success(`${normalizedEmail} added as ${inviteRole.toLowerCase()}.`);
+      }
     } catch (error) {
       toast.error(
         error instanceof Error ? error.message : "Failed to add the member.",
@@ -540,7 +557,7 @@ export default function EventUsersPage() {
             {sortedMembers.length ? (
               <div className="space-y-3 px-5 py-5 md:px-6">
                 <div className="rounded-[1.35rem] border border-slate-200 bg-slate-50/80 p-4">
-                  <div className="grid gap-4 lg:grid-cols-[minmax(0,1.2fr)_8rem_minmax(0,1fr)_11rem] lg:items-center">
+                  <div className="grid gap-4 lg:grid-cols-[minmax(0,1.2fr)_8rem_minmax(0,1fr)_9rem] lg:items-center">
                     <div className="min-w-0">
                       <div className="flex items-start gap-3">
                         <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[linear-gradient(135deg,rgba(16,185,129,0.16),rgba(46,117,182,0.14))] text-sm font-semibold text-[var(--color-primary)]">
@@ -575,7 +592,6 @@ export default function EventUsersPage() {
                         <LockKeyhole className="h-4 w-4 text-slate-400" />
                         Locked
                       </div>
-                      <Badge>Fixed</Badge>
                     </div>
                   </div>
                 </div>
@@ -613,7 +629,7 @@ export default function EventUsersPage() {
                           )
                         }
                       >
-                        <div className="grid gap-4 px-4 py-4 lg:grid-cols-[minmax(0,1.2fr)_8rem_minmax(0,1fr)_11rem] lg:items-center">
+                        <div className="grid gap-4 px-4 py-4 lg:grid-cols-[minmax(0,1.2fr)_8rem_minmax(0,1fr)_9rem] lg:items-center">
                           <div className="min-w-0">
                             <div className="flex items-start gap-3">
                               <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-slate-100 text-sm font-semibold text-[var(--color-primary)]">
@@ -642,20 +658,20 @@ export default function EventUsersPage() {
                           </p>
 
                           <div
-                            className={`flex items-center justify-between rounded-[1rem] px-3 py-3 text-sm font-medium transition ${
+                            className={`flex items-center justify-between rounded-[0.95rem] px-2.5 py-2 text-sm font-medium transition ${
                               isSelected
                                 ? "border border-[rgba(46,117,182,0.18)] bg-white text-[var(--color-primary)]"
                                 : "border border-slate-200 bg-slate-50/80 text-slate-600"
                             }`}
                           >
-                            <span className="flex items-center gap-2">
-                              <Settings2 className="h-4 w-4 text-slate-400" />
+                            <span className="flex items-center gap-1.5">
+                              <Settings2 className="h-3.5 w-3.5 text-slate-400" />
                               {isSelected ? "Hide" : "Manage"}
                             </span>
                             {isSelected ? (
-                              <ChevronDown className="h-4 w-4 text-slate-400" />
+                              <ChevronDown className="h-3.5 w-3.5 text-slate-400" />
                             ) : (
-                              <ChevronRight className="h-4 w-4 text-slate-400" />
+                              <ChevronRight className="h-3.5 w-3.5 text-slate-400" />
                             )}
                           </div>
                         </div>
@@ -854,7 +870,8 @@ export default function EventUsersPage() {
                         Invite by email
                       </p>
                       <p className="mt-1 text-sm leading-6 text-slate-600">
-                        Use the email address the member will sign in with.
+                        Use the email address the member will sign in with. We will
+                        send the invite there after access is added.
                       </p>
                     </div>
 
@@ -882,7 +899,7 @@ export default function EventUsersPage() {
                     </label>
 
                     <p className="text-sm text-slate-500">
-                      The email should belong to a user who already has access to the app.
+                      The email should match the account the member will use to sign in.
                     </p>
                   </div>
                 ) : (

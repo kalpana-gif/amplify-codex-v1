@@ -8,12 +8,14 @@ import { auth } from "./auth/resource";
 import { data } from "./data/resource";
 import { storage } from "./storage/resource";
 import { alertFunction } from "./functions/alertFunction/resource";
+import { memberInviteFunction } from "./functions/memberInviteFunction/resource";
 
 const backend = defineBackend({
   auth,
   data,
   storage,
   alertFunction,
+  memberInviteFunction,
 });
 
 const branchName = process.env.AWS_BRANCH?.trim();
@@ -90,6 +92,20 @@ backend.alertFunction.addEnvironment(
 );
 
 backend.alertFunction.resources.lambda.addToRolePolicy(
+  new PolicyStatement({
+    actions: ["ses:SendEmail", "ses:SendRawEmail"],
+    resources: ["*"],
+  }),
+);
+
+getModelTable("Event").grantReadData(backend.memberInviteFunction.resources.lambda);
+
+backend.memberInviteFunction.addEnvironment(
+  "EVENT_TABLE_NAME",
+  getModelTableName("Event"),
+);
+
+backend.memberInviteFunction.resources.lambda.addToRolePolicy(
   new PolicyStatement({
     actions: ["ses:SendEmail", "ses:SendRawEmail"],
     resources: ["*"],
