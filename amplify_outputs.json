@@ -332,13 +332,45 @@
               "properties": {
                 "rules": [
                   {
-                    "allow": "private",
+                    "provider": "userPools",
+                    "ownerField": "owner",
+                    "allow": "owner",
                     "operations": [
                       "create",
                       "read",
                       "update",
                       "delete"
-                    ]
+                    ],
+                    "identityClaim": "email"
+                  },
+                  {
+                    "provider": "userPools",
+                    "ownerField": "admins",
+                    "allow": "owner",
+                    "operations": [
+                      "read",
+                      "update",
+                      "delete"
+                    ],
+                    "identityClaim": "email"
+                  },
+                  {
+                    "provider": "userPools",
+                    "ownerField": "editors",
+                    "allow": "owner",
+                    "operations": [
+                      "read"
+                    ],
+                    "identityClaim": "email"
+                  },
+                  {
+                    "provider": "userPools",
+                    "ownerField": "viewers",
+                    "allow": "owner",
+                    "operations": [
+                      "read"
+                    ],
+                    "identityClaim": "email"
                   }
                 ]
               }
@@ -477,13 +509,46 @@
               "properties": {
                 "rules": [
                   {
-                    "allow": "private",
+                    "provider": "userPools",
+                    "ownerField": "owner",
+                    "allow": "owner",
                     "operations": [
                       "create",
                       "read",
                       "update",
                       "delete"
-                    ]
+                    ],
+                    "identityClaim": "email"
+                  },
+                  {
+                    "provider": "userPools",
+                    "ownerField": "admins",
+                    "allow": "owner",
+                    "operations": [
+                      "create",
+                      "read",
+                      "update",
+                      "delete"
+                    ],
+                    "identityClaim": "email"
+                  },
+                  {
+                    "provider": "userPools",
+                    "ownerField": "editors",
+                    "allow": "owner",
+                    "operations": [
+                      "read"
+                    ],
+                    "identityClaim": "email"
+                  },
+                  {
+                    "provider": "userPools",
+                    "ownerField": "viewers",
+                    "allow": "owner",
+                    "operations": [
+                      "read"
+                    ],
+                    "identityClaim": "email"
                   }
                 ]
               }
@@ -650,13 +715,45 @@
               "properties": {
                 "rules": [
                   {
-                    "allow": "private",
+                    "provider": "userPools",
+                    "ownerField": "owner",
+                    "allow": "owner",
                     "operations": [
                       "create",
                       "read",
                       "update",
                       "delete"
-                    ]
+                    ],
+                    "identityClaim": "email"
+                  },
+                  {
+                    "provider": "userPools",
+                    "ownerField": "admins",
+                    "allow": "owner",
+                    "operations": [
+                      "read",
+                      "update",
+                      "delete"
+                    ],
+                    "identityClaim": "email"
+                  },
+                  {
+                    "provider": "userPools",
+                    "ownerField": "editors",
+                    "allow": "owner",
+                    "operations": [
+                      "read"
+                    ],
+                    "identityClaim": "email"
+                  },
+                  {
+                    "provider": "userPools",
+                    "ownerField": "viewers",
+                    "allow": "owner",
+                    "operations": [
+                      "read"
+                    ],
+                    "identityClaim": "email"
                   }
                 ]
               }
@@ -848,13 +945,46 @@
               "properties": {
                 "rules": [
                   {
-                    "allow": "private",
+                    "provider": "userPools",
+                    "ownerField": "owner",
+                    "allow": "owner",
                     "operations": [
                       "create",
                       "read",
                       "update",
                       "delete"
-                    ]
+                    ],
+                    "identityClaim": "email"
+                  },
+                  {
+                    "provider": "userPools",
+                    "ownerField": "admins",
+                    "allow": "owner",
+                    "operations": [
+                      "create",
+                      "read",
+                      "update",
+                      "delete"
+                    ],
+                    "identityClaim": "email"
+                  },
+                  {
+                    "provider": "userPools",
+                    "ownerField": "editors",
+                    "allow": "owner",
+                    "operations": [
+                      "read"
+                    ],
+                    "identityClaim": "email"
+                  },
+                  {
+                    "provider": "userPools",
+                    "ownerField": "viewers",
+                    "allow": "owner",
+                    "operations": [
+                      "read"
+                    ],
+                    "identityClaim": "email"
                   }
                 ]
               }
@@ -1022,13 +1152,46 @@
               "properties": {
                 "rules": [
                   {
-                    "allow": "private",
+                    "provider": "userPools",
+                    "ownerField": "owner",
+                    "allow": "owner",
                     "operations": [
                       "create",
                       "read",
                       "update",
                       "delete"
-                    ]
+                    ],
+                    "identityClaim": "email"
+                  },
+                  {
+                    "provider": "userPools",
+                    "ownerField": "admins",
+                    "allow": "owner",
+                    "operations": [
+                      "create",
+                      "read",
+                      "update",
+                      "delete"
+                    ],
+                    "identityClaim": "email"
+                  },
+                  {
+                    "provider": "userPools",
+                    "ownerField": "editors",
+                    "allow": "owner",
+                    "operations": [
+                      "read"
+                    ],
+                    "identityClaim": "email"
+                  },
+                  {
+                    "provider": "userPools",
+                    "ownerField": "viewers",
+                    "allow": "owner",
+                    "operations": [
+                      "read"
+                    ],
+                    "identityClaim": "email"
                   }
                 ]
               }
@@ -1260,13 +1423,49 @@
               "properties": {
                 "rules": [
                   {
-                    "allow": "private",
+                    "provider": "userPools",
+                    "ownerField": "owner",
+                    "allow": "owner",
                     "operations": [
                       "create",
                       "read",
                       "update",
                       "delete"
-                    ]
+                    ],
+                    "identityClaim": "email"
+                  },
+                  {
+                    "provider": "userPools",
+                    "ownerField": "admins",
+                    "allow": "owner",
+                    "operations": [
+                      "create",
+                      "read",
+                      "update",
+                      "delete"
+                    ],
+                    "identityClaim": "email"
+                  },
+                  {
+                    "provider": "userPools",
+                    "ownerField": "editors",
+                    "allow": "owner",
+                    "operations": [
+                      "create",
+                      "read",
+                      "update",
+                      "delete"
+                    ],
+                    "identityClaim": "email"
+                  },
+                  {
+                    "provider": "userPools",
+                    "ownerField": "viewers",
+                    "allow": "owner",
+                    "operations": [
+                      "read"
+                    ],
+                    "identityClaim": "email"
                   }
                 ]
               }
@@ -1404,13 +1603,38 @@
               "properties": {
                 "rules": [
                   {
-                    "allow": "private",
+                    "provider": "userPools",
+                    "ownerField": "owner",
+                    "allow": "owner",
                     "operations": [
                       "create",
                       "read",
                       "update",
                       "delete"
-                    ]
+                    ],
+                    "identityClaim": "email"
+                  },
+                  {
+                    "provider": "userPools",
+                    "ownerField": "admins",
+                    "allow": "owner",
+                    "operations": [
+                      "create",
+                      "read",
+                      "update",
+                      "delete"
+                    ],
+                    "identityClaim": "email"
+                  },
+                  {
+                    "provider": "userPools",
+                    "ownerField": "userId",
+                    "allow": "owner",
+                    "operations": [
+                      "read",
+                      "update"
+                    ],
+                    "identityClaim": "email"
                   }
                 ]
               }
