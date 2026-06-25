@@ -91,6 +91,13 @@ type EventAccessRecord = {
   createdAt?: string | null;
 };
 
+export type AddEventMemberResult = {
+  snapshot: EventTeamSnapshot;
+  status: "created" | "updated" | "unchanged";
+  inviteEmailSent: boolean;
+  inviteEmailError: string | null;
+};
+
 const getResultErrorMessage = (
   errors: readonly { message?: string | null }[] | undefined,
   fallback: string,
@@ -808,12 +815,11 @@ const syncEventAccessState = async (
   eventId: string,
   ownerEmail: string,
   members: TeamMemberInput[],
-  targetRoleChange: { email: string; role: MemberRole },
 ) => {
-  const memberGroups = splitMembersByRole(ownerEmail, members);
+  const normalizedMembers = normalizeMembers(ownerEmail, members);
+  const memberGroups = splitMembersByRole(ownerEmail, normalizedMembers);
   const userPoolAuth = await getUserPoolAuthOptions();
-  const [budgetResult, expenseResult, memberResult, notificationResult] =
-    await Promise.all([
+  const [budgetResult, expenseResult, notificationResult] = await Promise.all([
       client.models.Budget.list({
         ...userPoolAuth,
         filter: {
@@ -828,13 +834,6 @@ const syncEventAccessState = async (
         },
         selectionSet: ["id"],
       }),
-      client.models.EventMember.list({
-        ...userPoolAuth,
-        filter: {
-          eventId: { eq: eventId },
-        },
-        selectionSet: ["eventId", "email", "role"],
-      }),
       client.models.Notification.list({
         ...userPoolAuth,
         filter: {
@@ -846,7 +845,6 @@ const syncEventAccessState = async (
 
   const budgets = asArray(budgetResult.data);
   const expenses = asArray(expenseResult.data);
-  const memberRecords = asArray(memberResult.data);
   const notifications = asArray(notificationResult.data);
 
   const budgetUpdates = budgets.map((budget) =>
@@ -903,15 +901,12 @@ const syncEventAccessState = async (
     ),
   );
 
-  const memberUpdates = memberRecords.map((member) =>
+  const memberUpdates = normalizedMembers.map((member) =>
     client.models.EventMember.update(
       {
-        eventId: member.eventId,
+        eventId,
         email: member.email,
-        role:
-          member.email.toLowerCase() === targetRoleChange.email
-            ? targetRoleChange.role
-            : (member.role as MemberRole),
+        role: member.role,
         admins: memberGroups.admins,
         editors: memberGroups.editors,
         viewers: memberGroups.viewers,
@@ -1008,7 +1003,7 @@ export const addEventMember = async (
   eventId: string,
   email: string,
   role: MemberRole,
-): Promise<EventTeamSnapshot> => {
+): Promise<AddEventMemberResult> => {
   const context = await loadEventTeamContext(eventId);
   const profile = context.currentUser;
   const normalizedEmail = email.toLowerCase();
@@ -1032,12 +1027,22 @@ export const addEventMember = async (
   if (existingMember) {
     if (existingMember.role === role) {
       return {
-        ...context,
-        members: sortMembersForDisplay(context.members),
+        snapshot: {
+          ...context,
+          members: sortMembersForDisplay(context.members),
+        },
+        status: "unchanged",
+        inviteEmailSent: false,
+        inviteEmailError: null,
       };
     }
 
-    return updateEventMemberRole(eventId, normalizedEmail, role);
+    return {
+      snapshot: await updateEventMemberRole(eventId, normalizedEmail, role),
+      status: "updated",
+      inviteEmailSent: false,
+      inviteEmailError: null,
+    };
   }
 
   const nextMembers = [
@@ -1066,12 +1071,51 @@ export const addEventMember = async (
 
   assertMutationSucceeded(createResult, "Failed to assign the user to this event.");
 
-  await syncEventAccessState(eventId, context.event.owner, nextMembers, {
-    email: normalizedEmail,
-    role,
-  });
+  await syncEventAccessState(eventId, context.event.owner, nextMembers);
 
-  return getEventTeamSnapshot(eventId);
+  const snapshot = await getEventTeamSnapshot(eventId);
+
+  try {
+    const inviteResult = await client.mutations.sendEventMemberInviteEmail(
+      {
+        eventId,
+        email: normalizedEmail,
+        role,
+      },
+      await getUserPoolAuthOptions(),
+    );
+
+    if (!inviteResult.data?.delivered) {
+      return {
+        snapshot,
+        status: "created",
+        inviteEmailSent: false,
+        inviteEmailError:
+          inviteResult.data?.message ??
+          getResultErrorMessage(
+            inviteResult.errors,
+            "The member was added, but the invite email could not be sent.",
+          ),
+      };
+    }
+
+    return {
+      snapshot,
+      status: "created",
+      inviteEmailSent: true,
+      inviteEmailError: null,
+    };
+  } catch (error) {
+    return {
+      snapshot,
+      status: "created",
+      inviteEmailSent: false,
+      inviteEmailError:
+        error instanceof Error
+          ? error.message
+          : "The member was added, but the invite email could not be sent.",
+    };
+  }
 };
 
 export const updateEventMemberRole = async (
@@ -1118,10 +1162,60 @@ export const updateEventMemberRole = async (
       : teamMember,
   );
 
-  await syncEventAccessState(eventId, context.event.owner, nextMembers, {
-    email: normalizedEmail,
-    role,
-  });
+  await syncEventAccessState(eventId, context.event.owner, nextMembers);
+
+  return getEventTeamSnapshot(eventId);
+};
+
+export const removeEventMember = async (
+  eventId: string,
+  email: string,
+): Promise<EventTeamSnapshot> => {
+  const context = await loadEventTeamContext(eventId);
+  const profile = context.currentUser;
+  const normalizedEmail = email.toLowerCase();
+
+  if (!profile) {
+    throw new Error("You must be signed in to remove users from this event.");
+  }
+
+  if (!context.permissions.canManageRoles) {
+    throw new Error("You do not have permission to manage this event team.");
+  }
+
+  if (normalizedEmail === profile.email) {
+    throw new Error("You cannot remove yourself from this event.");
+  }
+
+  if (normalizedEmail === context.event.owner) {
+    throw new Error("The event owner cannot be removed.");
+  }
+
+  const member = context.members.find((teamMember) => teamMember.email === normalizedEmail);
+
+  if (!member) {
+    throw new Error("User not found on this event.");
+  }
+
+  const nextMembers = context.members.filter(
+    (teamMember) => teamMember.email !== normalizedEmail,
+  );
+
+  await syncEventAccessState(eventId, context.event.owner, nextMembers);
+
+  const userPoolAuth = await getUserPoolAuthOptions();
+  const deleteResult = await client.models.EventMember.delete(
+    {
+      eventId,
+      email: normalizedEmail,
+    },
+    userPoolAuth,
+  );
+
+  assertMutationSucceeded(
+    deleteResult,
+    "Member access was updated, but the membership record could not be removed.",
+  );
 
   return getEventTeamSnapshot(eventId);
 };

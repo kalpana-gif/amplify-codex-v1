@@ -3,19 +3,33 @@
 import { useDeferredValue, useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import toast from "react-hot-toast";
-import { ShieldCheck, UserCog, UserPlus, Users } from "lucide-react";
+import {
+  ChevronDown,
+  ChevronRight,
+  Crown,
+  Eye,
+  LockKeyhole,
+  Search,
+  Settings2,
+  SquarePen,
+  UserMinus,
+  UserPlus,
+  Users,
+  type LucideIcon,
+} from "lucide-react";
 import { PageWrapper } from "@/components/layout/page-wrapper";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { EmptyState } from "@/components/ui/empty-state";
 import { Input } from "@/components/ui/input";
+import { Modal } from "@/components/ui/modal";
 import { EventWorkspaceLoader } from "@/components/ui/page-loader";
 import { Select } from "@/components/ui/select";
 import {
   addEventMember,
   getEventTeamSnapshot,
   listUserDirectoryProfiles,
+  removeEventMember,
   updateEventMemberRole,
 } from "@/lib/graphql/events";
 import type { EventTeamSnapshot, MemberRole, UserDirectoryProfile } from "@/types";
@@ -28,11 +42,19 @@ const roleCopy: Record<MemberRole, string> = {
   VIEWER: "Read-only access across the event.",
 };
 
-const roleVariant: Record<MemberRole, "active" | "warning" | "default"> = {
+const roleVariant: Record<MemberRole, "active" | "completed" | "default"> = {
   ADMIN: "active",
-  EDITOR: "warning",
+  EDITOR: "completed",
   VIEWER: "default",
 };
+
+const roleOrder: Record<MemberRole, number> = {
+  ADMIN: 0,
+  EDITOR: 1,
+  VIEWER: 2,
+};
+
+type AddMemberMode = "invite" | "existing";
 
 const buildLoadDescription = (snapshot: EventTeamSnapshot | null) => {
   if (!snapshot) {
@@ -99,8 +121,13 @@ export default function EventUsersPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [loadError, setLoadError] = useState<string | null>(null);
   const [updatingEmail, setUpdatingEmail] = useState<string | null>(null);
+  const [removingEmail, setRemovingEmail] = useState<string | null>(null);
   const [inviteEmail, setInviteEmail] = useState("");
   const [inviteRole, setInviteRole] = useState<MemberRole>("VIEWER");
+  const [isAddMemberModalOpen, setIsAddMemberModalOpen] = useState(false);
+  const [memberPendingRemoval, setMemberPendingRemoval] = useState<string | null>(null);
+  const [selectedMemberEmail, setSelectedMemberEmail] = useState<string | null>(null);
+  const [addMemberMode, setAddMemberMode] = useState<AddMemberMode>("invite");
   const [isInviting, setIsInviting] = useState(false);
   const [directoryUsers, setDirectoryUsers] = useState<UserDirectoryProfile[]>([]);
   const [directoryQuery, setDirectoryQuery] = useState("");
@@ -189,6 +216,20 @@ export default function EventUsersPage() {
     };
   }, [snapshot?.permissions.canManageRoles]);
 
+  useEffect(() => {
+    if (!selectedMemberEmail || !snapshot) {
+      return;
+    }
+
+    const memberStillExists = snapshot.members.some(
+      (member) => member.email === selectedMemberEmail,
+    );
+
+    if (!memberStillExists) {
+      setSelectedMemberEmail(null);
+    }
+  }, [selectedMemberEmail, snapshot]);
+
   const handleRoleChange = async (email: string, role: MemberRole) => {
     setUpdatingEmail(email);
 
@@ -222,11 +263,31 @@ export default function EventUsersPage() {
     setIsInviting(true);
 
     try {
-      const nextSnapshot = await addEventMember(params.id, normalizedEmail, inviteRole);
-      setSnapshot(nextSnapshot);
+      const result = await addEventMember(params.id, normalizedEmail, inviteRole);
+      setSnapshot(result.snapshot);
       setInviteEmail("");
       setInviteRole("VIEWER");
-      toast.success(`${normalizedEmail} added as ${inviteRole.toLowerCase()}.`);
+      setDirectoryQuery("");
+      setAddMemberMode("invite");
+      setIsAddMemberModalOpen(false);
+
+      if (result.status === "updated") {
+        toast.success(`${normalizedEmail} is now ${inviteRole.toLowerCase()}.`);
+      } else if (result.status === "unchanged") {
+        toast.success(
+          `${normalizedEmail} already has ${inviteRole.toLowerCase()} access.`,
+        );
+      } else if (result.inviteEmailSent) {
+        toast.success(
+          `${normalizedEmail} added as ${inviteRole.toLowerCase()} and invite email sent.`,
+        );
+      } else if (result.inviteEmailError) {
+        toast.success(
+          `${normalizedEmail} added as ${inviteRole.toLowerCase()}, but the invite email could not be sent.`,
+        );
+      } else {
+        toast.success(`${normalizedEmail} added as ${inviteRole.toLowerCase()}.`);
+      }
     } catch (error) {
       toast.error(
         error instanceof Error ? error.message : "Failed to add the member.",
@@ -236,12 +297,67 @@ export default function EventUsersPage() {
     }
   };
 
+  const handleRemoveMember = async (email: string) => {
+    setRemovingEmail(email);
+
+    try {
+      const nextSnapshot = await removeEventMember(params.id, email);
+      setSnapshot(nextSnapshot);
+      setMemberPendingRemoval(null);
+      setSelectedMemberEmail((current) => (current === email ? null : current));
+      toast.success(`${email} removed from this event.`);
+    } catch (error) {
+      toast.error(
+        error instanceof Error ? error.message : "Failed to remove the member.",
+      );
+    } finally {
+      setRemovingEmail(null);
+    }
+  };
+
   const title = snapshot?.event.name ? `${snapshot.event.name} Team` : "Event Team";
   const totalUsers = snapshot ? snapshot.members.length + 1 : 0;
   const adminCount = snapshot ? snapshot.event.admins.length + 1 : 0;
   const editorCount = snapshot?.event.editors.length ?? 0;
   const viewerCount = snapshot?.event.viewers.length ?? 0;
+  const teamMetrics: Array<{
+    label: string;
+    value: string;
+    icon: LucideIcon;
+    accentClass: string;
+    iconClass: string;
+  }> = [
+    {
+      label: "Total Members",
+      value: String(totalUsers),
+      icon: Users,
+      accentClass: "bg-[rgba(15,23,42,0.03)]",
+      iconClass: "bg-slate-950 text-white",
+    },
+    {
+      label: "Admins",
+      value: String(adminCount),
+      icon: Crown,
+      accentClass: "bg-[rgba(46,117,182,0.08)]",
+      iconClass: "bg-[rgba(46,117,182,0.14)] text-[var(--color-accent)]",
+    },
+    {
+      label: "Editors",
+      value: String(editorCount),
+      icon: SquarePen,
+      accentClass: "bg-[rgba(14,165,233,0.08)]",
+      iconClass: "bg-[rgba(14,165,233,0.14)] text-sky-700",
+    },
+    {
+      label: "Viewers",
+      value: String(viewerCount),
+      icon: Eye,
+      accentClass: "bg-[rgba(30,58,95,0.06)]",
+      iconClass: "bg-[rgba(30,58,95,0.12)] text-[var(--color-primary)]",
+    },
+  ];
   const normalizedDirectoryQuery = deferredDirectoryQuery.trim().toLowerCase();
+  const hasDirectoryQuery = normalizedDirectoryQuery.length > 0;
   const assignedEmails = snapshot
     ? new Set([
         snapshot.event.owner,
@@ -271,12 +387,40 @@ export default function EventUsersPage() {
       }
 
       return (second.lastSeenAt ?? "").localeCompare(first.lastSeenAt ?? "");
-    })
-    .slice(0, 6);
+    });
+  const directorySuggestions = matchingDirectoryUsers.slice(0, 2);
+  const sortedMembers = [...(snapshot?.members ?? [])].sort((first, second) => {
+    const roleDifference = roleOrder[first.role] - roleOrder[second.role];
+
+    if (roleDifference !== 0) {
+      return roleDifference;
+    }
+
+    return first.email.localeCompare(second.email);
+  });
 
   if (isLoading) {
     return <EventWorkspaceLoader variant="team" />;
   }
+
+  const closeAddMemberModal = () => {
+    if (isInviting) {
+      return;
+    }
+
+    setIsAddMemberModalOpen(false);
+    setAddMemberMode("invite");
+    setInviteEmail("");
+    setDirectoryQuery("");
+  };
+
+  const closeRemoveMemberModal = () => {
+    if (removingEmail) {
+      return;
+    }
+
+    setMemberPendingRemoval(null);
+  };
 
   return (
     <PageWrapper
@@ -301,313 +445,605 @@ export default function EventUsersPage() {
 
       {snapshot ? (
         <>
-          <div className="grid gap-4 md:grid-cols-4">
-            {[
-              ["Total Users", String(totalUsers)],
-              ["Admins", String(adminCount)],
-              ["Editors", String(editorCount)],
-              ["Viewers", String(viewerCount)],
-            ].map(([label, value]) => (
-              <Card key={label} className="p-5">
-                <p className="text-xs uppercase tracking-[0.18em] text-slate-500">
-                  {label}
-                </p>
-                <p className="mt-3 text-3xl font-semibold text-slate-950">{value}</p>
-              </Card>
-            ))}
-          </div>
-
-          <Card className="overflow-hidden p-6">
-            <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
-              <div>
-                <div className="flex flex-wrap items-center gap-2">
-                  <Badge variant="active">Owner</Badge>
-                  <Badge variant="active">Admin</Badge>
-                </div>
-                <h2 className="mt-4 text-xl font-semibold text-slate-950">
-                  {snapshot.event.owner}
-                </h2>
-                <p className="mt-2 max-w-2xl text-sm leading-7 text-slate-600">
-                  The event creator is treated as the primary admin, keeps full
-                  access, and cannot be changed from this screen.
-                </p>
-              </div>
-              <div className="rounded-[1.5rem] bg-slate-950/[0.04] p-4 text-sm text-slate-600">
-                <p className="font-semibold text-slate-950">Access sync</p>
-                <p className="mt-2 leading-7">
-                  Role changes update the event, budget, categories, line items, and
-                  expense permissions together.
-                </p>
-              </div>
-            </div>
-          </Card>
-
           <Card className="p-4 md:p-5">
-            <div className="grid gap-4 xl:grid-cols-[minmax(0,1.1fr)_minmax(20rem,0.9fr)]">
-              <div className="rounded-[1.35rem] border border-slate-200/80 bg-white/90 px-4 py-4 shadow-[0_10px_26px_rgba(15,23,42,0.04)]">
-                <p className="text-xs uppercase tracking-[0.18em] text-slate-500">
-                  Add Member
-                </p>
-                <h2 className="mt-2 text-xl font-semibold text-slate-950">
-                  Invite by email
-                </h2>
-                <p className="mt-2 text-sm leading-6 text-slate-600">
-                  Add an existing user to this event by entering their email address and
-                  assigning a role.
-                </p>
-
-                <div className="mt-4 grid gap-3 md:grid-cols-[minmax(0,1fr)_11rem_auto]">
-                  <Input
-                    className="h-11 rounded-[1rem]"
-                    placeholder="name@company.com"
-                    value={inviteEmail}
-                    onChange={(event) => setInviteEmail(event.target.value)}
-                  />
-                  <Select
-                    className="h-11 rounded-[1rem] bg-white"
-                    value={inviteRole}
-                    onChange={(event) =>
-                      setInviteRole(event.target.value as MemberRole)
-                    }
-                  >
-                    {roleOptions.map((role) => (
-                      <option key={role} value={role}>
-                        {role}
-                      </option>
-                    ))}
-                  </Select>
-                  <Button
-                    className="h-11 rounded-[1rem] px-4"
-                    disabled={!snapshot.permissions.canManageRoles || isInviting}
-                    onClick={() => void handleInviteMember()}
-                  >
-                    <UserPlus className="mr-2 h-4 w-4" />
-                    {isInviting ? "Adding..." : "Add Member"}
-                  </Button>
+            <div className="flex flex-col gap-3">
+              <div className="flex flex-col gap-3 xl:flex-row xl:items-start xl:justify-between">
+                <div className="min-w-0">
+                  <p className="text-[11px] uppercase tracking-[0.24em] text-slate-500">
+                    Team Overview
+                  </p>
+                  <h2 className="mt-2 max-w-3xl text-[clamp(1.55rem,1.9vw,2.15rem)] font-semibold leading-[1.08] tracking-tight text-slate-950">
+                    Simple access control for this event
+                  </h2>
+                  <p className="mt-1.5 max-w-2xl text-sm leading-6 text-slate-600">
+                    Members, roles, and access levels in one compact view.
+                  </p>
                 </div>
 
-                <p className="mt-3 text-sm text-slate-500">
-                  The email should belong to a registered user in your auth system.
-                </p>
-
-                <div className="mt-5 rounded-[1.35rem] border border-slate-200/80 bg-slate-50/80 p-4">
-                  <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-                    <div>
-                      <p className="text-xs uppercase tracking-[0.18em] text-slate-500">
-                        Registered Users
-                      </p>
-                      <h3 className="mt-2 text-lg font-semibold text-slate-950">
-                        Search your app directory
-                      </h3>
-                      <p className="mt-1 text-sm leading-6 text-slate-600">
-                        Find people who already signed in to the app and add them with
-                        the selected role.
-                      </p>
-                    </div>
-                    <div className="inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-500">
-                      {directoryUsers.length} known users
-                    </div>
+                <div className="grid gap-2 sm:grid-cols-2 xl:w-fit xl:self-start">
+                  <div className="rounded-[0.95rem] border border-slate-200/70 bg-slate-50/80 px-3.5 py-2.5">
+                    <p className="text-[10px] uppercase tracking-[0.18em] text-slate-500">
+                      Access
+                    </p>
+                    <p
+                      className={`mt-1 text-sm font-semibold ${
+                        snapshot.permissions.canManageRoles
+                          ? "text-[var(--color-primary)]"
+                          : "text-slate-700"
+                      }`}
+                    >
+                      {snapshot.permissions.canManageRoles ? "Manage" : "View"}
+                    </p>
                   </div>
 
-                  <Input
-                    className="mt-4 h-11 rounded-[1rem] bg-white"
-                    placeholder="Search by name or email"
-                    value={directoryQuery}
-                    onChange={(event) => setDirectoryQuery(event.target.value)}
-                  />
-
-                  {directoryError ? (
-                    <p className="mt-3 text-sm text-red-600">{directoryError}</p>
-                  ) : null}
-
-                  {isDirectoryLoading ? (
-                    <p className="mt-3 text-sm text-slate-500">
-                      Loading registered users...
+                  <div className="rounded-[0.95rem] border border-slate-200/70 bg-slate-50/80 px-3.5 py-2.5">
+                    <p className="text-[10px] uppercase tracking-[0.18em] text-slate-500">
+                      Event Owner
                     </p>
-                  ) : matchingDirectoryUsers.length ? (
-                    <div className="mt-4 grid gap-3">
-                      {matchingDirectoryUsers.map((profile) => (
-                        <div
-                          key={profile.email}
-                          className="flex flex-col gap-3 rounded-[1.15rem] border border-slate-200/80 bg-white px-4 py-3 shadow-[0_8px_24px_rgba(15,23,42,0.04)] md:flex-row md:items-center md:justify-between"
-                        >
-                          <div className="min-w-0">
-                            <p className="truncate text-sm font-semibold text-slate-950">
-                              {profile.name}
-                            </p>
-                            <p className="truncate text-sm text-slate-500">
-                              {profile.email}
-                            </p>
-                          </div>
-                          <Button
-                            className="h-10 rounded-[0.95rem] px-4"
-                            disabled={!snapshot.permissions.canManageRoles || isInviting}
-                            onClick={() => void handleInviteMember(profile.email)}
-                            variant="secondary"
-                          >
-                            <UserPlus className="mr-2 h-4 w-4" />
-                            Add as {inviteRole.toLowerCase()}
-                          </Button>
-                        </div>
-                      ))}
-                    </div>
-                  ) : (
-                    <p className="mt-3 text-sm text-slate-500">
-                      {normalizedDirectoryQuery
-                        ? "No registered users match that search yet."
-                        : "Registered users will appear here after they sign in to the app."}
+                    <p className="mt-1 max-w-[18rem] truncate text-sm font-semibold text-slate-950">
+                      {snapshot.event.owner}
                     </p>
-                  )}
+                  </div>
                 </div>
               </div>
 
-              <div className="rounded-[1.35rem] border border-amber-200 bg-amber-50/80 px-4 py-4 text-sm text-amber-900">
-                <p className="font-semibold text-amber-950">Directory browsing temporarily disabled</p>
-                <p className="mt-2 leading-6">
-                  Automatic Cognito user-pool lookup is still paused for deployment recovery,
-                  but manual member assignment is available now.
-                </p>
+              <div className="mt-1 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+                {teamMetrics.map(({ label, value, icon: Icon, accentClass, iconClass }) => (
+                  <div
+                    key={label}
+                    className={`flex min-h-[78px] min-w-0 flex-col justify-between rounded-[1rem] border border-slate-200/70 px-4 py-3 ${accentClass}`}
+                  >
+                    <div className="flex items-start justify-between gap-3">
+                      <p className="max-w-[11ch] text-[10px] uppercase tracking-[0.2em] text-slate-500">
+                        {label}
+                      </p>
+                      <span
+                        className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full ${iconClass}`}
+                      >
+                        <Icon className="h-4 w-4" />
+                      </span>
+                    </div>
+                    <p className="mt-1.5 min-w-0 text-[clamp(1rem,1vw,1.28rem)] font-semibold leading-tight tracking-tight text-slate-950 tabular-nums">
+                      {value}
+                    </p>
+                  </div>
+                ))}
               </div>
             </div>
           </Card>
 
-          {snapshot.members.length ? (
-            <Card className="p-4 md:p-5">
+          <Card className="overflow-hidden p-0">
+            <div className="border-b border-slate-200 px-5 py-5 md:px-6">
               <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
                 <div>
                   <p className="text-xs uppercase tracking-[0.18em] text-slate-500">
-                    Team Directory
+                    Team Members
                   </p>
                   <h2 className="mt-2 text-xl font-semibold text-slate-950">
-                    Member access by role
+                    Practical list view
                   </h2>
                   <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600">
-                    A denser layout keeps larger teams easier to scan and update.
+                    Scan everyone quickly, see their access level, and update roles in
+                    one place.
                   </p>
                 </div>
-                <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm text-slate-600">
-                  <Users className="h-4 w-4" />
-                  {snapshot.members.length} invited members
+                <div className="flex flex-wrap items-center gap-3">
+                  <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm text-slate-600">
+                    <Users className="h-4 w-4" />
+                    {sortedMembers.length} invited members
+                  </div>
+                  <Button
+                    className="group relative h-11 min-w-[12.5rem] justify-start overflow-visible rounded-full pl-5 pr-[3.35rem] active:scale-[0.99]"
+                    disabled={!snapshot.permissions.canManageRoles}
+                    variant="auth"
+                    onClick={() => setIsAddMemberModalOpen(true)}
+                  >
+                    <span className="text-sm font-semibold tracking-[0.01em]">
+                      Add Member
+                    </span>
+                    <span className="pointer-events-none absolute right-1 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center">
+                      <span className="absolute inset-0 rounded-full border border-white/24 opacity-0 transition-all duration-300 group-hover:scale-[1.16] group-hover:opacity-100" />
+                      <span className="absolute -inset-[4px] rounded-full border border-white/18 opacity-0 transition-all duration-300 group-hover:scale-[1.3] group-hover:opacity-100" />
+                      <span className="absolute -inset-[8px] rounded-full border border-white/12 opacity-0 transition-all duration-300 group-hover:scale-[1.44] group-hover:opacity-100" />
+                      <span className="relative flex h-9 w-9 items-center justify-center rounded-full border border-white/60 bg-white/95 text-[var(--color-primary)] shadow-[0_8px_18px_rgba(15,23,42,0.16)] transition-all duration-300 group-hover:scale-[1.08] group-hover:shadow-[0_12px_28px_rgba(15,23,42,0.22)]">
+                        <UserPlus className="h-4 w-4" />
+                      </span>
+                    </span>
+                  </Button>
                 </div>
               </div>
+            </div>
 
-              <div className="mt-5 grid gap-3 xl:grid-cols-2 2xl:grid-cols-3">
-                {snapshot.members.map((member) => {
+            {sortedMembers.length ? (
+              <div className="space-y-3 px-5 py-5 md:px-6">
+                <div className="rounded-[1.35rem] border border-slate-200 bg-slate-50/80 p-4">
+                  <div className="grid gap-4 lg:grid-cols-[minmax(0,1.2fr)_8rem_minmax(0,1fr)_9rem] lg:items-center">
+                    <div className="min-w-0">
+                      <div className="flex items-start gap-3">
+                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[linear-gradient(135deg,rgba(16,185,129,0.16),rgba(46,117,182,0.14))] text-sm font-semibold text-[var(--color-primary)]">
+                          {getEmailMonogram(snapshot.event.owner)}
+                        </div>
+                        <div className="min-w-0">
+                          <div className="flex flex-wrap items-center gap-2">
+                            <p className="truncate text-sm font-semibold text-slate-950">
+                              {snapshot.event.owner}
+                            </p>
+                            {snapshot.currentUser?.email === snapshot.event.owner ? (
+                              <Badge>You</Badge>
+                            ) : null}
+                          </div>
+                          <p className="mt-2 text-sm text-slate-500">
+                            Primary event owner
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div>
+                      <Badge variant="active">ADMIN</Badge>
+                    </div>
+
+                    <p className="text-sm leading-6 text-slate-600">
+                      Full event management, budget control, and permanent ownership.
+                    </p>
+
+                    <div className="flex items-center justify-between rounded-[1rem] border border-slate-200 bg-white px-3 py-3 text-sm font-medium text-slate-600">
+                      <div className="flex items-center gap-2">
+                        <LockKeyhole className="h-4 w-4 text-slate-400" />
+                        Locked
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {sortedMembers.map((member) => {
                   const isCurrentUser = snapshot.currentUser?.email === member.email;
-                  const isBusy = updatingEmail === member.email;
+                  const isRemoving = removingEmail === member.email;
+                  const isBusy = updatingEmail === member.email || isRemoving;
                   const canEditRole =
                     snapshot.permissions.canManageRoles &&
                     !isCurrentUser &&
                     !isBusy;
+                  const canRemoveMember =
+                    snapshot.permissions.canManageRoles &&
+                    !isCurrentUser &&
+                    !isBusy;
+                  const isSelected = selectedMemberEmail === member.email;
 
                   return (
                     <div
                       key={member.email}
-                      className="rounded-[1.5rem] border border-slate-200/80 bg-white/88 p-4 shadow-[0_10px_28px_rgba(15,23,42,0.04)]"
+                      className={`overflow-hidden rounded-[1.35rem] border transition ${
+                        isSelected
+                          ? "border-[rgba(46,117,182,0.28)] bg-slate-50/80 shadow-[0_16px_36px_rgba(15,23,42,0.06)]"
+                          : "border-slate-200 bg-white"
+                      }`}
                     >
-                      <div className="flex items-start gap-3">
-                        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[1rem] bg-[linear-gradient(135deg,rgba(30,58,95,0.12),rgba(46,117,182,0.12))] text-sm font-semibold text-[var(--color-primary)]">
-                          {getEmailMonogram(member.email)}
-                        </div>
-
-                        <div className="min-w-0 flex-1">
-                          <div className="flex flex-wrap items-center gap-2">
-                            <h3 className="min-w-0 truncate text-[1rem] font-semibold text-slate-950">
-                              {member.email}
-                            </h3>
-                            <Badge variant={roleVariant[member.role]}>
-                              {member.role}
-                            </Badge>
-                            {isCurrentUser ? <Badge>You</Badge> : null}
+                      <button
+                        aria-expanded={isSelected}
+                        className="w-full text-left"
+                        type="button"
+                        onClick={() =>
+                          setSelectedMemberEmail((current) =>
+                            current === member.email ? null : member.email,
+                          )
+                        }
+                      >
+                        <div className="grid gap-4 px-4 py-4 lg:grid-cols-[minmax(0,1.2fr)_8rem_minmax(0,1fr)_9rem] lg:items-center">
+                          <div className="min-w-0">
+                            <div className="flex items-start gap-3">
+                              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-slate-100 text-sm font-semibold text-[var(--color-primary)]">
+                                {getEmailMonogram(member.email)}
+                              </div>
+                              <div className="min-w-0">
+                                <div className="flex flex-wrap items-center gap-2">
+                                  <p className="truncate text-sm font-semibold text-slate-950">
+                                    {member.email}
+                                  </p>
+                                  {isCurrentUser ? <Badge>You</Badge> : null}
+                                </div>
+                                <p className="mt-2 text-sm text-slate-500">
+                                  Invited team member
+                                </p>
+                              </div>
+                            </div>
                           </div>
-                          <p className="mt-2 text-sm leading-6 text-slate-600">
+
+                          <div>
+                            <Badge variant={roleVariant[member.role]}>{member.role}</Badge>
+                          </div>
+
+                          <p className="text-sm leading-6 text-slate-600">
                             {roleCopy[member.role]}
                           </p>
-                        </div>
-                      </div>
 
-                      <div className="mt-4 rounded-[1.15rem] border border-slate-200/80 bg-slate-950/[0.03] p-3">
-                        <div className="flex items-center justify-between gap-3">
-                          <label className="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500">
-                            Role
-                          </label>
-                          <p className="text-[11px] font-medium text-slate-500">
-                            {isCurrentUser
-                              ? "Self managed"
-                              : snapshot.permissions.canManageRoles
-                                ? "Updates instantly"
-                                : "Admin only"}
-                          </p>
+                          <div
+                            className={`flex items-center justify-between rounded-[0.95rem] px-2.5 py-2 text-sm font-medium transition ${
+                              isSelected
+                                ? "border border-[rgba(46,117,182,0.18)] bg-white text-[var(--color-primary)]"
+                                : "border border-slate-200 bg-slate-50/80 text-slate-600"
+                            }`}
+                          >
+                            <span className="flex items-center gap-1.5">
+                              <Settings2 className="h-3.5 w-3.5 text-slate-400" />
+                              {isSelected ? "Hide" : "Manage"}
+                            </span>
+                            {isSelected ? (
+                              <ChevronDown className="h-3.5 w-3.5 text-slate-400" />
+                            ) : (
+                              <ChevronRight className="h-3.5 w-3.5 text-slate-400" />
+                            )}
+                          </div>
                         </div>
-                        <Select
-                          className="mt-2 h-10 rounded-[0.95rem] bg-white"
-                          value={member.role}
-                          disabled={!canEditRole}
-                          onChange={(event) =>
-                            void handleRoleChange(
-                              member.email,
-                              event.target.value as MemberRole,
-                            )
-                          }
-                        >
-                          {roleOptions.map((role) => (
-                            <option key={role} value={role}>
-                              {role}
-                            </option>
-                          ))}
-                        </Select>
-                      </div>
+                      </button>
+
+                      {isSelected ? (
+                        <div className="border-t border-slate-200 bg-white px-4 py-4">
+                          <div className="grid gap-3 lg:grid-cols-[13rem_minmax(0,1fr)_auto] lg:items-center">
+                            <div className="min-w-0">
+                              <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-500">
+                                Role
+                              </p>
+                              <Select
+                                className="h-10 rounded-[0.95rem] bg-white"
+                                value={member.role}
+                                disabled={!canEditRole}
+                                onChange={(event) =>
+                                  void handleRoleChange(
+                                    member.email,
+                                    event.target.value as MemberRole,
+                                  )
+                                }
+                              >
+                                {roleOptions.map((role) => (
+                                  <option key={role} value={role}>
+                                    {role}
+                                  </option>
+                                ))}
+                              </Select>
+                            </div>
+
+                            <p className="text-sm leading-6 text-slate-500">
+                              {isCurrentUser
+                                ? "You cannot change your own role or remove yourself here."
+                                : snapshot.permissions.canManageRoles
+                                  ? "Change the role or remove this member from the event."
+                                  : "Only admins can update roles or remove members."}
+                            </p>
+
+                            {snapshot.permissions.canManageRoles ? (
+                              <Button
+                                className="h-10 justify-start rounded-[0.95rem] border border-red-200 bg-white px-4 text-red-600 shadow-none hover:border-red-300 hover:bg-red-50 hover:text-red-700"
+                                disabled={!canRemoveMember}
+                                variant="secondary"
+                                onClick={() => setMemberPendingRemoval(member.email)}
+                              >
+                                <UserMinus className="mr-2 h-4 w-4" />
+                                {isRemoving ? "Removing..." : "Remove"}
+                              </Button>
+                            ) : null}
+                          </div>
+                        </div>
+                      ) : null}
                     </div>
                   );
                 })}
               </div>
-            </Card>
-          ) : (
-            <EmptyState
-              title="No invited users yet"
-              description="Only the event owner is currently attached to this event. Add members when creating the next event, then manage their roles here."
-              action={
-                <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm text-slate-600">
-                  <Users className="h-4 w-4" />
-                  Owner only
-                </div>
-              }
-            />
-          )}
-
-          <Card className="p-6">
-            <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-              <div>
-                <p className="text-xs uppercase tracking-[0.18em] text-slate-500">
-                  Permission Model
+            ) : (
+              <div className="px-5 py-12 text-center md:px-6">
+                <p className="text-base font-semibold text-slate-950">
+                  No invited users yet
                 </p>
-                <h2 className="mt-2 text-xl font-semibold text-slate-950">
-                  Role access at a glance
-                </h2>
+                <p className="mt-2 text-sm text-slate-600">
+                  Only the event owner is currently attached to this event. Use the
+                  Add Member button to invite people when you are ready.
+                </p>
               </div>
-              <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm text-slate-600">
-                <ShieldCheck className="h-4 w-4" />
-                Synced with Amplify access lists
-              </div>
-            </div>
-
-            <div className="mt-5 grid gap-4 lg:grid-cols-3">
-              {roleOptions.map((role) => (
-                <div
-                  key={role}
-                  className="rounded-[1.5rem] border border-slate-200/80 bg-white/80 p-5"
-                >
-                  <div className="flex items-center gap-2">
-                    <UserCog className="h-4 w-4 text-slate-500" />
-                    <Badge variant={roleVariant[role]}>{role}</Badge>
-                  </div>
-                  <p className="mt-4 text-sm leading-7 text-slate-600">
-                    {roleCopy[role]}
-                  </p>
-                </div>
-              ))}
-            </div>
+            )}
           </Card>
+
+          <Modal
+            className="max-w-2xl md:h-[34rem] md:max-h-[calc(100vh-4rem)]"
+            description="Invite by email or add someone who already uses the system."
+            open={isAddMemberModalOpen}
+            title="Add Member"
+            onClose={closeAddMemberModal}
+          >
+            <div className="flex h-full min-h-[34rem] flex-col md:min-h-0">
+              <div className="space-y-6">
+                <div className="rounded-[1.35rem] border border-slate-200 bg-slate-50/95 p-1">
+                  <div
+                    aria-label="Add member mode"
+                    className="grid grid-cols-2 gap-1"
+                    role="tablist"
+                  >
+                    <button
+                      aria-selected={addMemberMode === "invite"}
+                      className={`group relative rounded-[1rem] px-4 py-3 text-left transition duration-200 ${
+                        addMemberMode === "invite"
+                          ? "bg-[#1e3a5f] text-white shadow-[0_10px_24px_rgba(30,58,95,0.18)]"
+                          : "text-slate-700 hover:bg-white hover:text-[var(--color-primary)]"
+                      }`}
+                      role="tab"
+                      type="button"
+                      onClick={() => setAddMemberMode("invite")}
+                    >
+                      <span
+                        className={`absolute inset-0 rounded-[1rem] transition duration-200 ${
+                          addMemberMode === "invite"
+                            ? "bg-transparent"
+                            : "bg-transparent group-hover:bg-white"
+                        }`}
+                      />
+                      <p
+                        className={`relative text-sm font-semibold ${
+                          addMemberMode === "invite"
+                            ? "text-white"
+                            : "text-slate-950 group-hover:text-[var(--color-primary)]"
+                        }`}
+                      >
+                        Invite new
+                      </p>
+                      <p
+                        className={`relative mt-1 text-xs leading-5 ${
+                          addMemberMode === "invite"
+                            ? "text-white/72"
+                            : "text-slate-500 group-hover:text-[var(--color-primary)]/80"
+                        }`}
+                      >
+                        Add by email
+                      </p>
+                    </button>
+
+                    <button
+                      aria-selected={addMemberMode === "existing"}
+                      className={`group relative rounded-[1rem] px-4 py-3 text-left transition duration-200 ${
+                        addMemberMode === "existing"
+                          ? "bg-[#1e3a5f] text-white shadow-[0_10px_24px_rgba(30,58,95,0.18)]"
+                          : "text-slate-700 hover:bg-white hover:text-[var(--color-primary)]"
+                      }`}
+                      role="tab"
+                      type="button"
+                      onClick={() => setAddMemberMode("existing")}
+                    >
+                      <span
+                        className={`absolute inset-0 rounded-[1rem] transition duration-200 ${
+                          addMemberMode === "existing"
+                            ? "bg-transparent"
+                            : "bg-transparent group-hover:bg-white"
+                        }`}
+                      />
+                      <p
+                        className={`relative text-sm font-semibold ${
+                          addMemberMode === "existing"
+                            ? "text-white"
+                            : "text-slate-950 group-hover:text-[var(--color-primary)]"
+                        }`}
+                      >
+                        Add existing
+                      </p>
+                      <p
+                        className={`relative mt-1 text-xs leading-5 ${
+                          addMemberMode === "existing"
+                            ? "text-white/72"
+                            : "text-slate-500 group-hover:text-[var(--color-primary)]/80"
+                        }`}
+                      >
+                        Pick from users
+                      </p>
+                    </button>
+                  </div>
+                </div>
+
+                <div className="rounded-[1.35rem] border border-slate-200 bg-slate-50/70 p-4">
+                  <div className="grid gap-3 md:grid-cols-[minmax(0,1fr)_11rem] md:items-center">
+                    <div>
+                      <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500">
+                        Role
+                      </p>
+                      <p className="mt-1 text-sm text-slate-600">
+                        Choose the access level for this member.
+                      </p>
+                    </div>
+                    <Select
+                      className="h-11 rounded-[1rem] bg-white"
+                      value={inviteRole}
+                      onChange={(event) =>
+                        setInviteRole(event.target.value as MemberRole)
+                      }
+                    >
+                      {roleOptions.map((role) => (
+                        <option key={role} value={role}>
+                          {role}
+                        </option>
+                      ))}
+                    </Select>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-6 min-h-0 flex-1 overflow-y-auto pr-1">
+                {addMemberMode === "invite" ? (
+                  <div className="space-y-4">
+                    <div>
+                      <p className="text-sm font-semibold text-slate-950">
+                        Invite by email
+                      </p>
+                      <p className="mt-1 text-sm leading-6 text-slate-600">
+                        Use the email address the member will sign in with. We will
+                        send the invite there after access is added.
+                      </p>
+                    </div>
+
+                    <label className="block">
+                      <span className="mb-2 block text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500">
+                        Email address
+                      </span>
+                      <div className="grid gap-3 md:grid-cols-[minmax(0,1fr)_auto]">
+                        <Input
+                          autoFocus
+                          className="h-11 rounded-[1rem] bg-white"
+                          placeholder="name@company.com"
+                          value={inviteEmail}
+                          onChange={(event) => setInviteEmail(event.target.value)}
+                        />
+                        <Button
+                          className="h-11 rounded-[1rem] px-5"
+                          disabled={!snapshot.permissions.canManageRoles || isInviting}
+                          onClick={() => void handleInviteMember()}
+                        >
+                          <UserPlus className="mr-2 h-4 w-4" />
+                          {isInviting ? "Adding..." : "Invite Member"}
+                        </Button>
+                      </div>
+                    </label>
+
+                    <p className="text-sm text-slate-500">
+                      The email should match the account the member will use to sign in.
+                    </p>
+                  </div>
+                ) : (
+                  <div className="space-y-4">
+                    <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+                      <div>
+                        <p className="text-sm font-semibold text-slate-950">
+                          Add existing member
+                        </p>
+                        <p className="mt-1 text-sm leading-6 text-slate-600">
+                          Search people who already signed in. We will show the best two matches.
+                        </p>
+                      </div>
+                      <div className="inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-500">
+                        {directoryUsers.length} in system
+                      </div>
+                    </div>
+
+                    <label className="block">
+                      <span className="mb-2 block text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500">
+                        Search users
+                      </span>
+                      <div className="relative">
+                        <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+                        <Input
+                          autoFocus
+                          className="h-11 rounded-[1rem] bg-white pl-11"
+                          placeholder="Type a name or email"
+                          value={directoryQuery}
+                          onChange={(event) => setDirectoryQuery(event.target.value)}
+                        />
+                      </div>
+                    </label>
+
+                    {directoryError ? (
+                      <p className="text-sm text-red-600">{directoryError}</p>
+                    ) : null}
+
+                    {isDirectoryLoading ? (
+                      <p className="text-sm text-slate-500">
+                        Loading registered users...
+                      </p>
+                    ) : directorySuggestions.length ? (
+                      <div className="space-y-3">
+                        <div className="flex items-center justify-between">
+                          <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500">
+                            {hasDirectoryQuery ? "Top matches" : "Recent users"}
+                          </p>
+                          <p className="text-xs text-slate-500">
+                            Showing {directorySuggestions.length}
+                          </p>
+                        </div>
+
+                        <div className="overflow-hidden rounded-[1.35rem] border border-slate-200 bg-white">
+                          {directorySuggestions.map((profile, index) => (
+                            <div
+                              key={profile.email}
+                              className={`flex flex-col gap-3 px-4 py-4 md:flex-row md:items-center md:justify-between ${
+                                index !== directorySuggestions.length - 1
+                                  ? "border-b border-slate-200"
+                                  : ""
+                              }`}
+                            >
+                              <div className="flex min-w-0 items-center gap-3">
+                                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-slate-100 text-sm font-semibold text-[var(--color-primary)]">
+                                  {getEmailMonogram(profile.email)}
+                                </div>
+                                <div className="min-w-0">
+                                  <p className="truncate text-sm font-semibold text-slate-950">
+                                    {profile.name}
+                                  </p>
+                                  <p className="truncate text-sm text-slate-500">
+                                    {profile.email}
+                                  </p>
+                                </div>
+                              </div>
+                              <Button
+                                className="h-10 rounded-[0.95rem] px-4"
+                                disabled={!snapshot.permissions.canManageRoles || isInviting}
+                                onClick={() => void handleInviteMember(profile.email)}
+                                variant="secondary"
+                              >
+                                <UserPlus className="mr-2 h-4 w-4" />
+                                Add as {inviteRole.toLowerCase()}
+                              </Button>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    ) : hasDirectoryQuery ? (
+                      <p className="text-sm text-slate-500">
+                        No registered users match that search yet.
+                      </p>
+                    ) : (
+                      <p className="text-sm text-slate-500">
+                        Start typing to look up people already in the system.
+                      </p>
+                    )}
+                  </div>
+                )}
+              </div>
+
+              <div className="mt-6 border-t border-slate-200 pt-4" />
+            </div>
+          </Modal>
+
+          <Modal
+            className="max-w-md"
+            description="This removes the member from this event and revokes their access."
+            open={Boolean(memberPendingRemoval)}
+            title="Remove Member"
+            onClose={closeRemoveMemberModal}
+          >
+            <div className="space-y-5">
+              <div className="rounded-[1.35rem] border border-red-200 bg-red-50/80 p-4">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-red-600">
+                  Member
+                </p>
+                <p className="mt-2 break-all text-sm font-semibold text-slate-950">
+                  {memberPendingRemoval}
+                </p>
+                <p className="mt-3 text-sm leading-6 text-slate-600">
+                  They will lose access to this event, budget, expenses, and team
+                  workspace immediately.
+                </p>
+              </div>
+
+              <Button
+                className="h-11 w-full rounded-[1rem]"
+                disabled={!memberPendingRemoval || Boolean(removingEmail)}
+                variant="danger"
+                onClick={() =>
+                  memberPendingRemoval
+                    ? void handleRemoveMember(memberPendingRemoval)
+                    : undefined
+                }
+              >
+                <UserMinus className="mr-2 h-4 w-4" />
+                {removingEmail === memberPendingRemoval
+                  ? "Removing..."
+                  : "Remove Member"}
+              </Button>
+            </div>
+          </Modal>
         </>
       ) : null}
     </PageWrapper>

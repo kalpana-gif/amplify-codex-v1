@@ -1,4 +1,5 @@
 import { a, defineData } from "@aws-amplify/backend";
+import { memberInviteFunction } from "../functions/memberInviteFunction/resource.mjs";
 
 export const schema = a
   .schema({
@@ -17,6 +18,20 @@ export const schema = a
       "OVER_BUDGET",
       "MEMBER_ADDED",
     ]),
+    InviteMemberEmailResult: a.customType({
+      delivered: a.boolean().required(),
+      message: a.string().required(),
+    }),
+    sendEventMemberInviteEmail: a
+      .mutation()
+      .arguments({
+        eventId: a.id().required(),
+        email: a.email().required(),
+        role: a.ref("MemberRole").required(),
+      })
+      .returns(a.ref("InviteMemberEmailResult"))
+      .authorization((allow) => [allow.authenticated()])
+      .handler(a.handler.function(memberInviteFunction)),
     UserDirectoryProfile: a
       .model({
         email: a.email().required(),
