@@ -1919,6 +1919,7 @@
           "name": "TaskStatus",
           "values": [
             "OPEN",
+            "IN_PROGRESS",
             "COMPLETED"
           ]
         },

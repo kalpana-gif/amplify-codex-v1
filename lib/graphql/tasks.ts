@@ -4,6 +4,8 @@ import type { EventTaskView, TaskStatus } from "@/types";
 
 export const EVENT_TASKS_UNAVAILABLE_MESSAGE =
   "To-do List is not available yet. Deploy the latest backend changes to add task support.";
+export const EVENT_TASKS_IN_PROGRESS_UNAVAILABLE_MESSAGE =
+  "In Progress is not available in the current Amplify deployment yet. Deploy the latest backend changes, then refresh the app.";
 
 const taskSelectionSet = [
   "id",
@@ -36,12 +38,30 @@ const getEventTaskModel = () => {
 export const isEventTasksUnavailableError = (error: unknown) =>
   error instanceof Error && error.message === EVENT_TASKS_UNAVAILABLE_MESSAGE;
 
+export const isEventTaskInProgressUnavailableError = (error: unknown) =>
+  error instanceof Error &&
+  error.message === EVENT_TASKS_IN_PROGRESS_UNAVAILABLE_MESSAGE;
+
 const getResultErrorMessage = (
   errors: readonly { message?: string | null }[] | undefined,
   fallback: string,
 ) => {
   const firstMessage = errors?.find((error) => Boolean(error.message))?.message;
   return firstMessage ?? fallback;
+};
+
+const normalizeTaskMutationErrorMessage = (
+  message: string,
+  nextStatus: TaskStatus,
+) => {
+  if (
+    nextStatus === "IN_PROGRESS" &&
+    message.includes("Variable 'status' has an invalid value.")
+  ) {
+    return EVENT_TASKS_IN_PROGRESS_UNAVAILABLE_MESSAGE;
+  }
+
+  return message;
 };
 
 const normalizeOptionalText = (value?: string | null) => {
@@ -96,7 +116,13 @@ const mapTaskRecord = (task: {
 export const sortEventTasks = (tasks: EventTaskView[]) =>
   [...tasks].sort((first, second) => {
     if (first.status !== second.status) {
-      return first.status === "OPEN" ? -1 : 1;
+      const statusOrder: Record<TaskStatus, number> = {
+        OPEN: 0,
+        IN_PROGRESS: 1,
+        COMPLETED: 2,
+      };
+
+      return statusOrder[first.status] - statusOrder[second.status];
     }
 
     const firstTimestamp = first.updatedAt ?? first.createdAt ?? "";
@@ -215,7 +241,10 @@ export const createEventTask = async (
 
   if (!result.data) {
     throw new Error(
-      getResultErrorMessage(result.errors, "Failed to create the task."),
+      normalizeTaskMutationErrorMessage(
+        getResultErrorMessage(result.errors, "Failed to create the task."),
+        nextStatus,
+      ),
     );
   }
 
@@ -302,7 +331,10 @@ export const updateEventTask = async (
 
   if (!result.data) {
     throw new Error(
-      getResultErrorMessage(result.errors, "Failed to update the task."),
+      normalizeTaskMutationErrorMessage(
+        getResultErrorMessage(result.errors, "Failed to update the task."),
+        nextStatus,
+      ),
     );
   }
 

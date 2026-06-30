@@ -9,7 +9,7 @@ export type EventStatus = "DRAFT" | "ACTIVE" | "COMPLETED" | "ARCHIVED";
 
 export type MemberRole = "ADMIN" | "EDITOR" | "VIEWER";
 
-export type TaskStatus = "OPEN" | "COMPLETED";
+export type TaskStatus = "OPEN" | "IN_PROGRESS" | "COMPLETED";
 
 export type PaymentMethod =
   | "CASH"
