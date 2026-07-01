@@ -4,7 +4,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...defineBackend in @aws-amplify/backend...",
-        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782415871215:12: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782415871215:12:1)",
+        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782788646003:12: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782788646003:12:1)",
         "...node internals, @aws-amplify/backend-deployer, @aws-cdk/toolkit-lib..."
       ]
     },
@@ -49,7 +49,7 @@
         "...<anonymous> in @aws-amplify/backend-output-storage...",
         "Array.forEach (:)",
         "...@aws-amplify/backend-output-storage, defineBackend in @aws-amplify/backend...",
-        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782415871215:12: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782415871215:12:1)",
+        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782788646003:12: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782788646003:12:1)",
         "...node internals, @aws-amplify/backend-deployer, @aws-cdk/toolkit-lib..."
       ]
     }
@@ -65,7 +65,7 @@
         "...<anonymous> in @aws-amplify/backend-output-storage...",
         "Array.forEach (:)",
         "...@aws-amplify/backend-output-storage, defineBackend in @aws-amplify/backend...",
-        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782415871215:12: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782415871215:12:1)",
+        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782788646003:12: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782788646003:12:1)",
         "...node internals, @aws-amplify/backend-deployer, @aws-cdk/toolkit-lib..."
       ]
     }
@@ -77,7 +77,7 @@
         "...<anonymous> in @aws-amplify/backend...",
         "Array.forEach (:)",
         "...defineBackend in @aws-amplify/backend...",
-        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782415871215:12: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782415871215:12:1)",
+        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782788646003:12: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782788646003:12:1)",
         "...node internals..."
       ]
     }
@@ -404,7 +404,7 @@
         "...<anonymous> in @aws-amplify/backend...",
         "Array.forEach (:)",
         "...defineBackend in @aws-amplify/backend...",
-        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782415871215:12: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782415871215:12:1)",
+        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782788646003:12: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782788646003:12:1)",
         "...node internals..."
       ]
     }
@@ -521,7 +521,7 @@
         "...<anonymous> in @aws-amplify/backend...",
         "Array.forEach (:)",
         "...defineBackend in @aws-amplify/backend...",
-        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782415871215:12: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782415871215:12:1)",
+        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782788646003:12: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782788646003:12:1)",
         "...node internals..."
       ]
     }
@@ -670,7 +670,7 @@
         "...aws-cdk-lib, <anonymous> in @aws-amplify/backend...",
         "Array.forEach (:)",
         "...defineBackend in @aws-amplify/backend...",
-        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782415871215:12: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782415871215:12:1)",
+        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782788646003:12: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782788646003:12:1)",
         "...node internals..."
       ]
     }
@@ -910,7 +910,7 @@
         "...aws-cdk-lib, <anonymous> in @aws-amplify/backend...",
         "Array.forEach (:)",
         "...defineBackend in @aws-amplify/backend...",
-        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782415871215:12: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782415871215:12:1)",
+        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782788646003:12: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782788646003:12:1)",
         "...node internals..."
       ]
     }
@@ -971,7 +971,7 @@
         "...aws-cdk-lib, <anonymous> in @aws-amplify/backend...",
         "Array.forEach (:)",
         "...defineBackend in @aws-amplify/backend...",
-        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782415871215:12: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782415871215:12:1)",
+        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782788646003:12: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782788646003:12:1)",
         "...node internals..."
       ]
     }
@@ -1013,7 +1013,7 @@
         "...@aws-amplify/auth-construct, @aws-amplify/backend-auth, <anonymous> in @aws-amplify/backend...",
         "Array.forEach (:)",
         "...defineBackend in @aws-amplify/backend...",
-        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782415871215:12: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782415871215:12:1)"
+        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782788646003:12: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782788646003:12:1)"
       ]
     }
   ],
@@ -1028,7 +1028,7 @@
         "...@aws-amplify/auth-construct, @aws-amplify/backend-auth, <anonymous> in @aws-amplify/backend...",
         "Array.forEach (:)",
         "...defineBackend in @aws-amplify/backend...",
-        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782415871215:12: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782415871215:12:1)"
+        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782788646003:12: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782788646003:12:1)"
       ]
     }
   ],
@@ -6605,7 +6605,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...NodejsFunction.addEventSourceMapping in aws-cdk-lib...",
-        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782415871215:60: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782415871215:60:4)",
+        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782788646003:71: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782788646003:71:4)",
         "...node internals, @aws-amplify/backend-deployer, @aws-cdk/toolkit-lib..."
       ]
     }
@@ -12971,7 +12971,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...Import.grantStreamRead in aws-cdk-lib...",
-        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782415871215:74: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782415871215:74:1)"
+        "file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782788646003:85: (file:///Users/novigi/Desktop/amplify-codex-v1/amplify/backend.mjs?tsx-namespace=1782788646003:85:1)"
       ]
     }
   ],

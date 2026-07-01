@@ -12,7 +12,7 @@ export const schema = a
     ]),
     EventStatus: a.enum(["DRAFT", "ACTIVE", "COMPLETED", "ARCHIVED"]),
     MemberRole: a.enum(["ADMIN", "EDITOR", "VIEWER"]),
-    TaskStatus: a.enum(["OPEN", "COMPLETED"]),
+    TaskStatus: a.enum(["OPEN", "IN_PROGRESS", "COMPLETED"]),
     PaymentMethod: a.enum(["CASH", "CARD", "TRANSFER", "CHECK", "OTHER"]),
     NotificationType: a.enum([
       "BUDGET_WARNING",
