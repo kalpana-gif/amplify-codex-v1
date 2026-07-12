@@ -9,8 +9,11 @@ export function EventCard({ event }: { event: EventSummary }) {
   const remaining = Math.max(event.totalBudget - event.totalActual, 0);
 
   return (
-    <Link href={`/events/${event.id}`} className="block">
-      <Card className="relative h-full overflow-hidden p-5 transition hover:-translate-y-1 hover:shadow-[var(--shadow-panel-strong)]">
+    <Link
+      href={`/events/${event.id}`}
+      className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgba(46,117,182,0.24)] focus-visible:ring-offset-2"
+    >
+      <Card className="relative h-full overflow-hidden p-5 transition hover:border-[rgba(46,117,182,0.32)] hover:ring-2 hover:ring-[rgba(46,117,182,0.14)] hover:ring-offset-0">
         <div className="flex items-start justify-between gap-4">
           <div>
             <p className="text-xs uppercase tracking-[0.24em] text-slate-500">

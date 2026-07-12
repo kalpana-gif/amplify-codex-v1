@@ -20,7 +20,6 @@ import { signOut } from "aws-amplify/auth";
 import { AuthButtonLoader } from "@/components/auth/auth-button-loader";
 import { Button } from "@/components/ui/button";
 import { Modal } from "@/components/ui/modal";
-import { Skeleton } from "@/components/ui/skeleton";
 import { BRANDING } from "@/config/branding.mjs";
 import { getCurrentUserProfile } from "@/lib/graphql/events";
 
@@ -89,16 +88,16 @@ export function Header({
 
   return (
     <>
-      <header className="relative z-30 flex min-h-20 items-center justify-between overflow-visible rounded-[1.75rem] border border-slate-200/80 bg-white/82 px-4 py-3 shadow-[var(--shadow-panel)] backdrop-blur-md">
+      <header className="relative z-30 flex min-h-20 items-center justify-between overflow-visible rounded-[2rem] border-[2mm] border-[rgba(12,18,28,0.82)] bg-[linear-gradient(180deg,rgba(20,25,34,0.985),rgba(12,17,26,0.985))] px-4 py-3 shadow-[0_16px_28px_rgba(2,6,23,0.22),0_7px_14px_rgba(15,23,42,0.11),inset_0_0_0_1px_rgba(255,255,255,0.05),inset_0_-2px_0_rgba(0,0,0,0.28)] backdrop-blur-md before:pointer-events-none before:absolute before:inset-[2px] before:rounded-[1.45rem] before:border before:border-white/8 before:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.04),inset_0_-1px_0_rgba(0,0,0,0.2)]">
         <div className="flex items-center gap-3">
           <button
-            className="rounded-2xl border border-slate-200 bg-white p-2.5 text-slate-700 md:hidden"
+            className="rounded-2xl border border-slate-200/85 bg-[linear-gradient(180deg,rgba(241,244,248,0.98),rgba(232,237,243,0.97))] p-2.5 text-slate-700 shadow-[0_10px_18px_rgba(2,6,23,0.16),inset_0_0_0_1px_rgba(255,255,255,0.28)] md:hidden"
             onClick={onOpenSidebar}
           >
             <Menu className="h-5 w-5" />
           </button>
           <button
-            className="hidden rounded-2xl border border-slate-200 bg-white p-2.5 text-slate-700 md:inline-flex"
+            className="hidden rounded-2xl border border-slate-200/85 bg-[linear-gradient(180deg,rgba(241,244,248,0.98),rgba(232,237,243,0.97))] p-2.5 text-slate-700 shadow-[0_10px_18px_rgba(2,6,23,0.16),inset_0_0_0_1px_rgba(255,255,255,0.28)] md:inline-flex"
             onClick={onToggleSidebarCollapse}
           >
             {sidebarCollapsed ? (
@@ -108,25 +107,20 @@ export function Header({
             )}
           </button>
           <div>
-            <p className="text-xs uppercase tracking-[0.24em] text-slate-500">
+            <p className="text-xs uppercase tracking-[0.24em] text-slate-300">
               {BRANDING.fullName}
             </p>
-            {userName ? (
-              <h2 className="text-xl font-semibold text-slate-950">{userName}</h2>
-            ) : (
-              <Skeleton className="mt-2 h-6 w-32 rounded-full border-white/0" />
-            )}
           </div>
         </div>
 
         <div
-          className="relative z-40 flex items-center border-l border-slate-200/80 pl-3"
+          className="relative z-40 flex items-center border-l border-white/10 pl-4"
           ref={profileMenuRef}
         >
           <button
             aria-expanded={profileMenuOpen}
             aria-haspopup="menu"
-            className="group flex items-center gap-2.5 rounded-[1.25rem] border border-transparent bg-white/0 px-2.5 py-1.5 text-left transition hover:border-slate-200/80 hover:bg-slate-50/90"
+            className="group flex items-center gap-2.5 rounded-[1.35rem] border border-slate-200/85 bg-[linear-gradient(180deg,rgba(241,244,248,0.97),rgba(233,238,244,0.96))] px-2.5 py-1.5 text-left shadow-[0_10px_18px_rgba(2,6,23,0.16),inset_0_0_0_1px_rgba(255,255,255,0.26)] transition hover:border-white hover:bg-[linear-gradient(180deg,rgba(244,247,250,0.98),rgba(236,241,246,0.97))]"
             onClick={() => setProfileMenuOpen((current) => !current)}
           >
             <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[linear-gradient(135deg,var(--color-primary),var(--color-accent))] text-xs font-semibold tracking-[0.12em] text-white shadow-[0_10px_24px_rgba(30,58,95,0.22)]">

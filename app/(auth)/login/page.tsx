@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { ArrowRight, Mail, ShieldCheck } from "lucide-react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
@@ -20,7 +21,10 @@ import {
   startGoogleAuthRedirect,
 } from "@/lib/amplify-auth-actions";
 import { isGoogleAuthConfigured } from "@/lib/amplify-client";
-import { syncCurrentUserDirectoryProfile } from "@/lib/graphql/events";
+import {
+  getCurrentUserProfile,
+  syncCurrentUserDirectoryProfile,
+} from "@/lib/graphql/events";
 
 const schema = z.object({
   email: z.string().email("Enter a valid email."),
@@ -33,6 +37,8 @@ export default function LoginPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const redirect = searchParams.get("redirect") ?? "/events";
+  const nextRoute = redirect.startsWith("/login") ? "/events" : redirect;
+  const [isCheckingSession, setIsCheckingSession] = useState(true);
 
   const form = useForm<FormValues>({
     resolver: zodResolver(schema),
@@ -41,6 +47,28 @@ export default function LoginPage() {
       password: "",
     },
   });
+
+  useEffect(() => {
+    let isActive = true;
+
+    void getCurrentUserProfile().then((profile) => {
+      if (!isActive) {
+        return;
+      }
+
+      if (profile) {
+        void syncCurrentUserDirectoryProfile(profile);
+        router.replace(nextRoute);
+        return;
+      }
+
+      setIsCheckingSession(false);
+    });
+
+    return () => {
+      isActive = false;
+    };
+  }, [nextRoute, router]);
 
   const handleGoogleSignIn = async () => {
     if (!isGoogleAuthConfigured) {
@@ -59,7 +87,7 @@ export default function LoginPage() {
     }
   };
 
-  const isSubmitting = form.formState.isSubmitting;
+  const isSubmitting = form.formState.isSubmitting || isCheckingSession;
 
   return (
     <AuthFormShell
@@ -122,12 +150,21 @@ export default function LoginPage() {
             if (result.isSignedIn) {
               await syncCurrentUserDirectoryProfile();
               toast.success("Signed in.");
-              router.replace(redirect);
+              router.replace(nextRoute);
               return;
             }
 
             toast.error("Additional auth steps are required for this account.");
           } catch (error) {
+            if (
+              error instanceof Error &&
+              error.message.toLowerCase().includes("already a signed in user")
+            ) {
+              void syncCurrentUserDirectoryProfile();
+              router.replace(nextRoute);
+              return;
+            }
+
             toast.error(
               error instanceof Error ? error.message : "Unable to sign in.",
             );

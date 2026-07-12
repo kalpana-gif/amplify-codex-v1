@@ -10,10 +10,11 @@ export function ResizableSplitView({
   left,
   right,
   className,
-  initialLeftWidth = 420,
+  initialLeftWidth = 400,
+  initialLeftRatio,
   leftClassName,
   minLeftWidth = 360,
-  minRightWidth = 640,
+  minRightWidth = 680,
   rightClassName,
   storageKey = "resizable-split-view",
 }: {
@@ -21,6 +22,7 @@ export function ResizableSplitView({
   right: ReactNode;
   className?: string;
   initialLeftWidth?: number;
+  initialLeftRatio?: number;
   leftClassName?: string;
   minLeftWidth?: number;
   minRightWidth?: number;
@@ -30,6 +32,7 @@ export function ResizableSplitView({
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [leftWidth, setLeftWidth] = useState(initialLeftWidth);
+  const [hasStoredWidth, setHasStoredWidth] = useState(false);
 
   const clampWidth = useCallback((nextWidth: number) => {
     const containerWidth = containerRef.current?.clientWidth ?? 0;
@@ -46,10 +49,21 @@ export function ResizableSplitView({
     return Math.min(Math.max(nextWidth, minLeftWidth), maxLeftWidth);
   }, [minLeftWidth, minRightWidth]);
 
+  const getDefaultWidth = useCallback(() => {
+    const containerWidth = containerRef.current?.clientWidth ?? 0;
+
+    if (!containerWidth || initialLeftRatio == null) {
+      return initialLeftWidth;
+    }
+
+    return (containerWidth - HANDLE_WIDTH) * initialLeftRatio;
+  }, [initialLeftRatio, initialLeftWidth]);
+
   useEffect(() => {
     const savedWidth = window.localStorage.getItem(storageKey);
 
     if (!savedWidth) {
+      setHasStoredWidth(false);
       return;
     }
 
@@ -57,6 +71,7 @@ export function ResizableSplitView({
 
     if (Number.isFinite(parsedWidth)) {
       setLeftWidth(parsedWidth);
+      setHasStoredWidth(true);
     }
   }, [storageKey]);
 
@@ -66,7 +81,9 @@ export function ResizableSplitView({
 
   useEffect(() => {
     const syncWidth = () => {
-      setLeftWidth((current) => clampWidth(current));
+      setLeftWidth((current) =>
+        clampWidth(hasStoredWidth ? current : getDefaultWidth()),
+      );
     };
 
     syncWidth();
@@ -75,7 +92,7 @@ export function ResizableSplitView({
     return () => {
       window.removeEventListener("resize", syncWidth);
     };
-  }, [clampWidth]);
+  }, [clampWidth, getDefaultWidth, hasStoredWidth]);
 
   useEffect(() => {
     if (!isDragging) {
@@ -109,7 +126,12 @@ export function ResizableSplitView({
               "group relative flex w-full cursor-col-resize items-center justify-center rounded-full outline-none transition focus-visible:ring-2 focus-visible:ring-[rgba(46,117,182,0.22)]",
               isDragging ? "bg-[rgba(46,117,182,0.06)]" : "hover:bg-slate-100/70",
             )}
-            onDoubleClick={() => setLeftWidth(clampWidth(initialLeftWidth))}
+            onDoubleClick={() => {
+              const nextWidth = clampWidth(getDefaultWidth());
+              setLeftWidth(nextWidth);
+              window.localStorage.setItem(storageKey, String(nextWidth));
+              setHasStoredWidth(true);
+            }}
             onPointerDown={(event) => {
               const startX = event.clientX;
               const startWidth = leftWidth;
@@ -122,6 +144,7 @@ export function ResizableSplitView({
 
               const handlePointerUp = () => {
                 setIsDragging(false);
+                setHasStoredWidth(true);
                 window.removeEventListener("pointermove", handlePointerMove);
                 window.removeEventListener("pointerup", handlePointerUp);
               };
