@@ -18,7 +18,7 @@ export default function DashboardLayout({
     <AuthGuard>
       <div
         className={cn(
-          "min-h-screen md:grid",
+          "min-h-screen md:grid md:gap-x-6 lg:gap-x-8",
           sidebarCollapsed
             ? "md:grid-cols-[96px_minmax(0,1fr)]"
             : "md:grid-cols-[308px_minmax(0,1fr)]",

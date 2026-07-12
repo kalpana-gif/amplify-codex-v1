@@ -33,18 +33,25 @@ html {
 body {
   min-height: 100vh;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.4)),
-    radial-gradient(circle at top left, rgba(30, 58, 95, 0.18), transparent 26%),
-    radial-gradient(circle at top right, rgba(46, 117, 182, 0.18), transparent 24%),
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.72),
+      rgba(255, 255, 255, 0.4)
+    ),
+    radial-gradient(
+      circle at top left,
+      rgba(30, 58, 95, 0.18),
+      transparent 26%
+    ),
+    radial-gradient(
+      circle at top right,
+      rgba(46, 117, 182, 0.18),
+      transparent 24%
+    ),
     linear-gradient(180deg, #f8fafc 0%, #eef4fb 45%, #f8fafc 100%);
   background-attachment: fixed;
   color: var(--color-foreground);
-  font-family:
-    "Segoe UI",
-    "Helvetica Neue",
-    Arial,
-    "Noto Sans",
-    sans-serif;
+  font-family: "Segoe UI", "Helvetica Neue", Arial, "Noto Sans", sans-serif;
   -webkit-font-smoothing: antialiased;
   position: relative;
 }
@@ -199,7 +206,11 @@ a {
   transform: rotate(165deg);
   filter: drop-shadow(
     0 0 0.55rem
-      color-mix(in srgb, var(--auth-loader-accent, var(--color-accent)) 18%, transparent)
+      color-mix(
+        in srgb,
+        var(--auth-loader-accent, var(--color-accent)) 18%,
+        transparent
+      )
   );
   --auth-loader-primary: color-mix(in srgb, var(--color-primary) 88%, white);
   --auth-loader-accent: color-mix(in srgb, var(--color-accent) 84%, white);

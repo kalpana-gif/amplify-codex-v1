@@ -8,6 +8,7 @@ import { data } from "./data/resource.mjs";
 import { storage } from "./storage/resource.mjs";
 import { alertFunction } from "./functions/alertFunction/resource.mjs";
 import { memberInviteFunction } from "./functions/memberInviteFunction/resource.mjs";
+import { splitwiseFunction } from "./functions/splitwiseFunction/resource.mjs";
 
 const backend = defineBackend({
   auth,
@@ -15,6 +16,7 @@ const backend = defineBackend({
   storage,
   alertFunction,
   memberInviteFunction,
+  splitwiseFunction,
 });
 
 const branchName = process.env.AWS_BRANCH?.trim();

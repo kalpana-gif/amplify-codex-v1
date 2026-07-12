@@ -202,3 +202,147 @@ export type EventTaskView = {
   createdAt?: string | null;
   updatedAt?: string | null;
 };
+
+export type SplitwiseGroupRole = "ADMIN" | "MEMBER";
+
+export type SplitwiseSplitType = "EQUAL" | "EXACT" | "PERCENTAGE" | "SHARES";
+
+export type SplitwiseOperationResult = {
+  success: boolean;
+  code: string;
+  message: string;
+};
+
+export type SplitwiseGroupListItem = {
+  id: string;
+  name: string;
+  currency: CurrencyCode;
+  createdBy: string;
+  memberCount: number;
+  createdAt?: string | null;
+};
+
+export type SplitwiseGroupPermissionSummary = {
+  isMember: boolean;
+  isAdmin: boolean;
+  canManageMembers: boolean;
+  canEditAnyExpense: boolean;
+  canRecordExpenses: boolean;
+  canRecordSettlements: boolean;
+};
+
+export type SplitwiseMemberInput = {
+  name: string;
+  email?: string | null;
+};
+
+export type SplitwiseMember = {
+  email: string;
+  name: string;
+  isGuest: boolean;
+  role: SplitwiseGroupRole;
+};
+
+export type SplitwiseExpenseSplit = {
+  email: string;
+  amountCents: number;
+  percentageBasisPoints?: number | null;
+  shares?: number | null;
+};
+
+export type SplitwiseExpenseInputSplit = {
+  email: string;
+  amountCents?: number | null;
+  percentageBasisPoints?: number | null;
+  shares?: number | null;
+};
+
+export type SplitwiseExpense = {
+  id: string;
+  description: string;
+  totalAmount: number;
+  paidBy: string;
+  splitType: SplitwiseSplitType;
+  splits: SplitwiseExpenseSplit[];
+  participantEmails: string[];
+  createdBy: string;
+  updatedBy?: string | null;
+  isDeleted: boolean;
+  recordedAt: string;
+  updatedAt?: string | null;
+  deletedAt?: string | null;
+};
+
+export type SplitwiseSettlement = {
+  id: string;
+  fromEmail: string;
+  toEmail: string;
+  amount: number;
+  note?: string | null;
+  settledAt: string;
+  createdBy: string;
+};
+
+export type SplitwiseBalance = {
+  email: string;
+  name: string;
+  balance: number;
+};
+
+export type SplitwiseSimplifiedDebt = {
+  fromEmail: string;
+  toEmail: string;
+  amount: number;
+};
+
+export type SplitwiseActivityItem = {
+  id: string;
+  actorEmail: string;
+  actorName: string;
+  actionType:
+    | "GROUP_CREATED"
+    | "MEMBER_ADDED"
+    | "MEMBER_UPDATED"
+    | "MEMBER_REMOVED"
+    | "EXPENSE_ADDED"
+    | "EXPENSE_EDITED"
+    | "EXPENSE_DELETED"
+    | "SETTLEMENT_RECORDED";
+  entityType: "GROUP" | "MEMBER" | "EXPENSE" | "SETTLEMENT";
+  entityId?: string | null;
+  message: string;
+  details?: unknown;
+  beforeState?: unknown;
+  afterState?: unknown;
+  diff?: unknown;
+  loggedAt: string;
+};
+
+export type SplitwiseGroupView = {
+  group: SplitwiseGroupListItem;
+  permissions: SplitwiseGroupPermissionSummary;
+  members: SplitwiseMember[];
+  expenses: SplitwiseExpense[];
+  settlements: SplitwiseSettlement[];
+  balances: SplitwiseBalance[];
+  simplifiedDebts: SplitwiseSimplifiedDebt[];
+};
+
+export type SplitwiseGroupMutationResult = SplitwiseOperationResult & {
+  groupId?: string | null;
+};
+
+export type SplitwiseExpenseMutationResult = SplitwiseOperationResult & {
+  groupId?: string | null;
+  expenseId?: string | null;
+};
+
+export type SplitwiseSettlementMutationResult = SplitwiseOperationResult & {
+  groupId?: string | null;
+  settlementId?: string | null;
+};
+
+export type SplitwiseActivityPage = SplitwiseOperationResult & {
+  items: SplitwiseActivityItem[];
+  nextToken?: string | null;
+};

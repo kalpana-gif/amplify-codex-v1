@@ -1885,6 +1885,1010 @@
             "primaryKeyFieldName": "id",
             "sortKeyFieldNames": []
           }
+        },
+        "Group": {
+          "name": "Group",
+          "fields": {
+            "id": {
+              "name": "id",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true,
+              "attributes": []
+            },
+            "name": {
+              "name": "name",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "currency": {
+              "name": "currency",
+              "isArray": false,
+              "type": {
+                "enum": "CurrencyCode"
+              },
+              "isRequired": true,
+              "attributes": []
+            },
+            "createdBy": {
+              "name": "createdBy",
+              "isArray": false,
+              "type": "AWSEmail",
+              "isRequired": true,
+              "attributes": []
+            },
+            "owner": {
+              "name": "owner",
+              "isArray": false,
+              "type": "AWSEmail",
+              "isRequired": true,
+              "attributes": []
+            },
+            "admins": {
+              "name": "admins",
+              "isArray": true,
+              "type": "AWSEmail",
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true
+            },
+            "memberEmails": {
+              "name": "memberEmails",
+              "isArray": true,
+              "type": "AWSEmail",
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": false
+            },
+            "members": {
+              "name": "members",
+              "isArray": true,
+              "type": {
+                "model": "GroupMember"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true,
+              "association": {
+                "connectionType": "HAS_MANY",
+                "associatedWith": [
+                  "groupId"
+                ]
+              }
+            },
+            "expenses": {
+              "name": "expenses",
+              "isArray": true,
+              "type": {
+                "model": "GroupExpense"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true,
+              "association": {
+                "connectionType": "HAS_MANY",
+                "associatedWith": [
+                  "groupId"
+                ]
+              }
+            },
+            "settlements": {
+              "name": "settlements",
+              "isArray": true,
+              "type": {
+                "model": "Settlement"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true,
+              "association": {
+                "connectionType": "HAS_MANY",
+                "associatedWith": [
+                  "groupId"
+                ]
+              }
+            },
+            "activityLogs": {
+              "name": "activityLogs",
+              "isArray": true,
+              "type": {
+                "model": "ActivityLog"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true,
+              "association": {
+                "connectionType": "HAS_MANY",
+                "associatedWith": [
+                  "groupId"
+                ]
+              }
+            },
+            "createdAt": {
+              "name": "createdAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            },
+            "updatedAt": {
+              "name": "updatedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            }
+          },
+          "syncable": true,
+          "pluralName": "Groups",
+          "attributes": [
+            {
+              "type": "model",
+              "properties": {}
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "groupsByCreatedBy",
+                "queryField": "listGroupByCreatedBy",
+                "fields": [
+                  "createdBy"
+                ]
+              }
+            },
+            {
+              "type": "auth",
+              "properties": {
+                "rules": [
+                  {
+                    "provider": "userPools",
+                    "ownerField": "owner",
+                    "allow": "owner",
+                    "operations": [
+                      "create",
+                      "read",
+                      "update",
+                      "delete"
+                    ],
+                    "identityClaim": "email"
+                  },
+                  {
+                    "provider": "userPools",
+                    "ownerField": "admins",
+                    "allow": "owner",
+                    "operations": [
+                      "read",
+                      "update",
+                      "delete"
+                    ],
+                    "identityClaim": "email"
+                  },
+                  {
+                    "provider": "userPools",
+                    "ownerField": "memberEmails",
+                    "allow": "owner",
+                    "operations": [
+                      "read"
+                    ],
+                    "identityClaim": "email"
+                  }
+                ]
+              }
+            }
+          ],
+          "primaryKeyInfo": {
+            "isCustomPrimaryKey": false,
+            "primaryKeyFieldName": "id",
+            "sortKeyFieldNames": []
+          }
+        },
+        "GroupMember": {
+          "name": "GroupMember",
+          "fields": {
+            "groupId": {
+              "name": "groupId",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true,
+              "attributes": []
+            },
+            "email": {
+              "name": "email",
+              "isArray": false,
+              "type": "AWSEmail",
+              "isRequired": true,
+              "attributes": []
+            },
+            "name": {
+              "name": "name",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "isGuest": {
+              "name": "isGuest",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": false,
+              "attributes": []
+            },
+            "role": {
+              "name": "role",
+              "isArray": false,
+              "type": {
+                "enum": "GroupRole"
+              },
+              "isRequired": true,
+              "attributes": []
+            },
+            "joinedBy": {
+              "name": "joinedBy",
+              "isArray": false,
+              "type": "AWSEmail",
+              "isRequired": true,
+              "attributes": []
+            },
+            "userId": {
+              "name": "userId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "owner": {
+              "name": "owner",
+              "isArray": false,
+              "type": "AWSEmail",
+              "isRequired": true,
+              "attributes": []
+            },
+            "admins": {
+              "name": "admins",
+              "isArray": true,
+              "type": "AWSEmail",
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true
+            },
+            "memberEmails": {
+              "name": "memberEmails",
+              "isArray": true,
+              "type": "AWSEmail",
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": false
+            },
+            "group": {
+              "name": "group",
+              "isArray": false,
+              "type": {
+                "model": "Group"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "association": {
+                "connectionType": "BELONGS_TO",
+                "targetNames": [
+                  "groupId"
+                ]
+              }
+            },
+            "createdAt": {
+              "name": "createdAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            },
+            "updatedAt": {
+              "name": "updatedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            }
+          },
+          "syncable": true,
+          "pluralName": "GroupMembers",
+          "attributes": [
+            {
+              "type": "model",
+              "properties": {}
+            },
+            {
+              "type": "key",
+              "properties": {
+                "fields": [
+                  "groupId",
+                  "email"
+                ]
+              }
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "groupMembersByEmail",
+                "queryField": "listGroupMemberByEmail",
+                "fields": [
+                  "email"
+                ]
+              }
+            },
+            {
+              "type": "auth",
+              "properties": {
+                "rules": [
+                  {
+                    "provider": "userPools",
+                    "ownerField": "owner",
+                    "allow": "owner",
+                    "operations": [
+                      "create",
+                      "read",
+                      "update",
+                      "delete"
+                    ],
+                    "identityClaim": "email"
+                  },
+                  {
+                    "provider": "userPools",
+                    "ownerField": "admins",
+                    "allow": "owner",
+                    "operations": [
+                      "read",
+                      "update",
+                      "delete"
+                    ],
+                    "identityClaim": "email"
+                  },
+                  {
+                    "provider": "userPools",
+                    "ownerField": "memberEmails",
+                    "allow": "owner",
+                    "operations": [
+                      "read"
+                    ],
+                    "identityClaim": "email"
+                  }
+                ]
+              }
+            }
+          ],
+          "primaryKeyInfo": {
+            "isCustomPrimaryKey": true,
+            "primaryKeyFieldName": "groupId",
+            "sortKeyFieldNames": [
+              "email"
+            ]
+          }
+        },
+        "GroupExpense": {
+          "name": "GroupExpense",
+          "fields": {
+            "id": {
+              "name": "id",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true,
+              "attributes": []
+            },
+            "groupId": {
+              "name": "groupId",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true,
+              "attributes": []
+            },
+            "description": {
+              "name": "description",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "totalAmount": {
+              "name": "totalAmount",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": true,
+              "attributes": []
+            },
+            "paidBy": {
+              "name": "paidBy",
+              "isArray": false,
+              "type": "AWSEmail",
+              "isRequired": true,
+              "attributes": []
+            },
+            "splitType": {
+              "name": "splitType",
+              "isArray": false,
+              "type": {
+                "enum": "SplitType"
+              },
+              "isRequired": true,
+              "attributes": []
+            },
+            "splits": {
+              "name": "splits",
+              "isArray": false,
+              "type": "AWSJSON",
+              "isRequired": true,
+              "attributes": []
+            },
+            "participantEmails": {
+              "name": "participantEmails",
+              "isArray": true,
+              "type": "AWSEmail",
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": false
+            },
+            "createdBy": {
+              "name": "createdBy",
+              "isArray": false,
+              "type": "AWSEmail",
+              "isRequired": true,
+              "attributes": []
+            },
+            "updatedBy": {
+              "name": "updatedBy",
+              "isArray": false,
+              "type": "AWSEmail",
+              "isRequired": false,
+              "attributes": []
+            },
+            "isDeleted": {
+              "name": "isDeleted",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": true,
+              "attributes": []
+            },
+            "recordedAt": {
+              "name": "recordedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": true,
+              "attributes": []
+            },
+            "deletedAt": {
+              "name": "deletedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": []
+            },
+            "deletedBy": {
+              "name": "deletedBy",
+              "isArray": false,
+              "type": "AWSEmail",
+              "isRequired": false,
+              "attributes": []
+            },
+            "owner": {
+              "name": "owner",
+              "isArray": false,
+              "type": "AWSEmail",
+              "isRequired": true,
+              "attributes": []
+            },
+            "admins": {
+              "name": "admins",
+              "isArray": true,
+              "type": "AWSEmail",
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true
+            },
+            "memberEmails": {
+              "name": "memberEmails",
+              "isArray": true,
+              "type": "AWSEmail",
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": false
+            },
+            "group": {
+              "name": "group",
+              "isArray": false,
+              "type": {
+                "model": "Group"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "association": {
+                "connectionType": "BELONGS_TO",
+                "targetNames": [
+                  "groupId"
+                ]
+              }
+            },
+            "createdAt": {
+              "name": "createdAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            },
+            "updatedAt": {
+              "name": "updatedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            }
+          },
+          "syncable": true,
+          "pluralName": "GroupExpenses",
+          "attributes": [
+            {
+              "type": "model",
+              "properties": {}
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "groupExpensesByGroupIdAndRecordedAt",
+                "queryField": "listGroupExpenseByGroupIdAndRecordedAt",
+                "fields": [
+                  "groupId",
+                  "recordedAt"
+                ]
+              }
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "groupExpensesByCreatedBy",
+                "queryField": "listGroupExpenseByCreatedBy",
+                "fields": [
+                  "createdBy"
+                ]
+              }
+            },
+            {
+              "type": "auth",
+              "properties": {
+                "rules": [
+                  {
+                    "provider": "userPools",
+                    "ownerField": "owner",
+                    "allow": "owner",
+                    "operations": [
+                      "create",
+                      "read",
+                      "update",
+                      "delete"
+                    ],
+                    "identityClaim": "email"
+                  },
+                  {
+                    "provider": "userPools",
+                    "ownerField": "admins",
+                    "allow": "owner",
+                    "operations": [
+                      "read",
+                      "update",
+                      "delete"
+                    ],
+                    "identityClaim": "email"
+                  },
+                  {
+                    "provider": "userPools",
+                    "ownerField": "memberEmails",
+                    "allow": "owner",
+                    "operations": [
+                      "read"
+                    ],
+                    "identityClaim": "email"
+                  }
+                ]
+              }
+            }
+          ],
+          "primaryKeyInfo": {
+            "isCustomPrimaryKey": false,
+            "primaryKeyFieldName": "id",
+            "sortKeyFieldNames": []
+          }
+        },
+        "Settlement": {
+          "name": "Settlement",
+          "fields": {
+            "id": {
+              "name": "id",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true,
+              "attributes": []
+            },
+            "groupId": {
+              "name": "groupId",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true,
+              "attributes": []
+            },
+            "fromEmail": {
+              "name": "fromEmail",
+              "isArray": false,
+              "type": "AWSEmail",
+              "isRequired": true,
+              "attributes": []
+            },
+            "toEmail": {
+              "name": "toEmail",
+              "isArray": false,
+              "type": "AWSEmail",
+              "isRequired": true,
+              "attributes": []
+            },
+            "amount": {
+              "name": "amount",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": true,
+              "attributes": []
+            },
+            "note": {
+              "name": "note",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "settledAt": {
+              "name": "settledAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": true,
+              "attributes": []
+            },
+            "createdBy": {
+              "name": "createdBy",
+              "isArray": false,
+              "type": "AWSEmail",
+              "isRequired": true,
+              "attributes": []
+            },
+            "owner": {
+              "name": "owner",
+              "isArray": false,
+              "type": "AWSEmail",
+              "isRequired": true,
+              "attributes": []
+            },
+            "admins": {
+              "name": "admins",
+              "isArray": true,
+              "type": "AWSEmail",
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true
+            },
+            "memberEmails": {
+              "name": "memberEmails",
+              "isArray": true,
+              "type": "AWSEmail",
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": false
+            },
+            "group": {
+              "name": "group",
+              "isArray": false,
+              "type": {
+                "model": "Group"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "association": {
+                "connectionType": "BELONGS_TO",
+                "targetNames": [
+                  "groupId"
+                ]
+              }
+            },
+            "createdAt": {
+              "name": "createdAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            },
+            "updatedAt": {
+              "name": "updatedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            }
+          },
+          "syncable": true,
+          "pluralName": "Settlements",
+          "attributes": [
+            {
+              "type": "model",
+              "properties": {}
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "settlementsByGroupIdAndSettledAt",
+                "queryField": "listSettlementByGroupIdAndSettledAt",
+                "fields": [
+                  "groupId",
+                  "settledAt"
+                ]
+              }
+            },
+            {
+              "type": "auth",
+              "properties": {
+                "rules": [
+                  {
+                    "provider": "userPools",
+                    "ownerField": "owner",
+                    "allow": "owner",
+                    "operations": [
+                      "create",
+                      "read",
+                      "update",
+                      "delete"
+                    ],
+                    "identityClaim": "email"
+                  },
+                  {
+                    "provider": "userPools",
+                    "ownerField": "admins",
+                    "allow": "owner",
+                    "operations": [
+                      "read",
+                      "update",
+                      "delete"
+                    ],
+                    "identityClaim": "email"
+                  },
+                  {
+                    "provider": "userPools",
+                    "ownerField": "memberEmails",
+                    "allow": "owner",
+                    "operations": [
+                      "read"
+                    ],
+                    "identityClaim": "email"
+                  }
+                ]
+              }
+            }
+          ],
+          "primaryKeyInfo": {
+            "isCustomPrimaryKey": false,
+            "primaryKeyFieldName": "id",
+            "sortKeyFieldNames": []
+          }
+        },
+        "ActivityLog": {
+          "name": "ActivityLog",
+          "fields": {
+            "id": {
+              "name": "id",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true,
+              "attributes": []
+            },
+            "groupId": {
+              "name": "groupId",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true,
+              "attributes": []
+            },
+            "actorEmail": {
+              "name": "actorEmail",
+              "isArray": false,
+              "type": "AWSEmail",
+              "isRequired": true,
+              "attributes": []
+            },
+            "actionType": {
+              "name": "actionType",
+              "isArray": false,
+              "type": {
+                "enum": "ActivityActionType"
+              },
+              "isRequired": true,
+              "attributes": []
+            },
+            "entityType": {
+              "name": "entityType",
+              "isArray": false,
+              "type": {
+                "enum": "ActivityEntityType"
+              },
+              "isRequired": true,
+              "attributes": []
+            },
+            "entityId": {
+              "name": "entityId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "message": {
+              "name": "message",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "details": {
+              "name": "details",
+              "isArray": false,
+              "type": "AWSJSON",
+              "isRequired": false,
+              "attributes": []
+            },
+            "beforeState": {
+              "name": "beforeState",
+              "isArray": false,
+              "type": "AWSJSON",
+              "isRequired": false,
+              "attributes": []
+            },
+            "afterState": {
+              "name": "afterState",
+              "isArray": false,
+              "type": "AWSJSON",
+              "isRequired": false,
+              "attributes": []
+            },
+            "diff": {
+              "name": "diff",
+              "isArray": false,
+              "type": "AWSJSON",
+              "isRequired": false,
+              "attributes": []
+            },
+            "loggedAt": {
+              "name": "loggedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": true,
+              "attributes": []
+            },
+            "owner": {
+              "name": "owner",
+              "isArray": false,
+              "type": "AWSEmail",
+              "isRequired": true,
+              "attributes": []
+            },
+            "admins": {
+              "name": "admins",
+              "isArray": true,
+              "type": "AWSEmail",
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true
+            },
+            "memberEmails": {
+              "name": "memberEmails",
+              "isArray": true,
+              "type": "AWSEmail",
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": false
+            },
+            "group": {
+              "name": "group",
+              "isArray": false,
+              "type": {
+                "model": "Group"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "association": {
+                "connectionType": "BELONGS_TO",
+                "targetNames": [
+                  "groupId"
+                ]
+              }
+            },
+            "createdAt": {
+              "name": "createdAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            },
+            "updatedAt": {
+              "name": "updatedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            }
+          },
+          "syncable": true,
+          "pluralName": "ActivityLogs",
+          "attributes": [
+            {
+              "type": "model",
+              "properties": {}
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "activityLogsByGroupIdAndLoggedAt",
+                "queryField": "listActivityLogByGroupIdAndLoggedAt",
+                "fields": [
+                  "groupId",
+                  "loggedAt"
+                ]
+              }
+            },
+            {
+              "type": "auth",
+              "properties": {
+                "rules": [
+                  {
+                    "provider": "userPools",
+                    "ownerField": "owner",
+                    "allow": "owner",
+                    "operations": [
+                      "create",
+                      "read",
+                      "update",
+                      "delete"
+                    ],
+                    "identityClaim": "email"
+                  },
+                  {
+                    "provider": "userPools",
+                    "ownerField": "admins",
+                    "allow": "owner",
+                    "operations": [
+                      "read",
+                      "update",
+                      "delete"
+                    ],
+                    "identityClaim": "email"
+                  },
+                  {
+                    "provider": "userPools",
+                    "ownerField": "memberEmails",
+                    "allow": "owner",
+                    "operations": [
+                      "read"
+                    ],
+                    "identityClaim": "email"
+                  }
+                ]
+              }
+            }
+          ],
+          "primaryKeyInfo": {
+            "isCustomPrimaryKey": false,
+            "primaryKeyFieldName": "id",
+            "sortKeyFieldNames": []
+          }
         }
       },
       "enums": {
@@ -1915,6 +2919,13 @@
             "VIEWER"
           ]
         },
+        "GroupRole": {
+          "name": "GroupRole",
+          "values": [
+            "ADMIN",
+            "MEMBER"
+          ]
+        },
         "TaskStatus": {
           "name": "TaskStatus",
           "values": [
@@ -1933,12 +2944,50 @@
             "OTHER"
           ]
         },
+        "CurrencyCode": {
+          "name": "CurrencyCode",
+          "values": [
+            "USD",
+            "LKR"
+          ]
+        },
+        "SplitType": {
+          "name": "SplitType",
+          "values": [
+            "EQUAL",
+            "EXACT",
+            "PERCENTAGE",
+            "SHARES"
+          ]
+        },
         "NotificationType": {
           "name": "NotificationType",
           "values": [
             "BUDGET_WARNING",
             "OVER_BUDGET",
             "MEMBER_ADDED"
+          ]
+        },
+        "ActivityActionType": {
+          "name": "ActivityActionType",
+          "values": [
+            "GROUP_CREATED",
+            "MEMBER_ADDED",
+            "MEMBER_UPDATED",
+            "MEMBER_REMOVED",
+            "EXPENSE_ADDED",
+            "EXPENSE_EDITED",
+            "EXPENSE_DELETED",
+            "SETTLEMENT_RECORDED"
+          ]
+        },
+        "ActivityEntityType": {
+          "name": "ActivityEntityType",
+          "values": [
+            "GROUP",
+            "MEMBER",
+            "EXPENSE",
+            "SETTLEMENT"
           ]
         }
       },
@@ -1959,6 +3008,863 @@
               "type": "String",
               "isRequired": true,
               "attributes": []
+            }
+          }
+        },
+        "ExpenseSplitInput": {
+          "name": "ExpenseSplitInput",
+          "fields": {
+            "email": {
+              "name": "email",
+              "isArray": false,
+              "type": "AWSEmail",
+              "isRequired": true,
+              "attributes": []
+            },
+            "amountCents": {
+              "name": "amountCents",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false,
+              "attributes": []
+            },
+            "percentageBasisPoints": {
+              "name": "percentageBasisPoints",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false,
+              "attributes": []
+            },
+            "shares": {
+              "name": "shares",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        },
+        "GroupMemberInput": {
+          "name": "GroupMemberInput",
+          "fields": {
+            "name": {
+              "name": "name",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "email": {
+              "name": "email",
+              "isArray": false,
+              "type": "AWSEmail",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        },
+        "GroupPermissionSummary": {
+          "name": "GroupPermissionSummary",
+          "fields": {
+            "isMember": {
+              "name": "isMember",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": true,
+              "attributes": []
+            },
+            "isAdmin": {
+              "name": "isAdmin",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": true,
+              "attributes": []
+            },
+            "canManageMembers": {
+              "name": "canManageMembers",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": true,
+              "attributes": []
+            },
+            "canEditAnyExpense": {
+              "name": "canEditAnyExpense",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": true,
+              "attributes": []
+            },
+            "canRecordExpenses": {
+              "name": "canRecordExpenses",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": true,
+              "attributes": []
+            },
+            "canRecordSettlements": {
+              "name": "canRecordSettlements",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": true,
+              "attributes": []
+            }
+          }
+        },
+        "GroupSummary": {
+          "name": "GroupSummary",
+          "fields": {
+            "id": {
+              "name": "id",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true,
+              "attributes": []
+            },
+            "name": {
+              "name": "name",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "currency": {
+              "name": "currency",
+              "isArray": false,
+              "type": {
+                "enum": "CurrencyCode"
+              },
+              "isRequired": true,
+              "attributes": []
+            },
+            "createdBy": {
+              "name": "createdBy",
+              "isArray": false,
+              "type": "AWSEmail",
+              "isRequired": true,
+              "attributes": []
+            },
+            "memberCount": {
+              "name": "memberCount",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": true,
+              "attributes": []
+            },
+            "createdAt": {
+              "name": "createdAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        },
+        "GroupListResult": {
+          "name": "GroupListResult",
+          "fields": {
+            "success": {
+              "name": "success",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": true,
+              "attributes": []
+            },
+            "code": {
+              "name": "code",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "message": {
+              "name": "message",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "groups": {
+              "name": "groups",
+              "isArray": true,
+              "type": {
+                "nonModel": "GroupSummary"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": false
+            }
+          }
+        },
+        "GroupMemberSummary": {
+          "name": "GroupMemberSummary",
+          "fields": {
+            "email": {
+              "name": "email",
+              "isArray": false,
+              "type": "AWSEmail",
+              "isRequired": true,
+              "attributes": []
+            },
+            "name": {
+              "name": "name",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "isGuest": {
+              "name": "isGuest",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": true,
+              "attributes": []
+            },
+            "role": {
+              "name": "role",
+              "isArray": false,
+              "type": {
+                "enum": "GroupRole"
+              },
+              "isRequired": true,
+              "attributes": []
+            }
+          }
+        },
+        "ExpenseSplitSummary": {
+          "name": "ExpenseSplitSummary",
+          "fields": {
+            "email": {
+              "name": "email",
+              "isArray": false,
+              "type": "AWSEmail",
+              "isRequired": true,
+              "attributes": []
+            },
+            "amountCents": {
+              "name": "amountCents",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": true,
+              "attributes": []
+            },
+            "percentageBasisPoints": {
+              "name": "percentageBasisPoints",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false,
+              "attributes": []
+            },
+            "shares": {
+              "name": "shares",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        },
+        "GroupExpenseSummary": {
+          "name": "GroupExpenseSummary",
+          "fields": {
+            "id": {
+              "name": "id",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true,
+              "attributes": []
+            },
+            "description": {
+              "name": "description",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "totalAmount": {
+              "name": "totalAmount",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": true,
+              "attributes": []
+            },
+            "paidBy": {
+              "name": "paidBy",
+              "isArray": false,
+              "type": "AWSEmail",
+              "isRequired": true,
+              "attributes": []
+            },
+            "splitType": {
+              "name": "splitType",
+              "isArray": false,
+              "type": {
+                "enum": "SplitType"
+              },
+              "isRequired": true,
+              "attributes": []
+            },
+            "splits": {
+              "name": "splits",
+              "isArray": true,
+              "type": {
+                "nonModel": "ExpenseSplitSummary"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": false
+            },
+            "participantEmails": {
+              "name": "participantEmails",
+              "isArray": true,
+              "type": "AWSEmail",
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": false
+            },
+            "createdBy": {
+              "name": "createdBy",
+              "isArray": false,
+              "type": "AWSEmail",
+              "isRequired": true,
+              "attributes": []
+            },
+            "updatedBy": {
+              "name": "updatedBy",
+              "isArray": false,
+              "type": "AWSEmail",
+              "isRequired": false,
+              "attributes": []
+            },
+            "isDeleted": {
+              "name": "isDeleted",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": true,
+              "attributes": []
+            },
+            "recordedAt": {
+              "name": "recordedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": true,
+              "attributes": []
+            },
+            "updatedAt": {
+              "name": "updatedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": []
+            },
+            "deletedAt": {
+              "name": "deletedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        },
+        "SettlementSummary": {
+          "name": "SettlementSummary",
+          "fields": {
+            "id": {
+              "name": "id",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true,
+              "attributes": []
+            },
+            "fromEmail": {
+              "name": "fromEmail",
+              "isArray": false,
+              "type": "AWSEmail",
+              "isRequired": true,
+              "attributes": []
+            },
+            "toEmail": {
+              "name": "toEmail",
+              "isArray": false,
+              "type": "AWSEmail",
+              "isRequired": true,
+              "attributes": []
+            },
+            "amount": {
+              "name": "amount",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": true,
+              "attributes": []
+            },
+            "note": {
+              "name": "note",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "settledAt": {
+              "name": "settledAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": true,
+              "attributes": []
+            },
+            "createdBy": {
+              "name": "createdBy",
+              "isArray": false,
+              "type": "AWSEmail",
+              "isRequired": true,
+              "attributes": []
+            }
+          }
+        },
+        "MemberBalanceSummary": {
+          "name": "MemberBalanceSummary",
+          "fields": {
+            "email": {
+              "name": "email",
+              "isArray": false,
+              "type": "AWSEmail",
+              "isRequired": true,
+              "attributes": []
+            },
+            "name": {
+              "name": "name",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "balance": {
+              "name": "balance",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": true,
+              "attributes": []
+            }
+          }
+        },
+        "SimplifiedDebtSummary": {
+          "name": "SimplifiedDebtSummary",
+          "fields": {
+            "fromEmail": {
+              "name": "fromEmail",
+              "isArray": false,
+              "type": "AWSEmail",
+              "isRequired": true,
+              "attributes": []
+            },
+            "toEmail": {
+              "name": "toEmail",
+              "isArray": false,
+              "type": "AWSEmail",
+              "isRequired": true,
+              "attributes": []
+            },
+            "amount": {
+              "name": "amount",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": true,
+              "attributes": []
+            }
+          }
+        },
+        "ActivityFeedItem": {
+          "name": "ActivityFeedItem",
+          "fields": {
+            "id": {
+              "name": "id",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true,
+              "attributes": []
+            },
+            "actorEmail": {
+              "name": "actorEmail",
+              "isArray": false,
+              "type": "AWSEmail",
+              "isRequired": true,
+              "attributes": []
+            },
+            "actorName": {
+              "name": "actorName",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "actionType": {
+              "name": "actionType",
+              "isArray": false,
+              "type": {
+                "enum": "ActivityActionType"
+              },
+              "isRequired": true,
+              "attributes": []
+            },
+            "entityType": {
+              "name": "entityType",
+              "isArray": false,
+              "type": {
+                "enum": "ActivityEntityType"
+              },
+              "isRequired": true,
+              "attributes": []
+            },
+            "entityId": {
+              "name": "entityId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "message": {
+              "name": "message",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "details": {
+              "name": "details",
+              "isArray": false,
+              "type": "AWSJSON",
+              "isRequired": false,
+              "attributes": []
+            },
+            "beforeState": {
+              "name": "beforeState",
+              "isArray": false,
+              "type": "AWSJSON",
+              "isRequired": false,
+              "attributes": []
+            },
+            "afterState": {
+              "name": "afterState",
+              "isArray": false,
+              "type": "AWSJSON",
+              "isRequired": false,
+              "attributes": []
+            },
+            "diff": {
+              "name": "diff",
+              "isArray": false,
+              "type": "AWSJSON",
+              "isRequired": false,
+              "attributes": []
+            },
+            "loggedAt": {
+              "name": "loggedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": true,
+              "attributes": []
+            }
+          }
+        },
+        "GroupViewResult": {
+          "name": "GroupViewResult",
+          "fields": {
+            "success": {
+              "name": "success",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": true,
+              "attributes": []
+            },
+            "code": {
+              "name": "code",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "message": {
+              "name": "message",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "group": {
+              "name": "group",
+              "isArray": false,
+              "type": {
+                "nonModel": "GroupSummary"
+              },
+              "isRequired": false,
+              "attributes": []
+            },
+            "permissions": {
+              "name": "permissions",
+              "isArray": false,
+              "type": {
+                "nonModel": "GroupPermissionSummary"
+              },
+              "isRequired": false,
+              "attributes": []
+            },
+            "members": {
+              "name": "members",
+              "isArray": true,
+              "type": {
+                "nonModel": "GroupMemberSummary"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": false
+            },
+            "expenses": {
+              "name": "expenses",
+              "isArray": true,
+              "type": {
+                "nonModel": "GroupExpenseSummary"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": false
+            },
+            "settlements": {
+              "name": "settlements",
+              "isArray": true,
+              "type": {
+                "nonModel": "SettlementSummary"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": false
+            },
+            "balances": {
+              "name": "balances",
+              "isArray": true,
+              "type": {
+                "nonModel": "MemberBalanceSummary"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": false
+            },
+            "simplifiedDebts": {
+              "name": "simplifiedDebts",
+              "isArray": true,
+              "type": {
+                "nonModel": "SimplifiedDebtSummary"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": false
+            }
+          }
+        },
+        "GroupActivityPage": {
+          "name": "GroupActivityPage",
+          "fields": {
+            "success": {
+              "name": "success",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": true,
+              "attributes": []
+            },
+            "code": {
+              "name": "code",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "message": {
+              "name": "message",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "items": {
+              "name": "items",
+              "isArray": true,
+              "type": {
+                "nonModel": "ActivityFeedItem"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": false
+            },
+            "nextToken": {
+              "name": "nextToken",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        },
+        "GroupMutationResult": {
+          "name": "GroupMutationResult",
+          "fields": {
+            "success": {
+              "name": "success",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": true,
+              "attributes": []
+            },
+            "code": {
+              "name": "code",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "message": {
+              "name": "message",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "groupId": {
+              "name": "groupId",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        },
+        "ExpenseMutationResult": {
+          "name": "ExpenseMutationResult",
+          "fields": {
+            "success": {
+              "name": "success",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": true,
+              "attributes": []
+            },
+            "code": {
+              "name": "code",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "message": {
+              "name": "message",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "groupId": {
+              "name": "groupId",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": false,
+              "attributes": []
+            },
+            "expenseId": {
+              "name": "expenseId",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        },
+        "SettlementMutationResult": {
+          "name": "SettlementMutationResult",
+          "fields": {
+            "success": {
+              "name": "success",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": true,
+              "attributes": []
+            },
+            "code": {
+              "name": "code",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "message": {
+              "name": "message",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "groupId": {
+              "name": "groupId",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": false,
+              "attributes": []
+            },
+            "settlementId": {
+              "name": "settlementId",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        }
+      },
+      "queries": {
+        "listSplitwiseGroups": {
+          "name": "listSplitwiseGroups",
+          "isArray": false,
+          "type": {
+            "nonModel": "GroupListResult"
+          },
+          "isRequired": false
+        },
+        "getSplitwiseGroup": {
+          "name": "getSplitwiseGroup",
+          "isArray": false,
+          "type": {
+            "nonModel": "GroupViewResult"
+          },
+          "isRequired": false,
+          "arguments": {
+            "groupId": {
+              "name": "groupId",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true
+            }
+          }
+        },
+        "listSplitwiseGroupActivity": {
+          "name": "listSplitwiseGroupActivity",
+          "isArray": false,
+          "type": {
+            "nonModel": "GroupActivityPage"
+          },
+          "isRequired": false,
+          "arguments": {
+            "groupId": {
+              "name": "groupId",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true
+            },
+            "limit": {
+              "name": "limit",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false
+            },
+            "nextToken": {
+              "name": "nextToken",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false
             }
           }
         }
@@ -1991,6 +3897,335 @@
                 "enum": "MemberRole"
               },
               "isRequired": true
+            }
+          }
+        },
+        "createSplitwiseGroup": {
+          "name": "createSplitwiseGroup",
+          "isArray": false,
+          "type": {
+            "nonModel": "GroupMutationResult"
+          },
+          "isRequired": false,
+          "arguments": {
+            "name": {
+              "name": "name",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            },
+            "currency": {
+              "name": "currency",
+              "isArray": false,
+              "type": {
+                "enum": "CurrencyCode"
+              },
+              "isRequired": true
+            },
+            "members": {
+              "name": "members",
+              "isArray": true,
+              "type": {
+                "input": "GroupMemberInputInput"
+              },
+              "isRequired": false,
+              "isArrayNullable": true
+            }
+          }
+        },
+        "addSplitwiseGroupMember": {
+          "name": "addSplitwiseGroupMember",
+          "isArray": false,
+          "type": {
+            "nonModel": "GroupMutationResult"
+          },
+          "isRequired": false,
+          "arguments": {
+            "groupId": {
+              "name": "groupId",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true
+            },
+            "name": {
+              "name": "name",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            },
+            "email": {
+              "name": "email",
+              "isArray": false,
+              "type": "AWSEmail",
+              "isRequired": false
+            }
+          }
+        },
+        "updateSplitwiseGroupMember": {
+          "name": "updateSplitwiseGroupMember",
+          "isArray": false,
+          "type": {
+            "nonModel": "GroupMutationResult"
+          },
+          "isRequired": false,
+          "arguments": {
+            "groupId": {
+              "name": "groupId",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true
+            },
+            "email": {
+              "name": "email",
+              "isArray": false,
+              "type": "AWSEmail",
+              "isRequired": true
+            },
+            "name": {
+              "name": "name",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            }
+          }
+        },
+        "removeSplitwiseGroupMember": {
+          "name": "removeSplitwiseGroupMember",
+          "isArray": false,
+          "type": {
+            "nonModel": "GroupMutationResult"
+          },
+          "isRequired": false,
+          "arguments": {
+            "groupId": {
+              "name": "groupId",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true
+            },
+            "email": {
+              "name": "email",
+              "isArray": false,
+              "type": "AWSEmail",
+              "isRequired": true
+            }
+          }
+        },
+        "createSplitwiseExpense": {
+          "name": "createSplitwiseExpense",
+          "isArray": false,
+          "type": {
+            "nonModel": "ExpenseMutationResult"
+          },
+          "isRequired": false,
+          "arguments": {
+            "groupId": {
+              "name": "groupId",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true
+            },
+            "description": {
+              "name": "description",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            },
+            "totalAmount": {
+              "name": "totalAmount",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": true
+            },
+            "paidBy": {
+              "name": "paidBy",
+              "isArray": false,
+              "type": "AWSEmail",
+              "isRequired": true
+            },
+            "splitType": {
+              "name": "splitType",
+              "isArray": false,
+              "type": {
+                "enum": "SplitType"
+              },
+              "isRequired": true
+            },
+            "splits": {
+              "name": "splits",
+              "isArray": true,
+              "type": {
+                "input": "ExpenseSplitInputInput"
+              },
+              "isRequired": false,
+              "isArrayNullable": false
+            }
+          }
+        },
+        "updateSplitwiseExpense": {
+          "name": "updateSplitwiseExpense",
+          "isArray": false,
+          "type": {
+            "nonModel": "ExpenseMutationResult"
+          },
+          "isRequired": false,
+          "arguments": {
+            "groupId": {
+              "name": "groupId",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true
+            },
+            "expenseId": {
+              "name": "expenseId",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true
+            },
+            "description": {
+              "name": "description",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            },
+            "totalAmount": {
+              "name": "totalAmount",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": true
+            },
+            "paidBy": {
+              "name": "paidBy",
+              "isArray": false,
+              "type": "AWSEmail",
+              "isRequired": true
+            },
+            "splitType": {
+              "name": "splitType",
+              "isArray": false,
+              "type": {
+                "enum": "SplitType"
+              },
+              "isRequired": true
+            },
+            "splits": {
+              "name": "splits",
+              "isArray": true,
+              "type": {
+                "input": "ExpenseSplitInputInput"
+              },
+              "isRequired": false,
+              "isArrayNullable": false
+            }
+          }
+        },
+        "deleteSplitwiseExpense": {
+          "name": "deleteSplitwiseExpense",
+          "isArray": false,
+          "type": {
+            "nonModel": "ExpenseMutationResult"
+          },
+          "isRequired": false,
+          "arguments": {
+            "groupId": {
+              "name": "groupId",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true
+            },
+            "expenseId": {
+              "name": "expenseId",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true
+            }
+          }
+        },
+        "recordSplitwiseSettlement": {
+          "name": "recordSplitwiseSettlement",
+          "isArray": false,
+          "type": {
+            "nonModel": "SettlementMutationResult"
+          },
+          "isRequired": false,
+          "arguments": {
+            "groupId": {
+              "name": "groupId",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true
+            },
+            "fromEmail": {
+              "name": "fromEmail",
+              "isArray": false,
+              "type": "AWSEmail",
+              "isRequired": true
+            },
+            "toEmail": {
+              "name": "toEmail",
+              "isArray": false,
+              "type": "AWSEmail",
+              "isRequired": true
+            },
+            "amount": {
+              "name": "amount",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": true
+            },
+            "note": {
+              "name": "note",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false
+            }
+          }
+        }
+      },
+      "inputs": {
+        "GroupMemberInputInput": {
+          "name": "GroupMemberInputInput",
+          "attributes": {
+            "name": {
+              "name": "name",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            },
+            "email": {
+              "name": "email",
+              "isArray": false,
+              "type": "AWSEmail",
+              "isRequired": false
+            }
+          }
+        },
+        "ExpenseSplitInputInput": {
+          "name": "ExpenseSplitInputInput",
+          "attributes": {
+            "email": {
+              "name": "email",
+              "isArray": false,
+              "type": "AWSEmail",
+              "isRequired": true
+            },
+            "amountCents": {
+              "name": "amountCents",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false
+            },
+            "percentageBasisPoints": {
+              "name": "percentageBasisPoints",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false
+            },
+            "shares": {
+              "name": "shares",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false
             }
           }
         }
